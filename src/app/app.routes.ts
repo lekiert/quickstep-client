@@ -5,9 +5,9 @@ import { Login } from './components/login';
 import { AuthGuard } from './common/auth.guard';
 
 export const rootRouterConfig: Routes = [
-  { path: 'home',   component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'summary',   component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'excercise-list',   component: ExcerciseListComponent, canActivate: [AuthGuard] },
   { path: '',       component: Login },
   { path: 'login',  component: Login },
-  { path: '**',     redirectTo: '/home',  },
+  { path: '**',     redirectTo: '/summary',  },
 ];

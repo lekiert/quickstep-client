@@ -1,12 +1,39 @@
 @import '../config';
 
 .main-header {
+  @include gridle_state(sm) {
+    padding-top: 1.5rem;
+  }
   padding: $global-side-padding;
-  padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   background: rgba(0, 0, 0, 0.03);
 }
 
 .main-header__title {
+  margin-top: 1.5rem;
   color: $color-blue-vlight;
+}
+
+.main-header__panel {
+  @include gridle_state(sm) {
+    display: inline-block;
+    float: right;
+    margin-top: -1.5rem;
+    margin-right: -1em;
+  }
+  text-align: right;
+  color: $color-white;
+  background: $color-blue-dark;
+}
+
+.main-header__panel__logout-button {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  transition: all 200ms;
+
+  &:hover {
+    background: $color-red;
+    // color: $color-blue-dark;
+    cursor: pointer;
+  }
 }

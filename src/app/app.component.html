@@ -1,61 +1,54 @@
 <div class="container">
-  <div class="row">
-    <div class="gr-12">
-
-      <div class="main-header" *ngIf="isUser()">
-        <div class="main-header__title">
-          <h1 class="heading heading--blue">Quickstep</h1>
+    <div class="main-header" *ngIf="isUser()">
+      <div class="main-header__panel">
+        <div class="main-header__panel__logout-button" (click)="logout()">
+          <i class="fa fa-power-off" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="main-container">
-        <div class="row">
-          <div class="gr-12@xs gr-3@sm gr-2@md">
-              <div class="sidebar" *ngIf="isUser()">
-                <nav role="navigation">
-                  <ul class="nav">
-                    <li class="nav__menu-item">
-                      <a class="nav__menu-item__link" [routerLink]="['/home']">
-                        <i class="nav__menu-item__link__icon fa fa-home" aria-hidden="true"></i>
-                        Dashboard
-                      </a>
-                    </li>
-                    <li class="nav__menu-item">
-                      <a class="nav__menu-item__link" [routerLink]="['/excercise-list']">
-                        <i class="nav__menu-item__link__icon fa fa-book" aria-hidden="true"></i>
-                        Excercises
-                      </a>
-                    </li>
-                    <li class="nav__menu-item">
-                      <a class="nav__menu-item__link" [routerLink]="['/logout']">
-                        <i class="nav__menu-item__link__icon fa fa-cog" aria-hidden="true"></i>
-                        Settings
-                      </a>
-                    </li>
-                    <li class="nav__menu-item">
-                      <a class="nav__menu-item__link" (click)="logout()">
-                        <i class="nav__menu-item__link__icon fa fa-sign-out" aria-hidden="true"></i>
-                        Logout
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-
-            <div class="gr-12 gr-9@sm  gr-8@md">
-              <div class="main-content">
-                <main>
-                  <router-outlet></router-outlet>
-                </main>
-              </div>
-            </div>
-        </div>
+      <div class="main-header__title">
+        <h1 class="heading heading--blue">Quickstep</h1>
       </div>
-
-      <div class="footer">
-        <footer>© 2016</footer>
-      </div>
-
     </div>
-  </div>
+    <div class="main-container">
+      <div class="row">
+        <div class="gr-12@xs gr-3@sm gr-2@md">
+            <div class="sidebar" *ngIf="isUser()">
+              <nav role="navigation">
+                <ul class="nav">
+                  <li class="nav__menu-item">
+                    <a class="nav__menu-item__link" [routerLink]="['/summary']">
+                      <i class="nav__menu-item__link__icon fa fa-home" aria-hidden="true"></i>
+                      Podsumowanie
+                    </a>
+                  </li>
+                  <li class="nav__menu-item">
+                    <a class="nav__menu-item__link" [routerLink]="['/excercise-list']">
+                      <i class="nav__menu-item__link__icon fa fa-book" aria-hidden="true"></i>
+                      Testy
+                    </a>
+                  </li>
+                  <li class="nav__menu-item">
+                    <a class="nav__menu-item__link" [routerLink]="['/logout']">
+                      <i class="nav__menu-item__link__icon fa fa-cog" aria-hidden="true"></i>
+                      Ustawienia
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="gr-12 gr-9@sm  gr-8@md">
+            <div class="main-content">
+              <main>
+                <router-outlet></router-outlet>
+              </main>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <footer>© 2016</footer>
+    </div>
 </div>

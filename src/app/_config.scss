@@ -15,6 +15,8 @@ $color-blue: #2C4D6F;
 $color-blue-dark: #1E3650;
 $color-blue-vdark: #112131;
 
+$color-red: #A83A3D;
+
 // font sizes
 $font-size-normal: 16pt;
 $font-size-big: 18pt;
@@ -29,6 +31,7 @@ $margin-small: 0.875rem 0;
 $padding-small: 0.875rem;
 $padding-normal: 1rem;
 $global-side-padding: 0 1rem;
+$global-side-remove-padding: 0 -1rem;
 
 // mixins
 @mixin clearfix() {
