@@ -1,7 +1,39 @@
 <div class="">
   <div class="row">
     <div class="gr-12">
-      <h1 class="heading">test</h1>
+      <h1 class="heading heading--border">Excercises</h1>
+    </div>
+    <div class="gr-12">
+      <table class="excercises-table">
+        <thead>
+          <th>Kod</th>
+          <th colspan="2">Nazwa ćwiczenia</th>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let excercise of excercises">
+            <td>
+              <span class="excercises-table__code">
+                {{ excercise.code }}
+              </span>
+            </td>
+            <td>
+              <span class="excercises-table__name">
+                {{ excercise.name }}
+              </span>
+              <p class="excercises-table__description">
+                {{ excercise.description }}
+              </p>
+
+            </td>
+            <td>
+              <button class="button button--primary">
+                <i class="fa fa-pencil"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
