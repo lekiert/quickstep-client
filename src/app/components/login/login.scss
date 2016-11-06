@@ -20,3 +20,24 @@
   margin-left: 15px;
   display: inline-block;
 }
+
+.login__error {
+  height: 0;
+  color: $color-red;
+  text-align: center;
+  opacity: 0.5;
+  overflow: hidden;
+  transition: all 200ms;
+  line-height: 30px;
+  margin-bottom: -15px;
+  padding-top: 15px;
+
+  &.login__error--triggered {
+    opacity: 1;
+    height: 30px;
+  }
+}
+
+.login__error__icon {
+  margin-right: 7px;
+}

@@ -5,6 +5,10 @@
         <h1 class="heading heading--normal">Wymagana autoryzacja</h1>
       </div>
 
+      <div class="login__error" [ngClass]="{'login__error--triggered': error }">
+        <i class="login__error__icon fa fa-warning"></i> Nieprawidłowy e-mail lub hasło.
+      </div>
+
       <div class="login__form">
         <form role="form" class="form" (submit)="login($event, username.value, password.value)">
 

@@ -16,12 +16,13 @@ export class Login {
   constructor(public router: Router, public http: Http) {
   }
 
+  error = false;
+
   login(event, username, password) {
-    console.log(process.env.PRODUCTION);
-    console.log(process.env);
     event.preventDefault();
+    
+    this.error = false;
     let body = {auth : { email: username, password: password } };
-    console.log(body);
     this.http.post(process.env.API_URL + 'user_token', body, { headers: contentHeaders })
       .subscribe(
         response => {
@@ -29,8 +30,7 @@ export class Login {
           this.router.navigate(['home']);
         },
         error => {
-          alert(error.text());
-          console.log(error.text());
+          this.error = true;
         }
       );
   }
