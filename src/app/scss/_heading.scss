@@ -1,0 +1,14 @@
+.heading {
+  margin: 0;
+  padding: 0;
+  display: block;
+  color: $color-gray;
+}
+
+.heading--border {
+  border-bottom: 1px solid $color-gray;
+}
+
+.heading--blue {
+  color: $color-blue;
+}

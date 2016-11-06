@@ -1,0 +1,12 @@
+@import '../config';
+
+.main-header {
+  padding: $global-side-padding;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.main-header__title {
+  color: $color-blue-vlight;
+}

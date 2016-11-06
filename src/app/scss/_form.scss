@@ -1,0 +1,33 @@
+@import '../config';
+
+.form {
+  font-size: 13pt;
+}
+
+.form__group {
+  display: block;
+  margin: $margin-small;
+  &:after {
+    @include clearfix();
+  }
+}
+
+.form__buttons {
+  display: block;
+  margin-top: 2rem;
+  &:after {
+    @include clearfix();
+  }
+}
+
+.form__group__label {
+  margin: $margin-vsmall;
+}
+
+.form__link {
+  color: $color-blue;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

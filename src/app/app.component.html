@@ -1,25 +1,61 @@
-<h3>
-  Angular 2 Seed
-</h3>
+<div class="container">
+  <div class="row">
+    <div class="gr-12">
 
-<nav>
-	<a [routerLink]="['/']">
-    Login
-  </a>
-  |
-	<a [routerLink]="['/home']">
-    Home
-  </a>
-	<a [routerLink]="['/logout']">
-    Home2
-  </a>
-</nav>
+      <div class="main-header" *ngIf="isUser()">
+        <div class="main-header__title">
+          <h1 class="heading heading--blue">Quickstep</h1>
+        </div>
+      </div>
+      <div class="main-container">
+        <div class="row">
+          <div class="gr-12 gr-3@sm gr-2@md">
+              <div class="sidebar" *ngIf="isUser()">
+                <nav role="navigation">
+                  <ul class="nav">
+                    <li class="nav__menu-item">
+                      <a class="nav__menu-item__link" [routerLink]="['/home']">
+                        <i class="nav__menu-item__link__icon fa fa-home" aria-hidden="true"></i>
+                        Dashboard
+                      </a>
+                    </li>
+                    <li class="nav__menu-item">
+                      <a class="nav__menu-item__link" [routerLink]="['/excercise-list']">
+                        <i class="nav__menu-item__link__icon fa fa-book" aria-hidden="true"></i>
+                        Excercises
+                      </a>
+                    </li>
+                    <li class="nav__menu-item">
+                      <a class="nav__menu-item__link" [routerLink]="['/logout']">
+                        <i class="nav__menu-item__link__icon fa fa-cog" aria-hidden="true"></i>
+                        Settings
+                      </a>
+                    </li>
+                    <li class="nav__menu-item">
+                      <a class="nav__menu-item__link" (click)="logout()">
+                        <i class="nav__menu-item__link__icon fa fa-sign-out" aria-hidden="true"></i>
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
 
-<main>
-	<router-outlet></router-outlet>
-</main>
+            <div class="gr-12 gr-9@sm  gr-8@md">
+              <div class="main-content">
+                <main>
+                  <router-outlet></router-outlet>
+                </main>
+              </div>
+            </div>
+        </div>
+      </div>
 
+      <div class="footer">
+        <footer>© 2016</footer>
+      </div>
 
-<footer>
-  © 2016
-</footer>
+    </div>
+  </div>
+</div>

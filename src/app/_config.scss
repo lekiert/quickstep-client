@@ -1,0 +1,38 @@
+// colors
+$color-white: #fff;
+$color-black: #000;
+$color-gray: #929292;
+
+$color-green-vlight: #58D552;
+$color-green-light: #46B141;
+$color-green: #348A30;
+$color-green-dark: #236320;
+$color-green-vdark: #153C13;
+
+$color-blue-vlight: #4D7FB2;
+$color-blue-light: #3B648E;
+$color-blue: #2C4D6F;
+$color-blue-dark: #1E3650;
+$color-blue-vdark: #112131;
+
+// font sizes
+$font-size-normal: 16pt;
+$font-size-big: 18pt;
+$font-size-huge: 22pt;
+$font-size-gigantic: 26pt;
+
+// margins
+$margin-vsmall: 0.525rem 0;
+$margin-small: 0.875rem 0;
+
+// paddings
+$padding-small: 0.875rem;
+$padding-normal: 1rem;
+$global-side-padding: 0 1rem;
+
+// mixins
+@mixin clearfix() {
+  content: '';
+  display: block;
+  clear: none;
+}

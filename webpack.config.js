@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 
-
+var appConfig = require('./config');
 // Webpack Config
 var webpackConfig = {
   entry: {
@@ -17,6 +17,9 @@ var webpackConfig = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(true),
     new webpack.optimize.CommonsChunkPlugin({ name: ['main', 'vendor', 'polyfills'], minChunks: Infinity }),
+    new webpack.DefinePlugin({
+      'process.env': appConfig
+    })
   ],
 
   module: {

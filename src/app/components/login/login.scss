@@ -1,0 +1,22 @@
+@import '../../config';
+@import '../../grid';
+
+.login {
+  color: #777;
+  margin-top: 15%;
+}
+
+.login__title {
+  border-bottom: 1px solid $color-gray;
+  color: $color-blue;
+  padding-bottom: 15px;
+}
+
+.login__form {
+  padding: 1rem 0 2rem;
+}
+
+.login__form__forgotten-link {
+  margin-left: 15px;
+  display: inline-block;
+}

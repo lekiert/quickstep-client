@@ -1,0 +1,28 @@
+@import '../config';
+
+.button {
+  border: 0;
+  padding: 0.5rem 0.625rem;
+  transition: all 200ms;
+  border: 1px solid transparent;
+  font-family: Lato, sans-serif;
+  font-weight: 300;
+  font-size: 12pt;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button--primary {
+  color: $color-white;
+  background: $color-blue-light;
+  border-color: $color-blue-light;
+
+  &:hover {
+    color: $color-blue-light;
+    border-color: $color-blue-light;
+    background: $color-white;
+  }
+}
