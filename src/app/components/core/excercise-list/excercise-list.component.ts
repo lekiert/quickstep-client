@@ -30,8 +30,4 @@ export class ExcerciseListComponent {
   ngOnInit(): void {
     this.getExcercises();
   }
-
-  ping() {
-    this.service.ping();
-  }
 }

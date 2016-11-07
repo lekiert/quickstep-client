@@ -1,25 +1,36 @@
 import { Injectable }             from '@angular/core';
 import { Http, Headers, Response }         from '@angular/http';
-import { Excercise }              from '../excercise';
+import { Course }              from '../course';
 import { Observable }             from 'rxjs/Observable';
 import { AuthHttp }               from 'angular2-jwt';
 
 @Injectable()
-export class ExcerciseService {
+export class CourseService {
 
-  private excercisesUrl = process.env.API_URL + 'excercises';  // URL to web API
+  private coursesUrl = process.env.API_URL + 'courses';  // URL to web API
+  private usersUrl = process.env.API_URL + 'users';  // URL to web API
 
   constructor (private authHttp: AuthHttp) {}
 
-  getExcercises (): Promise<Excercise[]> {
-    return this.authHttp.get(this.excercisesUrl)
+  getCourses (): Promise<Course[]> {
+    return this.authHttp.get(this.usersUrl + '/1/courses')
                .toPromise()
                .then((response) => {
                  let data = response.json().data;
 
                  return data.map((item) => {
-                   return new Excercise(item.id, item.attributes);
+                   return new Course(item.id, item.attributes);
                  })
+               })
+               .catch(this.handleError);
+  }
+
+  getCourse(id: number): Promise<Course> {
+    return this.authHttp.get(this.coursesUrl + '/' + id)
+               .toPromise()
+               .then((response) => {
+                 let data = response.json().data;
+                 return new Course(data.id, data.attributes);
                })
                .catch(this.handleError);
   }
