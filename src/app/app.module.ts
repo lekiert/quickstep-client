@@ -17,8 +17,8 @@ import { contentHeaders } from './common/headers';
   declarations: [AppComponent, HomeComponent, ExcerciseListComponent, Login],
   imports     : [BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(rootRouterConfig)],
   providers   : [AuthGuard, ExcerciseService, provideAuth({
-      tokenName: 'jwt',
-      tokenGetter: () => localStorage.getItem('jwt') // tmp bug in angular2-jwt fix
+      tokenName: process.env.TOKEN_NAME,
+      tokenGetter: () => localStorage.getItem(process.env.TOKEN_NAME) // tmp bug in angular2-jwt fix
     })],
   bootstrap   : [AppComponent]
 })
