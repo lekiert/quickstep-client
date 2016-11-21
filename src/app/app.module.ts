@@ -8,6 +8,7 @@ import { HttpModule } from "@angular/http";
 import { ExcerciseListComponent } from "./components/core/excercise-list/excercise-list.component";
 import { CourseListComponent } from "./components/core/course-list/course-list.component";
 import { CourseComponent } from "./components/core/course/course.component";
+import { SettingsComponent } from './components/core/settings/settings.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './common/auth.guard';
 import { Login } from './components/login';
@@ -18,7 +19,7 @@ import { contentHeaders } from './common/headers';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, ExcerciseListComponent,
-                 CourseListComponent, Login, CourseComponent],
+                 CourseListComponent, Login, CourseComponent, SettingsComponent],
   imports     : [BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(rootRouterConfig)],
   providers   : [AuthGuard, ExcerciseService, CourseService, provideAuth({
       tokenName: process.env.TOKEN_NAME,

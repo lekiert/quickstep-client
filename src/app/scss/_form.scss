@@ -2,22 +2,55 @@
 
 .form {
   font-size: 13pt;
+
+  @include clearfix;
 }
 
 .form__group {
   display: block;
   margin: $margin-small;
-  &:after {
-    @include clearfix();
+
+  &.form__group--inline {
+    @include gridle_state(md) {
+      margin-top: 15px;
+
+      .form__group__label {
+        display: inline-block;
+        width: 155px;
+        float: left;
+        text-align: right;
+        margin-right: 15px;
+      }
+
+      .form__group__control {
+        display: inline-block;
+        width: calc(100% - 175px);
+      }
+    }
   }
+
+  @include clearfix;
+}
+
+.form__section {
+  margin-top: 35px;
+
+  @include clearfix;
+}
+
+.form__section__heading {
+
+}
+
+.form__section__description {
+
 }
 
 .form__buttons {
   display: block;
   margin-top: 2rem;
-  &:after {
-    @include clearfix();
-  }
+
+  @include clearfix;
 }
 
 .form__group__label {

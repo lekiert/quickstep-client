@@ -35,7 +35,9 @@ $global-side-remove-padding: 0 -1rem;
 
 // mixins
 @mixin clearfix() {
-  content: '';
-  display: block;
-  clear: none;
+  &:after {
+    content: ' ';
+    display: block;
+    clear: both;
+  }
 }
