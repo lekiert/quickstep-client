@@ -1,9 +1,9 @@
 import { Component, OnInit }                       from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router }                                  from '@angular/router';
+import { Router, ActivatedRoute, Params }          from '@angular/router';
 import { AuthHttp }                                from 'angular2-jwt';
-// import { ExcerciseService }                        from '../../../services/excercise.service';
-// import { Excercise }                               from '../../../excercise';
+import { UserService }                             from '../../../services/user.service';
+import { User }                                    from '../../../user';
 
 const styles = require('./settings.component.scss');
 const template = require('./settings.component.html');
@@ -13,4 +13,77 @@ const template = require('./settings.component.html');
   template: template,
   styles: [ styles ],
 })
-export class SettingsComponent {}
+export class SettingsComponent {
+
+  changePasswordError: string;
+  oldPassword: string;
+  newPassword: string;
+  newPasswordRepeat: string;
+  successMessage: string;
+  user: User;
+
+  constructor(
+    private route: ActivatedRoute,
+    private service: UserService) {
+      this.changePasswordError = '';
+      this.oldPassword = '';
+      this.newPassword = '';
+      this.newPasswordRepeat = '';
+      this.successMessage = '';
+    }
+
+  ngOnInit(): void {
+    this.getUser();
+  }
+
+  getUser() {
+    this.service.getAuthenticatedUser().then((user) => {
+      this.user = user;
+    })
+  }
+
+  changePassword() {
+    try {
+      this.changePasswordError = '';
+      this.successMessage = '';
+
+      if (this.oldPassword.length === 0) {
+        throw new Error('Musisz podać stare hasło.')
+      }
+      if (this.newPassword.length === 0) {
+        throw new Error('Musisz podać nowe hasło.')
+      }
+      if (this.newPasswordRepeat.length === 0) {
+        throw new Error('Musisz podać powtórzyć nowe hasło.')
+      }
+      if (this.newPassword !== this.newPasswordRepeat) {
+        throw new Error('Musisz powtórzyć takie samo hasło.')
+      }
+    } catch (e) {
+      this.changePasswordError = e.message;
+    } finally {
+      if (this.changePasswordError.length === 0) {
+        this.submitPasswordChange(this.oldPassword, this.newPassword);
+      }
+    }
+
+  }
+
+  private submitPasswordChange(oldPassword, newPassword) {
+    this.service.changePassword(this.oldPassword, this.newPassword)
+                               .then((response) => {
+                                 this.successMessage = 'Hasło zostało zmienione.';
+                               })
+                               .catch((error) => {
+                                 switch (error.json().data.attributes.result) {
+                                   case 'WRONG_PASSWORD':
+                                    this.changePasswordError = 'Nieprawidłowe obecne hasło użytkownika.';
+                                   break;
+                                   case 'VALIDATION_FAILED':
+                                    this.changePasswordError = 'Nieprawidłowy format hasła. Hasło powinno mieć przynajmniej 6 znaków.';
+                                   break;
+                                 }
+                               });
+  }
+
+}

@@ -15,13 +15,14 @@ import { Login } from './components/login';
 import { provideAuth } from 'angular2-jwt';
 import { ExcerciseService } from './services/excercise.service';
 import { CourseService } from './services/course.service';
+import { UserService } from './services/user.service';
 import { contentHeaders } from './common/headers';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, ExcerciseListComponent,
                  CourseListComponent, Login, CourseComponent, SettingsComponent],
   imports     : [BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(rootRouterConfig)],
-  providers   : [AuthGuard, ExcerciseService, CourseService, provideAuth({
+  providers   : [AuthGuard, ExcerciseService, CourseService, UserService, provideAuth({
       tokenName: process.env.TOKEN_NAME,
       tokenGetter: () => localStorage.getItem(process.env.TOKEN_NAME) // tmp bug in angular2-jwt fix
     })],

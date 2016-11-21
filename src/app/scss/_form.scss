@@ -57,6 +57,25 @@
   margin: $margin-vsmall;
 }
 
+.form__group__error {
+  display: block;
+  clear: both;
+  color: red;
+  text-align: center;
+  font-size: 90%;
+  margin-top: 10px;
+}
+
+// TODO: create an alert SCSS component
+.form__group__success-message {
+  display: block;
+  clear: both;
+  color: green;
+  text-align: center;
+  font-size: 90%;
+  margin-top: 10px;
+}
+
 .form__link {
   color: $color-blue;
 

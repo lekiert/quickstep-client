@@ -11,7 +11,7 @@ export class ExcerciseService {
 
   constructor (private authHttp: AuthHttp) {}
 
-  getExcercises (): Promise<Excercise[]> {
+  getExcercises(): Promise<Excercise[]> {
     return this.authHttp.get(this.excercisesUrl)
                .toPromise()
                .then((response) => {
