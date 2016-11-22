@@ -11,6 +11,7 @@ import { UserListComponent } from "./components/core/user-list/user-list.compone
 import { CourseComponent } from "./components/core/course/course.component";
 import { TestComponent } from "./components/core/test/test.component";
 import { SettingsComponent } from './components/core/settings/settings.component';
+import { AddUserComponent } from './components/core/add-user/add-user.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './common/auth.guard';
 import { Login } from './components/login';
@@ -24,7 +25,7 @@ import { contentHeaders } from './common/headers';
 @NgModule({
   declarations: [AppComponent, HomeComponent, ExcerciseListComponent,
                  CourseListComponent, Login, CourseComponent, SettingsComponent,
-                 TestComponent, UserListComponent],
+                 TestComponent, UserListComponent, AddUserComponent],
   imports     : [BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(rootRouterConfig)],
   providers   : [AuthGuard, ExcerciseService, CourseService,
                  UserService, TestService, provideAuth({

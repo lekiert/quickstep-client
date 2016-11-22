@@ -9,6 +9,9 @@
   font-weight: 300;
   font-size: 12pt;
   border-radius: 5px;
+  text-decoration: none;
+
+  background: #ddd;
 
   &:hover {
     cursor: pointer;
@@ -24,5 +27,17 @@
     color: $color-blue-light;
     border-color: $color-blue-light;
     background: $color-white;
+  }
+}
+
+.button:disabled {
+  opacity: 0.5;
+}
+
+.button:disabled:hover {
+  &:hover {
+    color: inherit !important;
+    border-color: inherit !important;;
+    background: inherit !important;;
   }
 }

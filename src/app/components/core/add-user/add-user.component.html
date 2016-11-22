@@ -1,0 +1,127 @@
+<div class="" *ngIf="user">
+  <div class="row">
+    <div class="gr-12">
+      <h1 class="heading heading--border">Dodaj nowego użytkownika</h1>
+    </div>
+    <div class="gr-12">
+      <div [hidden]="result !== true">
+        <div class="alert alert--success">Dodano użytkownika.</div>
+      </div>
+      <div [hidden]="result !== false">
+        <div class="alert alert--danger">Wystąpił błąd podczas dodawania użytkownika.</div>
+      </div>
+      <form class="form" (ngSubmit)="saveUser()" #userForm="ngForm">
+        <div class="form__section">
+          <header class="form_section__heading">
+            <h3 class="heading heading--center">Dane personalne</h3>
+          </header>
+
+          <div class="form__section">
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="user-email">Adres e-mail</label>
+              </div>
+              <div class="form__group__control">
+                <input type="email" [(ngModel)]="user.email" name="user[email]" #useremail="ngModel" required class="input input--full" id="user-email">
+              </div>
+              <div [class.hidden]="useremail.valid || useremail.pristine">
+                <div class="form__group__error">
+                  Adres e-mail jest obowiązkowy.
+                </div>
+              </div>
+            </div>
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="user-first_name">Imię</label>
+              </div>
+              <div class="form__group__control">
+                <input type="text" [(ngModel)]="user.first_name" name="user[first_name]" #userfirstname="ngModel" required class="input input--full" id="user-first_name">
+              </div>
+              <div [class.hidden]="userfirstname.valid || userfirstname.pristine">
+                <div class="form__group__error">
+                  Imię jest obowiązkowe.
+                </div>
+              </div>
+            </div>
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="user-last_name">Nazwisko</label>
+              </div>
+              <div class="form__group__control">
+                <input type="text" [(ngModel)]="user.last_name" name="user[last_name]" #userlastname="ngModel" required class="input input--full" id="user-last_name">
+              </div>
+              <div [class.hidden]="userlastname.valid || userlastname.pristine">
+                <div class="form__group__error">
+                  Nazwisko jest obowiązkowe.
+                </div>
+              </div>
+            </div>
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="user-last_name">Rola</label>
+              </div>
+              <div class="form__group__control">
+                <select [(ngModel)]="user.role" #userrole="ngModel" required name="user[role]" class="select">
+                    <option *ngFor="let type of roles" [value]="type.value">{{ type.name }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <hr class="line">
+
+          <div class="form__section">
+            <div class="form__group form__group--inline" style="text-align: center;">
+              <a class="button generate-password-button" (click)="generatePassword()">
+                Wygeneruj hasło
+              </a>
+              <a class="button generate-password-button" (click)="togglePasswordFields()">
+                Pokaż/ukryj hasło
+              </a>
+            </div>
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="user-new_password">Hasło</label>
+              </div>
+              <div class="form__group__control">
+                <input [type]="password_field_type" required #userpassword="ngModel" name="user[password]" [(ngModel)]="user.password" class="input input--full" id="user-new_password">
+              </div>
+            </div>
+            <div class="form__group form__group--inline">
+
+              <div class="form__group__label">
+                <label for="user-new_password_repeat">Powtórz hasło</label>
+              </div>
+              <div class="form__group__control">
+                <input [type]="password_field_type" required #userpasswordrepeat="ngModel" name="user[password_repeat]" [(ngModel)]="user.password_repeat" class="input input--full" id="user-new_password_repeat">
+              </div>
+
+              <div [class.hidden]="
+                (userpassword.valid || userpassword.pristine) &&
+                (userpasswordrepeat.valid || userpasswordrepeat.pristine)
+              ">
+                <div class="form__group__error">
+                  Oba hasła są obowiązkowe
+                </div>
+              </div>
+              <div [class.hidden]="user.password === user.password_repeat || (userpassword.pristine || userpasswordrepeat.pristine)">
+                <div class="form__group__error">
+                  Hasła muszą być jednakowe.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form__buttons">
+            <button type="submit" class="button button--primary pull-right" [disabled]="!userForm.form.valid">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp;Dodaj nowego użytkownika
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

@@ -73,4 +73,20 @@ export class UserService {
       }
     }, { headers: contentHeaders }).toPromise();
   }
+
+  createUser(user) {
+    let userId = getAuthenticatedUserId();
+    return this.authHttp.post(this.usersUrl, {
+      data: {
+        type: "users",
+        attributes: {
+          "first-name": user.first_name,
+          "last-name": user.last_name,
+          "password": user.password,
+          "email": user.email,
+          "role": user.role
+        }
+      }
+    }, { headers: contentHeaders }).toPromise();
+  }
 }

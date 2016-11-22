@@ -5,6 +5,7 @@ import { CourseListComponent } from './components/core/course-list/course-list.c
 import { UserListComponent } from './components/core/user-list/user-list.component';
 import { CourseComponent } from './components/core/course/course.component';
 import { SettingsComponent } from './components/core/settings/settings.component';
+import { AddUserComponent } from './components/core/add-user/add-user.component';
 import { TestComponent } from './components/core/test/test.component';
 import { Login } from './components/login';
 import { AuthGuard } from './common/auth.guard';
@@ -12,6 +13,7 @@ import { AuthGuard } from './common/auth.guard';
 export const rootRouterConfig: Routes = [
   { path: 'summary',   component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'settings',   component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'users/new',   component: AddUserComponent, canActivate: [AuthGuard] },
   { path: 'users/:type',   component: UserListComponent, canActivate: [AuthGuard] },
   { path: 'courses',   component: CourseListComponent, canActivate: [AuthGuard] },
   { path: 'course/:id',   component: CourseComponent, canActivate: [AuthGuard] },
