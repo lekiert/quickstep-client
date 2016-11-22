@@ -30,17 +30,16 @@ export class SettingsComponent {
       this.newPassword = '';
       this.newPasswordRepeat = '';
       this.successMessage = '';
+      this.service.fetchUserFromAPI();
+      this.service.getAuthenticatedUser().subscribe(
+        user => {
+          this.user = user
+        },
+        error => {
+          console.log(error)
+        }
+      )
     }
-
-  ngOnInit(): void {
-    this.getUser();
-  }
-
-  getUser() {
-    this.service.getAuthenticatedUser().then((user) => {
-      this.user = user;
-    })
-  }
 
   changePassword() {
     try {

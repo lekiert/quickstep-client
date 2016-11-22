@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { contentHeaders } from '../../common/headers';
 import { AuthGuard } from '../../common/auth.guard';
+import { UserService } from '../../services/user.service';
 
 const theme   = require('../../style.scss');
 const styles   = require('./login.scss');
@@ -14,7 +15,10 @@ const template = require('./login.html');
   styles: [ theme, styles ]
 })
 export class Login {
-  constructor(public router: Router, public http: Http, private guard: AuthGuard) {
+  constructor(public router: Router,
+              public http: Http,
+              private guard: AuthGuard,
+              private service: UserService) {
   }
 
   error = false;
@@ -25,7 +29,7 @@ export class Login {
     }
   }
 
-  login(event, username, password) {
+  login(event, username, password): void {
     event.preventDefault();
 
     this.error = false;
@@ -34,6 +38,7 @@ export class Login {
       .subscribe(
         response => {
           localStorage.setItem('jwt', response.json().jwt);
+          this.service.fetchUserFromAPI();
           this.router.navigate(['home']);
         },
         error => {
@@ -42,7 +47,7 @@ export class Login {
       );
   }
 
-  signup(event) {
+  signup(event): void {
     event.preventDefault();
     this.router.navigate(['signup']);
   }

@@ -5,5 +5,9 @@ export function getAuthenticatedUserId() {
   let helper = new JwtHelper;
   let token = localStorage.getItem(process.env.TOKEN_NAME);
 
-  return helper.decodeToken(token).sub;
+  if (token && helper.decodeToken(token)) {
+    return helper.decodeToken(token).sub;
+  }
+
+  return null;
 }

@@ -13,4 +13,24 @@ export class User {
   get email(): string {
     return this.attributes['email'];
   }
+
+  get role(): string {
+    return this.attributes['role'];
+  }
+
+  isStudent(): boolean {
+    return this.attributes['role'] === 'STUDENT';
+  }
+
+  isAdmin(): boolean {
+    return this.attributes['role'] === 'ADMIN';
+  }
+
+  isTeacher(): boolean {
+    return this.attributes['role'] === 'TEACHER';
+  }
+
+  isSupervisor(): boolean {
+    return this.attributes['role'] === 'SUPERVISOR';
+  }
 }
