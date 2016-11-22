@@ -1,0 +1,14 @@
+<div class="" *ngIf="test">
+  <div class="row">
+    <div class="gr-12">
+      <h1 class="heading heading--border">{{ test.name }}</h1>
+    </div>
+    <div class="gr-12">
+
+      <div *ngFor="let excercise of excercises">
+        {{ excercise.name }} - {{ excercise.command }}
+      </div>
+
+    </div>
+  </div>
+</div>

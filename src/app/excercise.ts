@@ -10,7 +10,7 @@ export class Excercise {
     return this.attributes['code'];
   }
 
-  get description(): string {
+  get command(): string {
     return this.attributes['command'];
   }
 }

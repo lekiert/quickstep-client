@@ -12,7 +12,7 @@ export class CourseService {
 
   constructor (private authHttp: AuthHttp) {}
 
-  getCourses (): Promise<Course[]> {
+  getCourses(): Promise<Course[]> {
     return this.authHttp.get(this.usersUrl + '/1/courses')
                .toPromise()
                .then((response) => {

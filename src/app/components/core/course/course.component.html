@@ -6,5 +6,29 @@
     <div class="gr-12">
       <p>{{ course.description }}</p>
     </div>
+    <div class="gr-12">
+
+      <table class="tests-table">
+        <thead>
+          <th colspan="2">Nazwa testu</th>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let test of tests" [routerLink]="['/test', test.id]">
+            <td>
+              <span class="tests-table__name">
+                {{ test.name }}
+              </span>
+            </td>
+            <td>
+              <button class="button button--primary">
+                <i class="fa fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
   </div>
 </div>

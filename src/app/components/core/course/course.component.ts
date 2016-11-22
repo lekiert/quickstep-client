@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { CourseService } from '../../../services/course.service';
+import { TestService } from '../../../services/test.service';
 import { Course } from '../../../course';
+import { Test } from '../../../test';
 
 const styles = require('./course.component.scss');
 const template = require('./course.component.html');
@@ -14,9 +16,11 @@ const template = require('./course.component.html');
 export class CourseComponent {
   constructor(
     private route: ActivatedRoute,
-    private service: CourseService) {}
+    private service: CourseService,
+    private testService: TestService) {}
 
   course: Course;
+  tests: Test[];
   private sub: any;
   id: number;
 
@@ -26,7 +30,10 @@ export class CourseComponent {
 
        this.service.getCourse(this.id).then((course) => {
          this.course = course;
-         console.log(course);
+       });
+
+       this.testService.getTestsByCourse(this.id).then((tests) => {
+         this.tests = tests;
        });
     });
   }

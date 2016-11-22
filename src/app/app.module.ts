@@ -8,6 +8,7 @@ import { HttpModule } from "@angular/http";
 import { ExcerciseListComponent } from "./components/core/excercise-list/excercise-list.component";
 import { CourseListComponent } from "./components/core/course-list/course-list.component";
 import { CourseComponent } from "./components/core/course/course.component";
+import { TestComponent } from "./components/core/test/test.component";
 import { SettingsComponent } from './components/core/settings/settings.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './common/auth.guard';
@@ -16,13 +17,15 @@ import { provideAuth } from 'angular2-jwt';
 import { ExcerciseService } from './services/excercise.service';
 import { CourseService } from './services/course.service';
 import { UserService } from './services/user.service';
+import { TestService } from './services/test.service';
 import { contentHeaders } from './common/headers';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, ExcerciseListComponent,
-                 CourseListComponent, Login, CourseComponent, SettingsComponent],
+                 CourseListComponent, Login, CourseComponent, SettingsComponent,
+                 TestComponent],
   imports     : [BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(rootRouterConfig)],
-  providers   : [AuthGuard, ExcerciseService, CourseService, UserService, provideAuth({
+  providers   : [AuthGuard, ExcerciseService, CourseService, UserService, TestService, provideAuth({
       tokenName: process.env.TOKEN_NAME,
       tokenGetter: () => localStorage.getItem(process.env.TOKEN_NAME) // tmp bug in angular2-jwt fix
     })],
