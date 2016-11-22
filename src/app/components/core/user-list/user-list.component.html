@@ -53,10 +53,10 @@
                 {{ user.created }}
               </span>
             </td>
-            <td>
-              <button class="button button--primary">
+            <td class="users-table__edit">
+              <a class="button button--primary" [routerLink]="['/users', user.id, 'edit']">
                 <i class="fa fa-eye"></i>
-              </button>
+              </a>
             </td>
           </tr>
         </tbody>

@@ -1,6 +1,7 @@
 @import '../config';
 
 .button {
+  display: inline-block;
   border: 0;
   padding: 0.5rem 0.625rem;
   transition: all 200ms;
@@ -28,6 +29,12 @@
     border-color: $color-blue-light;
     background: $color-white;
   }
+}
+
+.button--danger {
+  color: $color-white;
+  background: $color-red;
+  border-color: $color-red;
 }
 
 .button:disabled {

@@ -26,8 +26,19 @@ export class UserService {
     return this.subject.asObservable();
   }
 
-  fetchUserFromAPI() {
-    let userId = getAuthenticatedUserId();
+  getUser(userId: number): Promise<User> {
+    return this.authHttp.get(this.usersUrl + '/' + userId + '/')
+                        .toPromise()
+                        .then((response) => {
+                          let id = response.json().data.id;
+                          let data = response.json().data.attributes;
+                          let user = new User(id, data);
+                          return user;
+                        });
+  }
+
+  fetchUserFromAPI(id?: number) {
+    let userId = id || getAuthenticatedUserId();
     return this.authHttp.get(this.usersUrl + '/' + userId + '/')
                         .subscribe(
                           (response) => {
@@ -39,6 +50,12 @@ export class UserService {
                           },
                           (error) => { console.log(error) }
                         );
+  }
+
+  deleteUser(id): Promise<boolean> {
+    return this.authHttp.delete(this.usersUrl + '/' + id).toPromise().then((response) => {
+      return true;
+    });
   }
 
   getUsers(type?: string): Promise<User[]> {
@@ -83,6 +100,21 @@ export class UserService {
           "first-name": user.first_name,
           "last-name": user.last_name,
           "password": user.password,
+          "email": user.email,
+          "role": user.role
+        }
+      }
+    }, { headers: contentHeaders }).toPromise();
+  }
+
+  updateUser(user) {
+    return this.authHttp.patch(this.usersUrl + '/' + user.id, {
+      data: {
+        id: user.id,
+        type: "users",
+        attributes: {
+          "first-name": user.first_name,
+          "last-name": user.last_name,
           "email": user.email,
           "role": user.role
         }

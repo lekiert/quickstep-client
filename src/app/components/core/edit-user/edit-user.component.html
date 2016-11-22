@@ -1,0 +1,125 @@
+<div class="" *ngIf="user">
+  <div class="row">
+    <div class="gr-12">
+      <h1 class="heading heading--border">
+        Edycja użytkownika:
+        <span [innerHTML]="user.first_name"></span>
+        <span [innerHTML]="user.last_name"></span>
+      </h1>
+    </div>
+    <div class="gr-12">
+
+      <form class="form" (ngSubmit)="saveUser()" #userForm="ngForm">
+        <div class="form__section">
+          <header class="form_section__heading">
+            <h3 class="heading heading--center">Dane personalne</h3>
+          </header>
+
+
+          <div class="form__group form__group--inline">
+            <div class="form__group__label">
+              <label for="user-email">Adres e-mail</label>
+            </div>
+            <div class="form__group__control">
+              <input type="text" required #useremail="ngModel" name="user[email]" [(ngModel)]="user.email" class="input input--full" id="user-email" value="{{ user.email }}">
+            </div>
+          </div>
+
+          <div class="form__group form__group--inline">
+            <div class="form__group__label">
+              <label for="user-first_name">Imię</label>
+            </div>
+            <div class="form__group__control">
+              <input type="text" required #userfirstname="ngModel" name="user[first_name]" [(ngModel)]="user.first_name" class="input input--full" id="user-first_name" value="{{ user.first_name }}">
+            </div>
+          </div>
+
+          <div class="form__group form__group--inline">
+            <div class="form__group__label">
+              <label for="user-last_name">Nazwisko</label>
+            </div>
+            <div class="form__group__control">
+              <input type="text" required #userlastname="ngModel" name="user[last_name]" [(ngModel)]="user.last_name" class="input input--full" id="user-last_name" value="{{ user.last_name }}">
+            </div>
+          </div>
+
+          <div class="form__group form__group--inline">
+            <div class="form__group__label">
+              <label for="user-last_name">Rola</label>
+            </div>
+            <div class="form__group__control">
+              <select [(ngModel)]="user.role" #userrole="ngModel" required name="user[role]" class="select">
+                  <option *ngFor="let type of roles" [value]="type.value">{{ type.name }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form__buttons">
+            <button type="submit" class="button button--primary pull-right" [disabled]="!userForm.form.valid">
+              <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Uaktualnij dane osobowe użytkownika
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <hr class="line">
+
+      <form class="form">
+        <div class="form__section">
+          <header class="form_section__heading">
+            <h3 class="heading heading--center">Zmiana hasła</h3>
+          </header>
+
+          <div class="form__group form__group--inline" style="text-align: center;">
+            <a class="button generate-password-button" (click)="generatePassword()">
+              Wygeneruj hasło
+            </a>
+            <a class="button generate-password-button" (click)="togglePasswordFields()">
+              Pokaż/ukryj hasło
+            </a>
+          </div>
+
+          <div class="form__group form__group--inline">
+            <div class="form__group__label">
+              <label for="user-new_password">Nowe hasło</label>
+            </div>
+            <div class="form__group__control">
+              <input [type]="password_field_type" name="user[password]" [(ngModel)]="user.password" class="input input--full" id="user-new_password">
+            </div>
+          </div>
+
+          <div class="form__group form__group--inline">
+            <div class="form__group__label">
+              <label for="user-new_password_repeat">Powtórz nowe hasło</label>
+            </div>
+            <div class="form__group__control">
+              <input [type]="password_field_type" name="user[password_repeat]" [(ngModel)]="password_repeat" class="input input--full" id="user-new_password_repeat">
+            </div>
+            <span class="form__group__error" *ngIf="changePasswordError.length > 0">{{ changePasswordError }}</span>
+            <span class="form__group__success-message" *ngIf="successMessage.length > 0">{{ successMessage }}
+                <!-- <i class="fa fa-remove pull-right" aria-hidden="true"></i> -->
+            </span>
+          </div>
+
+          <div class="form__buttons">
+            <button type="submit" class="button button--primary pull-right" (click)="changePassword()">
+              <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Zmień hasło
+            </button>
+          </div>
+
+        </div>
+      </form>
+
+      <hr class="line">
+
+      <div class="gr-12 delete-user">
+        <p>Wpisz <strong>USUŃ</strong> i kliknij w przycisk obok, aby usunąć użytkownika.</p>
+        <input type="text" [(ngModel)]="delete_confirmation" class="input delete-user-confirmation">
+        <button (click)="deleteUser()" class="button button--danger delete-user-button" [disabled]="delete_confirmation !== 'USUŃ'">
+          <i class="fa fa-remove"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
