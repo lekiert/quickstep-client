@@ -1,0 +1,74 @@
+<div class="">
+  <div class="row">
+    <div class="gr-12">
+      <h1 class="heading heading--border">Użytkownicy</h1>
+    </div>
+    <div class="gr-12">
+      <div class="form-filters">
+        <div class="form-filters__filter gr-12 gr-4@md">
+          <div class="form-filters__filter__label">
+            <label for="user-role-filter">Typ użytkownika</label>
+          </div>
+          <div class="form-filters__filter__control">
+            <select [(ngModel)]="filter" (ngModelChange)="getUsers()" class="select">
+                <option *ngFor="let type of filters" [value]="type.value">{{ type.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gr-12">
+      <table class="users-table">
+        <thead>
+          <th>Imię</th>
+          <th>Nazwisko</th>
+          <th>E-mail</th>
+          <th>Rola</th>
+          <th colspan="2">Utworzony</th>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let user of users" [routerLink]="['/user', user.id]">
+            <td>
+              <span class="users-table__first-name">
+                {{ user.first_name }}
+              </span>
+            </td>
+            <td>
+              <span class="users-table__last-name">
+                {{ user.last_name }}
+              </span>
+            <td>
+              <span class="users-table__email">
+                {{ user.email }}
+              </span>
+            </td>
+            <td>
+              <span class="users-table__role badge badge--{{ user.role | lowercase }}">
+                {{ user.role_name }}
+              </span>
+            </td>
+            <td>
+              <span class="users-table__created">
+                {{ user.created }}
+              </span>
+            </td>
+            <td>
+              <button class="button button--primary">
+                <i class="fa fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="gr-12">
+      <button class="button button--primary add-users pull-right">
+        <i class="fa fa-plus"></i> <i class="fa fa-group"></i>
+      </button>
+      <button class="button button--primary add-user pull-right">
+        <i class="fa fa-plus"></i> <i class="fa fa-user"></i>
+      </button>
+    </div>
+  </div>
+</div>

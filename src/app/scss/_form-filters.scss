@@ -1,0 +1,24 @@
+@import '../config';
+
+.form-filters {
+  margin-top: 15px;
+  margin-bottom: 35px;
+  @include clearfix;
+}
+
+.form-filters__filter {
+  @include clearfix;
+}
+
+.form-filters__filter__label {
+  width: 140px;
+  float: left;
+  line-height: 36px;
+  margin: 0 15px;
+  text-align: right;
+}
+
+.form-filters__filter__control {
+  width: calc(100% - 170px);
+  float: right;
+}

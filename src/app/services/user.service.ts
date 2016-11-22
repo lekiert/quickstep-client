@@ -1,5 +1,5 @@
 import { Injectable }             from '@angular/core';
-import { Http, Response }         from '@angular/http';
+import { Http, Response, URLSearchParams }         from '@angular/http';
 import { Observable }             from 'rxjs/Observable';
 import { AuthHttp, JwtHelper }    from 'angular2-jwt';
 import { getAuthenticatedUserId } from '../common/helpers';
@@ -39,6 +39,25 @@ export class UserService {
                           },
                           (error) => { console.log(error) }
                         );
+  }
+
+  getUsers(type?: string): Promise<User[]> {
+
+    let filter = new URLSearchParams();
+
+    if (type && type !== 'ALL') {
+      filter.set('filter[role]', type);
+    }
+
+    return this.authHttp.get(this.usersUrl, { search: filter })
+               .toPromise()
+               .then((response) => {
+                 let data = response.json().data;
+
+                 return data.map((item) => {
+                   return new User(item.id, item.attributes);
+                 })
+               });
   }
 
   changePassword(oldPassword: string, newPassword: string) {

@@ -18,6 +18,23 @@ export class User {
     return this.attributes['role'];
   }
 
+  get role_name(): string {
+    let role = 'Nieokreślony';
+    
+    switch (this.attributes['role']) {
+      case 'ADMIN': role = 'Administrator'; break;
+      case 'SUPERVISOR': role = 'Kierownik'; break;
+      case 'TEACHER': role = 'Nauczyciel'; break;
+      case 'STUDENT': role = 'Uczeń'; break;
+    }
+
+    return role;
+  }
+
+  get created(): string {
+    return this.attributes['created-at'];
+  }
+
   isStudent(): boolean {
     return this.attributes['role'] === 'STUDENT';
   }

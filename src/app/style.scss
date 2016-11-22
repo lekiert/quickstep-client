@@ -1,8 +1,10 @@
 // import settings :
+@import 'grid';
 @import 'settings';
 
 @import 'scss/button';
 @import 'scss/form';
+@import 'scss/form-filters';
 @import 'scss/footer';
 @import 'scss/heading';
 @import 'scss/input';
@@ -10,3 +12,4 @@
 @import 'scss/main-content';
 @import 'scss/main-header';
 @import 'scss/nav';
+@import 'scss/select';
