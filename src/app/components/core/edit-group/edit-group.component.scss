@@ -22,6 +22,7 @@
   min-width: 150px;
 }
 
+.add-teacher-to-group,
 .add-user-to-group {
   width: 100%;
 
@@ -33,6 +34,7 @@
   @include clearfix;
 }
 
+.add-teacher-to-group__input,
 .add-user-to-group__input {
   width: calc(100% - 40px);
   float: left;
@@ -43,6 +45,7 @@
   }
 }
 
+.add-teacher-to-group__button,
 .add-user-to-group__button {
   float: right;
 }

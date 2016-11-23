@@ -18,13 +18,17 @@ const template = require('./search-field.component.html');
 export class SearchFieldComponent {
   constructor(private http: AuthHttp) {}
 
-  @Input() type: string;
+  @Input() entity: string;
   users = [];
   query:string = '';
   @Output() userSelection = new EventEmitter();
   @Output() userSelectionUnset = new EventEmitter();
 
-  private usersUrl = process.env.API_URL + 'users';
+  private url;
+
+  ngOnInit() {
+    this.url =  process.env.API_URL + this.entity + 's'
+  }
 
   querySearch() {
     this.userSelection.emit(false);
@@ -35,14 +39,12 @@ export class SearchFieldComponent {
     let filter = new URLSearchParams();
     filter.set('filter[search]', this.query);
 
-    this.http.get(this.usersUrl, { search: filter, headers: contentHeaders }).toPromise().then((response) => {
+    this.http.get(this.url, { search: filter, headers: contentHeaders }).toPromise().then((response) => {
       let data = response.json().data;
 
       this.users = data.map((item) => {
         return new User(item.id, item.attributes);
       })
-
-      console.log(this.users);
     });
   }
 

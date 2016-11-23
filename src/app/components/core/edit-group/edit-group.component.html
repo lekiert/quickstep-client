@@ -6,128 +6,185 @@
         <span [innerHTML]="group.name"></span>
       </h1>
     </div>
-    <div class="gr-12">
+    <div class="row">
+      <div class="gr-12">
 
-      <form class="form" (ngSubmit)="saveUser()" #groupForm="ngForm">
+        <form class="form" (ngSubmit)="saveUser()" #groupForm="ngForm">
+          <div class="form__section">
+            <header class="form_section__heading">
+              <h3 class="heading heading--center">Dane grupy</h3>
+            </header>
+            <span class="alert alert--success" (click)="updateSuccess = ''" *ngIf="updateSuccess.length > 0">
+              {{ updateSuccess }}
+            </span>
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="group-name">Nazwa grupy</label>
+              </div>
+              <div class="form__group__control">
+                <input type="text" required #groupname="ngModel"
+                       name="group[name]" [(ngModel)]="group.name"
+                       class="input input--full" id="group-name">
+              </div>
+            </div>
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="group-description">Opis grupy</label>
+              </div>
+              <div class="form__group__control">
+                <textarea required #groupdescription="ngModel"
+                       name="group[description]" [(ngModel)]="group.description"
+                       class="textarea" id="group-description"></textarea>
+              </div>
+            </div>
+
+            <div class="form__buttons">
+              <button type="button" (click)="updateGroup()" class="button button--primary pull-right" [disabled]="!groupForm.form.valid">
+                <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Uaktualnij dane grupy
+              </button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="gr-12">
         <div class="form__section">
           <header class="form_section__heading">
-            <h3 class="heading heading--center">Dane grupy</h3>
+            <h3 class="heading heading--center">Nauczyciele</h3>
           </header>
-          <span class="alert alert--success" (click)="updateSuccess = ''" *ngIf="updateSuccess.length > 0">
-            {{ updateSuccess }}
-          </span>
+          <span class="alert alert--success" (click)="teacherSuccess = ''" *ngIf="teacherSuccess.length > 0">{{ teacherSuccess }}</span>
+          <table class="table-list">
+            <thead>
+              <th>Imię</th>
+              <th>Nazwisko</th>
+              <th>E-mail</th>
+            </thead>
 
-          <div class="form__group form__group--inline">
-            <div class="form__group__label">
-              <label for="group-name">Nazwa grupy</label>
-            </div>
-            <div class="form__group__control">
-              <input type="text" required #groupname="ngModel"
-                     name="group[name]" [(ngModel)]="group.name"
-                     class="input input--full" id="group-name">
-            </div>
-          </div>
-
-          <div class="form__group form__group--inline">
-            <div class="form__group__label">
-              <label for="group-description">Opis grupy</label>
-            </div>
-            <div class="form__group__control">
-              <textarea required #groupdescription="ngModel"
-                     name="group[description]" [(ngModel)]="group.description"
-                     class="textarea" id="group-description"></textarea>
-            </div>
-          </div>
-
-          <div class="form__buttons">
-            <button type="button" (click)="updateGroup()" class="button button--primary pull-right" [disabled]="!groupForm.form.valid">
-              <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Uaktualnij dane grupy
-            </button>
-          </div>
+            <tbody>
+              <tr *ngFor="let teacher of teachers">
+                <td>
+                  <span class="users-table__first-name">
+                    {{ teacher.first_name }}
+                  </span>
+                </td>
+                <td>
+                  <span class="users-table__last-name">
+                    {{ teacher.last_name }}
+                  </span>
+                <td>
+                  <span class="users-table__email">
+                    {{ teacher.email }}
+                  </span>
+                </td>
+                <td class="users-table__edit hide@mmd">
+                  <a class="button button--primary" [routerLink]="['/users', teacher.id, 'edit']">
+                    <i class="fa fa-eye"></i>
+                  </a>
+                  <a class="button" [routerLink]="['/users', teacher.id, 'results']">
+                    <i class="fa fa-bar-chart"></i>
+                  </a>
+                  <button type="button" class="button button--danger" (click)="removeTeacherFromGroup(teacher.id)">
+                    <i class="fa fa-remove"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </form>
+      </div>
+      <div class="gr-12">
+        <form class="form">
+          <div class="add-teacher-to-group">
+            <div class="add-teacher-to-group__input">
+              <!-- <input type="text" placeholder="imię, nazwisko lub email" class="input"> -->
+              <search-field (userSelection)="selectTeacher($event)" entity="teacher"></search-field>
+            </div>
 
-    </div>
-
-    <div class="gr-12">
-      <div class="form__section">
-        <header class="form_section__heading">
-          <h3 class="heading heading--center">Lista uczniów przypisanych do grupy</h3>
-        </header>
-        <span class="alert alert--success" (click)="success = ''" *ngIf="success.length > 0">{{ success }}</span>
-        <table class="table-list">
-          <thead>
-            <th>Imię</th>
-            <th>Nazwisko</th>
-            <th>E-mail</th>
-            <th colspan="2" class="hide@mmd">Utworzony</th>
-          </thead>
-
-          <tbody>
-            <tr *ngFor="let user of users">
-              <td>
-                <span class="users-table__first-name">
-                  {{ user.first_name }}
-                </span>
-              </td>
-              <td>
-                <span class="users-table__last-name">
-                  {{ user.last_name }}
-                </span>
-              <td>
-                <span class="users-table__email">
-                  {{ user.email }}
-                </span>
-              </td>
-              <td class="hide@mmd">
-                <span class="users-table__created">
-                  {{ user.created }}
-                </span>
-              </td>
-              <td class="users-table__edit hide@mmd">
-                <a class="button button--primary" [routerLink]="['/users', user.id, 'edit']">
-                  <i class="fa fa-eye"></i>
-                </a>
-                <a class="button" [routerLink]="['/users', user.id, 'results']">
-                  <i class="fa fa-bar-chart"></i>
-                </a>
-                <button type="button" class="button button--danger" (click)="removeUserFromGroup(user.id)">
-                  <i class="fa fa-remove"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            <div class="add-teacher-to-group__button">
+              <button class="button button--primary" (click)="addTeacher()" [disabled]="selectedTeacher === null">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
+    <hr class="line">
+    <div class="row">
+      <div class="gr-12">
+        <div class="form__section">
+          <header class="form_section__heading">
+            <h3 class="heading heading--center">Lista uczniów przypisanych do grupy</h3>
+          </header>
+          <span class="alert alert--success" (click)="success = ''" *ngIf="success.length > 0">{{ success }}</span>
+          <table class="table-list">
+            <thead>
+              <th>Imię</th>
+              <th>Nazwisko</th>
+              <th colspan="2" class="hide@mmd">E-mail</th>
+            </thead>
 
-    <div class="gr-12">
-      <form action="" class="form">
-        <div class="add-user-to-group">
-          <div class="add-user-to-group__input">
-            <!-- <input type="text" placeholder="imię, nazwisko lub email" class="input"> -->
-            <search-field (userSelection)="selectUser($event)"></search-field>
-          </div>
-
-          <div class="add-user-to-group__button">
-            <button class="button button--primary" (click)="addUser()" [disabled]="selectedUser === null">
-              <i class="fa fa-plus"></i>
-            </button>
-          </div>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td>
+                  <span class="users-table__first-name">
+                    {{ user.first_name }}
+                  </span>
+                </td>
+                <td>
+                  <span class="users-table__last-name">
+                    {{ user.last_name }}
+                  </span>
+                <td>
+                  <span class="users-table__email">
+                    {{ user.email }}
+                  </span>
+                </td>
+                <td class="users-table__edit hide@mmd">
+                  <a class="button button--primary" [routerLink]="['/users', user.id, 'edit']">
+                    <i class="fa fa-eye"></i>
+                  </a>
+                  <a class="button" [routerLink]="['/users', user.id, 'results']">
+                    <i class="fa fa-bar-chart"></i>
+                  </a>
+                  <button type="button" class="button button--danger" (click)="removeUserFromGroup(user.id)">
+                    <i class="fa fa-remove"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </form>
-    </div>
-
-    <div class="gr-12">
-
-      <div class="gr-12 delete-group">
-        <p>Wpisz <strong>USUŃ</strong> i kliknij w przycisk obok, aby usunąć grupę.</p>
-        <input type="text" [(ngModel)]="delete_confirmation" class="input delete-group-confirmation">
-        <button (click)="deleteGroup()" class="button button--danger delete-group-button" [disabled]="delete_confirmation !== 'USUŃ'">
-          <i class="fa fa-remove"></i>
-        </button>
       </div>
+      <div class="gr-12">
+        <form action="" class="form">
+          <div class="add-user-to-group">
+            <div class="add-user-to-group__input">
+              <!-- <input type="text" placeholder="imię, nazwisko lub email" class="input"> -->
+              <search-field (userSelection)="selectUser($event)" entity="user"></search-field>
+            </div>
 
+            <div class="add-user-to-group__button">
+              <button class="button button--primary" (click)="addUser()" [disabled]="selectedUser === null">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="gr-12">
+
+        <div class="gr-12 delete-group">
+          <p>Wpisz <strong>USUŃ</strong> i kliknij w przycisk obok, aby usunąć grupę.</p>
+          <input type="text" [(ngModel)]="delete_confirmation" class="input delete-group-confirmation">
+          <button (click)="deleteGroup()" class="button button--danger delete-group-button" [disabled]="delete_confirmation !== 'USUŃ'">
+            <i class="fa fa-remove"></i>
+          </button>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

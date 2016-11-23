@@ -18,12 +18,15 @@ const template = require('./edit-group.component.html');
 export class EditGroupComponent {
   group: Group;
   users: User[];
+  teachers: User[];
   private sub: any;
   private selectedUser = null;
+  private selectedTeacher = null;
 
   // messages
   success:string = '';
   updateSuccess:string = '';
+  teacherSuccess:string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +37,7 @@ export class EditGroupComponent {
       let id = +params['id'];
       this.getGroup(id);
       this.getUsers(id);
+      this.getTeachers(id);
     });
   }
 
@@ -49,14 +53,31 @@ export class EditGroupComponent {
     });
   }
 
+  getTeachers(id): void {
+    this.userService.getTeachersByGroup(id).then((teachers) => {
+      this.teachers = teachers;
+    });
+  }
+
   removeUserFromGroup(userId): void {
-    let user = this.users.filter((u) => { return +u.id === +userId })[0]
+    let user = this.findUser(userId)
     this.success = '';
     this.service.removeUserFromGroup(+this.group.id, +userId).then(() => {
       this.users = this.users.filter((user) => {
         return +user.id !== +userId
       })
       this.success = 'Usunięto z grupy użytkownika: ' + user.first_name + ' ' + user.last_name;
+    })
+  }
+
+  removeTeacherFromGroup(userId): void {
+    let teacher = this.findTeacher(userId)
+    this.success = '';
+    this.service.removeTeacherFromGroup(+this.group.id, +userId).then(() => {
+      this.teachers = this.teachers.filter((user) => {
+        return +user.id !== +userId
+      })
+      this.teacherSuccess = 'Usunięto z grupy nauczyciela: ' + teacher.first_name + ' ' + teacher.last_name;
     })
   }
 
@@ -73,9 +94,21 @@ export class EditGroupComponent {
   }
 
   addUser(): void {
-    if (this.selectedUser instanceof User) {
+    let user = this.selectedUser;
+    if (user instanceof User) {
       this.service.addUserToGroup(this.group.id, this.selectedUser).then(() => {
         this.getUsers(this.group.id);
+        this.success = 'Dodano użytkownika ' + user.first_name + ' ' + user.last_name + ' do grupy.';
+      })
+    }
+  }
+
+  addTeacher(): void {
+    let user = this.selectedTeacher;
+    if (user instanceof User) {
+      this.service.addTeacherToGroup(this.group.id, this.selectedTeacher).then(() => {
+        this.getTeachers(this.group.id);
+        this.teacherSuccess = 'Dodano nauczyciela ' + user.first_name + ' ' + user.last_name + ' do grupy.';
       })
     }
   }
@@ -86,5 +119,21 @@ export class EditGroupComponent {
     } else {
       this.selectedUser = null;
     }
+  }
+
+  selectTeacher(user) {
+    if (user instanceof User && user.isTeacher()) {
+      this.selectedTeacher = user;
+    } else {
+      this.selectedTeacher = null;
+    }
+  }
+
+  private findTeacher(userId) {
+    return this.teachers.filter((u) => { return +u.id === +userId })[0];
+  }
+
+  private findUser(userId) {
+    return this.users.filter((u) => { return +u.id === +userId })[0];
   }
 }

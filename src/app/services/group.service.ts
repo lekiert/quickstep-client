@@ -11,6 +11,7 @@ export class GroupService {
 
   private groupsUrl = process.env.API_URL + 'groups';
   private usersUrl = process.env.API_URL + 'users';
+  private teachersUrl = process.env.API_URL + 'teachers';
 
   constructor (private authHttp: AuthHttp) {}
 
@@ -49,11 +50,35 @@ export class GroupService {
    .toPromise();
   }
 
+  removeTeacherFromGroup(groupId: number, userId: number) {
+    return this.authHttp.delete(this.groupsUrl + '/' + groupId + '/relationships/teachers',
+      {
+        body: {
+            data: [
+              { type: "teachers", id: userId }
+            ]
+        }
+      }
+    )
+   .toPromise();
+  }
+
   addUserToGroup(groupId: number, user: User) {
     return this.authHttp.post(this.groupsUrl + '/' + groupId + '/relationships/users',
       {
         data: [
           { type: "users", id: user.id }
+        ]
+      }, { headers: contentHeaders }
+    )
+   .toPromise();
+  }
+
+  addTeacherToGroup(groupId: number, user: User) {
+    return this.authHttp.post(this.groupsUrl + '/' + groupId + '/relationships/teachers',
+      {
+        data: [
+          { type: "teachers", id: user.id }
         ]
       }, { headers: contentHeaders }
     )
