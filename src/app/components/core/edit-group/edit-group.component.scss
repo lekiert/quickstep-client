@@ -1,0 +1,23 @@
+@import '../../../style';
+@import '../../../config';
+
+.delete-group {
+  text-align: center;
+
+  @include clearfix;
+}
+
+.delete-group-button {
+  margin: 0 auto;
+}
+
+.delete-group-confirmation {
+  width: 100px;
+  padding: 8px;
+  font-size: 12pt;
+  text-align: center;
+}
+
+.users-table__edit {
+  min-width: 150px;
+}

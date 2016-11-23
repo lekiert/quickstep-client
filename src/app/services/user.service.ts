@@ -14,7 +14,8 @@ export class UserService {
   private user: User;
   private subject = new Subject<User>();
 
-  private usersUrl = process.env.API_URL + 'users';  // URL to web API
+  private usersUrl = process.env.API_URL + 'users';
+  private groupsUrl = process.env.API_URL + 'groups';
 
   constructor (private authHttp: AuthHttp) {}
 
@@ -67,6 +68,18 @@ export class UserService {
     }
 
     return this.authHttp.get(this.usersUrl, { search: filter })
+               .toPromise()
+               .then((response) => {
+                 let data = response.json().data;
+
+                 return data.map((item) => {
+                   return new User(item.id, item.attributes);
+                 })
+               });
+  }
+
+  getUsersByGroup(id: number): Promise<User[]> {
+    return this.authHttp.get(this.groupsUrl + '/' + id + '/users')
                .toPromise()
                .then((response) => {
                  let data = response.json().data;

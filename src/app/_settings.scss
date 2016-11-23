@@ -31,6 +31,9 @@
 @include gridle_register_state( md, (
     min-width : 992px
 ) );
+@include gridle_register_state( mmd, (
+    max-width : 992px
+) );
 @include gridle_register_state( lg, (
     min-width : 1200px
 ) );

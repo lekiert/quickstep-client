@@ -1,0 +1,60 @@
+<div class="" *ngIf="group">
+  <div class="row">
+    <div class="gr-12">
+      <h1 class="heading heading--border">Dodaj nową grupę</h1>
+    </div>
+    <div class="gr-12">
+      <div [hidden]="result !== true">
+        <div class="alert alert--success">Dodano grupę.</div>
+      </div>
+      <div [hidden]="result !== false">
+        <div class="alert alert--danger">Wystąpił błąd podczas dodawania grupy.</div>
+      </div>
+      <form class="form" (ngSubmit)="saveGroup()" #groupForm="ngForm">
+        <div class="form__section">
+          <header class="form_section__heading">
+            <h3 class="heading heading--center">Dane grupy</h3>
+          </header>
+
+          <div class="form__section">
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="group-name">Nazwa grupy</label>
+              </div>
+              <div class="form__group__control">
+                <input type="text" [(ngModel)]="group.name" name="group[name]" #groupname="ngModel" required class="input input--full" id="group-name">
+              </div>
+              <div [class.hidden]="groupname.valid || groupname.pristine">
+                <div class="form__group__error">
+                  Nazwa grupy jest obowiązkowa.
+                </div>
+              </div>
+            </div>
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="user-last_name">Opis grupy</label>
+              </div>
+              <div class="form__group__control">
+                <input type="text" [(ngModel)]="group.description" name="group[description]" #groupdescription="ngModel" required class="input input--full" id="group-description">
+              </div>
+              <div [class.hidden]="groupdescription.valid || groupdescription.pristine">
+                <div class="form__group__error">
+                  Opis grupy jest obowiązkowy.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form__buttons">
+            <button type="submit" class="button button--primary pull-right" [disabled]="!groupForm.form.valid">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp;Dodaj nową grupę
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
