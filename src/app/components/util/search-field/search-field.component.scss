@@ -1,0 +1,56 @@
+@import '../../../config';
+@import '../../../style';
+
+.search-field {
+  width: 100%;
+  position: relative;
+  &:hover .search-field__results {
+    display: block;
+  }
+
+  .input {
+    width: calc(100% - 1.25rem);
+  }
+}
+
+.search-field__results {
+  background: $color-blue-vlight;
+  z-index: 4;
+  display: none;
+  position: absolute;
+  top: -250px;
+  min-width: 150px;
+  height: 250px;
+  overflow-y: scroll;
+  width: 100%;
+  border-top-left-radius: 8px;
+
+  ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+
+    li {
+      display: block;
+      padding: 0.75rem 1.25rem;
+      color: #fff;
+      transition: background 200ms;
+
+      &.supervisor:hover {
+        background: $color-yellow;
+      }
+      &.user:hover {
+        background: $color-green-vlight;
+      }
+      &.admin:hover {
+        background: $color-red;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background: $color-blue-light;
+        font-weight: bold;
+      }
+    }
+  }
+}

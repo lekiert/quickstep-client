@@ -17,6 +17,7 @@ import { AddGroupComponent } from './components/core/add-group/add-group.compone
 import { EditUserComponent } from './components/core/edit-user/edit-user.component';
 import { EditGroupComponent } from './components/core/edit-group/edit-group.component';
 import { HomeComponent } from './components/home/home.component';
+import { SearchFieldComponent } from './components/util/search-field/search-field.component';
 import { AuthGuard } from './common/auth.guard';
 import { Login } from './components/login';
 import { provideAuth } from 'angular2-jwt';
@@ -31,7 +32,8 @@ import { contentHeaders } from './common/headers';
   declarations: [AppComponent, HomeComponent, ExcerciseListComponent,
                  CourseListComponent, Login, CourseComponent, SettingsComponent,
                  TestComponent, UserListComponent, AddUserComponent, EditUserComponent,
-                 GroupListComponent, EditGroupComponent, AddGroupComponent],
+                 GroupListComponent, EditGroupComponent, AddGroupComponent,
+                 SearchFieldComponent],
   imports     : [BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(rootRouterConfig)],
   providers   : [AuthGuard, ExcerciseService, CourseService,
                  UserService, TestService, GroupService, provideAuth({

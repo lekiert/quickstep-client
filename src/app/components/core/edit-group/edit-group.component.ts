@@ -1,10 +1,11 @@
 import { Component, OnInit }                       from '@angular/core';
 import { Router, ActivatedRoute }                  from '@angular/router';
 import { AuthHttp }                                from 'angular2-jwt';
+import { SearchFieldComponent }                    from '../../util/search-field/search-field.component';
 import { GroupService }                            from '../../../services/group.service';
-import { UserService }                            from '../../../services/user.service';
+import { UserService }                             from '../../../services/user.service';
 import { Group }                                   from '../../../group';
-import { User }                                   from '../../../user';
+import { User }                                    from '../../../user';
 
 const styles = require('./edit-group.component.scss');
 const template = require('./edit-group.component.html');
@@ -12,12 +13,13 @@ const template = require('./edit-group.component.html');
 @Component({
   selector: 'edit-group',
   template: template,
-  styles: [ styles ],
+  styles: [ styles ]
 })
 export class EditGroupComponent {
   group: Group;
   users: User[];
   private sub: any;
+  private selectedUser = null;
 
   // messages
   success:string = '';
@@ -30,12 +32,20 @@ export class EditGroupComponent {
     private userService: UserService) {
     this.sub = this.route.params.subscribe(params => {
       let id = +params['id'];
-      this.service.getGroup(id).then((group) => {
-                     this.group = group;
-                   });
-      this.userService.getUsersByGroup(id).then((users) => {
-                     this.users = users;
-                   });
+      this.getGroup(id);
+      this.getUsers(id);
+    });
+  }
+
+  getGroup(id): void {
+    this.service.getGroup(id).then((group) => {
+      this.group = group;
+    });
+  }
+
+  getUsers(id): void {
+    this.userService.getUsersByGroup(id).then((users) => {
+      this.users = users;
     });
   }
 
@@ -60,5 +70,21 @@ export class EditGroupComponent {
     this.service.deleteGroup(this.group.id).then(() => {
       this.router.navigate(['/groups']);
     });
+  }
+
+  addUser(): void {
+    if (this.selectedUser instanceof User) {
+      this.service.addUserToGroup(this.group.id, this.selectedUser).then(() => {
+        this.getUsers(this.group.id);
+      })
+    }
+  }
+
+  selectUser(user) {
+    if (user instanceof User) {
+      this.selectedUser = user;
+    } else {
+      this.selectedUser = null;
+    }
   }
 }

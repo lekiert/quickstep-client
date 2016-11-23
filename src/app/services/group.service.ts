@@ -37,7 +37,6 @@ export class GroupService {
   }
 
   removeUserFromGroup(groupId: number, userId: number) {
-
     return this.authHttp.delete(this.groupsUrl + '/' + groupId + '/relationships/users',
       {
         body: {
@@ -46,6 +45,17 @@ export class GroupService {
             ]
         }
       }
+    )
+   .toPromise();
+  }
+
+  addUserToGroup(groupId: number, user: User) {
+    return this.authHttp.post(this.groupsUrl + '/' + groupId + '/relationships/users',
+      {
+        data: [
+          { type: "users", id: user.id }
+        ]
+      }, { headers: contentHeaders }
     )
    .toPromise();
   }

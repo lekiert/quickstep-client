@@ -52,7 +52,7 @@
     <div class="gr-12">
       <div class="form__section">
         <header class="form_section__heading">
-          <h3 class="heading heading--center">Lista użytkowników przypisanych do grupy</h3>
+          <h3 class="heading heading--center">Lista uczniów przypisanych do grupy</h3>
         </header>
         <span class="alert alert--success" (click)="success = ''" *ngIf="success.length > 0">{{ success }}</span>
         <table class="table-list">
@@ -99,6 +99,23 @@
           </tbody>
         </table>
       </div>
+    </div>
+
+    <div class="gr-12">
+      <form action="" class="form">
+        <div class="add-user-to-group">
+          <div class="add-user-to-group__input">
+            <!-- <input type="text" placeholder="imię, nazwisko lub email" class="input"> -->
+            <search-field (userSelection)="selectUser($event)"></search-field>
+          </div>
+
+          <div class="add-user-to-group__button">
+            <button class="button button--primary" (click)="addUser()" [disabled]="selectedUser === null">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
 
     <div class="gr-12">
