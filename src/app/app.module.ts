@@ -27,6 +27,7 @@ import { UserService } from './services/user.service';
 import { TestService } from './services/test.service';
 import { GroupService } from './services/group.service';
 import { contentHeaders } from './common/headers';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, ExcerciseListComponent,
@@ -37,8 +38,8 @@ import { contentHeaders } from './common/headers';
   imports     : [BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(rootRouterConfig)],
   providers   : [AuthGuard, ExcerciseService, CourseService,
                  UserService, TestService, GroupService, provideAuth({
-      tokenName: process.env.TOKEN_NAME,
-      tokenGetter: () => localStorage.getItem(process.env.TOKEN_NAME) // tmp bug in angular2-jwt fix
+      tokenName: environment.TOKEN_NAME,
+      tokenGetter: () => localStorage.getItem(environment.TOKEN_NAME) // tmp bug in angular2-jwt fix
     })],
   bootstrap   : [AppComponent]
 })

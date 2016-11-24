@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { contentHeaders } from '../../common/headers';
 import { AuthGuard } from '../../common/auth.guard';
 import { UserService } from '../../services/user.service';
+import { environment } from '../../../environments/environment';
 
 const theme   = require('../../style.scss');
 const styles   = require('./login.scss');
@@ -34,7 +35,7 @@ export class Login {
 
     this.error = false;
     let body = {auth : { email: username, password: password } };
-    this.http.post(process.env.API_URL + 'user_token', body, { headers: contentHeaders })
+    this.http.post(environment.API_URL + 'user_token', body, { headers: contentHeaders })
       .subscribe(
         response => {
           localStorage.setItem('jwt', response.json().jwt);

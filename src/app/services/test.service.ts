@@ -4,12 +4,13 @@ import { Test }              from '../test';
 import { Excercise }              from '../excercise';
 import { Observable }             from 'rxjs/Observable';
 import { AuthHttp }               from 'angular2-jwt';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class TestService {
 
-  private testsUrl = process.env.API_URL + 'tests';
-  private coursesUrl = process.env.API_URL + 'courses';
+  private testsUrl = environment.API_URL + 'tests';
+  private coursesUrl = environment.API_URL + 'courses';
 
   constructor (private authHttp: AuthHttp) {}
 

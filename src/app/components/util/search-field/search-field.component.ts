@@ -6,6 +6,7 @@ import { contentHeaders } from '../../../common/headers';
 import { AuthGuard } from '../../../common/auth.guard';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../user';
+import { environment } from '../../../../environments/environment';
 
 const styles   = require('./search-field.component.scss');
 const template = require('./search-field.component.html');
@@ -27,7 +28,7 @@ export class SearchFieldComponent {
   private url;
 
   ngOnInit() {
-    this.url =  process.env.API_URL + this.entity + 's'
+    this.url =  environment.API_URL + this.entity + 's'
   }
 
   querySearch() {

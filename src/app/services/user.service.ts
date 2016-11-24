@@ -7,6 +7,7 @@ import { User }                   from '../user';
 import { contentHeaders }         from '../common/headers';
 import '../rxjs-operators';
 import { Subject }    from 'rxjs/Subject';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class UserService {
@@ -14,9 +15,9 @@ export class UserService {
   private user: User;
   private subject = new Subject<User>();
 
-  private usersUrl = process.env.API_URL + 'users';
-  private teachersUrl = process.env.API_URL + 'teachers';
-  private groupsUrl = process.env.API_URL + 'groups';
+  private usersUrl = environment.API_URL + 'users';
+  private teachersUrl = environment.API_URL + 'teachers';
+  private groupsUrl = environment.API_URL + 'groups';
 
   constructor (private authHttp: AuthHttp) {}
 

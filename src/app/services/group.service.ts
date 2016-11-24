@@ -5,13 +5,14 @@ import { User }                     from '../user';
 import { Observable }               from 'rxjs/Observable';
 import { AuthHttp }                 from 'angular2-jwt';
 import { contentHeaders }         from '../common/headers';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class GroupService {
 
-  private groupsUrl = process.env.API_URL + 'groups';
-  private usersUrl = process.env.API_URL + 'users';
-  private teachersUrl = process.env.API_URL + 'teachers';
+  private groupsUrl = environment.API_URL + 'groups';
+  private usersUrl = environment.API_URL + 'users';
+  private teachersUrl = environment.API_URL + 'teachers';
 
   constructor (private authHttp: AuthHttp) {}
 

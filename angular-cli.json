@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.19-3",
+    "version": "1.0.0-beta.21",
     "name": "quickstep-client"
   },
   "apps": [
@@ -20,7 +20,7 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": [z],
+      "scripts": [],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

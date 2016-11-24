@@ -3,11 +3,12 @@ import { Http, Headers, Response }         from '@angular/http';
 import { Excercise }              from '../excercise';
 import { Observable }             from 'rxjs/Observable';
 import { AuthHttp }               from 'angular2-jwt';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ExcerciseService {
 
-  private excercisesUrl = process.env.API_URL + 'excercises';  // URL to web API
+  private excercisesUrl = environment.API_URL + 'excercises';  // URL to web API
 
   constructor (private authHttp: AuthHttp) {}
 
