@@ -1,5 +1,7 @@
 export class Excercise {
 
+  answers = {};
+
   constructor(public id: number, private attributes) {}
 
   get name(): string {
@@ -12,5 +14,9 @@ export class Excercise {
 
   get command(): string {
     return this.attributes['command'];
+  }
+
+  get data(): string {
+    return this.attributes['data'];
   }
 }

@@ -1,0 +1,24 @@
+<div class="dashboard">
+  <div class="row">
+    <div class="gr-12">
+      <h1 class="heading heading--border">Statystyki</h1>
+    </div>
+
+    <table *ngIf="stats" class="table">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Kto</th>
+          <th>Operacja</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of stats">
+          <td>{{ log.when }}</td>
+          <td>{{ log.userId }}</td>
+          <td>{{ log.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -5,9 +5,13 @@
     </div>
     <div class="gr-12">
 
-      <div *ngFor="let excercise of excercises">
-        {{ excercise.name }} - {{ excercise.command }}
+      <div *ngFor="let excercise of excercises; let i = index">
+        <h3>{{ excercise.name }}</h3>
+        <p>{{ excercise.command }}</p>
+        <student-brackets [excercise]="excercise"></student-brackets>
       </div>
+
+      <button type="button" (click)="getExcercisesAnswers()">TEST</button>
 
     </div>
   </div>

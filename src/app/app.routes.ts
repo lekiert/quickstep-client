@@ -11,11 +11,13 @@ import { AddGroupComponent } from './components/core/add-group/add-group.compone
 import { EditUserComponent } from './components/core/edit-user/edit-user.component';
 import { EditGroupComponent } from './components/core/edit-group/edit-group.component';
 import { TestComponent } from './components/core/test/test.component';
+import { StatsComponent } from './components/core/stats/stats.component';
 import { Login } from './components/login';
 import { AuthGuard } from './common/auth.guard';
 
 export const rootRouterConfig: Routes = [
   { path: 'summary',   component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'statistics',   component: StatsComponent, canActivate: [AuthGuard] },
   { path: 'settings',   component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'groups',   component: GroupListComponent, canActivate: [AuthGuard] },
   { path: 'groups/new',   component: AddGroupComponent, canActivate: [AuthGuard] },

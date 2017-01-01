@@ -16,6 +16,7 @@ import { AddUserComponent } from './components/core/add-user/add-user.component'
 import { AddGroupComponent } from './components/core/add-group/add-group.component';
 import { EditUserComponent } from './components/core/edit-user/edit-user.component';
 import { EditGroupComponent } from './components/core/edit-group/edit-group.component';
+import { StudentBracketsComponent } from './components/core/student-excercises/brackets/student-brackets.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchFieldComponent } from './components/util/search-field/search-field.component';
 import { AuthGuard } from './common/auth.guard';
@@ -26,21 +27,49 @@ import { CourseService } from './services/course.service';
 import { UserService } from './services/user.service';
 import { TestService } from './services/test.service';
 import { GroupService } from './services/group.service';
+import { InformationService } from './services/information.service';
 import { contentHeaders } from './common/headers';
 import { environment } from '../environments/environment';
+import { StatsComponent } from './components/core/stats/stats.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ExcerciseListComponent,
-                 CourseListComponent, Login, CourseComponent, SettingsComponent,
-                 TestComponent, UserListComponent, AddUserComponent, EditUserComponent,
-                 GroupListComponent, EditGroupComponent, AddGroupComponent,
-                 SearchFieldComponent],
-  imports     : [BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(rootRouterConfig)],
-  providers   : [AuthGuard, ExcerciseService, CourseService,
-                 UserService, TestService, GroupService, provideAuth({
-      tokenName: environment.TOKEN_NAME,
-      tokenGetter: () => localStorage.getItem(environment.TOKEN_NAME) // tmp bug in angular2-jwt fix
-    })],
+  declarations: [AppComponent,
+                 HomeComponent,
+                 ExcerciseListComponent,
+                 CourseListComponent,
+                 Login,
+                 CourseComponent,
+                 SettingsComponent,
+                 TestComponent,
+                 UserListComponent,
+                 AddUserComponent,
+                 EditUserComponent,
+                 GroupListComponent,
+                 EditGroupComponent,
+                 AddGroupComponent,
+                 SearchFieldComponent,
+                 StatsComponent,
+                 StudentBracketsComponent],
+
+  imports     : [BrowserModule,
+                 FormsModule,
+                 HttpModule,
+                 RouterModule.forRoot(rootRouterConfig)],
+
+  providers   : [AuthGuard,
+                 ExcerciseService,
+                 CourseService,
+                 UserService,
+                 TestService,
+                 GroupService,
+                 InformationService,
+
+                 provideAuth({
+                   tokenName: environment.TOKEN_NAME,
+                   tokenGetter: () => localStorage.getItem(environment.TOKEN_NAME) // tmp bug in angular2-jwt fix
+                 })],
+
   bootstrap   : [AppComponent]
 })
+
 export class AppModule {}
