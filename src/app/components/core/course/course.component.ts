@@ -2,8 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { CourseService } from '../../../services/course.service';
 import { TestService } from '../../../services/test.service';
+import { UserService } from '../../../services/user.service';
 import { Course } from '../../../course';
 import { Test } from '../../../test';
+import { User } from '../../../user';
 
 const styles = require('./course.component.scss');
 const template = require('./course.component.html');
@@ -17,8 +19,10 @@ export class CourseComponent {
   constructor(
     private route: ActivatedRoute,
     private service: CourseService,
+    private userService: UserService,
     private testService: TestService) {}
 
+  user: User;
   course: Course;
   tests: Test[];
   private sub: any;
@@ -36,6 +40,13 @@ export class CourseComponent {
          this.tests = tests;
        });
     });
+
+    this.userService.getAuthenticatedUserObject().then(
+      user => {
+        console.log(user);
+        this.user = user
+      }
+    )
   }
 
   ngOnDestroy() {

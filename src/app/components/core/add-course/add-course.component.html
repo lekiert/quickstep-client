@@ -1,0 +1,61 @@
+<div class="" *ngIf="course">
+  <div class="row">
+    <div class="gr-12">
+      <h1 class="heading heading--border">Dodaj nowy kurs</h1>
+    </div>
+    <div class="gr-12">
+      <div [hidden]="result !== true">
+        <div class="alert alert--success">Dodano kurs.</div>
+      </div>
+      <div [hidden]="result !== false">
+        <div class="alert alert--danger">Wystąpił błąd podczas dodawania kursu.</div>
+      </div>
+      <form class="form" (ngSubmit)="saveCourse()" #courseForm="ngForm">
+        <div class="form__section">
+          <header class="form_section__heading">
+            <h3 class="heading heading--center">Dane kursu</h3>
+          </header>
+
+          <div class="form__section">
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="course-name">Nazwa kursu</label>
+              </div>
+              <div class="form__group__control">
+                <input type="text" [(ngModel)]="course.name" name="course[name]" #coursename="ngModel" required class="input input--full" id="course-name">
+              </div>
+              <div [class.hidden]="coursename.valid || coursename.pristine">
+                <div class="form__group__error">
+                  Nazwa kursu jest obowiązkowa.
+                </div>
+              </div>
+            </div>
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="course-description">Opis kursu</label>
+              </div>
+              <div class="form__group__control">
+                <input type="text" [(ngModel)]="course.description" name="course[description]" #coursedescription="ngModel" required class="input input--full" id="course-description">
+              </div>
+              <div [class.hidden]="coursedescription.valid || coursedescription.pristine">
+                <div class="form__group__error">
+                  Opis kursu jest obowiązkowy.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form__buttons">
+            <button type="submit" class="button button--primary pull-right" [disabled]="!courseForm.form.valid">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp;Dodaj kurs
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

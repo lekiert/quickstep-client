@@ -7,9 +7,12 @@ import { GroupListComponent } from './components/core/group-list/group-list.comp
 import { CourseComponent } from './components/core/course/course.component';
 import { SettingsComponent } from './components/core/settings/settings.component';
 import { AddUserComponent } from './components/core/add-user/add-user.component';
+import { AddTestComponent } from './components/core/add-test/add-test.component';
+import { AddCourseComponent } from './components/core/add-course/add-course.component';
 import { AddGroupComponent } from './components/core/add-group/add-group.component';
 import { EditUserComponent } from './components/core/edit-user/edit-user.component';
 import { EditGroupComponent } from './components/core/edit-group/edit-group.component';
+import { EditTestComponent } from './components/core/edit-test/edit-test.component';
 import { TestComponent } from './components/core/test/test.component';
 import { StatsComponent } from './components/core/stats/stats.component';
 import { Login } from './components/login';
@@ -25,8 +28,11 @@ export const rootRouterConfig: Routes = [
   { path: 'users/new',   component: AddUserComponent, canActivate: [AuthGuard] },
   { path: 'users/:id/edit',   component: EditUserComponent, canActivate: [AuthGuard] },
   { path: 'users/:type',   component: UserListComponent, canActivate: [AuthGuard] },
+  { path: 'courses/new',   component: AddCourseComponent, canActivate: [AuthGuard] },
   { path: 'courses',   component: CourseListComponent, canActivate: [AuthGuard] },
+  { path: 'course/:id/tests/new',   component: AddTestComponent, canActivate: [AuthGuard] },
   { path: 'course/:id',   component: CourseComponent, canActivate: [AuthGuard] },
+  { path: 'tests/:id/edit',   component: EditTestComponent, canActivate: [AuthGuard] },
   { path: 'test/:id',   component: TestComponent, canActivate: [AuthGuard] },
   { path: '',       component: Login },
   { path: 'login',  component: Login },

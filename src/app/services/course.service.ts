@@ -14,7 +14,21 @@ export class CourseService {
   constructor (private authHttp: AuthHttp) {}
 
   getCourses(): Promise<Course[]> {
-    return this.authHttp.get(this.usersUrl + '/1/courses')
+
+    return this.authHttp.get(this.coursesUrl)
+               .toPromise()
+               .then((response) => {
+                 let data = response.json().data;
+
+                 return data.map((item) => {
+                   return new Course(item.id, item.attributes);
+                 })
+               })
+               .catch(this.handleError);
+  }
+
+  getCoursesByUser(id): Promise<Course[]> {
+    return this.authHttp.get(this.usersUrl + '/' + id + '/courses')
                .toPromise()
                .then((response) => {
                  let data = response.json().data;

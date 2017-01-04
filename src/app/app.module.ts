@@ -13,9 +13,13 @@ import { CourseComponent } from "./components/core/course/course.component";
 import { TestComponent } from "./components/core/test/test.component";
 import { SettingsComponent } from './components/core/settings/settings.component';
 import { AddUserComponent } from './components/core/add-user/add-user.component';
+import { AddTestComponent } from './components/core/add-test/add-test.component';
+import { AddCourseComponent } from './components/core/add-course/add-course.component';
 import { AddGroupComponent } from './components/core/add-group/add-group.component';
+import { AddExcerciseComponent } from './components/core/add-excercise/add-excercise.component';
 import { EditUserComponent } from './components/core/edit-user/edit-user.component';
 import { EditGroupComponent } from './components/core/edit-group/edit-group.component';
+import { EditTestComponent } from './components/core/edit-test/edit-test.component';
 import { StudentBracketsComponent } from './components/core/student-excercises/brackets/student-brackets.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchFieldComponent } from './components/util/search-field/search-field.component';
@@ -32,6 +36,8 @@ import { contentHeaders } from './common/headers';
 import { environment } from '../environments/environment';
 import { StatsComponent } from './components/core/stats/stats.component';
 
+import { AddBracketsComponent } from './components/core/add-excercise/brackets/add-brackets.component';
+
 @NgModule({
   declarations: [AppComponent,
                  HomeComponent,
@@ -43,13 +49,19 @@ import { StatsComponent } from './components/core/stats/stats.component';
                  TestComponent,
                  UserListComponent,
                  AddUserComponent,
+                 AddTestComponent,
+                 AddCourseComponent,
                  EditUserComponent,
+                 EditTestComponent,
                  GroupListComponent,
                  EditGroupComponent,
                  AddGroupComponent,
+                 AddExcerciseComponent,
                  SearchFieldComponent,
                  StatsComponent,
-                 StudentBracketsComponent],
+                 StudentBracketsComponent,
+
+                 AddBracketsComponent],
 
   imports     : [BrowserModule,
                  FormsModule,

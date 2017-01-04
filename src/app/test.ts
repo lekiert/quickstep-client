@@ -9,4 +9,16 @@ export class Test {
   get description(): string {
     return this.attributes['description'] || '';
   }
+
+  get code(): string {
+    return this.attributes['code'] || '';
+  }
+
+  set name(n) {
+    this.attributes['name'] = n;
+  }
+
+  set description(d) {
+    this.attributes['description'] = d;
+  }
 }

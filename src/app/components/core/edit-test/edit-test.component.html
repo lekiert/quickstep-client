@@ -1,0 +1,139 @@
+<div class="" *ngIf="test">
+  <div class="row">
+    <div class="gr-12">
+      <h1 class="heading heading--border">
+        Edycja testu:
+        <span [innerHTML]="test.name"></span>
+      </h1>
+    </div>
+    <div class="row">
+      <div class="gr-12">
+
+        <form class="form" (ngSubmit)="saveTest()" #testForm="ngForm">
+          <div class="form__section">
+            <header class="form_section__heading">
+              <h3 class="heading heading--center">Dane testu</h3>
+            </header>
+            <span class="alert alert--success" (click)="updateSuccess = ''" *ngIf="updateSuccess.length > 0">
+              {{ updateSuccess }}
+            </span>
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="group-name">Nazwa testu</label>
+              </div>
+              <div class="form__group__control">
+                <input type="text" required #testname="ngModel"
+                       name="test[name]" [(ngModel)]="test.name"
+                       class="input input--full" id="test-name">
+              </div>
+            </div>
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="group-description">Opis testu</label>
+              </div>
+              <div class="form__group__control">
+                <textarea required #testdescription="ngModel"
+                       name="test[description]" [(ngModel)]="test.description"
+                       class="textarea" id="test-description"></textarea>
+              </div>
+            </div>
+
+            <div class="form__buttons">
+              <button type="button" (click)="updateTest()" class="button button--primary pull-right" [disabled]="!testForm.form.valid">
+                <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Uaktualnij dane testu
+              </button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    <hr class="line">
+
+    <div class="gr-12">
+
+      <div class="form__section">
+        <header class="form_section__heading">
+          <h3 class="heading heading--center">Ćwiczenia w teście</h3>
+        </header>
+        <span class="alert alert--success" (click)="excerciseSuccess = ''" *ngIf="excerciseSuccess.length > 0">{{ excerciseSuccess }}</span>
+        <table class="table-list">
+          <thead>
+            <th>Rodzaj</th>
+            <th colspan="2">Polecenie</th>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let excercise of excercises">
+              <td>
+                <span class="users-table__first-name">
+                  {{ excercise.name }}
+                </span>
+              </td>
+              <td>
+                <span class="users-table__last-name">
+                  {{ excercise.description }}
+                </span>
+              </td>
+              <td class="users-table__edit hide@mmd">
+                <a class="button button--primary" [routerLink]="['/excercise', excercise.id, 'edit']">
+                  <i class="fa fa-eye"></i>
+                </a>
+                <button type="button" class="button button--danger" (click)="deleteExcercise(excercise.id)">
+                  <i class="fa fa-remove"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gr-12">
+        <div class="row">
+          <form action="" class="form">
+            <div class="gr-4 pull-right">
+              <div class="add-excercise-to-test">
+                <div class="add-excercise-to-test__input">
+                  <select name="selected-excercise" [(ngModel)]="selectedExcercise" class="select">
+                    <option *ngFor="let type of types" [value]="type.value">{{ type.name }}</option>
+                  </select>
+                </div>
+
+                <div class="add-excercise-to-test__button">
+                  <button class="button button--primary" (click)="showAddExcercise()" [disabled]="selectedExcercise === null && selectedExcercise === ''">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- <div class="gr-12" *ngIf="showAddExcerciseFlag === true || true"> -->
+      <div class="gr-12">
+        <add-excercise [excerciseType]="selectedExcercise" (addExcercise)="addExcerciseToTest($event)"></add-excercise>
+      </div>
+
+    </div>
+
+    <hr class="line">
+
+    <div class="row">
+      <div class="gr-12">
+
+        <div class="gr-12 delete-test">
+          <p>Wpisz <strong>USUŃ</strong> i kliknij w przycisk obok, aby usunąć test.</p>
+          <input type="text" [(ngModel)]="delete_confirmation" class="input delete-test-confirmation">
+          <button (click)="deleteTest()" class="button button--danger delete-test-button" [disabled]="delete_confirmation !== 'USUŃ'">
+            <i class="fa fa-remove"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

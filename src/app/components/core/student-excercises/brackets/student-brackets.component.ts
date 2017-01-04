@@ -42,7 +42,7 @@ export class StudentBracketsComponent {
   }
 
   ngOnInit(): void {
-    this.data = JSON.parse(this.excercise.data);
+    this.data = this.excercise.data;
     this.setDefaultReturnValues();
   }
 

@@ -12,9 +12,7 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class UserService {
 
-  private user: User;
   private subject = new Subject<User>();
-
   private usersUrl = environment.API_URL + 'users';
   private teachersUrl = environment.API_URL + 'teachers';
   private groupsUrl = environment.API_URL + 'groups';
@@ -27,6 +25,10 @@ export class UserService {
 
   getAuthenticatedUser(): Observable<User> {
     return this.subject.asObservable();
+  }
+
+  getAuthenticatedUserObject(): Promise<User> {
+    return this.getUser(getAuthenticatedUserId());
   }
 
   getUser(userId: number): Promise<User> {

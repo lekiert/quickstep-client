@@ -24,11 +24,20 @@
               <button class="button button--primary">
                 <i class="fa fa-eye"></i>
               </button>
+              <button *ngIf="user && user.isAdmin()" [routerLink]="['/tests', test.id, 'edit']" class="button button--default">
+                <i class="fa fa-pencil"></i>
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
 
+    </div>
+
+    <div class="gr-12" *ngIf="course && user && user.isAdmin()">
+      <a class="button button--primary add-user pull-right" [routerLink]="['tests', 'new']">
+        <i class="fa fa-plus"></i> <i class="fa fa-book"></i>
+      </a>
     </div>
   </div>
 </div>

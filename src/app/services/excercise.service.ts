@@ -4,11 +4,13 @@ import { Excercise }              from '../excercise';
 import { Observable }             from 'rxjs/Observable';
 import { AuthHttp }               from 'angular2-jwt';
 import { environment } from '../../environments/environment';
+import { contentHeaders }         from '../common/headers';
 
 @Injectable()
 export class ExcerciseService {
 
   private excercisesUrl = environment.API_URL + 'excercises';  // URL to web API
+  private testsUrl = environment.API_URL + 'tests';  // URL to web API
 
   constructor (private authHttp: AuthHttp) {}
 
@@ -23,6 +25,22 @@ export class ExcerciseService {
                  })
                })
                .catch(this.handleError);
+  }
+
+  createTestExcercise(testId, excercise) {
+    return this.authHttp.post(this.testsUrl + '/' + testId + '/excercises', {
+      data: {
+        type: "excercises",
+        attributes: {
+          "name": excercise.name,
+          "code": excercise.code,
+          "command": excercise.command,
+          "data": excercise.data,
+          "status": 1,
+          "test-id": testId,
+        }
+      }
+    }, { headers: contentHeaders }).toPromise();
   }
 
   private extractData(res: Response) {

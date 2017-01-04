@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="gr-12">
+    <div [ngSwitch]="excerciseType">
+      <add-brackets *ngSwitchCase="'BRACKETS'" (addExcercise)="addExcerciseToTest($event)"></add-brackets>
+      <div *ngSwitchDefault>Nieznany typ ćwiczenia</div>
+    </div>
+  </div>
+</div>

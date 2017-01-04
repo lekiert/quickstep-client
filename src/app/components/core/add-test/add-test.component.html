@@ -1,0 +1,75 @@
+<div class="" *ngIf="test">
+  <div class="row">
+    <div class="gr-12">
+      <h1 class="heading heading--border">Dodaj nowy test</h1>
+    </div>
+    <div class="gr-12">
+      <div [hidden]="result !== true">
+        <div class="alert alert--success">Dodano test.</div>
+      </div>
+      <div [hidden]="result !== false">
+        <div class="alert alert--danger">Wystąpił błąd podczas dodawania testu.</div>
+      </div>
+      <form class="form" (ngSubmit)="saveTest()" #testForm="ngForm">
+        <div class="form__section">
+          <header class="form_section__heading">
+            <h3 class="heading heading--center">Dane testu</h3>
+          </header>
+
+          <div class="form__section">
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="test-name">Nazwa testu</label>
+              </div>
+              <div class="form__group__control">
+                <input type="text" [(ngModel)]="test.name" name="test[name]" #testname="ngModel" required class="input input--full" id="test-name">
+              </div>
+              <div [class.hidden]="testname.valid || testname.pristine">
+                <div class="form__group__error">
+                  Nazwa testu jest obowiązkowa.
+                </div>
+              </div>
+            </div>
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="test-code">Kod testu</label>
+              </div>
+              <div class="form__group__control">
+                <input type="text" [(ngModel)]="test.code" name="test[code]" #testcode="ngModel" required class="input input--full" id="test-code">
+              </div>
+              <div [class.hidden]="testcode.valid || testcode.pristine">
+                <div class="form__group__error">
+                  Kod testu jest obowiązkowy.
+                </div>
+              </div>
+            </div>
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="test-description">Opis testu</label>
+              </div>
+              <div class="form__group__control">
+                <input type="text" [(ngModel)]="test.description" name="test[description]" #testdescription="ngModel" required class="input input--full" id="test-description">
+              </div>
+              <div [class.hidden]="testdescription.valid || testdescription.pristine">
+                <div class="form__group__error">
+                  Opis testu jest obowiązkowy.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form__buttons">
+            <button type="submit" class="button button--primary pull-right" [disabled]="!testForm.form.valid">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp;Dodaj test
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

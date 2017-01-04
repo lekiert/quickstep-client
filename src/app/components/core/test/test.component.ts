@@ -58,6 +58,7 @@ export class TestComponent {
 
   getExcercisesAnswers() {
     for (let excercise of this.excercises) {
+      console.log(excercise.id);
       console.log(excercise.answers);
     }
   }
