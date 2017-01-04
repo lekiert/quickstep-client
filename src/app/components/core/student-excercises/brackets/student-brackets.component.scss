@@ -1,0 +1,13 @@
+@import '../../../../style';
+@import '../../../../config';
+
+.word {
+  border: 0;
+  width: 110px;
+  margin: 0 5px;
+  border-bottom: 2px solid $color-blue-vlight;
+  text-align: center;
+  font-weight: 400;
+  color: $color-blue-vlight;
+  outline: 0;
+}

@@ -35,7 +35,9 @@ export class ExcerciseService {
           "name": excercise.name,
           "code": excercise.code,
           "command": excercise.command,
+          "excercise-type": excercise.type,
           "data": excercise.data,
+          "answers": excercise.answers,
           "status": 1,
           "test-id": testId,
         }

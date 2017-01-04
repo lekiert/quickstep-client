@@ -1,6 +1,6 @@
 export class Excercise {
 
-  answers = {};
+  _answers = {};
 
   constructor(public id: number, private attributes) {}
 
@@ -12,6 +12,10 @@ export class Excercise {
     return this.attributes['code'] || '';
   }
 
+  get type(): string {
+    return this.attributes['excercise-type'] || '';
+  }
+
   get command(): string {
     return this.attributes['command'] || '';
   }
@@ -20,8 +24,16 @@ export class Excercise {
     return this.attributes['data'] || '';
   }
 
+  get answers() {
+    return this.attributes['answers'] || '';
+  }
+
   set name(name) {
     this.attributes['name'] = name;
+  }
+
+  set type(name) {
+    this.attributes['excercise-type'] = name;
   }
 
   set code(code) {
@@ -34,5 +46,9 @@ export class Excercise {
 
   set data(data) {
     this.attributes['data'] = data;
+  }
+
+  set answers(answers) {
+    this.attributes['answers'] = answers;
   }
 }

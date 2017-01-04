@@ -15,10 +15,12 @@ export class AddBracketsComponent {
   @Input() excerciseType;
   @Output() addExcercise = new EventEmitter();
   excercise: Excercise = new Excercise(null, {
+    'excercise-type': 'BRACKETS',
     name: '',
     command: '',
     code: '',
-    data: {}
+    data: {},
+    answers: {}
   });
 
   constructor() {}
