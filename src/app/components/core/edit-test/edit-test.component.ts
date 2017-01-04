@@ -79,6 +79,7 @@ export class EditTestComponent {
     this.excerciseService.createTestExcercise(this.test.id, excercise).then((result) => {
       let results = result.json();
       this.getTest(this.test.id);
+      this.getExcercises(this.test.id);
     });
   }
 
