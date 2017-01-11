@@ -19,6 +19,7 @@
 
             <div class="test__excercises__excercise__body">
               <student-brackets [excercise]="excercise" *ngIf="excercise.type === 'BRACKETS'"></student-brackets>
+              <student-choice [excercise]="excercise" *ngIf="excercise.type === 'CHOICE'"></student-choice>
             </div>
           </div>
 

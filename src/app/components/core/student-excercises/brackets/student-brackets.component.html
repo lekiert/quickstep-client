@@ -1,6 +1,6 @@
 <div class="" *ngIf="data">
 
-    <p *ngFor="let sentence of data.sentences; let i = index">
+    <p *ngFor="let sentence of data; let i = index">
       <span *ngFor="let parsedSentence of splitSentence(sentence); let j = index">
         {{ parsedSentence }}
         <span *ngIf="j < (splitSentence(sentence).length - 1)">

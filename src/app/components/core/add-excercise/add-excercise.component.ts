@@ -4,6 +4,7 @@ import { ExcerciseService }                        from '../../../services/excer
 import { Excercise }                               from '../../../excercise';
 
 import { AddBracketsComponent } from './brackets/add-brackets.component';
+import { AddChoiceComponent } from './choice/add-choice.component';
 
 const styles = require('./add-excercise.component.scss');
 const template = require('./add-excercise.component.html');

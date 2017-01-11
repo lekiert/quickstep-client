@@ -1,0 +1,10 @@
+<div class="" *ngIf="data">
+
+    <div *ngFor="let sentence of data.sentences; let i = index">
+      <p>{{ sentence.questionSentence }}</p>
+      <div *ngFor="let choice of sentence.answers">
+        <input type="checkbox" (click)="toggleChoice(i, choice.text)"> {{ choice.text }}
+      </div>
+    </div>
+
+</div>

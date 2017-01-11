@@ -9,6 +9,7 @@ import { Test }                                    from '../../../test';
 import { User }                                    from '../../../user';
 import { Excercise }                               from '../../../excercise';
 import { AddExcerciseComponent }                   from '../add-excercise/add-excercise.component';
+import { EditExcerciseComponent }                   from '../edit-excercise/edit-excercise.component';
 
 const styles = require('./edit-test.component.scss');
 const template = require('./edit-test.component.html');
@@ -25,6 +26,7 @@ export class EditTestComponent {
   private sub: any;
   delete_confirmation = '';
   selectedExcercise:string = 'BRACKETS';
+  showEditExcerciseId:number = null;
   showAddExcerciseFlag:boolean = false;
 
   // messages
@@ -48,6 +50,7 @@ export class EditTestComponent {
   types = [
     { name: 'Rodzaj ćwiczenia', value: '' },
     { name: 'Luki', value: 'BRACKETS' },
+    { name: 'Wybór', value: 'CHOICE' },
   ];
 
   getTest(id): void {
@@ -83,10 +86,25 @@ export class EditTestComponent {
     });
   }
 
-  showAddExcercise() {
+  updateExcercise(excercise): void {
+    console.log('test');
+    this.excerciseService.updateExcercise(excercise).then((result) => {
+      let results = result.json();
+      this.getTest(this.test.id);
+      this.getExcercises(this.test.id);
+      this.showEditExcerciseId = null;
+    });
+  }
+
+  showEditExcercise(id): void {
+    this.showEditExcerciseId = id;
+  }
+
+  showAddExcercise(): void {
     this.showAddExcerciseFlag = true;
   }
-  hideAddExcercise() {
+
+  hideAddExcercise(): void {
     this.showAddExcerciseFlag = false;
   }
 }

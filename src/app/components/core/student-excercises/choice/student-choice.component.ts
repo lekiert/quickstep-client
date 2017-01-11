@@ -3,15 +3,15 @@ import { DomSanitizer }                            from '@angular/platform-brows
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router, ActivatedRoute }                  from '@angular/router';
 
-const styles = require('./student-brackets.component.scss');
-const template = require('./student-brackets.component.html');
+const styles = require('./student-choice.component.scss');
+const template = require('./student-choice.component.html');
 
 @Component({
-  selector: 'student-brackets',
+  selector: 'student-choice',
   template: template,
   styles: [ styles ],
 })
-export class StudentBracketsComponent {
+export class StudentChoiceComponent {
 
   constructor(private sanitizer: DomSanitizer){}
 
@@ -22,22 +22,11 @@ export class StudentBracketsComponent {
   sentenceCount = 0;
   sentenceRange = [];
   wordCount = [];
-  resultVal = {};
+  resultVal = [];
 
   setDefaultReturnValues() {
-    for (let sentence of this.data) {
-      this.resultVal[this.sentenceCount] = {};
-      let bracketCount = sentence.split('__').length -1;
-      let wordCountRange = [];
-
-      for (let i = 0; i < bracketCount; i++) {
-        wordCountRange.push(i);
-        this.resultVal[this.sentenceCount][i] = "";
-      }
-
-      this.wordCount.push(wordCountRange);
-      this.sentenceRange.push(this.sentenceCount);
-      this.sentenceCount++;
+    for (let sentence of this.excercise.data.sentences) {
+      this.resultVal.push([]);
     }
   }
 
@@ -57,6 +46,15 @@ export class StudentBracketsComponent {
   getAnswers() {
     console.log(this.resultVal);
     return this.resultVal;
+  }
+
+  toggleChoice(sentenceId, text) {
+    let choiceIndex = this.resultVal[sentenceId].indexOf(text);
+    if (choiceIndex > -1) {
+      this.resultVal[sentenceId].splice(choiceIndex, 1);
+    } else {
+      this.resultVal[sentenceId].push(text);
+    }
   }
 
 }

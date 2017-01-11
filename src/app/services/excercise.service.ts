@@ -45,6 +45,26 @@ export class ExcerciseService {
     }, { headers: contentHeaders }).toPromise();
   }
 
+  updateExcercise(excercise) {
+    console.log(excercise);
+    return this.authHttp.patch(this.excercisesUrl + '/' + excercise.id, {
+      data: {
+        id: excercise.id,
+        type: "excercises",
+        attributes: {
+          "name": excercise.name,
+          "code": excercise.code,
+          "command": excercise.command,
+          "excercise-type": excercise.type,
+          "data": excercise.data,
+          "answers": excercise.answers,
+          "status": 1,
+          "test-id": excercise.testId
+        }
+      }
+    }, { headers: contentHeaders }).toPromise();
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     return body.data || { };

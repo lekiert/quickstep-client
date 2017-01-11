@@ -7,6 +7,7 @@ import { Excercise }                               from '../../../excercise';
 import { Test }                                    from '../../../test';
 
 import { StudentBracketsComponent } from '../student-excercises/brackets/student-brackets.component';
+import { StudentChoiceComponent } from '../student-excercises/choice/student-choice.component';
 
 const styles = require('./test.component.scss');
 const template = require('./test.component.html');

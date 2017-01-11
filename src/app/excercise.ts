@@ -28,6 +28,14 @@ export class Excercise {
     return this.attributes['answers'] || '';
   }
 
+  get testId() {
+    return this.attributes['test-id'] || '';
+  }
+
+  set testId(id) {
+    this.attributes['test-id'] = id;
+  }
+
   set name(name) {
     this.attributes['name'] = name;
   }

@@ -20,7 +20,9 @@ import { AddExcerciseComponent } from './components/core/add-excercise/add-excer
 import { EditUserComponent } from './components/core/edit-user/edit-user.component';
 import { EditGroupComponent } from './components/core/edit-group/edit-group.component';
 import { EditTestComponent } from './components/core/edit-test/edit-test.component';
+import { EditExcerciseComponent } from './components/core/edit-excercise/edit-excercise.component';
 import { StudentBracketsComponent } from './components/core/student-excercises/brackets/student-brackets.component';
+import { StudentChoiceComponent } from './components/core/student-excercises/choice/student-choice.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchFieldComponent } from './components/util/search-field/search-field.component';
 import { AuthGuard } from './common/auth.guard';
@@ -37,6 +39,10 @@ import { environment } from '../environments/environment';
 import { StatsComponent } from './components/core/stats/stats.component';
 
 import { AddBracketsComponent } from './components/core/add-excercise/brackets/add-brackets.component';
+import { EditBracketsComponent } from './components/core/edit-excercise/brackets/edit-brackets.component';
+import { AddChoiceComponent } from './components/core/add-excercise/choice/add-choice.component';
+import { EditChoiceComponent } from './components/core/edit-excercise/choice/edit-choice.component';
+// import { EditBracketsComponent } from './components/core/edit-excercise/brackets/edit-brackets.component';
 
 @NgModule({
   declarations: [AppComponent,
@@ -60,8 +66,13 @@ import { AddBracketsComponent } from './components/core/add-excercise/brackets/a
                  SearchFieldComponent,
                  StatsComponent,
                  StudentBracketsComponent,
+                 StudentChoiceComponent,
+                 EditExcerciseComponent,
+                 AddBracketsComponent,
+                 EditBracketsComponent,
+                 EditChoiceComponent,
 
-                 AddBracketsComponent],
+                 AddChoiceComponent],
 
   imports     : [BrowserModule,
                  FormsModule,

@@ -55,7 +55,7 @@
 
     <div class="gr-12">
 
-      <div class="form__section">
+      <div class="form__section" *ngIf="showEditExcerciseId === null">
         <header class="form_section__heading">
           <h3 class="heading heading--center">Ćwiczenia w teście</h3>
         </header>
@@ -67,10 +67,10 @@
           </thead>
 
           <tbody>
-            <tr *ngFor="let excercise of excercises">
+            <tr *ngFor="let excercise of excercises; let i = index;">
               <td>
                 <span class="users-table__first-name">
-                  {{ excercise.name }}
+                  {{ excercise.name }} {{ i }}
                 </span>
               </td>
               <td>
@@ -79,8 +79,8 @@
                 </span>
               </td>
               <td class="users-table__edit hide@mmd">
-                <a class="button button--primary" [routerLink]="['/excercise', excercise.id, 'edit']">
-                  <i class="fa fa-eye"></i>
+                <a class="button button--primary" (click)="showEditExcercise(i)">
+                  <i class="fa fa-pencil"></i>
                 </a>
                 <button type="button" class="button button--danger" (click)="deleteExcercise(excercise.id)">
                   <i class="fa fa-remove"></i>
@@ -89,6 +89,15 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="form__section" *ngIf="showEditExcerciseId !== null">
+        <header class="form_section__heading">
+          <h3 class="heading heading--center">Edytuj ćwiczenie</h3>
+        </header>
+        <div>
+          <edit-excercise [excercise]="excercises[showEditExcerciseId]"  (updateExcercise)="updateExcercise($event)"></edit-excercise>
+        </div>
       </div>
 
       <div class="gr-12">
