@@ -57,9 +57,9 @@ export class EditUserComponent {
       this.changePasswordError = '';
       this.successMessage = '';
 
-      if (this.oldPassword.length === 0) {
-        throw new Error('Musisz podać stare hasło.')
-      }
+      // if (this.oldPassword.length === 0) {
+      //   throw new Error('Musisz podać stare hasło.')
+      // }
       if (this.newPassword.length === 0) {
         throw new Error('Musisz podać nowe hasło.')
       }
