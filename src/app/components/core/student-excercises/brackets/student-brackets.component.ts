@@ -25,7 +25,7 @@ export class StudentBracketsComponent {
   resultVal = {};
 
   setDefaultReturnValues() {
-    for (let sentence of this.data.sentences) {
+    for (let sentence of this.data) {
       this.resultVal[this.sentenceCount] = {};
       let bracketCount = sentence.split('__').length -1;
       let wordCountRange = [];

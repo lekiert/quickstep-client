@@ -18,7 +18,6 @@ export class EditBracketsComponent {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.excercise)
     let sentences = this.excercise.data;
     let answers = this.excercise.answers;
     this.excercise.data = {
