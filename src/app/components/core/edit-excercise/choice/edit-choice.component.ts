@@ -49,4 +49,8 @@ export class EditChoiceComponent {
     this.updateExcercise.emit(excercise);
   }
 
+  deleteSentence(index) {
+    this.excercise.data.sentences.splice(index, 1);
+  }
+
 }

@@ -39,7 +39,10 @@
 
         <div *ngFor="let sentence of excercise.data.sentences; let i = index">
           <div class="question-sentence">
-            <input type="text" required name="bracketsSentence-{{i}}"
+            <button style="margin-left: 5px; float: right" type="button" class="button button--danger" (click)="deleteSentence(i)">
+              <i class="fa fa-remove"></i>
+            </button>
+            <input type="text" required name="bracketsSentence-{{i}}" style="width: calc(100% - 4rem)"
                    [(ngModel)]="sentence.questionSentence" class="input input--full">
 
             <div *ngFor="let word of countSentenceBrackets(sentence.questionSentence); let j = index" style="display: inline">

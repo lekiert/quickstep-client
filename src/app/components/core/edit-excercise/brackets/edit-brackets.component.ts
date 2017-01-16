@@ -35,6 +35,10 @@ export class EditBracketsComponent {
     this.excercise.data.sentences.push({ questionSentence: "", answers: {} });
   }
 
+  deleteSentence(index) {
+    this.excercise.data.sentences.splice(index, 1);
+  }
+
   countSentenceBrackets(sentence) {
     let count = this.parseSentenceBracket(sentence);
     let result = [];
