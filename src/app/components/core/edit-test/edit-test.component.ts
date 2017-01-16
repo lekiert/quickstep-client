@@ -86,6 +86,14 @@ export class EditTestComponent {
     });
   }
 
+  deleteExcerciseFromTest(excerciseId): void {
+    this.excerciseService.deleteExcercise(excerciseId).then((result) => {
+      let results = result.json();
+      this.getTest(this.test.id);
+      this.getExcercises(this.test.id);
+    });
+  }
+
   updateExcercise(excercise): void {
     console.log('test');
     this.excerciseService.updateExcercise(excercise).then((result) => {

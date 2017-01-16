@@ -65,6 +65,10 @@ export class ExcerciseService {
     }, { headers: contentHeaders }).toPromise();
   }
 
+  deleteExcercise(excerciseId) {
+    return this.authHttp.delete(this.excercisesUrl + '/' + excerciseId).toPromise();
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     return body.data || { };
