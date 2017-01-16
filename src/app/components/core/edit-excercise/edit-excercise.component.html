@@ -1,5 +1,5 @@
 <div class="row">
-  {{ excercise }}
+
   <div class="gr-12">
     <div [ngSwitch]="excercise.type">
       <edit-brackets *ngSwitchCase="'BRACKETS'" [excercise]="excercise" (updateExcercise)="updateExcerciseData($event)"></edit-brackets>
