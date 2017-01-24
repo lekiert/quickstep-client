@@ -5,7 +5,7 @@
 
   <div class="gr-12" *ngIf="excercise.attachments">
     <div *ngFor="let attachment of excercise.attachments">
-      <img *ngIf="attachment.type === 'image/png' || attachment.type === 'image/jpg' || attachment.type === 'image/jpeg'" src="http://localhost:3000{{ attachment.url }}" style="max-width: 300px; max-height: 300px; width: auto; height: auto">
+      <img *ngIf="attachment.type === 'image/png' || attachment.type === 'image/jpg' || attachment.type === 'image/jpeg'" src="{{ storageUrl }}{{ attachment.url }}" style="max-width: 300px; max-height: 300px; width: auto; height: auto">
       <audio controls *ngIf="attachment.type === 'audio/mpeg'">
         <source  class="test__excercises__excercise__attachments__item" src="{{ storageUrl }}{{ attachment.url }}" type="{{ attachment.type }}">
       </audio>
