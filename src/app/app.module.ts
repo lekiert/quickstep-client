@@ -16,7 +16,7 @@ import { AddUserComponent } from './components/core/add-user/add-user.component'
 import { AddTestComponent } from './components/core/add-test/add-test.component';
 import { AddCourseComponent } from './components/core/add-course/add-course.component';
 import { AddGroupComponent } from './components/core/add-group/add-group.component';
-import { AddExcerciseComponent } from './components/core/add-excercise/add-excercise.component';
+// import { AddExcerciseComponent } from './components/core/add-excercise/add-excercise.component';
 import { EditUserComponent } from './components/core/edit-user/edit-user.component';
 import { EditGroupComponent } from './components/core/edit-group/edit-group.component';
 import { EditTestComponent } from './components/core/edit-test/edit-test.component';
@@ -39,10 +39,10 @@ import { contentHeaders } from './common/headers';
 import { environment } from '../environments/environment';
 import { StatsComponent } from './components/core/stats/stats.component';
 
-import { AddBracketsComponent } from './components/core/add-excercise/brackets/add-brackets.component';
-import { EditBracketsComponent } from './components/core/edit-excercise/brackets/edit-brackets.component';
-import { AddChoiceComponent } from './components/core/add-excercise/choice/add-choice.component';
-import { EditChoiceComponent } from './components/core/edit-excercise/choice/edit-choice.component';
+// import { AddBracketsComponent } from './components/core/add-excercise/brackets/add-brackets.component';
+// import { EditBracketsComponent } from './components/core/edit-excercise/brackets/edit-brackets.component';
+// import { AddChoiceComponent } from './components/core/add-excercise/choice/add-choice.component';
+// import { EditChoiceComponent } from './components/core/edit-excercise/choice/edit-choice.component';
 
 import { BracketsFormComponent } from './components/core/forms/brackets/brackets-form.component';
 import { ChoiceFormComponent } from './components/core/forms/choice/choice-form.component';
@@ -66,20 +66,21 @@ import { ChoiceFormComponent } from './components/core/forms/choice/choice-form.
                  GroupListComponent,
                  EditGroupComponent,
                  AddGroupComponent,
-                 AddExcerciseComponent,
+                //  AddExcerciseComponent,
                  SearchFieldComponent,
                  FileUploadComponent,
                  StatsComponent,
                  StudentBracketsComponent,
                  StudentChoiceComponent,
-                 AddBracketsComponent,
-                 EditBracketsComponent,
-                 EditChoiceComponent,
+                //  AddBracketsComponent,
+                //  EditBracketsComponent,
+                //  EditChoiceComponent,
                  ExcerciseFormComponent,
 
                  BracketsFormComponent,
                  ChoiceFormComponent,
-                 AddChoiceComponent],
+                //  AddChoiceComponent
+               ],
 
   imports     : [BrowserModule,
                  FormsModule,
