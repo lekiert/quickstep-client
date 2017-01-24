@@ -60,13 +60,13 @@ export class EditUserComponent {
       // if (this.oldPassword.length === 0) {
       //   throw new Error('Musisz podać stare hasło.')
       // }
-      if (this.newPassword.length === 0) {
+      if (this.user.password.length === 0) {
         throw new Error('Musisz podać nowe hasło.')
       }
-      if (this.newPasswordRepeat.length === 0) {
-        throw new Error('Musisz podać powtórzyć nowe hasło.')
+      if (this.password_repeat.length === 0) {
+        throw new Error('Musisz powtórzyć nowe hasło.')
       }
-      if (this.newPassword !== this.newPasswordRepeat) {
+      if (this.user.password !== this.password_repeat) {
         throw new Error('Musisz powtórzyć takie samo hasło.')
       }
     } catch (e) {
