@@ -8,7 +8,6 @@ import { ExcerciseService }                        from '../../../services/excer
 import { Test }                                    from '../../../test';
 import { User }                                    from '../../../user';
 import { Excercise }                               from '../../../excercise';
-import { AddExcerciseComponent }                   from '../add-excercise/add-excercise.component';
 import { ExcerciseFormComponent }                   from '../forms/excercise-form.component';
 
 const styles = require('./edit-test.component.scss');
