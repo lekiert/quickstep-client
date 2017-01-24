@@ -24,22 +24,36 @@ export class ExcerciseFormComponent {
   @Output() excerciseUpdated = new EventEmitter();
   @Output() excerciseCreated = new EventEmitter();
   @Output() cancelForm = new EventEmitter();
+
+  excerciseExists:boolean = false;
   storageUrl = environment.API_URL;
 
   constructor(
     private service: ExcerciseService,
-    private http: AuthHttp) {
-      console.log(this.excercise);
-      if (!this.excercise) {
-        this.excercise = new Excercise(null, {
-          attributes: {
-            type: this.excerciseType ,
-            data: {},
-            answers: {},
-            attachments: []
-          }
-        });
-      }
+    private http: AuthHttp) {}
+
+  ngOnInit(): void {
+    if (!this.excercise) {
+      this.excercise = new Excercise(null, {
+        // attributes: {
+        //   'excercise-type': this.excerciseType,
+        //   data: {},
+        //   answers: {},
+        //   attachments: []
+        // }
+      });
+      this.excercise.testId = this.testId;
+      this.excercise.name = '';
+      this.excercise.command = '';
+      this.excercise.code = '';
+      this.excercise.type = this.excerciseType;
+      this.excercise.data = {};
+      this.excercise.answers = {};
+      this.excercise.attachments = [];
+
+    } else {
+      this.excerciseExists = true;
+    }
   }
 
   cancel(): void {

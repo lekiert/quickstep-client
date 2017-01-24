@@ -17,25 +17,24 @@ export class BracketsFormComponent {
 
   constructor() {}
 
-  ngOnInit(): void {
-    let sentences = this.excercise.data;
-    let answers = this.excercise.answers;
-    // this.excercise.data = {
-    //   sentences: []
-    // }
-    // for (var index in sentences) {
-    //   this.excercise.data.sentences.push({
-    //     questionSentence: sentences[index].questionSentence, answers: answers[index]
-    //   });
-    // }
+  keys(dict) : Array<string> {
+    return Object.keys(dict);
   }
 
   addSentence() {
-    this.excercise.data.sentences.push({ questionSentence: "", answers: {} });
+    let lastIndex = 0;
+    let keys = this.keys(this.excercise.data).map((val) => { return parseInt(val) });
+    if (keys.length > 0) {
+      lastIndex = Math.max(...keys);
+    }
+    let newIndex = lastIndex + 1;
+    this.excercise.data[newIndex] = '';
+    this.excercise.answers[newIndex] = {};
   }
 
   deleteSentence(index) {
-    this.excercise.data.sentences.splice(index, 1);
+    delete this.excercise.data[index];
+    delete this.excercise.answers[index];
   }
 
   countSentenceBrackets(sentence) {
@@ -53,15 +52,4 @@ export class BracketsFormComponent {
       return sentence.split("__").length - 1;
     }
   }
-
-  updateExcerciseData() {
-    let data = this.excercise.data.sentences;
-    let excercise = this.excercise;
-    let answers = {};
-    excercise.data = data.map((sentence) => { return sentence.questionSentence });
-    data.forEach((sentence, index) => { answers[index] = sentence.answers });
-    excercise.answers = answers;
-    this.updateExcercise.emit(excercise);
-  }
-
 }

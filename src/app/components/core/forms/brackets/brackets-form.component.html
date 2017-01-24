@@ -4,7 +4,7 @@
     <form class="form" (ngSubmit)="saveTest()" #editBracketsForm="ngForm">
       <div class="form__section">
         <header class="form_section__heading">
-          <h3 class="heading heading--center">Edytuj: luki</h3>
+          <h3 class="heading heading--center">Formularz: <strong>luki</strong></h3>
         </header>
 
         <div class="form__group form__group--inline">
@@ -37,19 +37,19 @@
           </div>
         </div>
 
-        <div *ngFor="let sentence of excercise.data.sentences; let i = index">
+        <div *ngFor="let sentence of keys(excercise.data); let i = index">
           <div class="question-sentence">
-            <button style="margin-left: 5px; float: right" type="button" class="button button--danger" (click)="deleteSentence(i)">
+            <button style="margin-left: 5px; float: right" type="button" class="button button--danger" (click)="deleteSentence(sentence)">
               <i class="fa fa-remove"></i>
             </button>
             <input type="text" required name="bracketsSentence-{{i}}" style="width: calc(100% - 4rem)"
-                   [(ngModel)]="sentence.questionSentence" class="input input--full">
+                   [(ngModel)]="excercise.data[sentence]" class="input input--full">
 
-            <div *ngFor="let word of countSentenceBrackets(sentence.questionSentence); let j = index" style="display: inline">
+            <div *ngFor="let word of countSentenceBrackets(excercise.data[sentence]); let j = index" style="display: inline">
               <div class="question-sentence-word">
                 <div class="question-sentence-word__count">{{ j + 1}}.</div>
                 <input type="text" class="question-sentence-word__input input" required
-                       name="bracketsSentence-{{i}}-answer-{{j}}" [(ngModel)]="sentence.answers[j]">
+                       name="bracketsSentence-{{i}}-answer-{{j}}" [(ngModel)]="excercise.answers[sentence][j]">
               </div>
             </div>
           </div>

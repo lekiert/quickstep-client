@@ -15,45 +15,47 @@ export class StudentChoiceComponent {
 
   constructor(private sanitizer: DomSanitizer){}
 
-  data: any;
   @Input() excercise: any;
   @Output() collectResults = new EventEmitter();
+  @Input() answers = {};
 
   sentenceCount = 0;
   sentenceRange = [];
   wordCount = [];
-  resultVal = [];
 
   setDefaultReturnValues() {
-    for (let sentence of this.excercise.data.sentences) {
-      this.resultVal.push([]);
+    let keys = this.keys(this.excercise.data);
+
+    for (let key of keys) {
+      this.answers[key] = [];
     }
   }
 
+
+  keys(dict) : Array<string> {
+    return Object.keys(dict);
+  }
+
   ngOnInit(): void {
-    this.data = this.excercise.data;
     this.setDefaultReturnValues();
   }
 
   updateExcerciseAnswerValues() {
-    this.excercise.answers = this.resultVal;
+    this.excercise.answers = this.answers;
   }
 
-  splitSentence(sentence) {
-    return sentence.split('__');
-  }
 
   getAnswers() {
-    console.log(this.resultVal);
-    return this.resultVal;
+    console.log(this.answers);
+    return this.answers;
   }
 
   toggleChoice(sentenceId, text) {
-    let choiceIndex = this.resultVal[sentenceId].indexOf(text);
+    let choiceIndex = this.answers[sentenceId].indexOf(text);
     if (choiceIndex > -1) {
-      this.resultVal[sentenceId].splice(choiceIndex, 1);
+      this.answers[sentenceId].splice(choiceIndex, 1);
     } else {
-      this.resultVal[sentenceId].push(text);
+      this.answers[sentenceId].push(text);
     }
   }
 

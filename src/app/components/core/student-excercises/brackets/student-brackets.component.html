@@ -1,10 +1,10 @@
-<div class="" *ngIf="data">
+<div class="" *ngIf="excercise && excercise.data">
 
-    <p *ngFor="let sentence of data; let i = index">
-      <span *ngFor="let parsedSentence of splitSentence(sentence); let j = index">
+    <p *ngFor="let sentence of keys(excercise.data); let i = index">
+      <span *ngFor="let parsedSentence of splitSentence(excercise.data[sentence]); let j = index">
         {{ parsedSentence }}
-        <span *ngIf="j < (splitSentence(sentence).length - 1)">
-          <input type="text" [(ngModel)]="resultVal[i][j]" (ngModelChange)="updateExcerciseAnswerValues()" class="word">
+        <span *ngIf="j < (splitSentence(excercise.data[sentence]).length - 1)">
+          <input type="text" [(ngModel)]="answers[sentence][j+1]" (ngModelChange)="updateExcerciseAnswerValues()" class="word">
         </span>
       </span>
     </p>

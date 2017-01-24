@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter }  from '@angular/core';
 import { DomSanitizer }                            from '@angular/platform-browser';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router, ActivatedRoute }                  from '@angular/router';
+import { Excercise }                               from '../../../../excercise';
 
 const styles = require('./student-brackets.component.scss');
 const template = require('./student-brackets.component.html');
@@ -15,9 +16,9 @@ export class StudentBracketsComponent {
 
   constructor(private sanitizer: DomSanitizer){}
 
-  data: any;
-  @Input() excercise: any;
+  @Input() excercise: Excercise;
   @Output() collectResults = new EventEmitter();
+  @Input() answers = {};
 
   sentenceCount = 0;
   sentenceRange = [];
@@ -25,29 +26,27 @@ export class StudentBracketsComponent {
   resultVal = {};
 
   setDefaultReturnValues() {
-    for (let sentence of this.data) {
-      this.resultVal[this.sentenceCount] = {};
-      let bracketCount = sentence.split('__').length -1;
-      let wordCountRange = [];
+    let keys = this.keys(this.excercise.data);
+    for (let key of keys) {
+      let answerKeysCount = this.splitSentence(this.excercise.data[key]).length - 1;
 
-      for (let i = 0; i < bracketCount; i++) {
-        wordCountRange.push(i);
-        this.resultVal[this.sentenceCount][i] = "";
+      this.answers[key] = {};
+      for (let i = 1; i <= answerKeysCount; i++) {
+        this.answers[key][i] = '';
       }
-
-      this.wordCount.push(wordCountRange);
-      this.sentenceRange.push(this.sentenceCount);
-      this.sentenceCount++;
     }
   }
 
+  keys(dict) : Array<string> {
+    return Object.keys(dict);
+  }
+
   ngOnInit(): void {
-    this.data = this.excercise.data;
     this.setDefaultReturnValues();
   }
 
   updateExcerciseAnswerValues() {
-    this.excercise.answers = this.resultVal;
+    this.excercise.answers = this.answers;
   }
 
   splitSentence(sentence) {
@@ -55,8 +54,8 @@ export class StudentBracketsComponent {
   }
 
   getAnswers() {
-    console.log(this.resultVal);
-    return this.resultVal;
+    console.log(this.answers);
+    return this.answers;
   }
 
 }

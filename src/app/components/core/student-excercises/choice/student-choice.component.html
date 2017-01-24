@@ -1,9 +1,9 @@
-<div class="" *ngIf="data">
+<div *ngIf="excercise.data">
 
-    <div *ngFor="let sentence of data.sentences; let i = index">
-      <p>{{ sentence.questionSentence }}</p>
-      <div *ngFor="let choice of sentence.answers">
-        <input type="checkbox" (click)="toggleChoice(i, choice.text)"> {{ choice.text }}
+    <div *ngFor="let sentence of keys(excercise.data); let i = index">
+      <p>{{ excercise.data[sentence] }}</p>
+      <div *ngFor="let choice of excercise.answers[sentence]">
+        <input type="checkbox" (click)="toggleChoice(sentence, choice.text)"> {{ choice.text }}
       </div>
     </div>
 

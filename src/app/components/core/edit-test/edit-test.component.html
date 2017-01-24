@@ -132,8 +132,9 @@
       </div>
 
       <!-- <div class="gr-12" *ngIf="showAddExcerciseFlag === true || true"> -->
-      <div class="gr-12">
+      <div class="gr-12" *ngIf="selectedExcercise !== ''">
         <excercise-form [excerciseType]="selectedExcercise"
+                        [testId]="test.id"
                         (excerciseCreated)="refresh()"
                         (cancelForm)="cancelForm()"></excercise-form>
       </div>

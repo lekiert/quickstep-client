@@ -63,4 +63,8 @@ export class Excercise {
   set answers(answers) {
     this.attributes['answers'] = answers;
   }
+
+  set attachments(attachments) {
+    this.attributes['attachments'] = attachments;
+  }
 }

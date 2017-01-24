@@ -17,33 +17,28 @@ export class ChoiceFormComponent {
   @Output() updateExcercise = new EventEmitter();
   @Output() fileUploaded = new EventEmitter();
 
-  constructor() {}
-
-  ngOnInit(): void {
-    let sentences = this.excercise.data.sentences;
-    let answers = this.excercise.answers;
+  keys(dict) : Array<string> {
+    return Object.keys(dict);
   }
 
   addSentence() {
-    this.excercise.data.sentences.push({ questionSentence: "", answers: [] });
+    let lastIndex = 0;
+    let keys = this.keys(this.excercise.data).map((val) => { return parseInt(val) });
+    if (keys.length > 0) {
+      lastIndex = Math.max(...keys);
+    }
+    let newIndex = lastIndex + 1;
+    this.excercise.data[newIndex] = '';
+    this.excercise.answers[newIndex] = [];
   }
 
   addOption(sentenceId) {
-    this.excercise.data.sentences[sentenceId].answers.push({ text: '', correct: false })
-  }
-
-  updateExcerciseData() {
-    let data = this.excercise.data.sentences;
-    let excercise = this.excercise;
-    let answers = this.excercise.data.sentences.map((sentence) => {
-      return sentence.answers;
-    });
-    this.excercise.answers = answers;
-    this.updateExcercise.emit(excercise);
+    this.excercise.answers[sentenceId].push({ text: '', correct: false });
   }
 
   deleteSentence(index) {
-    this.excercise.data.sentences.splice(index, 1);
+    delete this.excercise.data[index];
+    delete this.excercise.answers[index];
   }
 
 }

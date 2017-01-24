@@ -26,6 +26,7 @@ export class TestComponent {
   test: Test;
   excercises: Excercise[];
   results = [];
+  answers = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +44,9 @@ export class TestComponent {
 
        this.service.getTestRelatedExcercises(this.id).then((excercises) => {
          this.excercises = excercises;
+         for (let i in this.excercises) {
+           this.answers[i] = {};
+         }
        });
     });
   }
@@ -60,9 +64,8 @@ export class TestComponent {
   }
 
   getExcercisesAnswers() {
-    for (let excercise of this.excercises) {
-      console.log(excercise.id);
-      console.log(excercise.answers);
+    for (let answer in this.answers) {
+      console.log(this.answers[answer]);
     }
   }
 
