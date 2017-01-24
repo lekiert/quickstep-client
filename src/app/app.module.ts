@@ -20,11 +20,12 @@ import { AddExcerciseComponent } from './components/core/add-excercise/add-excer
 import { EditUserComponent } from './components/core/edit-user/edit-user.component';
 import { EditGroupComponent } from './components/core/edit-group/edit-group.component';
 import { EditTestComponent } from './components/core/edit-test/edit-test.component';
-import { EditExcerciseComponent } from './components/core/edit-excercise/edit-excercise.component';
+import { ExcerciseFormComponent } from './components/core/forms/excercise-form.component';
 import { StudentBracketsComponent } from './components/core/student-excercises/brackets/student-brackets.component';
 import { StudentChoiceComponent } from './components/core/student-excercises/choice/student-choice.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchFieldComponent } from './components/util/search-field/search-field.component';
+import { FileUploadComponent } from './components/util/file-upload/file-upload.component';
 import { AuthGuard } from './common/auth.guard';
 import { Login } from './components/login';
 import { provideAuth } from 'angular2-jwt';
@@ -42,6 +43,9 @@ import { AddBracketsComponent } from './components/core/add-excercise/brackets/a
 import { EditBracketsComponent } from './components/core/edit-excercise/brackets/edit-brackets.component';
 import { AddChoiceComponent } from './components/core/add-excercise/choice/add-choice.component';
 import { EditChoiceComponent } from './components/core/edit-excercise/choice/edit-choice.component';
+
+import { BracketsFormComponent } from './components/core/forms/brackets/brackets-form.component';
+import { ChoiceFormComponent } from './components/core/forms/choice/choice-form.component';
 // import { EditBracketsComponent } from './components/core/edit-excercise/brackets/edit-brackets.component';
 
 @NgModule({
@@ -64,14 +68,17 @@ import { EditChoiceComponent } from './components/core/edit-excercise/choice/edi
                  AddGroupComponent,
                  AddExcerciseComponent,
                  SearchFieldComponent,
+                 FileUploadComponent,
                  StatsComponent,
                  StudentBracketsComponent,
                  StudentChoiceComponent,
-                 EditExcerciseComponent,
                  AddBracketsComponent,
                  EditBracketsComponent,
                  EditChoiceComponent,
+                 ExcerciseFormComponent,
 
+                 BracketsFormComponent,
+                 ChoiceFormComponent,
                  AddChoiceComponent],
 
   imports     : [BrowserModule,

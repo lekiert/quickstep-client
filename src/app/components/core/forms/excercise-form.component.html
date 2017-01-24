@@ -1,0 +1,40 @@
+<div class="row" *ngIf="excercise">
+  <div class="gr-12">
+      <file-upload [id]="file" (fileUploaded)="attachFileToExcercise($event)"></file-upload>
+  </div>
+
+  <div class="gr-12" *ngIf="excercise.attachments">
+    <div *ngFor="let attachment of excercise.attachments">
+      <img *ngIf="attachment.type === 'image/png' || attachment.type === 'image/jpg' || attachment.type === 'image/jpeg'" src="http://localhost:3000{{ attachment.url }}" style="max-width: 300px; max-height: 300px; width: auto; height: auto">
+      <audio controls *ngIf="attachment.type === 'audio/mpeg'">
+        <source  class="test__excercises__excercise__attachments__item" src="{{ storageUrl }}{{ attachment.url }}" type="{{ attachment.type }}">
+      </audio>
+    </div>
+  </div>
+
+  <div class="gr-12">
+    <div [ngSwitch]="excercise.type">
+      <brackets-form *ngSwitchCase="'BRACKETS'" [excercise]="excercise" (updateExcercise)="updateExcerciseData()"></brackets-form>
+      <choice-form *ngSwitchCase="'CHOICE'" [excercise]="excercise" (updateExcercise)="updateExcerciseData()" (fileUploaded)="attachFileToExcercise($event)"></choice-form>
+      <div *ngSwitchDefault>Nieznany typ ćwiczenia</div>
+    </div>
+  </div>
+
+  <div class="form__buttons" *ngIf="excercise.id > 0">
+    <button type="button" (click)="updateExcerciseData()" class="button button--primary pull-right">
+      <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Zaktualizuj ćwiczenie
+    </button>
+  </div>
+  <div class="form__buttons" *ngIf="excercise.id === 0 || excercise.id === null">
+    <button type="button" (click)="createExcercise()" class="button button--primary pull-right">
+      <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Dodaj ćwiczenie
+    </button>
+  </div>
+
+  <div class="form__buttons">
+    <button type="button" (click)="cancel()" class="button button--primary pull-right">
+      <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Powrót
+    </button>
+  </div>
+
+</div>

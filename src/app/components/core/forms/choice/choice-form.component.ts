@@ -3,15 +3,15 @@ import { AuthHttp }                                from 'angular2-jwt';
 import { Excercise }                               from '../../../../excercise';
 import { FileUploadComponent }                     from '../../../../components/util/file-upload/file-upload.component';
 
-const styles = require('./edit-choice.component.scss');
-const template = require('./edit-choice.component.html');
+const styles = require('./choice-form.component.scss');
+const template = require('./choice-form.component.html');
 
 @Component({
-  selector: 'edit-choice',
+  selector: 'choice-form',
   template: template,
   styles: [ styles ],
 })
-export class EditChoiceComponent {
+export class ChoiceFormComponent {
 
   @Input() excercise;
   @Output() updateExcercise = new EventEmitter();
@@ -22,14 +22,6 @@ export class EditChoiceComponent {
   ngOnInit(): void {
     let sentences = this.excercise.data.sentences;
     let answers = this.excercise.answers;
-    this.excercise.data = {
-      sentences: []
-    }
-    for (var index in sentences) {
-      this.excercise.data.sentences.push({
-        questionSentence: sentences[index].questionSentence, answers: answers[index]
-      });
-    }
   }
 
   addSentence() {

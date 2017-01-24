@@ -17,6 +17,15 @@
               <p>{{ excercise.command }}</p>
             </div>
 
+            <div class="test__excercises__excercise__attachments">
+              <div *ngFor="let item of excercise.attachments" style="display: inline-block;vertical-align:middle; margin: 15px;">
+                <img *ngIf="item.type === 'image/png' || item.type === 'image/jpg' || item.type === 'image/jpeg'" class="test__excercises__excercise__attachments__item" src="{{ storageUrl }}{{ item.url }}">
+                <audio controls *ngIf="item.type === 'audio/mpeg'">
+                  <source class="test__excercises__excercise__attachments__item" src="{{ storageUrl }}{{ item.url }}" type="{{ item.type }}">
+                </audio>
+              </div>
+            </div>
+
             <div class="test__excercises__excercise__body">
               <student-brackets [excercise]="excercise" *ngIf="excercise.type === 'BRACKETS'"></student-brackets>
               <student-choice [excercise]="excercise" *ngIf="excercise.type === 'CHOICE'"></student-choice>

@@ -9,3 +9,15 @@
   display: block;
   margin: 25px auto;
 }
+
+.test__excercises__excercise__attachments__item {
+  max-width: 250px;
+  max-height: 250px;
+  width: auto;
+  height: auto;
+  display: inline-block;
+  padding: 15px;
+  border: 1px solid $color-gray;
+  background: #fdfdfd;
+  vertical-align: middle;
+}

@@ -2,15 +2,15 @@ import { Component, OnInit, Input, Output, EventEmitter }  from '@angular/core';
 import { AuthHttp }                                from 'angular2-jwt';
 import { Excercise }                               from '../../../../excercise';
 
-const styles = require('./edit-brackets.component.scss');
-const template = require('./edit-brackets.component.html');
+const styles = require('./brackets-form.component.scss');
+const template = require('./brackets-form.component.html');
 
 @Component({
-  selector: 'edit-brackets',
+  selector: 'brackets-form',
   template: template,
   styles: [ styles ],
 })
-export class EditBracketsComponent {
+export class BracketsFormComponent {
 
   @Input() excercise;
   @Output() updateExcercise = new EventEmitter();
@@ -20,14 +20,14 @@ export class EditBracketsComponent {
   ngOnInit(): void {
     let sentences = this.excercise.data;
     let answers = this.excercise.answers;
-    this.excercise.data = {
-      sentences: []
-    }
-    for (var index in sentences) {
-      this.excercise.data.sentences.push({
-        questionSentence: sentences[index].questionSentence, answers: answers[index]
-      });
-    }
+    // this.excercise.data = {
+    //   sentences: []
+    // }
+    // for (var index in sentences) {
+    //   this.excercise.data.sentences.push({
+    //     questionSentence: sentences[index].questionSentence, answers: answers[index]
+    //   });
+    // }
   }
 
   addSentence() {

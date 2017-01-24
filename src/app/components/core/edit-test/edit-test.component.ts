@@ -9,7 +9,7 @@ import { Test }                                    from '../../../test';
 import { User }                                    from '../../../user';
 import { Excercise }                               from '../../../excercise';
 import { AddExcerciseComponent }                   from '../add-excercise/add-excercise.component';
-import { EditExcerciseComponent }                   from '../edit-excercise/edit-excercise.component';
+import { ExcerciseFormComponent }                   from '../forms/excercise-form.component';
 
 const styles = require('./edit-test.component.scss');
 const template = require('./edit-test.component.html');
@@ -25,7 +25,7 @@ export class EditTestComponent {
   excercises: Excercise[];
   private sub: any;
   delete_confirmation = '';
-  selectedExcercise:string = 'BRACKETS';
+  selectedExcercise:string = '';
   showEditExcerciseId:number = null;
   showAddExcerciseFlag:boolean = false;
 
@@ -79,10 +79,8 @@ export class EditTestComponent {
 
   addExcerciseToTest(excercise): void {
     this.selectedExcercise = '';
-    this.excerciseService.createTestExcercise(this.test.id, excercise).then((result) => {
+    this.excerciseService.createTestExcercise(excercise.testId, excercise).then((result) => {
       let results = result.json();
-      this.getTest(this.test.id);
-      this.getExcercises(this.test.id);
     });
   }
 
@@ -95,7 +93,6 @@ export class EditTestComponent {
   }
 
   updateExcercise(excercise): void {
-    console.log('test');
     this.excerciseService.updateExcercise(excercise).then((result) => {
       let results = result.json();
       this.getTest(this.test.id);
@@ -113,6 +110,12 @@ export class EditTestComponent {
   }
 
   hideAddExcercise(): void {
+    this.showAddExcerciseFlag = false;
+  }
+
+  cancelForm(): void {
+    this.selectedExcercise = '';
+    this.showEditExcerciseId = null;
     this.showAddExcerciseFlag = false;
   }
 }

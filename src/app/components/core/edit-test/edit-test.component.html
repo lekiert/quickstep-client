@@ -63,6 +63,7 @@
         <table class="table-list">
           <thead>
             <th>Rodzaj</th>
+            <th>Typ</th>
             <th colspan="2">Polecenie</th>
           </thead>
 
@@ -71,6 +72,11 @@
               <td>
                 <span class="users-table__first-name">
                   {{ excercise.name }}
+                </span>
+              </td>
+              <td>
+                <span>
+                  {{ excercise.type }}
                 </span>
               </td>
               <td>
@@ -91,12 +97,15 @@
         </table>
       </div>
 
-      <div class="form__section" *ngIf="showEditExcerciseId !== null">
+      <div class="form__section" *ngIf="showEditExcerciseId !== null && excercises.length > 0">
         <header class="form_section__heading">
           <h3 class="heading heading--center">Edytuj ćwiczenie</h3>
         </header>
         <div>
-          <edit-excercise [excercise]="excercises[showEditExcerciseId]"  (updateExcercise)="updateExcercise($event)"></edit-excercise>
+          <excercise-form [excercise]="excercises[showEditExcerciseId]"
+                          [testId]="test.id"
+                          (excerciseUpdated)="refresh()"
+                          (cancelForm)="cancelForm()"></excercise-form>
         </div>
       </div>
 
@@ -124,7 +133,9 @@
 
       <!-- <div class="gr-12" *ngIf="showAddExcerciseFlag === true || true"> -->
       <div class="gr-12">
-        <add-excercise [excerciseType]="selectedExcercise" (addExcercise)="addExcerciseToTest($event)"></add-excercise>
+        <excercise-form [excerciseType]="selectedExcercise"
+                        (excerciseCreated)="refresh()"
+                        (cancelForm)="cancelForm()"></excercise-form>
       </div>
 
     </div>

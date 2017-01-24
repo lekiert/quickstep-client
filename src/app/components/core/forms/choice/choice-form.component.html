@@ -1,10 +1,10 @@
 <div class="row">
   <div class="gr-12">
 
-    <form class="form" (ngSubmit)="saveTest()" #editBracketsForm="ngForm">
+    <form class="form" (ngSubmit)="saveTest()" #addChoiceForm="ngForm">
       <div class="form__section">
         <header class="form_section__heading">
-          <h3 class="heading heading--center">Edytuj: luki</h3>
+          <h3 class="heading heading--center">Edytuj: wybór</h3>
         </header>
 
         <div class="form__group form__group--inline">
@@ -37,19 +37,24 @@
           </div>
         </div>
 
-        <div *ngFor="let sentence of excercise.data.sentences; let i = index">
+        <div *ngFor="let sentence of excercise.data.sentences; let i = index;">
           <div class="question-sentence">
-            <button style="margin-left: 5px; float: right" type="button" class="button button--danger" (click)="deleteSentence(i)">
+            <input type="text" required name="bracketsSentence-{{i}}"
+                   [(ngModel)]="sentence.questionSentence" class="input input--full choice-sentence">
+            <button style="margin-left: 5px" type="button" class="button button--danger" (click)="deleteSentence(i)">
               <i class="fa fa-remove"></i>
             </button>
-            <input type="text" required name="bracketsSentence-{{i}}" style="width: calc(100% - 4rem)"
-                   [(ngModel)]="sentence.questionSentence" class="input input--full">
+            <button type="button" class="button button--primary" (click)="addOption(i)">
+              <i class="fa fa-plus"></i>
+            </button>
 
-            <div *ngFor="let word of countSentenceBrackets(sentence.questionSentence); let j = index" style="display: inline">
+            <div *ngFor="let answer of sentence.answers; let j = index" style="display: inline">
               <div class="question-sentence-word">
-                <div class="question-sentence-word__count">{{ j + 1}}.</div>
+                <div class="question-sentence-word__count">
+                  <input type="checkbox" name="bracketsSentence-{{i}}-answer-correct-{{j}}" [(ngModel)]="answer.correct">
+                </div>
                 <input type="text" class="question-sentence-word__input input" required
-                       name="bracketsSentence-{{i}}-answer-{{j}}" [(ngModel)]="sentence.answers[j]">
+                       name="bracketsSentence-{{i}}-answer-{{j}}" [(ngModel)]="answer.text">
               </div>
             </div>
           </div>
@@ -58,11 +63,6 @@
         <div class="form__buttons">
           <button type="button" (click)="addSentence()" class="button button--success pull-right">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Dodaj zdanie
-          </button>
-        </div>
-        <div class="form__buttons">
-          <button type="button" (click)="updateExcerciseData()" class="button button--primary pull-right" [disabled]="!editBracketsForm.valid">
-            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Zaktualizuj ćwiczenie
           </button>
         </div>
       </div>

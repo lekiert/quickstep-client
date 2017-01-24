@@ -5,6 +5,7 @@ import { AuthHttp }                                from 'angular2-jwt';
 import { TestService }                             from '../../../services/test.service';
 import { Excercise }                               from '../../../excercise';
 import { Test }                                    from '../../../test';
+import { environment }                             from '../../../../environments/environment';
 
 import { StudentBracketsComponent } from '../student-excercises/brackets/student-brackets.component';
 import { StudentChoiceComponent } from '../student-excercises/choice/student-choice.component';
@@ -19,6 +20,7 @@ const template = require('./test.component.html');
 })
 export class TestComponent {
 
+  storageUrl = environment.API_URL;
   id: number;
   private sub: any;
   test: Test;

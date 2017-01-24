@@ -32,6 +32,10 @@ export class Excercise {
     return this.attributes['test-id'] || '';
   }
 
+  get attachments() {
+    return this.attributes['attachments'] || [];
+  }
+
   set testId(id) {
     this.attributes['test-id'] = id;
   }
