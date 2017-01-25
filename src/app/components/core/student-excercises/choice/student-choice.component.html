@@ -3,7 +3,18 @@
     <div *ngFor="let sentence of keys(excercise.data); let i = index">
       <p>{{ excercise.data[sentence] }}</p>
       <div *ngFor="let choice of excercise.answers[sentence]">
-        <input type="checkbox" (click)="toggleChoice(sentence, choice.text)"> {{ choice.text }}
+
+        <input type="checkbox" (click)="toggleChoice(sentence, choice.text)">
+        <div *ngIf="!choice.mime || !choice.media">
+           {{ choice.text }}
+        </div>
+
+        <div *ngIf="choice.mime && choice.media">
+          <img *ngIf="choice.mime.indexOf('image') === 0" src="{{ storageUrl }}{{ choice.media }}" style="max-width: 300px; max-height: 300px; width: auto; height: auto">
+          <audio controls *ngIf="choice.mime.indexOf('audio') === 0">
+            <source src="{{ storageUrl }}{{ choice.media }}" type="{{ choice.mime }}">
+          </audio>
+        </div>
       </div>
     </div>
 

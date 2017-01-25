@@ -41,4 +41,10 @@ export class ChoiceFormComponent {
     delete this.excercise.answers[index];
   }
 
+  setAnswerAsMedia(evt, sentence, answer) {
+    this.excercise.answers[sentence][answer].text = evt.id;
+    this.excercise.answers[sentence][answer].media = evt.attributes.item;
+    this.excercise.answers[sentence][answer].mime = evt.attributes.mime;
+  }
+
 }

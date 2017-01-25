@@ -55,6 +55,7 @@
                 </div>
                 <input type="text" class="question-sentence-word__input input" required
                        name="bracketsSentence-{{i}}-answer-{{j}}" [(ngModel)]="excercise.answers[sentence][answer].text">
+                       <file-upload [id]="file" (fileUploaded)="setAnswerAsMedia($event, sentence, answer)"></file-upload>
               </div>
             </div>
           </div>

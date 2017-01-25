@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter }  from '@angular/core';
 import { DomSanitizer }                            from '@angular/platform-browser';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router, ActivatedRoute }                  from '@angular/router';
+import { environment } from '../../../../../environments/environment';
 
 const styles = require('./student-choice.component.scss');
 const template = require('./student-choice.component.html');
@@ -22,7 +23,8 @@ export class StudentChoiceComponent {
   sentenceCount = 0;
   sentenceRange = [];
   wordCount = [];
-
+  storageUrl = environment.API_URL;
+  
   setDefaultReturnValues() {
     let keys = this.keys(this.excercise.data);
 
