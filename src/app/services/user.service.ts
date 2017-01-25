@@ -116,6 +116,19 @@ export class UserService {
     }, { headers: contentHeaders }).toPromise();
   }
 
+  changeUserPassword(userId, oldPassword: string, newPassword: string) {
+    return this.authHttp.post(this.usersUrl + '/' + userId + '/password-updates', {
+      data: {
+        type: "password-updates",
+        attributes: {
+          "user-id": userId,
+          "old-password": oldPassword,
+          "new-password": newPassword
+        }
+      }
+    }, { headers: contentHeaders }).toPromise();
+  }
+
   createUser(user) {
     let userId = getAuthenticatedUserId();
     return this.authHttp.post(this.usersUrl, {

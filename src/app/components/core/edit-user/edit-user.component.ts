@@ -109,7 +109,7 @@ export class EditUserComponent {
   }
 
   private submitPasswordChange(oldPassword, newPassword) {
-    this.service.changePassword(this.oldPassword, this.newPassword)
+    this.service.changeUserPassword(this.user.id, this.oldPassword, this.newPassword)
                                .then((response) => {
                                  this.successMessage = 'Hasło zostało zmienione.';
                                })
