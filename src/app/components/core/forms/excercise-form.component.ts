@@ -63,6 +63,7 @@ export class ExcerciseFormComponent {
   updateExcerciseData(): void {
     this.service.updateExcercise(this.excercise).then((result) => {
       let results = result.json();
+      this.excerciseUpdated.emit(true);
     });
   }
 
@@ -81,6 +82,7 @@ export class ExcerciseFormComponent {
   createExcercise(): void {
     this.service.createTestExcercise(this.testId, this.excercise).then((result) => {
       let results = result.json();
+      this.excerciseCreated.emit(true);
     });
   }
 

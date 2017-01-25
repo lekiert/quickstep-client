@@ -33,12 +33,19 @@ export class EditTestComponent {
   updateSuccess:string = '';
   excerciseSuccess:string = '';
 
+  successMessage:string = '';
+  errorMessage:string = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: TestService,
     private excerciseService: ExcerciseService,
     private userService: UserService) {
+    this.reload();
+  }
+
+  reload():void {
     this.sub = this.route.params.subscribe(params => {
       let id = +params['id'];
       this.getTest(id);
@@ -110,6 +117,22 @@ export class EditTestComponent {
 
   hideAddExcercise(): void {
     this.showAddExcerciseFlag = false;
+  }
+
+  handleUpdate(evt): void {
+    if (evt === true) {
+      this.successMessage = 'Zaktualizowano ćwiczenie';
+      this.showEditExcerciseId = null;
+    }
+  }
+
+  handleCreate(evt): void {
+    if (evt === true) {
+      this.successMessage = 'Dodano ćwiczenie';
+      this.selectedExcercise = '';
+      this.showAddExcerciseFlag = false;
+      this.reload();
+    }
   }
 
   cancelForm(): void {

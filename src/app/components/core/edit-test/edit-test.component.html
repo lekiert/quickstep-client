@@ -53,6 +53,13 @@
 
     <hr class="line">
 
+    <span class="alert alert--success" (click)="successMessage = ''" *ngIf="successMessage.length > 0">
+      {{ successMessage }}
+    </span>
+    <span class="alert alert--danger" (click)="errorMessage = ''" *ngIf="errorMessage.length > 0">
+      {{ errorMessage }}
+    </span>
+
     <div class="gr-12">
 
       <div class="form__section" *ngIf="showEditExcerciseId === null">
@@ -104,7 +111,7 @@
         <div>
           <excercise-form [excercise]="excercises[showEditExcerciseId]"
                           [testId]="test.id"
-                          (excerciseUpdated)="refresh()"
+                          (excerciseUpdated)="handleUpdate($event)"
                           (cancelForm)="cancelForm()"></excercise-form>
         </div>
       </div>
@@ -135,7 +142,7 @@
       <div class="gr-12" *ngIf="selectedExcercise !== ''">
         <excercise-form [excerciseType]="selectedExcercise"
                         [testId]="test.id"
-                        (excerciseCreated)="refresh()"
+                        (excerciseCreated)="handleCreate($event)"
                         (cancelForm)="cancelForm()"></excercise-form>
       </div>
 
