@@ -10,4 +10,13 @@
   font-weight: 400;
   color: $color-blue-vlight;
   outline: 0;
+
+  &.word--error {
+    border-bottom-color: $color-red;
+    color: $color-red;
+  }
+  &.word--correct {
+    border-bottom-color: $color-green-light;
+    color: $color-green-light;
+  }
 }

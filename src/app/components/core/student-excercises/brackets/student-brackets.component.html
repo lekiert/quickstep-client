@@ -4,7 +4,11 @@
       <span *ngFor="let parsedSentence of splitSentence(excercise.data[sentence]); let j = index">
         {{ parsedSentence }}
         <span *ngIf="j < (splitSentence(excercise.data[sentence]).length - 1)">
-          <input type="text" [(ngModel)]="answers[sentence][j+1]" (ngModelChange)="updateExcerciseAnswerValues()" class="word">
+          <input type="text"
+                 [(ngModel)]="answers[sentence][j]"
+                 (ngModelChange)="updateExcerciseAnswerValues()"
+                 [ngClass]="{'word': true, 'word--error' : hasError(sentence, j), 'word--correct' : hasWordResult(sentence, j) && !hasError(sentence, j) }"
+                 [disabled]="hasWordResult(sentence, j)">
         </span>
       </span>
     </p>

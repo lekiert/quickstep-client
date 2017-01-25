@@ -31,10 +31,22 @@ export class StudentBracketsComponent {
       let answerKeysCount = this.splitSentence(this.excercise.data[key]).length - 1;
 
       this.answers[key] = {};
-      for (let i = 1; i <= answerKeysCount; i++) {
+      for (let i = 0; i < answerKeysCount; i++) {
         this.answers[key][i] = '';
       }
     }
+  }
+
+  hasError(sentence, word): boolean {
+    if (this.excercise.checkResults && this.excercise.checkResults[sentence] && this.excercise.checkResults[sentence][word] == false) {
+      return true;
+    }
+
+    return false;
+  }
+
+  hasWordResult(sentence, word): boolean {
+    return (this.excercise.checkResults && this.excercise.checkResults[sentence] && typeof this.excercise.checkResults[sentence][word] !== 'undefined');
   }
 
   keys(dict) : Array<string> {

@@ -24,7 +24,7 @@ export class StudentChoiceComponent {
   sentenceRange = [];
   wordCount = [];
   storageUrl = environment.API_URL;
-  
+
   setDefaultReturnValues() {
     let keys = this.keys(this.excercise.data);
 
@@ -46,9 +46,24 @@ export class StudentChoiceComponent {
     this.excercise.answers = this.answers;
   }
 
+  isSelected(sentence, choice): boolean {
+    return this.answers[sentence].indexOf(choice) > -1;
+  }
+
+  hasError(sentence, choice): boolean {
+    if (this.excercise.checkResults && this.excercise.checkResults[sentence] && this.excercise.checkResults[sentence][choice] == false) {
+      return true;
+    }
+
+    return false;
+  }
+
+  hasChoiceResult(sentence, choice): boolean {
+    return (this.excercise.checkResults && this.excercise.checkResults[sentence] && typeof this.excercise.checkResults[sentence][choice] !== 'undefined');
+  }
+
 
   getAnswers() {
-    console.log(this.answers);
     return this.answers;
   }
 

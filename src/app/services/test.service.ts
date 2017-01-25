@@ -13,6 +13,7 @@ export class TestService {
 
   private testsUrl = environment.API_URL + 'tests';
   private coursesUrl = environment.API_URL + 'courses';
+  private answersUrl = environment.API_URL + 'answers';
 
   constructor (private authHttp: AuthHttp) {}
 
@@ -128,6 +129,29 @@ export class TestService {
         attributes: {
           "name": course.name,
           "description": course.description
+        }
+      }
+    }, { headers: contentHeaders }).toPromise();
+  }
+
+  submitAnswers(testId, userId, answers) {
+    return this.authHttp.post(this.answersUrl, {
+      data: {
+        type: "answers",
+        attributes: {
+          "answers": answers
+        },
+        relationships: {
+          test : {
+            data: {
+              type: "tests", id: testId
+            }
+          },
+          user : {
+            data: {
+              type: "users", id: userId
+            }
+          }
         }
       }
     }, { headers: contentHeaders }).toPromise();

@@ -1,8 +1,12 @@
 export class Excercise {
 
-  _answers = {};
+  checkResults = {};
 
   constructor(public id: number, private attributes) {}
+
+  get hasResults(): boolean {
+    return Object.keys(this.checkResults).length > 0;
+  }
 
   get name(): string {
     return this.attributes['name'] || '';

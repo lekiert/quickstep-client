@@ -1,13 +1,47 @@
 @import '../../../../style';
 @import '../../../../config';
 
-.word {
-  border: 0;
-  width: 110px;
-  margin: 0 5px;
-  border-bottom: 2px solid $color-blue-vlight;
-  text-align: center;
-  font-weight: 400;
-  color: $color-blue-vlight;
-  outline: 0;
+.choice-options {
+  @include clearfix();
+}
+
+.choice-options__option {
+  display: block;
+  width: 150px;
+  height: 150px;
+  max-width: 150px;
+  max-height: 150px;
+  float: left;
+  margin: 10px;
+  padding: 10px 10px 25px 10px;
+  border: 2px solid #eee;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  audio {
+    max-width: 100%;
+  }
+  position:relative;
+
+  &.choice-options__option--error {
+    border-color: $color-red;
+  }
+  &.choice-options__option--correct {
+    border-color: $color-green-light;
+  }
+}
+
+.choice-options__option--selected {
+  border-color: $color-blue-light;
+}
+
+.choice-options__option__input {
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 5px;
+  left: calc(50% - 5px);
 }
