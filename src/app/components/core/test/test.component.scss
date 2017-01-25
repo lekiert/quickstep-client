@@ -5,6 +5,14 @@
   margin: 25px 0;
 }
 
+.test__excercises__excercise {
+  margin-top: 50px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
 .test__check {
   display: block;
   margin: 25px auto;
