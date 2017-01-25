@@ -32,6 +32,7 @@ export class TestComponent {
   results = [];
   answers = {};
   private hasResults:boolean = false;
+  private score:string = '0';
 
   constructor(
     private route: ActivatedRoute,
@@ -77,7 +78,10 @@ export class TestComponent {
 
   submitAnswers() {
     this.service.submitAnswers(this.id, this.user.id, this.answers).then(results => {
-      this.setExcerciseResults(results.json().data.attributes.results);
+      let data = results.json().data.attributes;
+      this.score = (+data.score.score / +data.score.max * 100).toFixed();
+
+      this.setExcerciseResults(data.results);
     });
   }
 

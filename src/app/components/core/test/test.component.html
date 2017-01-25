@@ -41,6 +41,11 @@
       <hr class="line">
 
       <button type="button" *ngIf="!hasResults" class="button button--primary test__check" (click)="submitAnswers()">Sprawdź wyniki</button>
+      <!-- <button type="button" class="button button--primary test__check" (click)="submitAnswers()">Sprawdź wyniki</button> -->
+
+      <div class="test__score" *ngIf="hasResults">
+        Wynik: {{ score }}%
+      </div>
 
     </div>
   </div>
