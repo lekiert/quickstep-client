@@ -32,7 +32,7 @@ export class UserService {
   }
 
   getUser(userId: number): Promise<User> {
-    return this.authHttp.get(this.usersUrl + '/' + userId + '/')
+    return this.authHttp.get(this.usersUrl + '/' + userId + '/', { headers: contentHeaders })
                         .toPromise()
                         .then((response) => {
                           let id = response.json().data.id;
@@ -44,7 +44,7 @@ export class UserService {
 
   fetchUserFromAPI(id?: number) {
     let userId = id || getAuthenticatedUserId();
-    return this.authHttp.get(this.usersUrl + '/' + userId + '/')
+    return this.authHttp.get(this.usersUrl + '/' + userId + '/', { headers: contentHeaders })
                         .subscribe(
                           (response) => {
                             let id = response.json().data.id;
@@ -58,7 +58,7 @@ export class UserService {
   }
 
   deleteUser(id): Promise<boolean> {
-    return this.authHttp.delete(this.usersUrl + '/' + id).toPromise().then((response) => {
+    return this.authHttp.delete(this.usersUrl + '/' + id, { headers: contentHeaders }).toPromise().then((response) => {
       return true;
     });
   }
@@ -71,7 +71,7 @@ export class UserService {
       filter.set('filter[role]', type);
     }
 
-    return this.authHttp.get(this.usersUrl, { search: filter })
+    return this.authHttp.get(this.usersUrl, { search: filter, headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;
@@ -91,7 +91,7 @@ export class UserService {
   }
 
   getUsersOfTypeByGroup(type: string, id: number): Promise<User[]> {
-    return this.authHttp.get(this.groupsUrl + '/' + id + '/' + type)
+    return this.authHttp.get(this.groupsUrl + '/' + id + '/' + type, { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;

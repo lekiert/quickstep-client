@@ -17,7 +17,7 @@ export class GroupService {
   constructor (private authHttp: AuthHttp) {}
 
   getGroups(): Promise<Group[]> {
-    return this.authHttp.get(this.groupsUrl)
+    return this.authHttp.get(this.groupsUrl, { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;
@@ -29,7 +29,7 @@ export class GroupService {
   }
 
   getGroup(id: number): Promise<Group> {
-    return this.authHttp.get(this.groupsUrl + '/' + id)
+    return this.authHttp.get(this.groupsUrl + '/' + id, { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;

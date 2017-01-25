@@ -4,6 +4,7 @@ import { Course }              from '../course';
 import { Observable }             from 'rxjs/Observable';
 import { AuthHttp }               from 'angular2-jwt';
 import { environment } from '../../environments/environment';
+import { contentHeaders }         from '../common/headers';
 
 @Injectable()
 export class CourseService {
@@ -15,7 +16,7 @@ export class CourseService {
 
   getCourses(): Promise<Course[]> {
 
-    return this.authHttp.get(this.coursesUrl)
+    return this.authHttp.get(this.coursesUrl, { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;
@@ -28,7 +29,7 @@ export class CourseService {
   }
 
   getCoursesByUser(id): Promise<Course[]> {
-    return this.authHttp.get(this.usersUrl + '/' + id + '/courses')
+    return this.authHttp.get(this.usersUrl + '/' + id + '/courses', { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;
@@ -41,7 +42,7 @@ export class CourseService {
   }
 
   getCourse(id: number): Promise<Course> {
-    return this.authHttp.get(this.coursesUrl + '/' + id)
+    return this.authHttp.get(this.coursesUrl + '/' + id, { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;

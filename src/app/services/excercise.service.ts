@@ -15,7 +15,7 @@ export class ExcerciseService {
   constructor (private authHttp: AuthHttp) {}
 
   getExcercises(): Promise<Excercise[]> {
-    return this.authHttp.get(this.excercisesUrl)
+    return this.authHttp.get(this.excercisesUrl, { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;

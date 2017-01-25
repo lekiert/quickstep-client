@@ -18,7 +18,7 @@ export class TestService {
   constructor (private authHttp: AuthHttp) {}
 
   getTestsByCourse(id): Promise<Test[]> {
-    return this.authHttp.get(this.coursesUrl + '/' + id + '/tests')
+    return this.authHttp.get(this.coursesUrl + '/' + id + '/tests', { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;
@@ -30,7 +30,7 @@ export class TestService {
   }
 
   getTest(id): Promise<Test> {
-    return this.authHttp.get(this.testsUrl + '/' + id)
+    return this.authHttp.get(this.testsUrl + '/' + id, { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;
@@ -40,7 +40,7 @@ export class TestService {
   }
 
   getTestRelatedExcercises(id): Promise<Excercise[]> {
-    return this.authHttp.get(this.testsUrl + '/' + id + '/excercises')
+    return this.authHttp.get(this.testsUrl + '/' + id + '/excercises', { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;
