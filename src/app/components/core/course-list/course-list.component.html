@@ -29,7 +29,7 @@
       </table>
     </div>
 
-    <div class="gr-12">
+    <div class="gr-12" *ngIf="user && user.isAdmin()">
       <a class="button button--primary add-user pull-right" [routerLink]="['/courses/new']">
         <i class="fa fa-plus"></i> <i class="fa fa-book"></i>
       </a>

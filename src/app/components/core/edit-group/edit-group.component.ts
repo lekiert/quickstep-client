@@ -3,9 +3,11 @@ import { Router, ActivatedRoute }                  from '@angular/router';
 import { AuthHttp }                                from 'angular2-jwt';
 import { SearchFieldComponent }                    from '../../util/search-field/search-field.component';
 import { GroupService }                            from '../../../services/group.service';
+import { CourseService }                            from '../../../services/course.service';
 import { UserService }                             from '../../../services/user.service';
 import { Group }                                   from '../../../group';
 import { User }                                    from '../../../user';
+import { Course }                                    from '../../../course';
 
 const styles = require('./edit-group.component.scss');
 const template = require('./edit-group.component.html');
@@ -18,13 +20,17 @@ const template = require('./edit-group.component.html');
 export class EditGroupComponent {
   group: Group;
   users: User[];
+  courses: Course[];
   teachers: User[];
   private sub: any;
+  private groupCourses: Course[];
+  private selectedCourse: number;
   private selectedUser = null;
   private selectedTeacher = null;
 
   // messages
   success:string = '';
+  error:string = '';
   updateSuccess:string = '';
   teacherSuccess:string = '';
 
@@ -32,18 +38,30 @@ export class EditGroupComponent {
     private route: ActivatedRoute,
     private router: Router,
     private service: GroupService,
+    private courseService: CourseService,
     private userService: UserService) {
     this.sub = this.route.params.subscribe(params => {
       let id = +params['id'];
       this.getGroup(id);
       this.getUsers(id);
+      this.getCourses();
       this.getTeachers(id);
     });
   }
 
   getGroup(id): void {
-    this.service.getGroup(id).then((group) => {
-      this.group = group;
+    this.service.getGroupWithCourses(id).then((result) => {
+      this.group = result.group;
+      this.groupCourses = result.courses;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  getCourses(): void {
+    this.courseService.getCourses().then((courses) => {
+      this.courses = courses;
     });
   }
 
@@ -81,6 +99,14 @@ export class EditGroupComponent {
     })
   }
 
+  removeCourseFromGroup(courseId): void {
+    this.success = '';
+    this.service.removeCourseFromGroup(+this.group.id, +courseId).then(() => {
+      this.getGroup(this.group.id);
+      this.success = 'Usunięto kurs z grupy.';
+    })
+  }
+
   updateGroup(): void {
     this.service.updateGroup(this.group).then(() => {
       this.updateSuccess = 'Zaktualizowano dane grupy';
@@ -101,6 +127,14 @@ export class EditGroupComponent {
         this.success = 'Dodano użytkownika ' + user.first_name + ' ' + user.last_name + ' do grupy.';
       })
     }
+  }
+
+  addCourse(): void {
+    let course = this.selectedCourse;
+    this.service.addCourseToGroup(this.group.id, course).then((result) => {
+      this.getGroup(this.group.id);
+      this.success = 'Dodano kurs do grupy.';
+    })
   }
 
   addTeacher(): void {

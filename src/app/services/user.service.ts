@@ -42,6 +42,17 @@ export class UserService {
                         });
   }
 
+  getUserWithGroups(userId: number): Promise<User> {
+    return this.authHttp.get(this.usersUrl + '/' + userId + '/', { headers: contentHeaders })
+                        .toPromise()
+                        .then((response) => {
+                          let id = response.json().data.id;
+                          let data = response.json().data.attributes;
+                          let user = new User(id, data);
+                          return user;
+                        });
+  }
+
   fetchUserFromAPI(id?: number) {
     let userId = id || getAuthenticatedUserId();
     return this.authHttp.get(this.usersUrl + '/' + userId + '/', { headers: contentHeaders })

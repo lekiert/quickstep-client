@@ -41,6 +41,23 @@ export class CourseService {
                .catch(this.handleError);
   }
 
+  getUserCourses(id): Promise<Course[]> {
+    console.log('test');
+    return this.authHttp.get(this.usersUrl + '/' + id + '/groups?include=courses', { headers: contentHeaders })
+               .toPromise()
+               .then((response) => {
+                 let data = response.json();
+                 if (data.included) {
+                   return data.included.map((item) => {
+                     return new Course(item.id, item.attributes);
+                   })
+                 }
+
+                 return [];
+               })
+               .catch(this.handleError);
+  }
+
   getCourse(id: number): Promise<Course> {
     return this.authHttp.get(this.coursesUrl + '/' + id, { headers: contentHeaders })
                .toPromise()
