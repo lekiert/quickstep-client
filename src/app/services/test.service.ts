@@ -40,7 +40,7 @@ export class TestService {
   }
 
   getTestRelatedExcercises(id): Promise<Excercise[]> {
-    return this.authHttp.get(this.testsUrl + '/' + id + '/excercises', { headers: contentHeaders })
+    return this.authHttp.get(this.testsUrl + '/' + id + '/excercises' + '?sort=id', { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;
