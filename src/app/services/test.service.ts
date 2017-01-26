@@ -18,7 +18,7 @@ export class TestService {
   constructor (private authHttp: AuthHttp) {}
 
   getTestsByCourse(id): Promise<Test[]> {
-    return this.authHttp.get(this.coursesUrl + '/' + id + '/tests', { headers: contentHeaders })
+    return this.authHttp.get(this.coursesUrl + '/' + id + '/tests' + '?sort=id', { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;
