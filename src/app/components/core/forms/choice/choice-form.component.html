@@ -61,9 +61,9 @@
 
                        <div style="max-width: 300px; max-height: 300px" *ngIf="excercise.answers[sentence][answer].mime && excercise.answers[sentence][answer].media">
                          <div>
-                           <img *ngIf="choice.mime.indexOf('image') === 0" src="{{ storageUrl }}{{ choice.media }}">
-                           <audio controls *ngIf="choice.mime.indexOf('audio') === 0">
-                             <source src="{{ storageUrl }}{{ choice.media }}" type="{{ choice.mime }}">
+                           <img *ngIf="excercise.answers[sentence][answer].mime.indexOf('image') === 0" src="{{ storageUrl }}{{ excercise.answers[sentence][answer].media }}">
+                           <audio controls *ngIf="excercise.answers[sentence][answer].mime.indexOf('audio') === 0">
+                             <source src="{{ storageUrl }}{{ excercise.answers[sentence][answer].media }}" type="{{ excercise.answers[sentence][answer].mime }}">
                            </audio>
                          </div>
                        </div>
