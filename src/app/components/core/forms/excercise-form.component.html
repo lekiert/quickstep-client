@@ -1,5 +1,5 @@
 <div class="row" *ngIf="excercise">
-  <div class="gr-12">
+  <div class="gr-12" *ngIf="excercise.id > 0">
       <file-upload [id]="file" (fileUploaded)="attachFileToExcercise($event)"></file-upload>
   </div>
 
