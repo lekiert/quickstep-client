@@ -18,6 +18,10 @@ export class Test {
     this.attributes['name'] = n;
   }
 
+  set code(n) {
+    this.attributes['code'] = n;
+  }
+
   set description(d) {
     this.attributes['description'] = d;
   }

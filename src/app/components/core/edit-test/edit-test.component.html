@@ -40,6 +40,18 @@
               </div>
             </div>
 
+
+            <div class="form__group form__group--inline">
+              <div class="form__group__label">
+                <label for="test-code">Kod testu</label>
+              </div>
+              <div class="form__group__control">
+                <input type="text" required #testname="ngModel"
+                       name="test[code]" [(ngModel)]="test.code"
+                       class="input input--full" id="test-code">
+              </div>
+            </div>
+
             <div class="form__buttons">
               <button type="button" (click)="updateTest()" class="button button--primary pull-right" [disabled]="!testForm.form.valid">
                 <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Uaktualnij dane testu
