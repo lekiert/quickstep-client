@@ -25,6 +25,7 @@ export class TestComponent {
   private answersUrl = environment.API_URL + 'answers';  // URL to web API
   storageUrl = environment.API_URL;
   id: number;
+  error: string = '';
   private sub: any;
   test: Test;
   user: User;
@@ -82,6 +83,9 @@ export class TestComponent {
       this.score = (+data.score.score / +data.score.max * 100).toFixed();
 
       this.setExcerciseResults(data.results);
+    }).catch(error => {
+      this.error = "Przekroczyłeś/aś limit 2 rozwiązań jednego testu.";
+      console.log(error);
     });
   }
 

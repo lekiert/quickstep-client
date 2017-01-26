@@ -4,6 +4,9 @@
       <h1 class="heading heading--border">{{ test.name }}</h1>
     </div>
     <div class="gr-12">
+      <div class="alert alert--danger" *ngIf="error.length > 0" (click)="error = ''">{{ error }}</div>
+    </div>
+    <div class="gr-12">
       <div class="test">
 
         <div class="test__excercises">
