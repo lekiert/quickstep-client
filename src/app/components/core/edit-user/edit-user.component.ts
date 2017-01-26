@@ -21,6 +21,7 @@ export class EditUserComponent {
   newPassword: string;
   newPasswordRepeat: string;
   successMessage: string;
+  old_password = '';
   password_repeat = '';
   password_field_type = 'password';
   delete_confirmation = '';
@@ -73,7 +74,8 @@ export class EditUserComponent {
       this.changePasswordError = e.message;
     } finally {
       if (this.changePasswordError.length === 0) {
-        this.submitPasswordChange(this.oldPassword, this.newPassword);
+        console.log(this.password_repeat)
+        this.submitPasswordChange(this.password_repeat);
       }
     }
 
@@ -108,8 +110,8 @@ export class EditUserComponent {
     });
   }
 
-  private submitPasswordChange(oldPassword, newPassword) {
-    this.service.changeUserPassword(this.user.id, this.oldPassword, this.newPassword)
+  private submitPasswordChange(newPassword) {
+    this.service.changeUserPassword(this.user.id, newPassword)
                                .then((response) => {
                                  this.successMessage = 'Hasło zostało zmienione.';
                                })

@@ -42,7 +42,6 @@ export class CourseService {
   }
 
   getUserCourses(id): Promise<Course[]> {
-    console.log('test');
     return this.authHttp.get(this.usersUrl + '/' + id + '/groups?include=courses', { headers: contentHeaders })
                .toPromise()
                .then((response) => {
