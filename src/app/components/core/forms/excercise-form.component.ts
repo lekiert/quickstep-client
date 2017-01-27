@@ -79,6 +79,13 @@ export class ExcerciseFormComponent {
     });
   }
 
+  deleteAttachmentFromExcercise(id) {
+    return this.http.delete(environment.API_URL + 'storage-files/' + id, { headers: contentHeaders }
+    ).toPromise().then((result) => {
+      this.updateExcerciseData();
+    });
+  }
+
   createExcercise(): void {
     this.service.createTestExcercise(this.testId, this.excercise).then((result) => {
       let results = result.json();

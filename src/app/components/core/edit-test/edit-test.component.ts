@@ -123,6 +123,7 @@ export class EditTestComponent {
     if (evt === true) {
       this.successMessage = 'Zaktualizowano ćwiczenie';
       this.showEditExcerciseId = null;
+      this.reload();
     }
   }
 

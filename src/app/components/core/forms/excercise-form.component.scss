@@ -1,2 +1,39 @@
 @import '../../../style';
 @import '../../../config';
+
+.excercise__attachment {
+  max-width: 200px;
+  max-height: 200px;
+  width: 200px;
+  height: 200px;
+  float: left;
+  padding: 15px;
+  margin: 15px;
+  border: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.excercise__attachment img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.excercise__remove-attachment {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: $color-red;
+  color: #fff;
+  text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
