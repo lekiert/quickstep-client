@@ -10,7 +10,8 @@
 
       <table class="tests-table">
         <thead>
-          <th colspan="2">Nazwa testu</th>
+          <th>Nazwa testu</th>
+          <th>Ostatni wynik</th>
         </thead>
 
         <tbody>
@@ -18,6 +19,11 @@
             <td>
               <span class="tests-table__name">
                 {{ test.name }}
+              </span>
+            </td>
+            <td>
+              <span class="tests-table__last-result" *ngIf="test.score.length > 0">
+                {{ test.score }}%
               </span>
             </td>
             <td>

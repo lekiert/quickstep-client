@@ -25,4 +25,14 @@ export class Test {
   set description(d) {
     this.attributes['description'] = d;
   }
+
+  get score() {
+    let max = this.attributes['last-score'].max;
+    let score = this.attributes['last-score'].score;
+    if (max && score) {
+      return (+score / +max * 100).toFixed().toString();
+    }
+
+    return '';
+  }
 }

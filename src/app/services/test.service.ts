@@ -29,6 +29,18 @@ export class TestService {
                });
   }
 
+  getTestsByCourseWithAnswers(id): Promise<Test[]> {
+    return this.authHttp.get(this.coursesUrl + '/' + id + '/tests' + '?sort=id&include=answers', { headers: contentHeaders })
+               .toPromise()
+               .then((response) => {
+                 let data = response.json().data;
+
+                 return data.map((item) => {
+                   return new Test(item.id, item.attributes);
+                 })
+               });
+  }
+
   getTest(id): Promise<Test> {
     return this.authHttp.get(this.testsUrl + '/' + id, { headers: contentHeaders })
                .toPromise()
