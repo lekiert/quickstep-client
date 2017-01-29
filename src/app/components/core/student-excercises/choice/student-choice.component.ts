@@ -19,6 +19,7 @@ export class StudentChoiceComponent {
   @Input() excercise: any;
   @Output() collectResults = new EventEmitter();
   @Input() answers = {};
+  @Input() setDefaults: boolean = true;
 
   sentenceCount = 0;
   sentenceRange = [];
@@ -39,7 +40,9 @@ export class StudentChoiceComponent {
   }
 
   ngOnInit(): void {
-    this.setDefaultReturnValues();
+    if (this.setDefaults) {
+      this.setDefaultReturnValues();
+    }
   }
 
   updateExcerciseAnswerValues() {

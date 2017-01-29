@@ -19,6 +19,7 @@ export class StudentBracketsComponent {
   @Input() excercise: Excercise;
   @Output() collectResults = new EventEmitter();
   @Input() answers = {};
+  @Input() setDefaults: boolean = true;
 
   sentenceCount = 0;
   sentenceRange = [];
@@ -54,7 +55,9 @@ export class StudentBracketsComponent {
   }
 
   ngOnInit(): void {
-    this.setDefaultReturnValues();
+    if (this.setDefaults) {
+      this.setDefaultReturnValues();
+    }
   }
 
   updateExcerciseAnswerValues() {
@@ -66,7 +69,6 @@ export class StudentBracketsComponent {
   }
 
   getAnswers() {
-    console.log(this.answers);
     return this.answers;
   }
 

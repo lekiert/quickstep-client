@@ -3,7 +3,7 @@
     <div *ngFor="let sentence of keys(excercise.data); let i = index">
       <p>{{ excercise.data[sentence] }}</p>
       <div class="choice-options">
-        <div *ngFor="let choice of excercise.answers[sentence]"
+        <div *ngFor="let choice of excercise.answers[sentence]; let j = index"
              [ngClass]="{
                'choice-options__option' : true,
                'choice-options__option--selected' : isSelected(sentence, choice.text),
@@ -22,7 +22,7 @@
             </audio>
           </div>
 
-          <input [disabled]="hasChoiceResult(sentence, choice.text)" type="checkbox" (click)="toggleChoice(sentence, choice.text)" class="choice-options__option__input">
+          <input *ngIf="setDefaults" [disabled]="hasChoiceResult(sentence, choice.text)" type="checkbox" (click)="toggleChoice(sentence, choice.text)" [checked]="hasChoiceResult(sentence, choice.text)" class="choice-options__option__input">
         </div>
       </div>
     </div>

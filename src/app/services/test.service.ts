@@ -14,6 +14,7 @@ export class TestService {
   private testsUrl = environment.API_URL + 'tests';
   private coursesUrl = environment.API_URL + 'courses';
   private answersUrl = environment.API_URL + 'answers';
+  private usersUrl = environment.API_URL + 'users';
 
   constructor (private authHttp: AuthHttp) {}
 
@@ -38,6 +39,26 @@ export class TestService {
                  return data.map((item) => {
                    return new Test(item.id, item.attributes);
                  })
+               });
+  }
+
+  getUserAnswers(userId): any {
+    return this.authHttp.get(this.usersUrl + '/' + userId + '/answers' + '?sort=-id', { headers: contentHeaders })
+               .toPromise()
+               .then((response) => {
+                 let data = response.json().data;
+
+                 return data;
+               });
+  }
+
+  getAnswer(answersId): any {
+    return this.authHttp.get(this.answersUrl + '/' + answersId + '?include=test,user', { headers: contentHeaders })
+               .toPromise()
+               .then((response) => {
+                 let data = response.json();
+
+                 return data;
                });
   }
 

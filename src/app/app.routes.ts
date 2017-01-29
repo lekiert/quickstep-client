@@ -15,6 +15,8 @@ import { EditGroupComponent } from './components/core/edit-group/edit-group.comp
 import { EditTestComponent } from './components/core/edit-test/edit-test.component';
 import { TestComponent } from './components/core/test/test.component';
 import { StatsComponent } from './components/core/stats/stats.component';
+import { AnswerComponent } from './components/core/answer/answer.component';
+import { AnswerListComponent } from './components/core/answer-list/answer-list.component';
 import { Login } from './components/login';
 import { AuthGuard } from './common/auth.guard';
 
@@ -27,11 +29,13 @@ export const rootRouterConfig: Routes = [
   { path: 'groups/:id/edit',   component: EditGroupComponent, canActivate: [AuthGuard] },
   { path: 'users/new',   component: AddUserComponent, canActivate: [AuthGuard] },
   { path: 'users/:id/edit',   component: EditUserComponent, canActivate: [AuthGuard] },
+  { path: 'users/:id/results',   component: AnswerListComponent, canActivate: [AuthGuard] },
   { path: 'users/:type',   component: UserListComponent, canActivate: [AuthGuard] },
   { path: 'courses/new',   component: AddCourseComponent, canActivate: [AuthGuard] },
   { path: 'courses',   component: CourseListComponent, canActivate: [AuthGuard] },
   { path: 'course/:id/tests/new',   component: AddTestComponent, canActivate: [AuthGuard] },
   { path: 'course/:id',   component: CourseComponent, canActivate: [AuthGuard] },
+  { path: 'answer/:id',   component: AnswerComponent, canActivate: [AuthGuard] },
   { path: 'tests/:id/edit',   component: EditTestComponent, canActivate: [AuthGuard] },
   { path: 'test/:id',   component: TestComponent, canActivate: [AuthGuard] },
   { path: '',       component: Login },

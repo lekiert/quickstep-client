@@ -46,6 +46,8 @@ import { StatsComponent } from './components/core/stats/stats.component';
 
 import { BracketsFormComponent } from './components/core/forms/brackets/brackets-form.component';
 import { ChoiceFormComponent } from './components/core/forms/choice/choice-form.component';
+import { AnswerComponent } from './components/core/answer/answer.component';
+import { AnswerListComponent } from './components/core/answer-list/answer-list.component';
 // import { EditBracketsComponent } from './components/core/edit-excercise/brackets/edit-brackets.component';
 
 @NgModule({
@@ -79,6 +81,8 @@ import { ChoiceFormComponent } from './components/core/forms/choice/choice-form.
 
                  BracketsFormComponent,
                  ChoiceFormComponent,
+                 AnswerComponent,
+                 AnswerListComponent,
                 //  AddChoiceComponent
                ],
 

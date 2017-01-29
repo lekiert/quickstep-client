@@ -1,0 +1,35 @@
+<div class="" *ngIf="user">
+  <div class="row">
+    <div class="gr-12">
+      <h1 class="heading heading--border">Rozwiązania testów {{ user.first_name }} {{ user.last_name }}</h1>
+    </div>
+    <div class="gr-12" *ngIf="answers">
+      <table class="answers-table">
+        <thead>
+          <th>ID testu</th>
+          <th>Nazwa testu</th>
+          <th colspan="2">Wynik</th>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let answer of answers" [routerLink]="['/answer', answer.id]">
+            <td>
+                #{{ answer.attributes['test-id'] }}
+            </td>
+            <td>
+                {{ answer.attributes['test-name'] }}
+            </td>
+            <td>
+                {{ getScore(answer.attributes.score.max, answer.attributes.score.score) }}
+            </td>
+            <td>
+              <button class="button button--primary">
+                <i class="fa fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -8,7 +8,7 @@
                  [(ngModel)]="answers[sentence][j]"
                  (ngModelChange)="updateExcerciseAnswerValues()"
                  [ngClass]="{'word': true, 'word--error' : hasError(sentence, j), 'word--correct' : hasWordResult(sentence, j) && !hasError(sentence, j) }"
-                 [disabled]="hasWordResult(sentence, j)">
+                 [disabled]="hasWordResult(sentence, j) || !setDefaults">
         </span>
       </span>
     </p>
