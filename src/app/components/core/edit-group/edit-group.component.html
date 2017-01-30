@@ -1,4 +1,4 @@
-<div class="" *ngIf="group">
+<div class="" *ngIf="group && user">
   <div class="row">
     <div class="gr-12">
       <h1 class="heading heading--border">
@@ -40,7 +40,7 @@
               </div>
             </div>
 
-            <div class="form__buttons">
+            <div class="form__buttons" *ngIf="user.isAdmin()">
               <button type="button" (click)="updateGroup()" class="button button--primary pull-right" [disabled]="!groupForm.form.valid">
                 <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Uaktualnij dane grupy
               </button>
@@ -85,7 +85,7 @@
                   <a class="button" [routerLink]="['/users', teacher.id, 'results']">
                     <i class="fa fa-bar-chart"></i>
                   </a>
-                  <button type="button" class="button button--danger" (click)="removeTeacherFromGroup(teacher.id)">
+                  <button *ngIf="user.isAdmin()" type="button" class="button button--danger" (click)="removeTeacherFromGroup(teacher.id)">
                     <i class="fa fa-remove"></i>
                   </button>
                 </td>
@@ -94,7 +94,7 @@
           </table>
         </div>
       </div>
-      <div class="gr-12">
+      <div class="gr-12" *ngIf="user.isAdmin()">
         <form class="form">
           <div class="add-teacher-to-group">
             <div class="add-teacher-to-group__input">
@@ -151,7 +151,7 @@
                   <a class="button" [routerLink]="['/users', user.id, 'results']">
                     <i class="fa fa-bar-chart"></i>
                   </a>
-                  <button type="button" class="button button--danger" (click)="removeUserFromGroup(user.id)">
+                  <button type="button" *ngIf="user.isAdmin()" class="button button--danger" (click)="removeUserFromGroup(user.id)">
                     <i class="fa fa-remove"></i>
                   </button>
                 </td>
@@ -160,7 +160,7 @@
           </table>
         </div>
       </div>
-      <div class="gr-12">
+      <div class="gr-12" *ngIf="user.isAdmin()">
         <form action="" class="form">
           <div class="add-user-to-group">
             Dodaj ucznia do grupy:
@@ -193,7 +193,7 @@
                 <td>{{ course.id }}</td>
                 <td>{{ course.name }}</td>
                 <td class="users-table__edit hide@mmd">
-                  <button type="button" class="button button--danger" (click)="removeCourseFromGroup(course.id)">
+                  <button *ngIf="user.isAdmin()" type="button" class="button button--danger" (click)="removeCourseFromGroup(course.id)">
                     <i class="fa fa-remove"></i>
                   </button>
                 </td>
@@ -201,7 +201,7 @@
             </tbody>
           </table>
 
-          <div class="add-user-to-group">
+          <div class="add-user-to-group" *ngIf="user.isAdmin()">
             Przypisz kurs do grupy:
             <div class="add-user-to-group__input">
               <select [(ngModel)]="selectedCourse" class="select" name="course">
@@ -223,7 +223,7 @@
 
       <div class="gr-12">
 
-        <div class="gr-12 delete-group">
+        <div class="gr-12 delete-group" *ngIf="user.isAdmin()">
           <p>Wpisz <strong>USUŃ</strong> i kliknij w przycisk obok, aby usunąć grupę.</p>
           <input type="text" [(ngModel)]="delete_confirmation" class="input delete-group-confirmation">
           <button (click)="deleteGroup()" class="button button--danger delete-group-button" [disabled]="delete_confirmation !== 'USUŃ'">
