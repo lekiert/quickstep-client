@@ -32,6 +32,11 @@ export class CourseListComponent {
                       .then((courses) => {
                         this.courses = courses;
                       });
+        } else if (this.user.isTeacher()) {
+          this.service.getTeacherCourses(this.user.id)
+                      .then((courses) => {
+                        this.courses = courses;
+                      });
         } else {
           this.service.getUserCourses(this.user.id)
                       .then((courses) => {

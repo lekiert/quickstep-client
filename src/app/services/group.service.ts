@@ -29,6 +29,18 @@ export class GroupService {
                });
   }
 
+  getTeacherGroups(id): Promise<Group[]> {
+    return this.authHttp.get(this.teachersUrl + '/' + id + '/groups', { headers: contentHeaders })
+               .toPromise()
+               .then((response) => {
+                 let data = response.json().data;
+
+                 return data.map((item) => {
+                   return new Group(item.id, item.attributes);
+                 })
+               });
+  }
+
   getGroup(id: number): Promise<Group> {
     return this.authHttp.get(this.groupsUrl + '/' + id, { headers: contentHeaders })
                .toPromise()

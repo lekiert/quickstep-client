@@ -11,6 +11,7 @@ export class CourseService {
 
   private coursesUrl = environment.API_URL + 'courses';  // URL to web API
   private usersUrl = environment.API_URL + 'users';  // URL to web API
+  private teachersUrl = environment.API_URL + 'teachers';  // URL to web API
 
   constructor (private authHttp: AuthHttp) {}
 
@@ -43,6 +44,23 @@ export class CourseService {
 
   getUserCourses(id): Promise<Course[]> {
     return this.authHttp.get(this.usersUrl + '/' + id + '/groups?include=courses', { headers: contentHeaders })
+               .toPromise()
+               .then((response) => {
+                 let data = response.json();
+                 if (data.included) {
+                   return data.included.map((item) => {
+                     return new Course(item.id, item.attributes);
+                   })
+                 }
+
+                 return [];
+               })
+               .catch(this.handleError);
+  }
+
+  getTeacherCourses(id): Promise<Course[]> {
+    console.log('test');
+    return this.authHttp.get(this.teachersUrl + '/' + id + '/groups?include=courses', { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json();
