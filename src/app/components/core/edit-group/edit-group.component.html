@@ -79,7 +79,7 @@
                   </span>
                 </td>
                 <td class="users-table__edit hide@mmd">
-                  <a class="button button--primary" [routerLink]="['/users', teacher.id, 'edit']">
+                  <a *ngIf="user.isAdmin()" class="button button--primary" [routerLink]="['/users', teacher.id, 'edit']">
                     <i class="fa fa-eye"></i>
                   </a>
                   <a class="button" [routerLink]="['/users', teacher.id, 'results']">
@@ -145,7 +145,7 @@
                   </span>
                 </td>
                 <td class="users-table__edit hide@mmd">
-                  <a class="button button--primary" [routerLink]="['/users', user.id, 'edit']">
+                  <a *ngIf="user.isAdmin()" class="button button--primary" [routerLink]="['/users', user.id, 'edit']">
                     <i class="fa fa-eye"></i>
                   </a>
                   <a class="button" [routerLink]="['/users', user.id, 'results']">
