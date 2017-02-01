@@ -20,7 +20,7 @@ const template = require('./edit-group.component.html');
 export class EditGroupComponent {
   group: Group;
   users: User[];
-  user: User;
+  currentUser: User;
   courses: Course[];
   teachers: User[];
   private sub: any;
@@ -42,7 +42,7 @@ export class EditGroupComponent {
     private courseService: CourseService,
     private userService: UserService) {
     this.userService.getAuthenticatedUserObject().then(
-      user => this.user = user
+      user => this.currentUser = user
     );
     this.sub = this.route.params.subscribe(params => {
       let id = +params['id'];
