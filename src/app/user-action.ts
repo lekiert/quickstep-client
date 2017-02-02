@@ -24,6 +24,10 @@ export class UserAction {
     return this.attributes['created-at'] || '';
   }
 
+  get userName(): string {
+    return this.attributes['user-name'] || '';
+  }
+
   get description(): string {
     switch (this.attributes['action-code']) {
       case 'USER_HAS_BEEN_CREATED':
@@ -38,8 +42,15 @@ export class UserAction {
                ' ' + this.attributes['additional-data'].last_name;
       case 'USER_HAS_LOGGED_IN':
         return 'Użytkownik zalogował się do aplikacji.';
+
+      case 'USER_HAS_SUBMITTED_ANSWER':
+        return 'Użytkownik rozwiązał test.';
     }
 
     return this.attributes['action-code'];
+  }
+
+  get answerId(): string {
+    return this.attributes['additional-data'].answer_id;
   }
 }

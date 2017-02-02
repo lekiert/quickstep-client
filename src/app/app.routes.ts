@@ -21,7 +21,7 @@ import { Login } from './components/login';
 import { AuthGuard } from './common/auth.guard';
 
 export const rootRouterConfig: Routes = [
-  { path: 'summary',   component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'summary',   component: StatsComponent, canActivate: [AuthGuard] },
   { path: 'statistics',   component: StatsComponent, canActivate: [AuthGuard] },
   { path: 'settings',   component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'groups',   component: GroupListComponent, canActivate: [AuthGuard] },

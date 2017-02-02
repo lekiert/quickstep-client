@@ -7,6 +7,7 @@
     <table *ngIf="stats" class="table">
       <thead>
         <tr>
+          <th>#</th>
           <th>Data</th>
           <th>Kto</th>
           <th>Operacja</th>
@@ -14,9 +15,15 @@
       </thead>
       <tbody>
         <tr *ngFor="let log of stats">
+          <td>{{ log.id }}</td>
           <td>{{ log.when }}</td>
-          <td>{{ log.userId }}</td>
-          <td>{{ log.description }}</td>
+          <td>{{ log.userName }}</td>
+          <td>
+            {{ log.description }}&nbsp;&nbsp;&nbsp;
+            <button *ngIf="log.code === 'USER_HAS_SUBMITTED_ANSWER'" class="button button--primary" [routerLink]="['/answer', log.answerId]">
+              <i class="fa fa-eye"></i>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

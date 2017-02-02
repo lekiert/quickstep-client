@@ -9,11 +9,13 @@ import { contentHeaders }         from '../common/headers';
 export class InformationService {
 
   private userLogsUrl = environment.API_URL + 'user-logs';  // URL to web API
+  private page = 1;
+  private size = 15;
 
   constructor (private authHttp: AuthHttp) {}
 
   getLatestUserActionLogs() {
-    return this.authHttp.get(this.userLogsUrl + '?include=user', { headers: contentHeaders }).toPromise().then((logs) => {
+    return this.authHttp.get(this.userLogsUrl + '?sort=-id&page%5Bnumber%5D=' + this.page + '&page%5Bsize%5D=' + this.size, { headers: contentHeaders }).toPromise().then((logs) => {
       let data = logs.json().data;
 
       if (data) {
