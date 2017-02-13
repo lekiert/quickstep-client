@@ -32,8 +32,8 @@
       </table>
     </div>
 
-    <div class="gr-12">
-      <a class="button button--primary add-group pull-right" [routerLink]="['/groups/new']">
+    <div class="gr-12" *ngIf="user">
+      <a class="button button--primary add-group pull-right" [routerLink]="['/groups/new']" *ngIf="user.isAdmin()">
         <i class="fa fa-plus"></i> <i class="fa fa-group"></i>
       </a>
       <!-- <a class="button button--primary add-user pull-right" [routerLink]="['/users/new']">
