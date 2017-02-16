@@ -93,6 +93,10 @@ export class UserService {
                });
   }
 
+  getTeachers(): Promise<User[]> {
+    return this.getUsers('TEACHER');
+  }
+
   getUsersByGroup(id: number): Promise<User[]> {
     return this.getUsersOfTypeByGroup('users', id);
   }

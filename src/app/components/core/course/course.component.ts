@@ -43,7 +43,6 @@ export class CourseComponent {
 
     this.userService.getAuthenticatedUserObject().then(
       user => {
-        console.log(user);
         this.user = user
       }
     )

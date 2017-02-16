@@ -14,9 +14,10 @@ const template = require('./user-list.component.html');
   styles: [ styles ],
 })
 export class UserListComponent {
-  constructor(private service: UserService) {
 
-  }
+  user: User;
+
+  constructor(private service: UserService) {}
 
   filters = [
     { name: 'Wszyscy', value: 'ALL' },
@@ -30,8 +31,15 @@ export class UserListComponent {
 
   users: User[];
 
-  getUsers(): void {
+  getUsers(type?: string): void {
     this.users = [];
+    if (type && type === 'TEACHER') {
+      this.service.getTeachers(this.filter)
+                .then((users) => {
+                  this.users = users;
+                });
+    }
+
     this.service.getUsers(this.filter)
                 .then((users) => {
                   this.users = users;
@@ -39,6 +47,15 @@ export class UserListComponent {
   }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.service.getAuthenticatedUserObject().then(
+      user => {
+        this.user = user
+        if user.isSupervisor() {
+          this.filter = 'TEACHER';
+        }
+        this.getUsers();
+      }
+    )
+    
   }
 }
