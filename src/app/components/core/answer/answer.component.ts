@@ -15,7 +15,7 @@ import { StudentChoiceComponent } from '../student-excercises/choice/student-cho
 @Component({
   selector: 'app-answer',
   templateUrl: './answer.component.html',
-  styleUrls: ['./answer.component.css']
+  styleUrls: ['./answer.component.scss']
 })
 export class AnswerComponent implements OnInit {
 

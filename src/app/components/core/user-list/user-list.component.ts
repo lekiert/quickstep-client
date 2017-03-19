@@ -50,12 +50,12 @@ export class UserListComponent {
     this.service.getAuthenticatedUserObject().then(
       user => {
         this.user = user
-        if user.isSupervisor() {
+        if (user.isSupervisor()) {
           this.filter = 'TEACHER';
         }
         this.getUsers();
       }
     )
-    
+
   }
 }

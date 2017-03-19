@@ -93,7 +93,7 @@ export class UserService extends BaseService {
                });
   }
 
-  getTeachers(): Promise<User[]> {
+  getTeachers(filter: any): Promise<User[]> {
     return this.getUsers('TEACHER');
   }
 

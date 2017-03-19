@@ -1,0 +1,37 @@
+@import '../../../style';
+@import '../../../config';
+
+.test__excercises__excercise {
+  margin: 25px 0;
+}
+
+.test__excercises__excercise {
+  margin-top: 50px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.test__check {
+  display: block;
+  margin: 25px auto;
+}
+
+.test__excercises__excercise__attachments__item {
+  max-width: 250px;
+  max-height: 250px;
+  width: auto;
+  height: auto;
+  display: inline-block;
+  padding: 15px;
+  border: 1px solid $color-gray;
+  background: #fdfdfd;
+  vertical-align: middle;
+}
+
+.test__score {
+  padding: 1.5em;
+  text-align: center;
+  font-size: 24pt;
+}
