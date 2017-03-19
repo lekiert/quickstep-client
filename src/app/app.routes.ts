@@ -30,6 +30,7 @@ export const rootRouterConfig: Routes = [
   { path: 'users/new',   component: AddUserComponent, canActivate: [AuthGuard] },
   { path: 'users/:id/edit',   component: EditUserComponent, canActivate: [AuthGuard] },
   { path: 'users/:id/results',   component: AnswerListComponent, canActivate: [AuthGuard] },
+  { path: 'users/:id/statistics',   component: StatsComponent, canActivate: [AuthGuard] },
   { path: 'users/:type',   component: UserListComponent, canActivate: [AuthGuard] },
   { path: 'courses/new',   component: AddCourseComponent, canActivate: [AuthGuard] },
   { path: 'courses',   component: CourseListComponent, canActivate: [AuthGuard] },

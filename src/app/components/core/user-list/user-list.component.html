@@ -1,9 +1,9 @@
-<div class="">
+<div class="" *ngIf="user">
   <div class="row">
     <div class="gr-12">
       <h1 class="heading heading--border">Użytkownicy</h1>
     </div>
-    <div class="gr-12">
+    <div class="gr-12" *ngIf="user.isAdmin()">
       <div class="form-filters">
         <div class="form-filters__filter gr-12 gr-4@md">
           <div class="form-filters__filter__label">
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="gr-12">
-      <a class="button button--primary add-user pull-right" [routerLink]="['/users/new']">
+      <a class="button button--primary add-user pull-right" [routerLink]="['/users/new']" *ngIf="user.isAdmin()">
         <i class="fa fa-plus"></i> <i class="fa fa-user"></i>
       </a>
     </div>
@@ -33,33 +33,36 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let user of users" [routerLink]="['/user', user.id]">
+          <tr *ngFor="let element of users" [routerLink]="['/user', element.id]">
             <td>
               <span class="users-table__first-name">
-                {{ user.first_name }}
+                {{ element.first_name }}
               </span>
             </td>
             <td>
               <span class="users-table__last-name">
-                {{ user.last_name }}
+                {{ element.last_name }}
               </span>
             <td>
               <span class="users-table__email">
-                {{ user.email }}
+                {{ element.email }}
               </span>
             </td>
             <td>
-              <span class="users-table__role badge badge--{{ user.role | lowercase }}">
-                {{ user.role_name }}
+              <span class="users-table__role badge badge--{{ element.role | lowercase }}">
+                {{ element.role_name }}
               </span>
             </td>
             <td>
               <span class="users-table__created">
-                {{ user.created }}
+                {{ element.created }}
               </span>
             </td>
             <td class="users-table__edit">
-              <a class="button button--primary" [routerLink]="['/users', user.id, 'edit']">
+              <a class="button" [routerLink]="['/users', element.id, 'statistics']" *ngIf="user.isAdmin() || user.isSupervisor()">
+                <i class="fa fa-bar-chart"></i>
+              </a>
+              <a class="button button--primary" [routerLink]="['/users', element.id, 'edit']" *ngIf="user.isAdmin()">
                 <i class="fa fa-eye"></i>
               </a>
             </td>
@@ -71,7 +74,7 @@
       <!-- <a class="button button--primary add-users pull-right" [routerLink]="['/users/new']">
         <i class="fa fa-plus"></i> <i class="fa fa-group"></i>
       </a> -->
-      <a class="button button--primary add-user pull-right" [routerLink]="['/users/new']">
+      <a class="button button--primary add-user pull-right" [routerLink]="['/users/new']" *ngIf="user.isAdmin()">
         <i class="fa fa-plus"></i> <i class="fa fa-user"></i>
       </a>
     </div>
