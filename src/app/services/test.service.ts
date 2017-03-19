@@ -1,22 +1,20 @@
-import { Injectable }             from '@angular/core';
-import { Http, Headers, Response }         from '@angular/http';
-import { Test }              from '../test';
-import { Excercise }              from '../excercise';
-import { Observable }             from 'rxjs/Observable';
-import { AuthHttp }               from 'angular2-jwt';
+import { Injectable } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
+import { Test } from '../test';
+import { Excercise } from '../excercise';
+import { Observable } from 'rxjs/Observable';
+import { AuthHttp } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
 import { getAuthenticatedUserId } from '../common/helpers';
-import { contentHeaders }         from '../common/headers';
+import { contentHeaders } from '../common/headers';
+import { BaseService } from './base.service';
 
 @Injectable()
-export class TestService {
+export class TestService extends BaseService {
 
-  private testsUrl = environment.API_URL + 'tests';
-  private coursesUrl = environment.API_URL + 'courses';
-  private answersUrl = environment.API_URL + 'answers';
-  private usersUrl = environment.API_URL + 'users';
-
-  constructor (private authHttp: AuthHttp) {}
+  constructor (private authHttp: AuthHttp) {
+    super()
+  }
 
   getTestsByCourse(id): Promise<Test[]> {
     return this.authHttp.get(this.coursesUrl + '/' + id + '/tests' + '?sort=id', { headers: contentHeaders })

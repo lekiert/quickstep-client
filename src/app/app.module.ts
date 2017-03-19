@@ -35,6 +35,7 @@ import { UserService } from './services/user.service';
 import { TestService } from './services/test.service';
 import { GroupService } from './services/group.service';
 import { InformationService } from './services/information.service';
+import { BaseService } from './services/base.service';
 import { contentHeaders } from './common/headers';
 import { environment } from '../environments/environment';
 import { StatsComponent } from './components/core/stats/stats.component';
@@ -92,6 +93,7 @@ import { AnswerListComponent } from './components/core/answer-list/answer-list.c
                  RouterModule.forRoot(rootRouterConfig)],
 
   providers   : [AuthGuard,
+                 BaseService,
                  ExcerciseService,
                  CourseService,
                  UserService,

@@ -1,19 +1,18 @@
-import { Injectable }             from '@angular/core';
-import { Http, Headers, Response }         from '@angular/http';
-import { Course }              from '../course';
-import { Observable }             from 'rxjs/Observable';
-import { AuthHttp }               from 'angular2-jwt';
+import { Injectable } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
+import { Course } from '../course';
+import { Observable } from 'rxjs/Observable';
+import { AuthHttp } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
-import { contentHeaders }         from '../common/headers';
+import { contentHeaders } from '../common/headers';
+import { BaseService } from './base.service';
 
 @Injectable()
-export class CourseService {
+export class CourseService extends BaseService {
 
-  private coursesUrl = environment.API_URL + 'courses';  // URL to web API
-  private usersUrl = environment.API_URL + 'users';  // URL to web API
-  private teachersUrl = environment.API_URL + 'teachers';  // URL to web API
-
-  constructor (private authHttp: AuthHttp) {}
+  constructor (private authHttp: AuthHttp) {
+    super()
+  }
 
   getCourses(): Promise<Course[]> {
 

@@ -1,23 +1,23 @@
-import { Injectable }             from '@angular/core';
-import { Http, Response, URLSearchParams }         from '@angular/http';
-import { Observable }             from 'rxjs/Observable';
-import { AuthHttp, JwtHelper }    from 'angular2-jwt';
+import { Injectable } from '@angular/core';
+import { Http, Response, URLSearchParams } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { getAuthenticatedUserId } from '../common/helpers';
-import { User }                   from '../user';
-import { contentHeaders }         from '../common/headers';
+import { User } from '../user';
+import { contentHeaders } from '../common/headers';
 import '../rxjs-operators';
 import { Subject }    from 'rxjs/Subject';
 import { environment } from '../../environments/environment';
+import { BaseService } from './base.service';
 
 @Injectable()
-export class UserService {
+export class UserService extends BaseService {
 
   private subject = new Subject<User>();
-  private usersUrl = environment.API_URL + 'users';
-  private teachersUrl = environment.API_URL + 'teachers';
-  private groupsUrl = environment.API_URL + 'groups';
 
-  constructor (private authHttp: AuthHttp) {}
+  constructor (private authHttp: AuthHttp) {
+    super()
+  }
 
   isAuthenticated(): boolean {
     return !!getAuthenticatedUserId();

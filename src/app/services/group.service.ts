@@ -1,21 +1,20 @@
-import { Injectable }               from '@angular/core';
-import { Http, Headers, Response, RequestOptions }  from '@angular/http';
-import { Group }                     from '../group';
-import { User }                     from '../user';
-import { Course }                     from '../course';
-import { Observable }               from 'rxjs/Observable';
-import { AuthHttp }                 from 'angular2-jwt';
-import { contentHeaders }         from '../common/headers';
+import { Injectable } from '@angular/core';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Group } from '../group';
+import { User } from '../user';
+import { Course } from '../course';
+import { Observable } from 'rxjs/Observable';
+import { AuthHttp } from 'angular2-jwt';
+import { contentHeaders } from '../common/headers';
 import { environment } from '../../environments/environment';
+import { BaseService } from './base.service';
 
 @Injectable()
-export class GroupService {
+export class GroupService extends BaseService {
 
-  private groupsUrl = environment.API_URL + 'groups';
-  private usersUrl = environment.API_URL + 'users';
-  private teachersUrl = environment.API_URL + 'teachers';
-
-  constructor (private authHttp: AuthHttp) {}
+  constructor (private authHttp: AuthHttp) {
+    super()
+  }
 
   getGroups(): Promise<Group[]> {
     return this.authHttp.get(this.groupsUrl, { headers: contentHeaders })
