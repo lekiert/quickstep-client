@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { UserAction } from '../user-action';
 import { contentHeaders } from '../common/headers';
 import { BaseService } from './base.service';
+import { HttpModule } from "@angular/http";
 
 @Injectable()
 export class InformationService extends BaseService {
