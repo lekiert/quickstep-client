@@ -1,12 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter }  from '@angular/core';
-import { AuthHttp }                                from 'angular2-jwt';
-import { Excercise }                               from '../../../excercise';
-import { contentHeaders } from '../../../common/headers';
-import { environment } from '../../../../environments/environment';
-import { ExcerciseService }                        from '../../../services/excercise.service';
-
-import { BracketsFormComponent } from './brackets/brackets-form.component';
-import { ChoiceFormComponent } from './choice/choice-form.component';
+import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {AuthHttp} from "angular2-jwt";
+import {Excercise} from "../../../excercise";
+import {contentHeaders} from "../../../common/headers";
+import {environment} from "../../../../environments/environment";
+import {ExcerciseService} from "../../../services/excercise.service";
 
 const styles = require('./excercise-form.component.scss');
 const template = require('./excercise-form.component.html');

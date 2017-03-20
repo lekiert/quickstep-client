@@ -1,12 +1,9 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
-import { Http, URLSearchParams } from '@angular/http';
-import { AuthHttp, JwtHelper }    from 'angular2-jwt';
-import { contentHeaders } from '../../../common/headers';
-import { AuthGuard } from '../../../common/auth.guard';
-import { UserService } from '../../../services/user.service';
-import { User } from '../../../user';
-import { environment } from '../../../../environments/environment';
+import {Component, Output, Input, EventEmitter} from "@angular/core";
+import {URLSearchParams} from "@angular/http";
+import {AuthHttp} from "angular2-jwt";
+import {contentHeaders} from "../../../common/headers";
+import {User} from "../../../user";
+import {environment} from "../../../../environments/environment";
 
 const styles   = require('./search-field.component.scss');
 const template = require('./search-field.component.html');

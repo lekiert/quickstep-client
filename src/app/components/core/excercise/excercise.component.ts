@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from "@angular/core";
 
 const styles = require('./excercise-list.component.scss');
 const template = require('./excercise-list.component.html');

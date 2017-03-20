@@ -1,13 +1,11 @@
-import { Component, OnInit }                       from '@angular/core';
-import { Router, ActivatedRoute }                  from '@angular/router';
-import { AuthHttp }                                from 'angular2-jwt';
-import { SearchFieldComponent }                    from '../../util/search-field/search-field.component';
-import { GroupService }                            from '../../../services/group.service';
-import { CourseService }                            from '../../../services/course.service';
-import { UserService }                             from '../../../services/user.service';
-import { Group }                                   from '../../../group';
-import { User }                                    from '../../../user';
-import { Course }                                    from '../../../course';
+import {Component} from "@angular/core";
+import {Router, ActivatedRoute} from "@angular/router";
+import {GroupService} from "../../../services/group.service";
+import {CourseService} from "../../../services/course.service";
+import {UserService} from "../../../services/user.service";
+import {Group} from "../../../group";
+import {User} from "../../../user";
+import {Course} from "../../../course";
 
 const styles = require('./edit-group.component.scss');
 const template = require('./edit-group.component.html');

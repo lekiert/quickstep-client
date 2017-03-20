@@ -1,14 +1,11 @@
-import { Component, OnInit }                       from '@angular/core';
-import { Router, ActivatedRoute }                  from '@angular/router';
-import { AuthHttp }                                from 'angular2-jwt';
-import { SearchFieldComponent }                    from '../../util/search-field/search-field.component';
-import { TestService }                             from '../../../services/test.service';
-import { UserService }                             from '../../../services/user.service';
-import { ExcerciseService }                        from '../../../services/excercise.service';
-import { Test }                                    from '../../../test';
-import { User }                                    from '../../../user';
-import { Excercise }                               from '../../../excercise';
-import { ExcerciseFormComponent }                   from '../forms/excercise-form.component';
+import {Component} from "@angular/core";
+import {Router, ActivatedRoute} from "@angular/router";
+import {TestService} from "../../../services/test.service";
+import {UserService} from "../../../services/user.service";
+import {ExcerciseService} from "../../../services/excercise.service";
+import {Test} from "../../../test";
+import {User} from "../../../user";
+import {Excercise} from "../../../excercise";
 
 const styles = require('./edit-test.component.scss');
 const template = require('./edit-test.component.html');

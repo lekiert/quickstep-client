@@ -1,8 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter }  from '@angular/core';
-import { DomSanitizer }                            from '@angular/platform-browser';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router, ActivatedRoute }                  from '@angular/router';
-import { environment } from '../../../../../environments/environment';
+import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {DomSanitizer} from "@angular/platform-browser";
+import {environment} from "../../../../../environments/environment";
 
 const styles = require('./student-choice.component.scss');
 const template = require('./student-choice.component.html');

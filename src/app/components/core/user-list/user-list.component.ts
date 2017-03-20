@@ -1,9 +1,6 @@
-import { Component, OnInit }                       from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router }                                  from '@angular/router';
-import { AuthHttp }                                from 'angular2-jwt';
-import { UserService }                        from '../../../services/user.service';
-import { User }                               from '../../../user';
+import {Component} from "@angular/core";
+import {UserService} from "../../../services/user.service";
+import {User} from "../../../user";
 
 const styles = require('./user-list.component.scss');
 const template = require('./user-list.component.html');

@@ -1,10 +1,8 @@
-import { Component, OnInit }                       from '@angular/core';
-import { Router }                                  from '@angular/router';
-import { AuthHttp }                                from 'angular2-jwt';
-import { GroupService }                            from '../../../services/group.service';
-import { UserService }                             from '../../../services/user.service';
-import { Group }                                   from '../../../group';
-import { User }                                   from '../../../user';
+import {Component} from "@angular/core";
+import {GroupService} from "../../../services/group.service";
+import {UserService} from "../../../services/user.service";
+import {Group} from "../../../group";
+import {User} from "../../../user";
 
 const styles = require('./group-list.component.scss');
 const template = require('./group-list.component.html');

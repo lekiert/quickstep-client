@@ -1,8 +1,5 @@
-import { Component, OnInit }                       from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router, ActivatedRoute }                  from '@angular/router';
-import { GroupService }                            from '../../../services/group.service';
-import { Group }                                   from '../../../group';
+import {Component} from "@angular/core";
+import {GroupService} from "../../../services/group.service";
 
 const styles = require('./add-group.component.scss');
 const template = require('./add-group.component.html');

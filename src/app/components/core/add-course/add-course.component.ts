@@ -1,9 +1,5 @@
-import { Component, OnInit }                       from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router, ActivatedRoute, Params }          from '@angular/router';
-import { AuthHttp }                                from 'angular2-jwt';
-import { TestService }                             from '../../../services/test.service';
-import { Course }                                    from '../../../course';
+import {Component} from "@angular/core";
+import {TestService} from "../../../services/test.service";
 
 const styles = require('./add-course.component.scss');
 const template = require('./add-course.component.html');

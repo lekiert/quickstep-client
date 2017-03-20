@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { CourseService } from '../../../services/course.service';
-import { TestService } from '../../../services/test.service';
-import { UserService } from '../../../services/user.service';
-import { Course } from '../../../course';
-import { Test } from '../../../test';
-import { User } from '../../../user';
+import {Component} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
+import {CourseService} from "../../../services/course.service";
+import {TestService} from "../../../services/test.service";
+import {UserService} from "../../../services/user.service";
+import {Course} from "../../../course";
+import {Test} from "../../../test";
+import {User} from "../../../user";
 
 const styles = require('./course.component.scss');
 const template = require('./course.component.html');

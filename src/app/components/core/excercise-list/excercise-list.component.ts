@@ -1,9 +1,6 @@
-import { Component, OnInit }                       from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router }                                  from '@angular/router';
-import { AuthHttp }                                from 'angular2-jwt';
-import { ExcerciseService }                        from '../../../services/excercise.service';
-import { Excercise }                               from '../../../excercise';
+import {Component} from "@angular/core";
+import {ExcerciseService} from "../../../services/excercise.service";
+import {Excercise} from "../../../excercise";
 
 const styles = require('./excercise-list.component.scss');
 const template = require('./excercise-list.component.html');

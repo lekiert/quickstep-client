@@ -1,8 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter }  from '@angular/core';
-import { DomSanitizer }                            from '@angular/platform-browser';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router, ActivatedRoute }                  from '@angular/router';
-import { Excercise }                               from '../../../../excercise';
+import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {DomSanitizer} from "@angular/platform-browser";
+import {Excercise} from "../../../../excercise";
 
 const styles = require('./student-brackets.component.scss');
 const template = require('./student-brackets.component.html');

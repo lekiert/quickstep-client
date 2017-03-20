@@ -1,8 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter }  from '@angular/core';
-import { AuthHttp }                                from 'angular2-jwt';
-import { Excercise }                               from '../../../../excercise';
-import { FileUploadComponent }                     from '../../../../components/util/file-upload/file-upload.component';
-import { environment }                             from '../../../../../environments/environment';
+import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {environment} from "../../../../../environments/environment";
 
 const styles = require('./choice-form.component.scss');
 const template = require('./choice-form.component.html');

@@ -1,10 +1,10 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
-import { Http } from '@angular/http';
-import { contentHeaders } from '../../common/headers';
-import { AuthGuard } from '../../common/auth.guard';
-import { UserService } from '../../services/user.service';
-import { environment } from '../../../environments/environment';
+import {Component} from "@angular/core";
+import {Router} from "@angular/router";
+import {Http} from "@angular/http";
+import {contentHeaders} from "../../common/headers";
+import {AuthGuard} from "../../common/auth.guard";
+import {UserService} from "../../services/user.service";
+import {environment} from "../../../environments/environment";
 
 const theme   = require('../../style.scss');
 const styles   = require('./login.scss');

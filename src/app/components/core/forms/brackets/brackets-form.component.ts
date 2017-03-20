@@ -1,6 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter }  from '@angular/core';
-import { AuthHttp }                                from 'angular2-jwt';
-import { Excercise }                               from '../../../../excercise';
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 
 const styles = require('./brackets-form.component.scss');
 const template = require('./brackets-form.component.html');

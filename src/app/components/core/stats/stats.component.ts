@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { InformationService } from '../../../services/information.service';
-import { UserService } from '../../../services/user.service';
-import { User } from '../../../user';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import {Component, OnInit} from "@angular/core";
+import {InformationService} from "../../../services/information.service";
+import {UserService} from "../../../services/user.service";
+import {Router, ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'stats',

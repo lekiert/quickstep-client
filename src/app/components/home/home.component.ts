@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router } from '@angular/router';
-import { AuthHttp } from 'angular2-jwt';
-import { Excercise } from '../../excercise';
-import { contentHeaders } from '../../common/headers';
-import { environment } from '../../../environments/environment';
+import {Component} from "@angular/core";
+import {Http} from "@angular/http";
+import {Router} from "@angular/router";
+import {AuthHttp} from "angular2-jwt";
 
 const styles = require('./home.component.scss');
 const template = require('./home.component.html');

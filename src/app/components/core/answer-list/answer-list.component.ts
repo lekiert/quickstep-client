@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { User }              from '../../../user';
-import { CourseService }     from '../../../services/course.service';
-import { TestService }     from '../../../services/test.service';
-import { UserService }       from '../../../services/user.service';
-import { Router, ActivatedRoute, Params }          from '@angular/router';
+import {Component, OnInit} from "@angular/core";
+import {User} from "../../../user";
+import {TestService} from "../../../services/test.service";
+import {UserService} from "../../../services/user.service";
+import {Router, ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'answer-list',

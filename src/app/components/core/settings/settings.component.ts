@@ -1,9 +1,7 @@
-import { Component, OnInit }                       from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Router, ActivatedRoute, Params }          from '@angular/router';
-import { AuthHttp }                                from 'angular2-jwt';
-import { UserService }                             from '../../../services/user.service';
-import { User }                                    from '../../../user';
+import {Component} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
+import {UserService} from "../../../services/user.service";
+import {User} from "../../../user";
 
 const styles = require('./settings.component.scss');
 const template = require('./settings.component.html');
