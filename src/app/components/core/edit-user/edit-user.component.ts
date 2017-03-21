@@ -14,12 +14,8 @@ const template = require('./edit-user.component.html');
 })
 export class EditUserComponent {
 
-  changePasswordError: string;
-  oldPassword: string;
-  newPassword: string;
-  newPasswordRepeat: string;
+  changePasswordError: string = '';
   successMessage: string;
-  old_password = '';
   password_repeat = '';
   password_field_type = 'password';
   delete_confirmation = '';
@@ -32,9 +28,6 @@ export class EditUserComponent {
     private route: ActivatedRoute,
     private service: UserService) {
       this.changePasswordError = '';
-      this.oldPassword = '';
-      this.newPassword = '';
-      this.newPasswordRepeat = '';
       this.successMessage = '';
       this.sub = this.route.params.subscribe(params => {
         let id = +params['id'];
@@ -56,9 +49,6 @@ export class EditUserComponent {
       this.changePasswordError = '';
       this.successMessage = '';
 
-      // if (this.oldPassword.length === 0) {
-      //   throw new Error('Musisz podać stare hasło.')
-      // }
       if (this.user.password.length === 0) {
         throw new Error('Musisz podać nowe hasło.')
       }
@@ -68,15 +58,16 @@ export class EditUserComponent {
       if (this.user.password !== this.password_repeat) {
         throw new Error('Musisz powtórzyć takie samo hasło.')
       }
+
     } catch (e) {
       this.changePasswordError = e.message;
-    } finally {
-      if (this.changePasswordError.length === 0) {
-        console.log(this.password_repeat)
-        this.submitPasswordChange(this.password_repeat);
-      }
+
+      return false;
     }
 
+    this.submitPasswordChange(this.password_repeat);
+
+    return true;
   }
 
   generatePassword(): void {
@@ -110,19 +101,12 @@ export class EditUserComponent {
 
   private submitPasswordChange(newPassword) {
     this.service.changeUserPassword(this.user.id, newPassword)
-                               .then((response) => {
-                                 this.successMessage = 'Hasło zostało zmienione.';
-                               })
-                               .catch((error) => {
-                                 switch (error.json().data.attributes.result) {
-                                   case 'WRONG_PASSWORD':
-                                    this.changePasswordError = 'Nieprawidłowe obecne hasło użytkownika.';
-                                   break;
-                                   case 'VALIDATION_FAILED':
-                                    this.changePasswordError = 'Nieprawidłowy format hasła. Hasło powinno mieć przynajmniej 6 znaków.';
-                                   break;
-                                 }
-                               });
+    .then(() => {
+        this.successMessage = 'Hasło zostało zmienione.';
+    })
+    .catch((error) => {
+        this.changePasswordError = 'Nieprawidłowy format hasła. Hasło powinno mieć przynajmniej 6 znaków.';
+    });
   }
 
 }

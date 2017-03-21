@@ -142,6 +142,7 @@ export class UserService extends BaseService {
       }
     }, { headers: contentHeaders }).toPromise();
   }
+
   createUser(user) {
     let userId = getAuthenticatedUserId();
     return this.authHttp.post(this.usersUrl, {
