@@ -1,7 +1,6 @@
-import {Component, OnInit} from "@angular/core";
-import {InformationService} from "../../../services/information.service";
-import {UserService} from "../../../services/user.service";
-import {Router, ActivatedRoute} from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { InformationService } from "../../../services/information.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'stats',
@@ -15,19 +14,17 @@ export class StatsComponent implements OnInit {
   private id;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
-    private service: InformationService, 
-    private userService: UserService) {
-      this.sub = this.route.params.subscribe(params => {
-        let id = +params['id'];
-        this.id = id;
-      });
-  }
+    private service: InformationService) {}
 
   ngOnInit() {
-    this.service.getLatestUserActionLogs(this.id).then((logs) => {
-      this.stats = logs;
+    this.sub = this.route.params.subscribe(params => {
+      let id = +params['id'];
+      this.id = id;
+
+      this.service.getLatestUserActionLogs(this.id).then((logs) => {
+        this.stats = logs;
+      });
     });
   }
 
