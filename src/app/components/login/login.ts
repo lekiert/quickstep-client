@@ -32,7 +32,6 @@ export class Login {
 
   login(event, username, password): void {
     event.preventDefault();
-    console.log(contentHeaders);
     this.error = false;
     let body = {auth : { email: username, password: password } };
     this.http.post(environment.API_URL + 'user_token', body, { headers: contentHeaders })

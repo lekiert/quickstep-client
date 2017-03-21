@@ -5,10 +5,10 @@ import { AnswerComponent } from './answer.component';
 import { StudentBracketsComponent } from '../student-excercises/brackets/student-brackets.component';
 import { StudentChoiceComponent } from '../student-excercises/choice/student-choice.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { UserService } from '../../../services/user.service';
-import { TestService } from '../../../services/test.service';
+import { UserService } from 'app/services/user.service';
+import { TestService } from 'app/services/test.service';
 import { provideAuth } from 'angular2-jwt';
-import { environment } from '../../../../environments/environment';
+import { environment } from 'environments/environment';
 import { HttpModule } from "@angular/http";
 
 describe('AnswerComponent', () => {

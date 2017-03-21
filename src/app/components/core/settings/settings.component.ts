@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {UserService} from "../../../services/user.service";
-import {User} from "../../../user";
+import {UserService} from "app/services/user.service";
+import {User} from "app/user";
 
 const styles = require('./settings.component.scss');
 const template = require('./settings.component.html');
@@ -22,7 +22,9 @@ export class SettingsComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private service: UserService) {
+    private service: UserService) {}
+
+  ngOnInit() {
       this.changePasswordError = '';
       this.oldPassword = '';
       this.newPassword = '';
@@ -30,14 +32,14 @@ export class SettingsComponent {
       this.successMessage = '';
       this.service.fetchUserFromAPI();
       this.service.getAuthenticatedUser().subscribe(
-        user => {
-          this.user = user
-        },
-        error => {
-          console.log(error)
-        }
+          user => {
+              this.user = user
+          },
+          error => {
+              console.log(error)
+          }
       )
-    }
+  }
 
   changePassword() {
     try {
@@ -56,8 +58,12 @@ export class SettingsComponent {
       if (this.newPassword !== this.newPasswordRepeat) {
         throw new Error('Musisz powtórzyć takie samo hasło.')
       }
+
+      return true;
     } catch (e) {
       this.changePasswordError = e.message;
+
+      return false;
     } finally {
       if (this.changePasswordError.length === 0) {
         this.submitPasswordChange(this.oldPassword, this.newPassword);

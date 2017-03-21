@@ -1,10 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {TestService} from "../../../services/test.service";
-import {Excercise} from "../../../excercise";
-import {Test} from "../../../test";
-import {User} from "../../../user";
-import {UserService} from "../../../services/user.service";
+import {TestService} from "app/services/test.service";
+import {Excercise} from "app/excercise";
+import {Test} from "app/test";
+import {User} from "app/user";
 
 @Component({
   selector: 'app-answer',
