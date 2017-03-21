@@ -16,7 +16,6 @@ import { AddUserComponent } from './components/core/add-user/add-user.component'
 import { AddTestComponent } from './components/core/add-test/add-test.component';
 import { AddCourseComponent } from './components/core/add-course/add-course.component';
 import { AddGroupComponent } from './components/core/add-group/add-group.component';
-// import { AddExcerciseComponent } from './components/core/add-excercise/add-excercise.component';
 import { EditUserComponent } from './components/core/edit-user/edit-user.component';
 import { EditGroupComponent } from './components/core/edit-group/edit-group.component';
 import { EditTestComponent } from './components/core/edit-test/edit-test.component';
@@ -36,20 +35,12 @@ import { TestService } from './services/test.service';
 import { GroupService } from './services/group.service';
 import { InformationService } from './services/information.service';
 import { BaseService } from './services/base.service';
-import { contentHeaders } from './common/headers';
 import { environment } from '../environments/environment';
 import { StatsComponent } from './components/core/stats/stats.component';
-
-// import { AddBracketsComponent } from './components/core/add-excercise/brackets/add-brackets.component';
-// import { EditBracketsComponent } from './components/core/edit-excercise/brackets/edit-brackets.component';
-// import { AddChoiceComponent } from './components/core/add-excercise/choice/add-choice.component';
-// import { EditChoiceComponent } from './components/core/edit-excercise/choice/edit-choice.component';
-
 import { BracketsFormComponent } from './components/core/forms/brackets/brackets-form.component';
 import { ChoiceFormComponent } from './components/core/forms/choice/choice-form.component';
 import { AnswerComponent } from './components/core/answer/answer.component';
 import { AnswerListComponent } from './components/core/answer-list/answer-list.component';
-// import { EditBracketsComponent } from './components/core/edit-excercise/brackets/edit-brackets.component';
 
 @NgModule({
   declarations: [AppComponent,

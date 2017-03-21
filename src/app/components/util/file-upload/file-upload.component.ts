@@ -1,7 +1,7 @@
 import {Component, Output, Input, EventEmitter} from "@angular/core";
 import {AuthHttp} from "angular2-jwt";
-import {contentHeaders} from "../../../common/headers";
-import {environment} from "../../../../environments/environment";
+import {contentHeaders} from "app/common/headers";
+import {environment} from "environments/environment";
 
 const styles   = require('./file-upload.component.scss');
 const template = require('./file-upload.component.html');

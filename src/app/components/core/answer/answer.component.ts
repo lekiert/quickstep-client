@@ -4,7 +4,6 @@ import {TestService} from "../../../services/test.service";
 import {Excercise} from "../../../excercise";
 import {Test} from "../../../test";
 import {User} from "../../../user";
-import {environment} from "../../../../environments/environment";
 import {UserService} from "../../../services/user.service";
 
 @Component({
@@ -21,16 +20,10 @@ export class AnswerComponent implements OnInit {
   excercises: Excercise[];
   answers: {};
   score: any;
-  answer: any;
-  private answersUrl = environment.API_URL + 'answers';  // URL to web API
-  storageUrl = environment.API_URL;
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService,
-    private service: TestService) {
-
-    }
+    private service: TestService) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -38,7 +31,6 @@ export class AnswerComponent implements OnInit {
 
        this.service.getAnswer(this.id).then((answer) => {
          this.answers = answer.data.attributes.answers;
-         console.log(answer);
          this.score = (answer.data.attributes.score.score / answer.data.attributes.score.max * 100).toFixed()
 
          if (answer.included) {

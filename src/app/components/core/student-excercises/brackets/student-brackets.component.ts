@@ -15,14 +15,8 @@ export class StudentBracketsComponent {
   constructor(private sanitizer: DomSanitizer){}
 
   @Input() excercise: Excercise;
-  @Output() collectResults = new EventEmitter();
   @Input() answers = {};
   @Input() setDefaults: boolean = true;
-
-  sentenceCount = 0;
-  sentenceRange = [];
-  wordCount = [];
-  resultVal = {};
 
   setDefaultReturnValues() {
     let keys = this.keys(this.excercise.data);
