@@ -1,9 +1,9 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {AuthHttp} from "angular2-jwt";
-import {Excercise} from "../../../excercise";
-import {contentHeaders} from "../../../common/headers";
-import {environment} from "../../../../environments/environment";
-import {ExcerciseService} from "../../../services/excercise.service";
+import {Excercise} from "app/excercise";
+import {contentHeaders} from "app/common/headers";
+import {environment} from "environments/environment";
+import {ExcerciseService} from "app/services/excercise.service";
 
 const styles = require('./excercise-form.component.scss');
 const template = require('./excercise-form.component.html');
@@ -64,6 +64,7 @@ export class ExcerciseFormComponent {
     });
   }
 
+  // TODO: move request to a service
   attachFileToExcercise(file) {
     return this.http.post(environment.API_URL + 'excercises' + '/' + this.excercise.id + '/relationships/storage-files',
       {
