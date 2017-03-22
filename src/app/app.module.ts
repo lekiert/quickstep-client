@@ -4,7 +4,7 @@ import { rootRouterConfig } from "./app.routes";
 import { AppComponent } from "./app.component";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
-import { HttpModule } from "@angular/http";
+import { HttpModule, Http, RequestOptions } from "@angular/http";
 import { ExcerciseListComponent } from "./components/core/excercise-list/excercise-list.component";
 import { CourseListComponent } from "./components/core/course-list/course-list.component";
 import { UserListComponent } from "./components/core/user-list/user-list.component";
@@ -27,7 +27,7 @@ import { SearchFieldComponent } from './components/util/search-field/search-fiel
 import { FileUploadComponent } from './components/util/file-upload/file-upload.component';
 import { AuthGuard } from './common/auth.guard';
 import { Login } from './components/login';
-import { provideAuth } from 'angular2-jwt';
+import { AuthHttp } from 'angular2-jwt';
 import { ExcerciseService } from './services/excercise.service';
 import { CourseService } from './services/course.service';
 import { UserService } from './services/user.service';
@@ -35,69 +35,65 @@ import { TestService } from './services/test.service';
 import { GroupService } from './services/group.service';
 import { InformationService } from './services/information.service';
 import { BaseService } from './services/base.service';
-import { environment } from '../environments/environment';
 import { StatsComponent } from './components/core/stats/stats.component';
 import { BracketsFormComponent } from './components/core/forms/brackets/brackets-form.component';
 import { ChoiceFormComponent } from './components/core/forms/choice/choice-form.component';
 import { AnswerComponent } from './components/core/answer/answer.component';
 import { AnswerListComponent } from './components/core/answer-list/answer-list.component';
+import { authHttpServiceFactory } from './common/helpers'
+
 
 @NgModule({
-  declarations: [AppComponent,
-                 HomeComponent,
-                 ExcerciseListComponent,
-                 CourseListComponent,
-                 Login,
-                 CourseComponent,
-                 SettingsComponent,
-                 TestComponent,
-                 UserListComponent,
-                 AddUserComponent,
-                 AddTestComponent,
-                 AddCourseComponent,
-                 EditUserComponent,
-                 EditTestComponent,
-                 GroupListComponent,
-                 EditGroupComponent,
-                 AddGroupComponent,
-                //  AddExcerciseComponent,
-                 SearchFieldComponent,
-                 FileUploadComponent,
-                 StatsComponent,
-                 StudentBracketsComponent,
-                 StudentChoiceComponent,
-                //  AddBracketsComponent,
-                //  EditBracketsComponent,
-                //  EditChoiceComponent,
-                 ExcerciseFormComponent,
+    declarations: [AppComponent,
+        HomeComponent,
+        ExcerciseListComponent,
+        CourseListComponent,
+        Login,
+        CourseComponent,
+        SettingsComponent,
+        TestComponent,
+        UserListComponent,
+        AddUserComponent,
+        AddTestComponent,
+        AddCourseComponent,
+        EditUserComponent,
+        EditTestComponent,
+        GroupListComponent,
+        EditGroupComponent,
+        AddGroupComponent,
+        SearchFieldComponent,
+        FileUploadComponent,
+        StatsComponent,
+        StudentBracketsComponent,
+        StudentChoiceComponent,
+        ExcerciseFormComponent,
+        BracketsFormComponent,
+        ChoiceFormComponent,
+        AnswerComponent,
+        AnswerListComponent
+    ],
 
-                 BracketsFormComponent,
-                 ChoiceFormComponent,
-                 AnswerComponent,
-                 AnswerListComponent,
-                //  AddChoiceComponent
-               ],
+    imports     : [BrowserModule,
+        FormsModule,
+        HttpModule,
+        RouterModule.forRoot(rootRouterConfig)],
 
-  imports     : [BrowserModule,
-                 FormsModule,
-                 HttpModule,
-                 RouterModule.forRoot(rootRouterConfig)],
+    providers   : [AuthGuard,
+        BaseService,
+        ExcerciseService,
+        CourseService,
+        UserService,
+        TestService,
+        GroupService,
+        InformationService,
+        {
+            provide: AuthHttp,
+            useFactory: authHttpServiceFactory,
+            deps: [ Http, RequestOptions ]
+        }
+    ],
 
-  providers   : [AuthGuard,
-                 BaseService,
-                 ExcerciseService,
-                 CourseService,
-                 UserService,
-                 TestService,
-                 GroupService,
-                 InformationService,
-
-                 provideAuth({
-                   tokenName: environment.TOKEN_NAME,
-                   tokenGetter: () => localStorage.getItem(environment.TOKEN_NAME) // tmp bug in angular2-jwt fix
-                 })],
-
-  bootstrap   : [AppComponent]
+    bootstrap   : [AppComponent]
 })
 
 export class AppModule {}
