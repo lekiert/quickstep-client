@@ -5,6 +5,7 @@ import { SettingsComponent } from '../settings/settings.component';
 import { RouterTestingModule } from "@angular/router/testing";
 import { FormsModule } from "@angular/forms";
 import { InformationService } from "app/services/information.service";
+import { AnswerService } from "app/services/answer.service";
 import { provideAuth } from "angular2-jwt";
 import { environment } from "environments/environment";
 import { HttpModule } from "@angular/http";
@@ -18,7 +19,7 @@ describe('StatsComponent', () => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule, FormsModule, HttpModule ],
       declarations: [ StatsComponent, SettingsComponent ],
-      providers: [ InformationService, UserService, provideAuth({
+      providers: [ InformationService, UserService, AnswerService, provideAuth({
           tokenName: environment.TOKEN_NAME,
           tokenGetter: () => localStorage.getItem(environment.TOKEN_NAME)
       }) ]

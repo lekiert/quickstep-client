@@ -4,6 +4,21 @@
       <h1 class="heading heading--border">Statystyki</h1>
     </div>
 
+
+    <div *ngIf="this.finished">
+      <canvas baseChart height="80"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
+
+    <div style="clear: both"></div>
+
     <table *ngIf="stats" class="table">
       <thead>
         <tr>

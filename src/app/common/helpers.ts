@@ -19,6 +19,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
     tokenName: environment.TOKEN_NAME,
     tokenGetter: (() => localStorage.getItem(environment.TOKEN_NAME)),
-    globalHeaders: [{'Content-Type':'application/json'}],
+    globalHeaders: [
+        {'Content-Type': 'application/vnd.api+json'},
+        {'Accept': 'application/vnd.api+json'},
+    ],
   }), http, options);
 }

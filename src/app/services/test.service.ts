@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import { Test } from '../test';
 import { Excercise } from '../excercise';
 import { Observable } from 'rxjs/Observable';
@@ -12,7 +12,10 @@ import { BaseService } from './base.service';
 @Injectable()
 export class TestService extends BaseService {
 
-  constructor (private authHttp: AuthHttp) {
+  constructor (
+      private authHttp: AuthHttp,
+      private http: Http
+  ) {
     super()
   }
 

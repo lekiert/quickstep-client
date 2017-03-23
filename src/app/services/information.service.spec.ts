@@ -22,7 +22,7 @@ describe('InformationService', () => {
     });
   });
 
-  it('should ...', inject([InformationService], (service: InformationService) => {
+  it('should create', inject([InformationService], (service: InformationService) => {
     expect(service).toBeTruthy();
   }));
 });

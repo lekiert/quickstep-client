@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
 @Injectable()
-export class BaseService {
+export abstract class BaseService {
 
   protected coursesUrl = environment.API_URL + 'courses';
   protected usersUrl = environment.API_URL + 'users';
@@ -12,4 +12,5 @@ export class BaseService {
   protected testsUrl = environment.API_URL + 'tests';
   protected userLogsUrl = environment.API_URL + 'user-logs';
   protected answersUrl = environment.API_URL + 'answers';
+
 }

@@ -32,6 +32,7 @@ import { ExcerciseService } from './services/excercise.service';
 import { CourseService } from './services/course.service';
 import { UserService } from './services/user.service';
 import { TestService } from './services/test.service';
+import { AnswerService } from './services/answer.service';
 import { GroupService } from './services/group.service';
 import { InformationService } from './services/information.service';
 import { BaseService } from './services/base.service';
@@ -84,12 +85,12 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 
     providers   : [
         AuthGuard,
-        BaseService,
         ExcerciseService,
         CourseService,
         UserService,
         TestService,
         GroupService,
+        AnswerService,
         InformationService,
         {
             provide: AuthHttp,
