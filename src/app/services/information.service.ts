@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
-import { environment } from '../../environments/environment';
 import { UserAction } from '../user-action';
 import { contentHeaders } from '../common/headers';
 import { BaseService } from './base.service';
-import { HttpModule } from "@angular/http";
 
 @Injectable()
 export class InformationService extends BaseService {
@@ -25,8 +23,17 @@ export class InformationService extends BaseService {
     }
   }
 
-  private getUserActionLogsForSpecificUser(id) {
-    return this.authHttp.get(this.usersUrl + '/' + id + '/user-logs/' + '?sort=-id&page%5Bnumber%5D=' + this.page + '&page%5Bsize%5D=' + this.size, { headers: contentHeaders }).toPromise().then((logs) => {
+  private getQueryParams(): URLSearchParams {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('sort', '-id');
+    params.set('page[number]', ''+this.page);
+    params.set('page[size]', ''+this.size);
+
+    return params;
+  }
+
+  private collectActions(logs: any): Array<UserAction> {
+    try {
       let data = logs.json().data;
 
       if (data) {
@@ -34,22 +41,25 @@ export class InformationService extends BaseService {
           return new UserAction(log.id, log.attributes);
         });
       }
+    } catch (e) {
+      console.log('Failed to parse user stats');
+    }
 
-      return [];
-    })
+    return [];
+  }
+
+  private getUserActionLogsForSpecificUser(id): Promise<Array<UserAction>> {
+    let url = this.usersUrl + '/' + id + '/user-logs/';
+    return this.authHttp.get(url, {
+      search: this.getQueryParams(),
+      headers: contentHeaders
+    }).toPromise().then(this.collectActions)
   }
 
   private getUserActionLogsForThisUser() {
-    return this.authHttp.get(this.userLogsUrl + '?sort=-id&page%5Bnumber%5D=' + this.page + '&page%5Bsize%5D=' + this.size, { headers: contentHeaders }).toPromise().then((logs) => {
-      let data = logs.json().data;
-
-      if (data) {
-        return data.map((log) => {
-          return new UserAction(log.id, log.attributes);
-        });
-      }
-
-      return [];
-    })
+    return this.authHttp.get(this.userLogsUrl, {
+      search: this.getQueryParams(),
+      headers: contentHeaders
+    }).toPromise().then(this.collectActions)
   }
 }
