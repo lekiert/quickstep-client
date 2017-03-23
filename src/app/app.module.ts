@@ -41,6 +41,7 @@ import { ChoiceFormComponent } from './components/core/forms/choice/choice-form.
 import { AnswerComponent } from './components/core/answer/answer.component';
 import { AnswerListComponent } from './components/core/answer-list/answer-list.component';
 import { authHttpServiceFactory } from './common/helpers'
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 
 @NgModule({
@@ -73,12 +74,16 @@ import { authHttpServiceFactory } from './common/helpers'
         AnswerListComponent
     ],
 
-    imports     : [BrowserModule,
+    imports     : [
+        BrowserModule,
         FormsModule,
         HttpModule,
-        RouterModule.forRoot(rootRouterConfig)],
+        RouterModule.forRoot(rootRouterConfig),
+        ChartsModule
+    ],
 
-    providers   : [AuthGuard,
+    providers   : [
+        AuthGuard,
         BaseService,
         ExcerciseService,
         CourseService,
