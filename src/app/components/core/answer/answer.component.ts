@@ -4,6 +4,7 @@ import {TestService} from "app/services/test.service";
 import {Excercise} from "app/excercise";
 import {Test} from "app/test";
 import {User} from "app/user";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-answer',
@@ -19,6 +20,7 @@ export class AnswerComponent implements OnInit {
   excercises: Excercise[];
   answers: {};
   score: any;
+  storageUrl = environment.API_URL;
 
   constructor(
     private route: ActivatedRoute,
