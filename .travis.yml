@@ -18,8 +18,9 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 before_script:
-  - npm install -g @angular/cli
+  - npm install -g @angular/cli@1.0.0-rc4
   - npm install -g karma
+  - npm install -g typescript@2.0.0
   - npm install
   - ng build
 
