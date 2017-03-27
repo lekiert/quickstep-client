@@ -8,13 +8,13 @@ Be aware that this project is still under development and certain parts of it wi
 
 ## Requirements
 * node >= 6
-* @angular/cli@1.0.0-rc.4
-* typescript@2.0.0
+* @angular/cli@1.0.0-rc.4 (`npm install -g @angular/cli@1.0.0-rc.4`)
+* typescript@2.0.0 (`npm install -g  typescript@2.0.0`)
 
 ## Installation and first run
 * Clone the repository to a desired location.
 * run `npm install`
-* mv src/environments/environment.sample.ts src/environments/environment.ts
+* run in the project's root directory `mv src/environments/environment.sample.ts src/environments/environment.ts`
 * provide your API instance URL in the src/environments/environment.ts
 * run `ng serve`
 
