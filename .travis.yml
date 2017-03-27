@@ -19,7 +19,7 @@ before_install:
   - mv src/environments/environment.sample.ts src/environments/environment.ts
 
 before_script:
-  - npm install -g @angular/cli@1.0.0-rc4
+  - npm install -g @angular/cli@1.0.0-rc.4
   - npm install -g karma
   - npm install -g typescript@2.0.0
   - npm install
