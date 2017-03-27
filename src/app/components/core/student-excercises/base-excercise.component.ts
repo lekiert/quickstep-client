@@ -23,9 +23,9 @@ export abstract class BaseExcerciseComponent {
         this.excercise.answers = this.answers;
     }
 
-    getAnswers() {
-        return this.answers;
-    }
+    // getAnswers() {
+    //     return this.answers;
+    // }
 
     hasError(element, word): boolean {
         if (this.excercise.checkResults && this.excercise.checkResults[element] && this.excercise.checkResults[element][word] == false) {
