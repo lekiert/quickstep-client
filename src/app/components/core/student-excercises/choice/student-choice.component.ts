@@ -1,5 +1,4 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {DomSanitizer} from "@angular/platform-browser";
 import {environment} from "../../../../../environments/environment";
 
 const styles = require('./student-choice.component.scss');
@@ -12,16 +11,11 @@ const template = require('./student-choice.component.html');
 })
 export class StudentChoiceComponent {
 
-  constructor(private sanitizer: DomSanitizer){}
-
   @Input() excercise: any;
   @Output() collectResults = new EventEmitter();
   @Input() answers = {};
   @Input() setDefaults: boolean = true;
 
-  sentenceCount = 0;
-  sentenceRange = [];
-  wordCount = [];
   storageUrl = environment.API_URL;
 
   setDefaultReturnValues() {
@@ -43,10 +37,6 @@ export class StudentChoiceComponent {
     }
   }
 
-  updateExcerciseAnswerValues() {
-    this.excercise.answers = this.answers;
-  }
-
   isSelected(sentence, choice): boolean {
     return this.answers[sentence].indexOf(choice) > -1;
   }
@@ -63,10 +53,10 @@ export class StudentChoiceComponent {
     return (this.excercise.checkResults && this.excercise.checkResults[sentence] && typeof this.excercise.checkResults[sentence][choice] !== 'undefined');
   }
 
-
-  getAnswers() {
-    return this.answers;
-  }
+  //
+  // getAnswers() {
+  //   return this.answers;
+  // }
 
   toggleChoice(sentenceId, text) {
     let choiceIndex = this.answers[sentenceId].indexOf(text);
