@@ -1,5 +1,6 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {environment} from "../../../../../environments/environment";
+import { Component, Output, EventEmitter } from "@angular/core";
+import { environment } from "../../../../../environments/environment";
+import { BaseExcerciseComponent } from "../base-excercise.component";
 
 const styles = require('./student-choice.component.scss');
 const template = require('./student-choice.component.html');
@@ -9,14 +10,11 @@ const template = require('./student-choice.component.html');
   template: template,
   styles: [ styles ],
 })
-export class StudentChoiceComponent {
+export class StudentChoiceComponent extends BaseExcerciseComponent {
 
-  @Input() excercise: any;
   @Output() collectResults = new EventEmitter();
-  @Input() answers = {};
-  @Input() setDefaults: boolean = true;
 
-  storageUrl = environment.API_URL;
+  readonly storageUrl = environment.API_URL;
 
   setDefaultReturnValues() {
     let keys = this.keys(this.excercise.data);
@@ -26,37 +24,13 @@ export class StudentChoiceComponent {
     }
   }
 
-
-  keys(dict) : Array<string> {
-    return Object.keys(dict);
-  }
-
-  ngOnInit(): void {
-    if (this.setDefaults) {
-      this.setDefaultReturnValues();
-    }
-  }
-
   isSelected(sentence, choice): boolean {
     return this.answers[sentence].indexOf(choice) > -1;
-  }
-
-  hasError(sentence, choice): boolean {
-    if (this.excercise.checkResults && this.excercise.checkResults[sentence] && this.excercise.checkResults[sentence][choice] == false) {
-      return true;
-    }
-
-    return false;
   }
 
   hasChoiceResult(sentence, choice): boolean {
     return (this.excercise.checkResults && this.excercise.checkResults[sentence] && typeof this.excercise.checkResults[sentence][choice] !== 'undefined');
   }
-
-  //
-  // getAnswers() {
-  //   return this.answers;
-  // }
 
   toggleChoice(sentenceId, text) {
     let choiceIndex = this.answers[sentenceId].indexOf(text);

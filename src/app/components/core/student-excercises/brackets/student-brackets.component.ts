@@ -1,6 +1,5 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {DomSanitizer} from "@angular/platform-browser";
-import {Excercise} from "../../../../excercise";
+import { Component } from "@angular/core";
+import { BaseExcerciseComponent } from "../base-excercise.component"
 
 const styles = require('./student-brackets.component.scss');
 const template = require('./student-brackets.component.html');
@@ -10,13 +9,11 @@ const template = require('./student-brackets.component.html');
   template: template,
   styles: [ styles ],
 })
-export class StudentBracketsComponent {
+export class StudentBracketsComponent extends BaseExcerciseComponent {
 
-  constructor(private sanitizer: DomSanitizer){}
-
-  @Input() excercise: Excercise;
-  @Input() answers = {};
-  @Input() setDefaults: boolean = true;
+  constructor(){
+    super()
+  }
 
   setDefaultReturnValues() {
     let keys = this.keys(this.excercise.data);
@@ -30,38 +27,12 @@ export class StudentBracketsComponent {
     }
   }
 
-  hasError(sentence, word): boolean {
-    if (this.excercise.checkResults && this.excercise.checkResults[sentence] && this.excercise.checkResults[sentence][word] == false) {
-      return true;
-    }
-
-    return false;
-  }
-
   hasWordResult(sentence, word): boolean {
     return (this.excercise.checkResults && this.excercise.checkResults[sentence] && typeof this.excercise.checkResults[sentence][word] !== 'undefined');
   }
 
-  keys(dict) : Array<string> {
-    return Object.keys(dict);
-  }
-
-  ngOnInit(): void {
-    if (this.setDefaults) {
-      this.setDefaultReturnValues();
-    }
-  }
-
-  updateExcerciseAnswerValues() {
-    this.excercise.answers = this.answers;
-  }
-
   splitSentence(sentence) {
     return sentence.split('__');
-  }
-
-  getAnswers() {
-    return this.answers;
   }
 
 }
