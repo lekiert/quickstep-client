@@ -10,6 +10,7 @@ import { provideAuth } from "angular2-jwt";
 import { environment } from "environments/environment";
 import { HttpModule } from "@angular/http";
 import { UserService } from "app/services/user.service";
+import { ChartsModule } from "ng2-charts";
 
 describe('StatsComponent', () => {
   let component: StatsComponent;
@@ -17,7 +18,7 @@ describe('StatsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule, FormsModule, HttpModule ],
+      imports: [ RouterTestingModule, FormsModule, HttpModule, ChartsModule ],
       declarations: [ StatsComponent, SettingsComponent ],
       providers: [ InformationService, UserService, AnswerService, provideAuth({
           tokenName: environment.TOKEN_NAME,

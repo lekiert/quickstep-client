@@ -5,6 +5,7 @@ import {StudentBracketsComponent} from "./student-brackets.component";
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpModule} from "@angular/http";
 import {Excercise} from "app/excercise";
+import {By} from "@angular/platform-browser";
 
 describe('StudentBracketsComponent', () => {
   let component: StudentBracketsComponent;
@@ -29,7 +30,7 @@ describe('StudentBracketsComponent', () => {
       testId: 1,
       command: 'Test excercise command',
       name: 'Test excercise',
-      data: {},
+      data: {"1": "A __ B.", "2": "A __ B. C __ D __ E."},
       answers: {}
     });
     component.excercise = expectedExcercise;
@@ -42,9 +43,20 @@ describe('StudentBracketsComponent', () => {
 
   it('should split sentences by __', () => {
     let testString = 'aaa __ bbb __ ccc';
-    let testResult = component.splitSentence(testString)
+    let testResult = component.splitSentence(testString);
     expect(testResult.length).toBe(3);
   });
 
+  it('should create input fields', () => {
+    let inputs = fixture.debugElement.queryAll(By.css('input.word'))
+    expect(inputs.length).toBe(4);
+  });
+
+  it('should create default return values', () => {
+    let answers = component.answers;
+    expect(Object.keys(answers).length).toBe(2);
+    expect(Object.keys(answers[1]).length).toBe(1);
+    expect(Object.keys(answers[2]).length).toBe(3);
+  });
 
 });
