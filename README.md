@@ -1,13 +1,25 @@
-# QuickstepClient
+[![Build Status](https://travis-ci.org/lekiert/quickstep-client.svg?branch=master)](https://travis-ci.org/lekiert/quickstep-client)
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.21.
+# Quickstep Client
+
+This is a client application that consumes the [Quickstep Api](https://github.com/lekiert/quickstep-api). It has been designed to help language schools with setting up their own apps, where they can put tests and exercises for their students. Built with Angular 2.
+
+Be aware that this project is still under development and certain parts of it will be rewritten. Also bear in mind that the UI language is Polish, however I intend to translate it later to English.
+
+## Requirements
+* node >= 6
+* @angular/cli@1.0.0-rc.4
+* typescript@2.0.0
+
+## Installation and first run
+* Clone the repository to a desired location.
+* run `npm install`
+* mv src/environments/environment.sample.ts src/environments/environment.ts
+* provide your API instance URL in the src/environments/environment.ts
+* run `ng serve`
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
 
 ## Build
 
@@ -15,17 +27,15 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+`ng test`
 
 ## Deploying to Github Pages
 
 Run `ng github-pages:deploy` to deploy to Github Pages.
 
-## Further help
+## TODOs so far (list will extend)
+* more test coverage
+* table pagination
+* pages
+* student scoring 
 
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
