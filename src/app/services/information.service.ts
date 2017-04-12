@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { UserAction } from '../user-action';
+import { UserActionBatch } from '../user-action-batch';
 import { contentHeaders } from '../common/headers';
 import { BaseService } from './base.service';
 
@@ -15,11 +16,11 @@ export class InformationService extends BaseService {
     super()
   }
 
-  getLatestUserActionLogs(id?: any) {
+  getLatestUserActionLogs(id?: any, page?: number) {
     if (!id) {
-      return this.getUserActionLogsForThisUser();
+      return this.getUserActionLogsForThisUser(page);
     } else {
-      return this.getUserActionLogsForSpecificUser(id);
+      return this.getUserActionLogsForSpecificUser(id, page);
     }
   }
 
@@ -32,33 +33,52 @@ export class InformationService extends BaseService {
     return params;
   }
 
-  private collectActions(logs: any): Array<UserAction> {
+  private collectActions(logs: any): UserActionBatch {
+    let batch = new UserActionBatch;
+
     try {
-      let data = logs.json().data;
+      let source = logs.json();
+      let data = source.data;
+
 
       if (data) {
-        return data.map((log) => {
+        let actions = data.map((log) => {
           return new UserAction(log.id, log.attributes);
         });
+        console.log(source);
+        batch.actions = actions;
+        batch.meta = source.links;
+
+        return batch;
       }
     } catch (e) {
       console.log('Failed to parse user stats');
     }
 
-    return [];
+    return batch;
   }
 
-  private getUserActionLogsForSpecificUser(id): Promise<Array<UserAction>> {
+  private getUserActionLogsForSpecificUser(id, page?: number): Promise<UserActionBatch> {
+    let params = this.getQueryParams();
+    if (page) {
+      params.set('page[number]', ''+page);
+    }
+
     let url = this.usersUrl + '/' + id + '/user-logs/';
     return this.authHttp.get(url, {
-      search: this.getQueryParams(),
+      search: params,
       headers: contentHeaders
     }).toPromise().then(this.collectActions)
   }
 
-  private getUserActionLogsForThisUser() {
+  private getUserActionLogsForThisUser(page?: number): Promise<UserActionBatch> {
+    let params = this.getQueryParams();
+    if (page) {
+      params.set('page[number]', ''+page);
+    }
+
     return this.authHttp.get(this.userLogsUrl, {
-      search: this.getQueryParams(),
+      search: params,
       headers: contentHeaders
     }).toPromise().then(this.collectActions)
   }

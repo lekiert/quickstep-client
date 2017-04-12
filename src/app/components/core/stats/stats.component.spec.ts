@@ -14,6 +14,7 @@ import { ChartsModule } from "ng2-charts";
 import {By} from "@angular/platform-browser";
 import {Answer} from "../../../answer";
 import {UserAction} from "../../../user-action";
+import {UserActionBatch} from "../../../user-action-batch";
 
 class UserServiceMock {
   getLatestUserActionLogs() {
@@ -77,8 +78,15 @@ class UserServiceMock {
     let statsList = testStats.data.map((answer) => {
       return new UserAction(+answer.id, answer.attributes);
     })
-    return new Promise<UserAction[]>((resolve, reject) => {
-      resolve(statsList);
+
+    let batch = new UserActionBatch;
+    batch.actions = statsList;
+    batch.meta = {
+      links: {}
+    }
+
+    return new Promise<UserActionBatch>((resolve, reject) => {
+      resolve(batch);
     });
   }
 }
@@ -210,11 +218,4 @@ describe('StatsComponent', () => {
     let pagination = fixture.debugElement.query(By.css('.dashboard .dashboard__chart'));
     expect(pagination).toBeTruthy();
   })
-  //
-  // it('should not display a pagination', () => {
-  //   component.stats = null;
-  //   fixture.detectChanges();
-  //   let pagination = fixture.debugElement.query(By.css('.dashboard .pagination'));
-  //   expect(pagination).toBeFalsy();
-  // })
 });

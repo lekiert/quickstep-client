@@ -44,6 +44,12 @@ export class StatsComponent implements OnInit {
   ];
   public lineChartLegend:boolean = false;
   public lineChartType:string = 'line';
+  public pagination:any = {
+    first: null,
+    last: null,
+    prev: null,
+    next: null
+  }
 
   constructor(
     public router: Router,
@@ -56,14 +62,45 @@ export class StatsComponent implements OnInit {
       let id = +params['id'];
       this.id = id;
 
-      this.service.getLatestUserActionLogs(this.id).then((logs) => {
-        this.stats = logs;
-      });
+      this.getUserActionLogs(1);
 
       this.answerService.getAnswerStats(this.id).then((answers) => {
         this.setAnswerChartData(answers);
       });
     });
+  }
+
+  public getUserActionLogs(page?: number) {
+    let id = this.id;
+    let pageNumber = page || 1;
+    this.stats = null;
+    this.pagination = {
+      first: null,
+      last: null,
+      prev: null,
+      next: null
+    }
+
+    this.service.getLatestUserActionLogs(id, +pageNumber).then((logs) => {
+      this.stats = logs.actions;
+      this.setPageNumbers(logs.meta)
+    });
+  }
+
+  private setPageNumbers(stats): void {
+    let links = stats;
+    let pageNumberRegex = /page%5Bnumber%5D=(\d+)/;
+
+    for (let type of Object.keys(this.pagination)) {
+      if (links[type]) {
+        let number = pageNumberRegex.exec(links[type]);
+        this.pagination[type] = number[1];
+      } else {
+        this.pagination[type] = null;
+      }
+    }
+
+    console.log(this.pagination);
   }
 
   private setAnswerChartData(answers: Array<Answer>): void {
