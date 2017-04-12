@@ -44,6 +44,7 @@ export class StatsComponent implements OnInit {
   ];
   public lineChartLegend:boolean = false;
   public lineChartType:string = 'line';
+  public currentPage = 1;
   public pagination:any = {
     first: null,
     last: null,
@@ -62,7 +63,7 @@ export class StatsComponent implements OnInit {
       let id = +params['id'];
       this.id = id;
 
-      this.getUserActionLogs(1);
+      this.getUserActionLogs(this.currentPage);
 
       this.answerService.getAnswerStats(this.id).then((answers) => {
         this.setAnswerChartData(answers);
@@ -82,6 +83,7 @@ export class StatsComponent implements OnInit {
     }
 
     this.service.getLatestUserActionLogs(id, +pageNumber).then((logs) => {
+      this.currentPage = page;
       this.stats = logs.actions;
       this.setPageNumbers(logs.meta)
     });
