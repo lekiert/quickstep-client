@@ -5,8 +5,8 @@
     </div>
 
 
-    <div *ngIf="this.finished">
-      <canvas baseChart height="80"
+    <div class="dashboard__chart">
+      <canvas *ngIf="this.finished" baseChart height="80"
               [datasets]="lineChartData"
               [labels]="lineChartLabels"
               [options]="lineChartOptions"
@@ -42,5 +42,9 @@
         </tr>
       </tbody>
     </table>
+
+    <div class="pagination">
+      test
+    </div>
   </div>
 </div>

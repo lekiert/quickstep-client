@@ -19,40 +19,9 @@ export class StatsComponent implements OnInit {
   public finished: boolean = false;
   private sub: any;
   private id;
-
-  constructor(
-    public router: Router,
-    private route: ActivatedRoute,
-    private answerService: AnswerService,
-    private service: InformationService) {}
-
-  ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      let id = +params['id'];
-      this.id = id;
-
-      this.service.getLatestUserActionLogs(this.id).then((logs) => {
-        this.stats = logs;
-      });
-
-      this.answerService.getAnswerStats(this.id).then((answers) => {
-        this.answers = answers;
-        let chartData = this.answers.map((e) => Math.round(e.score * 100));
-        this.lineChartData[0].data = chartData;
-
-        for (let index in answers) {
-          this.lineChartLabels.push(answers[index].testName)
-        }
-
-        this.finished = true;
-      });
-    });
-  }
-
-
-  public lineChartData:Array<any> = [{ data: [] }];
-  public lineChartLabels:Array<any> = [];
-  public lineChartOptions:any = {
+  public lineChartData: Array<any> = [{ data: [] }];
+  public lineChartLabels: Array<any> = [];
+  public lineChartOptions: any = {
     responsive: true,
     scales: {
       yAxes: [{
@@ -75,6 +44,39 @@ export class StatsComponent implements OnInit {
   ];
   public lineChartLegend:boolean = false;
   public lineChartType:string = 'line';
+
+  constructor(
+    public router: Router,
+    private route: ActivatedRoute,
+    private answerService: AnswerService,
+    private service: InformationService) {}
+
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      let id = +params['id'];
+      this.id = id;
+
+      this.service.getLatestUserActionLogs(this.id).then((logs) => {
+        this.stats = logs;
+      });
+
+      this.answerService.getAnswerStats(this.id).then((answers) => {
+        this.setAnswerChartData(answers);
+      });
+    });
+  }
+
+  private setAnswerChartData(answers: Array<Answer>): void {
+    this.answers = answers;
+    let chartData = answers.map((e) => Math.round(e.score * 100));
+    this.lineChartData[0].data = chartData;
+
+    for (let index in answers) {
+      this.lineChartLabels.push(answers[index].testName)
+    }
+
+    this.finished = true;
+  }
 
   // events
   public chartClicked(e:any) {
