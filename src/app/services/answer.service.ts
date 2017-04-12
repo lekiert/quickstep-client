@@ -40,10 +40,15 @@ export class AnswerService extends BaseService {
     return [];
   }
 
-  getAnswerStats(userId?: any): Promise<any> {
+  getAnswerStats(userId?: any, page?: number): Promise<any> {
     let url = this.answersUrl;
+    let params = this.getQueryParams();
     if (userId) {
       url = this.usersUrl + '/' + userId + '/answers/';
+    }
+
+    if (page) {
+      params.set('page[number]', ''+page);
     }
 
     return this.authHttp.get(url, {

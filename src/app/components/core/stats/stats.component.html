@@ -5,8 +5,8 @@
     </div>
 
 
-    <div *ngIf="this.finished">
-      <canvas baseChart height="80"
+    <div class="dashboard__chart">
+      <canvas *ngIf="this.finished" baseChart height="80"
               [datasets]="lineChartData"
               [labels]="lineChartLabels"
               [options]="lineChartOptions"
@@ -42,5 +42,20 @@
         </tr>
       </tbody>
     </table>
+
+    <div class="pagination">
+      <button type="button" class="button button--primary" [disabled]="!pagination.first" (click)="getUserActionLogs(pagination.first)">
+        <i class="fa fa-angle-double-left"></i>
+      </button>
+      <button type="button" class="button button--primary" [disabled]="!pagination.prev" (click)="getUserActionLogs(pagination.prev)">
+        <i class="fa fa-angle-left"></i>
+      </button>
+      <button type="button" class="button button--primary" [disabled]="!pagination.next" (click)="getUserActionLogs(pagination.next)">
+        <i class="fa fa-angle-right"></i>
+      </button>
+      <button type="button" class="button button--primary" [disabled]="!pagination.last" (click)="getUserActionLogs(pagination.last)">
+        <i class="fa fa-angle-double-right"></i>
+      </button>
+    </div>
   </div>
 </div>
