@@ -207,12 +207,6 @@ describe('StatsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
-  //
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(StatsComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
 
   it('should create', () => {
     expect(component).toBeTruthy();

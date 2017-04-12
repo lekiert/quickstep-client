@@ -4,10 +4,12 @@ import { EditUserComponent} from './edit-user.component';
 import { FormsModule } from "@angular/forms";
 import { RouterTestingModule } from "@angular/router/testing";
 import { UserService } from "app/services/user.service";
-import {provideAuth, AuthHttp} from "angular2-jwt";
+import {provideAuth, AuthHttp, AuthConfig} from "angular2-jwt";
 import { environment } from "environments/environment";
-import { HttpModule } from "@angular/http";
+import {Http, HttpModule} from "@angular/http";
 import { User } from "../../../user";
+import {Observable} from "rxjs/Observable";
+import {Subject} from "rxjs/Subject";
 
 describe('EditUserComponent', () => {
 
@@ -15,18 +17,53 @@ describe('EditUserComponent', () => {
     let component: EditUserComponent;
     let fixture: ComponentFixture<EditUserComponent>;
 
+    class UserServiceMock {
+        fetchUserFromAPI() {
+            return true;
+        }
+
+        getAuthenticatedUser(): Observable<User> {
+            let user = new User(1, {
+                attributes: {
+                    first_name: 'Jan',
+                    last_name: 'Kowalski'
+                }
+            });
+            let sub = new Subject<User>();
+            sub.next(user);
+
+            return sub.asObservable();
+        }
+
+        getUser() {
+            return new Promise((resolve) => resolve(
+                new User(1, {
+                    attributes: {
+                        first_name: 'Jan',
+                        last_name: 'Kowalski'
+                    }
+                })
+            ))
+        }
+
+        changeUserPassword() {
+            return {}
+        }
+    }
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [ FormsModule, RouterTestingModule, HttpModule ],
             declarations: [ EditUserComponent ],
-            providers: [ UserService,  provideAuth({
-                tokenName: environment.TOKEN_NAME,
-                tokenGetter: () => localStorage.getItem(environment.TOKEN_NAME)
-            }) ]
+            providers: [ {provide: UserService, useClass: UserServiceMock}, {
+                provide: AuthHttp,
+                useFactory: (http) => {
+                    return new AuthHttp(new AuthConfig(), http);
+                },
+                deps: [Http]
+            } ]
         }).compileComponents();
-    }));
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(EditUserComponent);
         component = fixture.componentInstance;
         userService = fixture.debugElement.injector.get(UserService);
@@ -34,7 +71,7 @@ describe('EditUserComponent', () => {
 
         spyOn(userService, 'changeUserPassword').and.returnValue(Promise.resolve({}));
         fixture.detectChanges();
-    });
+    }));
 
     it('should create', () => {
         expect(component).toBeTruthy();
