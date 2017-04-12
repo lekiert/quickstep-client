@@ -185,12 +185,12 @@ describe('StatsComponent', () => {
           {provide: InformationService, useClass: InformationServiceMock},
           {provide: AnswerService, useClass: AnswerServiceMock},
           {
-          provide: AuthHttp,
-          useFactory: (http) => {
-            return new AuthHttp(new AuthConfig(), http);
-          },
-          deps: [Http]
-        }
+            provide: AuthHttp,
+            useFactory: (http) => {
+              return new AuthHttp(new AuthConfig(), http);
+            },
+            deps: [Http]
+          }
       ]
     })
     .overrideComponent(StatsComponent, {
