@@ -1,14 +1,12 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { StatsComponent } from './stats.component';
-import { SettingsComponent } from '../settings/settings.component';
 import { RouterTestingModule } from "@angular/router/testing";
 import { FormsModule } from "@angular/forms";
 import { InformationService } from "app/services/information.service";
 import { AnswerService } from "app/services/answer.service";
-import { provideAuth } from "angular2-jwt";
-import { environment } from "environments/environment";
-import { HttpModule } from "@angular/http";
+import {AuthConfig, AuthHttp } from "angular2-jwt";
+import {Http, HttpModule} from "@angular/http";
 import { UserService } from "app/services/user.service";
 import { ChartsModule } from "ng2-charts";
 import {By} from "@angular/platform-browser";
@@ -16,7 +14,7 @@ import {Answer} from "../../../answer";
 import {UserAction} from "../../../user-action";
 import {UserActionBatch} from "../../../user-action-batch";
 
-class UserServiceMock {
+class InformationServiceMock {
   getLatestUserActionLogs() {
     let testStats = {
       "data": [
@@ -183,27 +181,38 @@ describe('StatsComponent', () => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule, FormsModule, HttpModule, ChartsModule ],
       declarations: [ StatsComponent ],
-      providers: [ InformationService, UserService, AnswerService, provideAuth({
-          tokenName: environment.TOKEN_NAME,
-          tokenGetter: () => localStorage.getItem(environment.TOKEN_NAME)
-      }) ]
+      providers: [
+          {provide: InformationService, useClass: InformationServiceMock},
+          {provide: AnswerService, useClass: AnswerServiceMock},
+          {
+          provide: AuthHttp,
+          useFactory: (http) => {
+            return new AuthHttp(new AuthConfig(), http);
+          },
+          deps: [Http]
+        }
+      ]
     })
     .overrideComponent(StatsComponent, {
       set: {
         providers: [
-          {provide: AnswerService, useClass: AnswerServiceMock},
-          {provide: UserService, useClass: UserServiceMock}
+          ,
+
         ]
       }
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(StatsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
+  //
+  // beforeEach(() => {
+  //   fixture = TestBed.createComponent(StatsComponent);
+  //   component = fixture.componentInstance;
+  //   fixture.detectChanges();
+  // });
 
   it('should create', () => {
     expect(component).toBeTruthy();

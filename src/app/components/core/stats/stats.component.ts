@@ -101,8 +101,6 @@ export class StatsComponent implements OnInit {
         this.pagination[type] = null;
       }
     }
-
-    console.log(this.pagination);
   }
 
   private setAnswerChartData(answers: Array<Answer>): void {

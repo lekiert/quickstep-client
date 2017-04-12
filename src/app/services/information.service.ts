@@ -40,12 +40,11 @@ export class InformationService extends BaseService {
       let source = logs.json();
       let data = source.data;
 
-
       if (data) {
         let actions = data.map((log) => {
           return new UserAction(log.id, log.attributes);
         });
-        console.log(source);
+
         batch.actions = actions;
         batch.meta = source.links;
 
