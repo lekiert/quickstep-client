@@ -11,6 +11,13 @@ import { UserService } from './services/user.service';
 import {Observable} from "rxjs/Observable";
 import {User} from "./user";
 import {Subject} from "rxjs/Subject";
+import {By} from "@angular/platform-browser";
+
+class AuthGuardMock {
+  isUser() {
+    return true;
+  }
+}
 
 class UserServiceMock {
   fetchUserFromAPI() {
@@ -19,10 +26,9 @@ class UserServiceMock {
 
   getAuthenticatedUser(): Observable<User> {
     let user = new User(1, {
-      attributes: {
         first_name: 'Jan',
-        last_name: 'Kowalski'
-      }
+        last_name: 'Kowalski',
+        role: 'STUDENT'
     });
     let sub = new Subject<User>();
     sub.next(user);
@@ -33,10 +39,9 @@ class UserServiceMock {
   getUser() {
     return new Promise((resolve) => resolve(
         new User(1, {
-          attributes: {
-            first_name: 'Jan',
-            last_name: 'Kowalski'
-          }
+          first_name: 'Jan',
+          last_name: 'Kowalski',
+          role: 'STUDENT'
         })
     ))
   }
@@ -55,7 +60,7 @@ describe('App: QuickstepClient', () => {
       ],
       providers: [
         {provide: UserService, useClass: UserServiceMock },
-        AuthGuard,
+        {provide: AuthGuard, useClass: AuthGuardMock },
         {
           provide: AuthHttp,
           useFactory: (http) => {
@@ -68,9 +73,42 @@ describe('App: QuickstepClient', () => {
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.debugElement.componentInstance;
+
+    component.user = new User(1, {
+      'first-name': 'Jan',
+      'last-name': 'Kowalski',
+      'role': 'STUDENT'
+    });
+    fixture.detectChanges()
   });
 
   it('should create the app', async(() => {
     expect(component).toBeTruthy();
+  }));
+
+  it('should display top container', async(() => {
+      let top = fixture.debugElement.query(By.css('.main-header'));
+      expect(top).toBeTruthy();
+  }));
+
+  it('should display the navigation', async(() => {
+      let nav = fixture.debugElement.query(By.css('.sidebar nav'));
+      expect(nav).toBeTruthy();
+  }));
+
+  it('should display the supervisor navigation if user is a supervisor', async(() => {
+      component.user = new User(1, {
+        first_name: 'Jan',
+        last_name: 'Kowalski',
+        role: 'SUPERVISOR'
+      })
+      fixture.detectChanges();
+
+      let nav = fixture.debugElement.queryAll(By.css('.sidebar nav .nav__menu-item__link'));
+
+      expect(nav[0].nativeNode.innerHTML).toContain('Podsumowanie');
+      expect(nav[1].nativeNode.innerHTML).toContain('Nauczyciele');
+      expect(nav[2].nativeNode.innerHTML).toContain('Uczniowie');
+      expect(nav[3].nativeNode.innerHTML).toContain('Dane konta');
   }));
 });

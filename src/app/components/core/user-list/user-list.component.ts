@@ -1,58 +1,78 @@
 import {Component} from "@angular/core";
 import {UserService} from "../../../services/user.service";
 import {User} from "../../../user";
+import {ActivatedRoute} from "@angular/router";
 
 const styles = require('./user-list.component.scss');
 const template = require('./user-list.component.html');
 
 @Component({
-  selector: 'user-list',
-  template: template,
-  styles: [ styles ],
+    selector: 'user-list',
+    template: template,
+    styles: [styles],
 })
 export class UserListComponent {
 
-  user: User;
+    user: User;
+    private sub: any;
 
-  constructor(private service: UserService) {}
-
-  filters = [
-    { name: 'Wszyscy', value: 'ALL' },
-    { name: 'Uczeń', value: 'STUDENT' },
-    { name: 'Nauczyciel', value: 'TEACHER' },
-    { name: 'Kierownik', value: 'SUPERVISOR' },
-    { name: 'Administrator', value: 'ADMIN' },
-  ];
-
-  filter = 'ALL';
-
-  users: User[];
-
-  getUsers(type?: string): void {
-    this.users = [];
-    if (type && type === 'TEACHER') {
-      this.service.getTeachers(this.filter)
-                .then((users) => {
-                  this.users = users;
-                });
+    constructor(private route: ActivatedRoute,
+                private service: UserService) {
     }
 
-    this.service.getUsers(this.filter)
+    filters = [
+        {name: 'Wszyscy', value: 'ALL'},
+        {name: 'Uczeń', value: 'STUDENT'},
+        {name: 'Nauczyciel', value: 'TEACHER'},
+        {name: 'Kierownik', value: 'SUPERVISOR'},
+        {name: 'Administrator', value: 'ADMIN'},
+    ];
+
+    filter = 'ALL';
+    private routeFilter: any;
+
+    users: User[];
+
+    getUsers(type?: string): void {
+        this.users = [];
+        if (type && type === 'TEACHER') {
+            this.service.getTeachers(this.filter)
                 .then((users) => {
-                  this.users = users;
+                    this.users = users;
                 });
-  }
-
-  ngOnInit(): void {
-    this.service.getAuthenticatedUserObject().then(
-      user => {
-        this.user = user
-        if (user.isSupervisor()) {
-          this.filter = 'TEACHER';
         }
-        this.getUsers();
-      }
-    )
 
-  }
+        this.service.getUsers(this.filter)
+            .then((users) => {
+                this.users = users;
+            });
+    }
+
+    ngOnInit(): void {
+        this.sub = this.route.params.subscribe(params => {
+            this.routeFilter = params['type'];
+            this.service.getAuthenticatedUserObject().then(
+                user => {
+                    this.user = user
+                    if (user.isSupervisor()) {
+                        switch (this.routeFilter) {
+                            case 'students':
+                                this.filter = 'STUDENT';
+                                break;
+                            case 'supervisors':
+                                this.filter = 'SUPERVISOR';
+                                break;
+                            default:
+                                this.filter = 'TEACHER';
+                                break;
+                        }
+
+                        console.log(this.routeFilter);
+                    }
+                    this.getUsers();
+                }
+            )
+        });
+
+    }
 }
