@@ -14,12 +14,7 @@ const template = require('./user-list.component.html');
 export class UserListComponent {
 
     user: User;
-    private sub: any;
-
-    constructor(private route: ActivatedRoute,
-                private service: UserService) {
-    }
-
+    users: User[];
     filters = [
         {name: 'Wszyscy', value: 'ALL'},
         {name: 'Uczeń', value: 'STUDENT'},
@@ -27,11 +22,13 @@ export class UserListComponent {
         {name: 'Kierownik', value: 'SUPERVISOR'},
         {name: 'Administrator', value: 'ADMIN'},
     ];
-
     filter = 'ALL';
+    private sub: any;
     private routeFilter: any;
 
-    users: User[];
+    constructor(private route: ActivatedRoute,
+                private service: UserService) {
+    }
 
     getUsers(type?: string): void {
         this.users = [];
@@ -66,8 +63,6 @@ export class UserListComponent {
                                 this.filter = 'TEACHER';
                                 break;
                         }
-
-                        console.log(this.routeFilter);
                     }
                     this.getUsers();
                 }

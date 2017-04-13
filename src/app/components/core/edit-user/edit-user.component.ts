@@ -23,6 +23,13 @@ export class EditUserComponent {
   result = null;
   private sub: any;
 
+  roles = [
+    { name: 'Uczeń', value: 'STUDENT' },
+    { name: 'Nauczyciel', value: 'TEACHER' },
+    { name: 'Kierownik', value: 'SUPERVISOR' },
+    { name: 'Administrator', value: 'ADMIN' },
+  ];
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -36,13 +43,6 @@ export class EditUserComponent {
         });
       });
     }
-
-  roles = [
-    { name: 'Uczeń', value: 'STUDENT' },
-    { name: 'Nauczyciel', value: 'TEACHER' },
-    { name: 'Kierownik', value: 'SUPERVISOR' },
-    { name: 'Administrator', value: 'ADMIN' },
-  ];
 
   changePassword() {
     try {

@@ -33,7 +33,7 @@ export class StatsComponent implements OnInit {
     }
   };
   public lineChartColors:Array<any> = [
-    { // grey
+    {
       backgroundColor: 'rgba(148,159,177,0.2)',
       borderColor: 'rgba(148,159,177,1)',
       pointBackgroundColor: 'rgba(148,159,177,1)',
@@ -64,7 +64,6 @@ export class StatsComponent implements OnInit {
       this.id = id;
 
       this.getUserActionLogs(this.currentPage);
-
       this.answerService.getAnswerStats(this.id).then((answers) => {
         this.setAnswerChartData(answers);
       });
@@ -115,14 +114,13 @@ export class StatsComponent implements OnInit {
     this.finished = true;
   }
 
-  // events
   public chartClicked(e:any) {
     let i = e.active[0]._index
     this.router.navigate(['/answer', this.answers[i].id]);
   }
 
   public chartHovered(e:any):void {
-    console.log(e);
+
   }
 
 }

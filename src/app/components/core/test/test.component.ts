@@ -17,16 +17,16 @@ const template = require('./test.component.html');
 })
 export class TestComponent {
 
-  private answersUrl = environment.API_URL + 'answers';  // URL to web API
   storageUrl = environment.API_URL;
   id: number;
   error: string = '';
-  private sub: any;
   test: Test;
   user: User;
   excercises: Excercise[];
   results = [];
   answers = {};
+
+  private sub: any;
   private hasResults:boolean = false;
   private score:string = '0';
 
