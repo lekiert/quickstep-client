@@ -5,6 +5,8 @@ import { ActivatedRoute } from "@angular/router";
 import { AnswerService } from "../../../services/answer.service";
 import { UserAction } from "../../../user-action";
 import { Answer } from "app/answer";
+import {UserService} from "../../../services/user.service";
+import {User} from "../../../user";
 
 
 @Component({
@@ -27,7 +29,8 @@ export class StatsComponent implements OnInit {
       yAxes: [{
         ticks: {
           beginAtZero: true,
-          callback: label => `${label}%`
+          callback: label => `${label}%`,
+          max: 100
         }
       }]
     }
@@ -51,12 +54,16 @@ export class StatsComponent implements OnInit {
     prev: null,
     next: null
   }
+  public user: User;
 
   constructor(
     public router: Router,
     private route: ActivatedRoute,
     private answerService: AnswerService,
-    private service: InformationService) {}
+    private userService: UserService,
+    private service: InformationService) {
+    this.userService.getAuthenticatedUserObject().then((user) => this.user = user);
+  }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {

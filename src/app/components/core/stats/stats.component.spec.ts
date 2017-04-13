@@ -13,6 +13,7 @@ import {By} from "@angular/platform-browser";
 import {Answer} from "../../../answer";
 import {UserAction} from "../../../user-action";
 import {UserActionBatch} from "../../../user-action-batch";
+import {User} from "../../../user";
 
 class InformationServiceMock {
   getLatestUserActionLogs() {
@@ -173,6 +174,16 @@ class AnswerServiceMock {
   }
 }
 
+class UserServiceMock {
+  getAuthenticatedUserObject() {
+    let user = new User(1, {
+      'role': 'SUPERVISOR'
+    })
+
+    return new Promise((resolve) => resolve(user));
+  }
+}
+
 describe('StatsComponent', () => {
   let component: StatsComponent;
   let fixture: ComponentFixture<StatsComponent>;
@@ -184,6 +195,7 @@ describe('StatsComponent', () => {
       providers: [
           {provide: InformationService, useClass: InformationServiceMock},
           {provide: AnswerService, useClass: AnswerServiceMock},
+          {provide: UserService, useClass: UserServiceMock},
           {
             provide: AuthHttp,
             useFactory: (http) => {
@@ -221,4 +233,12 @@ describe('StatsComponent', () => {
     let pagination = fixture.debugElement.query(By.css('.dashboard .dashboard__chart'));
     expect(pagination).toBeTruthy();
   })
+
+  it('should display user groups button for supervisors and admins (async)', async(() => {
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      let button = fixture.debugElement.query(By.css('.dashboard .view-user-groups'));
+      expect(button).toBeTruthy();
+    });
+  }))
 });

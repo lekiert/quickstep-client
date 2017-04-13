@@ -1,7 +1,15 @@
 <div class="dashboard">
   <div class="row">
     <div class="gr-12">
-      <h1 class="heading heading--border">Statystyki</h1>
+      <h1 class="heading heading--border">
+        Statystyki
+        <button class="button button--primary pull-right view-user-groups"
+                *ngIf="user && (user.isAdmin() || user.isSupervisor())"
+                [routerLink]="['/users', id, 'groups']"
+        >
+          <i class="fa fa-users"></i> Grupy użytkownika
+        </button>
+      </h1>
     </div>
 
 
