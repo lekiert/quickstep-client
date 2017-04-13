@@ -5,7 +5,7 @@
         Statystyki
         <button class="button button--primary pull-right view-user-groups"
                 *ngIf="user && (user.isAdmin() || user.isSupervisor())"
-                [routerLink]="['/users', id, 'groups']"
+                [routerLink]="['/users', id || user.id, 'groups']"
         >
           <i class="fa fa-users"></i> Grupy użytkownika
         </button>

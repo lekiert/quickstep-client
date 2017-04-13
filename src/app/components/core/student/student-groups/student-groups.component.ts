@@ -22,22 +22,7 @@ export class StudentGroupsComponent implements OnInit {
   constructor(
       private route: ActivatedRoute,
       private service: GroupService,
-      private userService: UserService) {
-      this.userService.getAuthenticatedUser().subscribe(
-          user => {
-            this.user = user;
-            this.sub = this.route.params.subscribe(params => {
-              let id = +params['id'];
-              this.studentId = id;
-              if (!isNaN(this.studentId)) {
-                  this.userService.getUser(this.studentId).then(user => this.student = user);
-              }
-              this.getUserGroups()
-            });
-          },
-          error => console.log(error)
-      )
-  }
+      private userService: UserService) {}
 
   getGroups(): void {
     this.service.getGroups()
@@ -59,6 +44,19 @@ export class StudentGroupsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+      console.log('test');
+      this.userService.getAuthenticatedUserObject().then(
+          user => {
+              console.log(user);
+              this.user = user;
+              this.sub = this.route.params.subscribe(params => {
+                  let id = +params['id'];
+                  this.studentId = id;
+                  if (!isNaN(this.studentId)) {
+                      this.userService.getUser(this.studentId).then(user => this.student = user);
+                  }
+                  this.getUserGroups()
+              });
+      })
   }
 }
