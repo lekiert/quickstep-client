@@ -55,6 +55,7 @@ export class StatsComponent implements OnInit {
     next: null
   }
   public user: User;
+  public student: User;
 
   constructor(
     public router: Router,
@@ -69,7 +70,11 @@ export class StatsComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       let id = +params['id'];
       this.id = id;
-
+      if (id) {
+        this.userService.getUser(id).then(user => {
+          this.student = user
+        })
+      }
       this.getUserActionLogs(this.currentPage);
       this.answerService.getAnswerStats(this.id).then((answers) => {
         this.setAnswerChartData(answers);

@@ -109,6 +109,7 @@ describe('App: QuickstepClient', () => {
       expect(nav[0].nativeNode.innerHTML).toContain('Podsumowanie');
       expect(nav[1].nativeNode.innerHTML).toContain('Nauczyciele');
       expect(nav[2].nativeNode.innerHTML).toContain('Uczniowie');
-      expect(nav[3].nativeNode.innerHTML).toContain('Dane konta');
+      expect(nav[3].nativeNode.innerHTML).toContain('Grupy');
+      expect(nav[4].nativeNode.innerHTML).toContain('Dane konta');
   }));
 });
