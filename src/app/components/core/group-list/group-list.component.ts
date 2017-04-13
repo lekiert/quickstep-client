@@ -1,8 +1,5 @@
-import {Component} from "@angular/core";
-import {GroupService} from "../../../services/group.service";
-import {UserService} from "../../../services/user.service";
+import {Component, Input} from "@angular/core";
 import {Group} from "../../../group";
-import {User} from "../../../user";
 
 const styles = require('./group-list.component.scss');
 const template = require('./group-list.component.html');
@@ -13,40 +10,5 @@ const template = require('./group-list.component.html');
   styles: [ styles ],
 })
 export class GroupListComponent {
-  constructor(private service: GroupService, private userService: UserService) {}
-
-  groups: Group[];
-  user: User;
-
-  getGroups(): void {
-    this.service.getGroups()
-                .then((groups) => {
-                  this.groups = groups;
-                });
-  }
-
-
-  getUserGroups(): void {
-    this.userService.getAuthenticatedUserObject().then(
-      user => {
-        this.user = user;
-        if (user.isTeacher()) {
-          this.service.getTeacherGroups(user.id)
-                      .then((groups) => {
-                        this.groups = groups;
-                      });
-        } else {
-          this.service.getGroups()
-                      .then((groups) => {
-                        this.groups = groups;
-                      });
-        }
-
-      }
-    );
-  }
-
-  ngOnInit(): void {
-    this.getUserGroups();
-  }
+  @Input() groups: Group[];
 }

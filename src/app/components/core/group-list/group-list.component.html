@@ -1,45 +1,26 @@
-<div class="">
-  <div class="row">
-    <div class="gr-12">
-      <h1 class="heading heading--border">Grupy uczniów</h1>
-    </div>
-    <div class="gr-12">
-      <table class="table-list">
-        <thead>
-          <th>Nazwa grupy</th>
-          <th colspan="2">Uczniów</th>
-        </thead>
+<table class="table-list">
+  <thead>
+    <th>Nazwa grupy</th>
+    <th colspan="2">Uczniów</th>
+  </thead>
 
-        <tbody>
-          <tr *ngFor="let group of groups" [routerLink]="['/groups', group.id, 'edit']">
-            <td>
-              <span class="table-list__level">
-                {{ group.name }}
-              </span>
-            </td>
-            <td>
-              <span class="table-list__level">
-                {{ group.user_count }}
-              </span>
-            </td>
-            <td>
-              <button class="button button--primary">
-                <i class="fa fa-eye"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="gr-12" *ngIf="user">
-      <a class="button button--primary add-group pull-right" [routerLink]="['/groups/new']" *ngIf="user.isAdmin()">
-        <i class="fa fa-plus"></i> <i class="fa fa-group"></i>
-      </a>
-      <!-- <a class="button button--primary add-user pull-right" [routerLink]="['/users/new']">
-        <i class="fa fa-plus"></i> <i class="fa fa-user"></i>
-      </a> -->
-    </div>
-
-  </div>
-</div>
+  <tbody>
+    <tr *ngFor="let group of groups" [routerLink]="['/groups', group.id, 'edit']">
+      <td>
+        <span class="table-list__level">
+          {{ group.name }}
+        </span>
+      </td>
+      <td>
+        <span class="table-list__level">
+          {{ group.user_count }}
+        </span>
+      </td>
+      <td>
+        <button class="button button--primary">
+          <i class="fa fa-eye"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

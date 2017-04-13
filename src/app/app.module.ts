@@ -43,6 +43,7 @@ import { AnswerComponent } from './components/core/answer/answer.component';
 import { AnswerListComponent } from './components/core/answer-list/answer-list.component';
 import { authHttpServiceFactory } from './common/helpers'
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { StudentGroupsComponent } from './components/core/student/student-groups/student-groups.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
         BracketsFormComponent,
         ChoiceFormComponent,
         AnswerComponent,
-        AnswerListComponent
+        AnswerListComponent,
+        StudentGroupsComponent
     ],
 
     imports     : [

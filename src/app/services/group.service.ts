@@ -16,28 +16,30 @@ export class GroupService extends BaseService {
     super()
   }
 
+  private mapGroupListFromResponse(response) {
+      let data = response.json().data;
+
+      return data.map((item) => {
+          return new Group(item.id, item.attributes);
+      })
+  }
+
   getGroups(): Promise<Group[]> {
     return this.authHttp.get(this.groupsUrl, { headers: contentHeaders })
                .toPromise()
-               .then((response) => {
-                 let data = response.json().data;
-
-                 return data.map((item) => {
-                   return new Group(item.id, item.attributes);
-                 })
-               });
+               .then(response => this.mapGroupListFromResponse(response));
   }
 
   getTeacherGroups(id): Promise<Group[]> {
     return this.authHttp.get(this.teachersUrl + '/' + id + '/groups', { headers: contentHeaders })
                .toPromise()
-               .then((response) => {
-                 let data = response.json().data;
+               .then(response => this.mapGroupListFromResponse(response));
+  }
 
-                 return data.map((item) => {
-                   return new Group(item.id, item.attributes);
-                 })
-               });
+  getUserGroups(id): Promise<Group[]> {
+    return this.authHttp.get(this.usersUrl + '/' + id + '/groups', { headers: contentHeaders })
+               .toPromise()
+               .then(response => this.mapGroupListFromResponse(response));
   }
 
   getGroup(id: number): Promise<Group> {
