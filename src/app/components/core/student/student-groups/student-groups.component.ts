@@ -32,8 +32,12 @@ export class StudentGroupsComponent implements OnInit {
   }
 
   getUserGroups(): void {
-    if (this.studentId) {
-      this.service.getUserGroups(this.studentId).then(groups =>  this.groups = groups);
+    if (this.student) {
+        if (this.student.isTeacher()) {
+            this.service.getTeacherGroups(this.student.id).then(groups =>  this.groups = groups)
+        } else {
+            this.service.getUserGroups(this.studentId).then(groups =>  this.groups = groups);
+        }
     } else {
       if (this.user.isTeacher()) {
         this.service.getTeacherGroups(this.user.id).then(groups =>  this.groups = groups)
@@ -53,9 +57,14 @@ export class StudentGroupsComponent implements OnInit {
                   let id = +params['id'];
                   this.studentId = id;
                   if (!isNaN(this.studentId)) {
-                      this.userService.getUser(this.studentId).then(user => this.student = user);
+                      this.userService.getUser(this.studentId).then(user =>  {
+                          this.student = user;
+                          this.getUserGroups()
+                      });
+                  } else {
+                      this.getUserGroups();
                   }
-                  this.getUserGroups()
+
               });
       })
   }
