@@ -15,6 +15,8 @@ export class UserService extends BaseService {
 
   private subject = new Subject<User>();
 
+  private user: User;
+
   constructor (private authHttp: AuthHttp) {
     super()
   }
@@ -31,15 +33,36 @@ export class UserService extends BaseService {
     return this.getUser(getAuthenticatedUserId());
   }
 
+  isAuthenticatedAsAdmin(): Promise<boolean> {
+    return this.getAuthenticatedUserObject().then(user => {
+      return user.isAdmin();
+    });
+  }
+
+  private createUserFromResponse(response): User {
+    console.log(response);
+    let id = response.json().data.id;
+    let data = response.json().data.attributes;
+    let user = new User(id, data);
+
+    this.user = user;
+
+    return this.user;
+  }
+
   getUser(userId: number): Promise<User> {
-    return this.authHttp.get(this.usersUrl + '/' + userId + '/', { headers: contentHeaders })
-                        .toPromise()
-                        .then((response) => {
-                          let id = response.json().data.id;
-                          let data = response.json().data.attributes;
-                          let user = new User(id, data);
-                          return user;
-                        });
+
+    let promise: Promise<User>;
+
+    if (this.user) {
+      console.log(this.user);
+      promise = new Promise(resolve => resolve(this.user)).then(user => user);
+    } else {
+      promise = this.authHttp.get(this.usersUrl + '/' + userId + '/', { headers: contentHeaders })
+          .toPromise().then(user => user).then((response) => this.createUserFromResponse(response));
+    }
+
+    return promise;
   }
 
   getUserWithGroups(userId: number): Promise<User> {
