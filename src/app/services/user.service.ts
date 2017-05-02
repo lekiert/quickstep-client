@@ -39,30 +39,36 @@ export class UserService extends BaseService {
     });
   }
 
-  private createUserFromResponse(response): User {
-    console.log(response);
+  private createUserFromResponse(response, cache: boolean = true): User {
+
     let id = response.json().data.id;
     let data = response.json().data.attributes;
     let user = new User(id, data);
 
-    this.user = user;
+    if (cache) {
+      this.user = user;
+    }
 
-    return this.user;
+    return user;
   }
 
-  getUser(userId: number): Promise<User> {
+  getUser(userId: number, cache: boolean = true): Promise<User> {
 
     let promise: Promise<User>;
 
-    if (this.user) {
+    if (this.user && cache) {
       console.log(this.user);
       promise = new Promise(resolve => resolve(this.user)).then(user => user);
     } else {
-      promise = this.authHttp.get(this.usersUrl + '/' + userId + '/', { headers: contentHeaders })
-          .toPromise().then(user => user).then((response) => this.createUserFromResponse(response));
+      promise = this.getUserFromAPI(userId, cache);
     }
 
     return promise;
+  }
+
+  getUserFromAPI(userId: number, cache: boolean = true): Promise<User> {
+    return this.authHttp.get(this.usersUrl + '/' + userId + '/', { headers: contentHeaders })
+        .toPromise().then(user => user).then((response) => this.createUserFromResponse(response, cache));
   }
 
   getUserWithGroups(userId: number): Promise<User> {

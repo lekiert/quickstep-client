@@ -20,7 +20,8 @@ export class AnswerListComponent implements OnInit {
       private userService: UserService) {
         this.sub = this.route.params.subscribe(params => {
           let id = +params['id'];
-          this.userService.getUser(id).then((user) => {
+          console.log(id);
+          this.userService.getUserFromAPI(id, false).then((user) => {
             this.user = user;
           });
           this.testService.getUserAnswers(id).then((answers) => {
