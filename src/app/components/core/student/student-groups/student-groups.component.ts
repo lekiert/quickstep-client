@@ -57,7 +57,7 @@ export class StudentGroupsComponent implements OnInit {
                   let id = +params['id'];
                   this.studentId = id;
                   if (!isNaN(this.studentId)) {
-                      this.userService.getUser(this.studentId).then(user =>  {
+                      this.userService.getUser(this.studentId, false).then(user =>  {
                           this.student = user;
                           this.getUserGroups()
                       });
