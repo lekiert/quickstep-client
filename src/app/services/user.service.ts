@@ -46,7 +46,7 @@ export class UserService extends BaseService {
     let user = new User(id, data);
 
     if (cache) {
-      this.user = user;
+      // this.user = user;
     }
 
     return user;
