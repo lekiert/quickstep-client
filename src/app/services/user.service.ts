@@ -7,7 +7,6 @@ import { contentHeaders } from '../common/headers';
 import '../rxjs-operators';
 import { Subject }    from 'rxjs/Subject';
 import { BaseService } from './base.service';
-import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class UserService extends BaseService {
@@ -20,11 +19,11 @@ export class UserService extends BaseService {
     super()
   }
 
-  isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     return !!getAuthenticatedUserId();
   }
 
-  isAuthenticatedAsAdmin(): boolean {
+  public isAuthenticatedAsAdmin(): boolean {
     if (this.authenticatedUser) {
       return this.authenticatedUser.isAdmin();
     }
@@ -32,7 +31,7 @@ export class UserService extends BaseService {
     return false
   }
 
-  isAuthenticatedAsSupervisor(): boolean {
+  public isAuthenticatedAsSupervisor(): boolean {
     if (this.authenticatedUser) {
       return this.authenticatedUser.isAdmin() || this.authenticatedUser.isSupervisor();
     }
@@ -56,20 +55,20 @@ export class UserService extends BaseService {
     });
   }
 
-  getUser(userId: number): Promise<User> {
+  public getUser(userId: number): Promise<User> {
     return this.getUserFromAPI(userId);
   }
 
-  getUserFromAPI(userId: number): Promise<User> {
+  public getUserFromAPI(userId: number): Promise<User> {
     return this.authHttp.get(this.usersUrl + '/' + userId + '/', { headers: contentHeaders })
         .toPromise().then(user => user).then((response) => this.createUserFromResponse(response));
   }
 
-  getUserObservable() {
+  public getUserObservable() {
     return this.subject.asObservable();
   }
 
-  fetchUserFromAPI(id?: number) {
+  public fetchUserFromAPI(id?: number) {
     let userId = id || getAuthenticatedUserId();
     return this.authHttp.get(this.usersUrl + '/' + userId + '/', { headers: contentHeaders })
                         .subscribe(
@@ -84,9 +83,7 @@ export class UserService extends BaseService {
                         );
   }
 
-
-
-  getUsers(type?: string): Promise<User[]> {
+  public getUsers(type?: string): Promise<User[]> {
     let filter = new URLSearchParams();
 
     if (type && type !== 'ALL') {
@@ -104,19 +101,19 @@ export class UserService extends BaseService {
                });
   }
 
-  getTeachers(): Promise<User[]> {
+  public getTeachers(): Promise<User[]> {
     return this.getUsers('TEACHER');
   }
 
-  getUsersByGroup(id: number): Promise<User[]> {
+  public getUsersByGroup(id: number): Promise<User[]> {
     return this.getUsersOfTypeByGroup('users', id);
   }
 
-  getTeachersByGroup(id: number): Promise<User[]> {
+  public getTeachersByGroup(id: number): Promise<User[]> {
     return this.getUsersOfTypeByGroup('teachers', id);
   }
 
-  getUsersOfTypeByGroup(type: string, id: number): Promise<User[]> {
+  public getUsersOfTypeByGroup(type: string, id: number): Promise<User[]> {
     return this.authHttp.get(this.groupsUrl + '/' + id + '/' + type, { headers: contentHeaders })
                .toPromise()
                .then((response) => {

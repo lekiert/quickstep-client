@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import { Course } from '../course';
 import { Observable } from 'rxjs/Observable';
 import { AuthHttp } from 'angular2-jwt';
-import { environment } from '../../environments/environment';
 import { contentHeaders } from '../common/headers';
 import { BaseService } from './base.service';
 

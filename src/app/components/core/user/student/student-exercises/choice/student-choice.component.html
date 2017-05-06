@@ -1,0 +1,30 @@
+<div *ngIf="exercise.data">
+
+    <div *ngFor="let sentence of keys(exercise.data); let i = index">
+      <p>{{ exercise.data[sentence] }}</p>
+      <div class="choice-options">
+        <div *ngFor="let choice of exercise.answers[sentence]; let j = index"
+             [ngClass]="{
+               'choice-options__option' : true,
+               'choice-options__option--selected' : isSelected(sentence, choice.text),
+               'choice-options__option--error' : hasError(sentence, choice.text),
+               'choice-options__option--correct' : hasChoiceResult(sentence, choice.text) && !hasError(sentence, choice.text)
+             }">
+
+          <div *ngIf="!choice.mime || !choice.media">
+             {{ choice.text }}
+          </div>
+
+          <div *ngIf="choice.mime && choice.media">
+            <img *ngIf="choice.mime.indexOf('image') === 0" src="{{ storageUrl }}{{ choice.media }}">
+            <audio controls *ngIf="choice.mime.indexOf('audio') === 0">
+              <source src="{{ storageUrl }}{{ choice.media }}" type="{{ choice.mime }}">
+            </audio>
+          </div>
+
+          <input *ngIf="setDefaults" [disabled]="hasChoiceResult(sentence, choice.text)" type="checkbox" (click)="toggleChoice(sentence, choice.text)" [checked]="hasChoiceResult(sentence, choice.text)" class="choice-options__option__input">
+        </div>
+      </div>
+    </div>
+
+</div>

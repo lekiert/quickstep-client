@@ -1,0 +1,33 @@
+@import 'src/app/style';
+@import 'src/app/config';
+
+.add-exercise-to-test {
+  margin-bottom: 30px;
+}
+
+.add-exercise-to-test__input {
+  width: calc(100% - 46px);
+  display: inline-block;
+}
+
+.add-exercise-to-test__button {
+  width: 36px;
+  display: inline-block;
+}
+
+.delete-test {
+  text-align: center;
+
+  @include clearfix;
+}
+
+.delete-test-button {
+  margin: 0 auto;
+}
+
+.delete-test-confirmation {
+  width: 100px;
+  padding: 8px;
+  font-size: 12pt;
+  text-align: center;
+}

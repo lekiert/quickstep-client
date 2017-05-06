@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers, Response, RequestOptions} from '@angular/http';
+import { Http } from '@angular/http';
 import { Test } from '../test';
-import { Excercise } from '../excercise';
-import { Observable } from 'rxjs/Observable';
+import { Exercise } from '../exercise';
 import { AuthHttp } from 'angular2-jwt';
-import { environment } from '../../environments/environment';
-import { getAuthenticatedUserId } from '../common/helpers';
 import { contentHeaders } from '../common/headers';
 import { BaseService } from './base.service';
 
@@ -19,7 +16,7 @@ export class TestService extends BaseService {
     super()
   }
 
-  getTestsByCourse(id): Promise<Test[]> {
+  public getTestsByCourse(id): Promise<Test[]> {
     return this.authHttp.get(this.coursesUrl + '/' + id + '/tests' + '?sort=id', { headers: contentHeaders })
                .toPromise()
                .then((response) => {
@@ -31,7 +28,7 @@ export class TestService extends BaseService {
                });
   }
 
-  getTestsByCourseWithAnswers(id): Promise<Test[]> {
+  public getTestsByCourseWithAnswers(id): Promise<Test[]> {
     return this.authHttp.get(this.coursesUrl + '/' + id + '/tests' + '?sort=id&include=answers', { headers: contentHeaders })
                .toPromise()
                .then((response) => {
@@ -43,7 +40,7 @@ export class TestService extends BaseService {
                });
   }
 
-  getUserAnswers(userId): any {
+  public getUserAnswers(userId): any {
     return this.authHttp.get(this.usersUrl + '/' + userId + '/answers' + '?sort=-id', { headers: contentHeaders })
                .toPromise()
                .then((response) => {
@@ -53,7 +50,7 @@ export class TestService extends BaseService {
                });
   }
 
-  getAnswer(answersId): any {
+  public getAnswer(answersId): any {
     return this.authHttp.get(this.answersUrl + '/' + answersId + '?include=test,user', { headers: contentHeaders })
                .toPromise()
                .then((response) => {
@@ -63,7 +60,7 @@ export class TestService extends BaseService {
                });
   }
 
-  getTest(id): Promise<Test> {
+  public getTest(id): Promise<Test> {
     return this.authHttp.get(this.testsUrl + '/' + id, { headers: contentHeaders })
                .toPromise()
                .then((response) => {
@@ -73,19 +70,19 @@ export class TestService extends BaseService {
                });
   }
 
-  getTestRelatedExcercises(id): Promise<Excercise[]> {
-    return this.authHttp.get(this.testsUrl + '/' + id + '/excercises' + '?sort=id', { headers: contentHeaders })
+  public getTestRelatedExercises(id): Promise<Exercise[]> {
+    return this.authHttp.get(this.testsUrl + '/' + id + '/exercises' + '?sort=id', { headers: contentHeaders })
                .toPromise()
                .then((response) => {
                  let data = response.json().data;
                  return data.map((item) => {
-                   return new Excercise(item.id, item.attributes);
+                   return new Exercise(item.id, item.attributes);
                  })
                });
   }
 
 
-  createTest(test) {
+  public createTest(test) {
     return this.authHttp.post(this.testsUrl, {
       data: {
         id: test.id,
@@ -99,7 +96,7 @@ export class TestService extends BaseService {
     }, { headers: contentHeaders }).toPromise();
   }
 
-  createCourseTest(courseId, test) {
+  public createCourseTest(courseId, test) {
     return this.authHttp.post(this.testsUrl, {
       data: {
         id: test.id,
@@ -121,7 +118,7 @@ export class TestService extends BaseService {
     });
   }
 
-  updateTest(test) {
+  public updateTest(test) {
     console.log('update');
     console.log(test);
     return this.authHttp.patch(this.testsUrl + '/' + test.id, {
@@ -137,7 +134,7 @@ export class TestService extends BaseService {
     }, { headers: contentHeaders }).toPromise();
   }
 
-  createCourse(course) {
+  public createCourse(course) {
     return this.authHttp.post(this.coursesUrl, {
       data: {
         type: "courses",
@@ -149,13 +146,13 @@ export class TestService extends BaseService {
     }, { headers: contentHeaders }).toPromise();
   }
 
-  deleteTest(id): Promise<boolean> {
+  public deleteTest(id): Promise<boolean> {
     return this.authHttp.delete(this.testsUrl + '/' + id).toPromise().then((response) => {
       return true;
     });
   }
 
-  updateCourse(course) {
+  public updateCourse(course) {
     return this.authHttp.patch(this.coursesUrl + '/' + course.id, {
       data: {
         id: course.id,
@@ -168,7 +165,7 @@ export class TestService extends BaseService {
     }, { headers: contentHeaders }).toPromise();
   }
 
-  submitAnswers(testId, userId, answers) {
+  public submitAnswers(testId, userId, answers) {
     return this.authHttp.post(this.answersUrl, {
       data: {
         type: "answers",

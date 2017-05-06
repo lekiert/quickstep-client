@@ -1,11 +1,11 @@
-@import '../../../style';
-@import '../../../config';
+@import 'src/app/style';
+@import 'src/app/config';
 
-.test__excercises__excercise {
+.test__exercises__exercise {
   margin: 25px 0;
 }
 
-.test__excercises__excercise {
+.test__exercises__exercise {
   margin-top: 50px;
 
   &:first-child {
@@ -18,7 +18,7 @@
   margin: 25px auto;
 }
 
-.test__excercises__excercise__attachments__item {
+.test__exercises__exercise__attachments__item {
   max-width: 250px;
   max-height: 250px;
   width: auto;

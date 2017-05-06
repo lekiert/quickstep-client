@@ -1,0 +1,42 @@
+<div class="row" *ngIf="exercise">
+  <div class="gr-12" *ngIf="exercise.id > 0">
+      <file-upload [id]="file" (fileUploaded)="attachFileToExercise($event)"></file-upload>
+  </div>
+
+  <div class="gr-12" *ngIf="exercise.attachments">
+    <div *ngFor="let attachment of exercise.attachments" class="exercise__attachment">
+      <span class="exercise__remove-attachment" (click)="deleteAttachmentFromExercise(attachment.id)"><i class="fa fa-remove"></i></span>
+      <img *ngIf="attachment.type === 'image/png' || attachment.type === 'image/jpg' || attachment.type === 'image/jpeg'" src="{{ storageUrl }}{{ attachment.url }}" style="width: auto; height: auto">
+      <audio controls *ngIf="attachment.type === 'audio/mpeg'">
+        <source  class="test__exercises__exercise__attachments__item" src="{{ storageUrl }}{{ attachment.url }}" type="{{ attachment.type }}">
+      </audio>
+    </div>
+  </div>
+
+  <div class="gr-12">
+    <div [ngSwitch]="exercise.type">
+      <brackets-form *ngSwitchCase="'BRACKETS'" [exercise]="exercise" (updateExercise)="updateExerciseData()"></brackets-form>
+      <choice-form *ngSwitchCase="'CHOICE'" [exercise]="exercise" (updateExercise)="updateExerciseData()" (fileUploaded)="attachFileToExercise($event)"></choice-form>
+      <div *ngSwitchDefault></div>
+    </div>
+  </div>
+
+  <div class="form__buttons" *ngIf="exercise.id > 0">
+    <button type="button" (click)="updateExerciseData()" class="button button--primary pull-right">
+      <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Zaktualizuj ćwiczenie
+    </button>
+  </div>
+
+  <div class="form__buttons" *ngIf="!exerciseExists">
+    <button type="button" (click)="createExercise()" class="button button--primary pull-right">
+      <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Dodaj ćwiczenie
+    </button>
+  </div>
+
+  <div class="form__buttons" *ngIf="exerciseExists || exercise.id > 0">
+    <button type="button" (click)="cancel()" class="button button--default pull-right">
+      <i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;&nbsp;Powrót
+    </button>
+  </div>
+
+</div>

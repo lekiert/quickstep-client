@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="gr-12">
+
+    <form class="form" (ngSubmit)="saveTest()" #editBracketsForm="ngForm">
+      <div class="form__section">
+        <header class="form_section__heading">
+          <h3 class="heading heading--center">Formularz: <strong>luki</strong></h3>
+        </header>
+
+        <div class="form__group form__group--inline">
+          <div class="form__group__label">
+            <label for="exercise-name">Nazwa ćwiczenia</label>
+          </div>
+          <div class="form__group__control">
+            <input type="text" required name="exercise[name]" [(ngModel)]="exercise.name"
+                   class="input input--full" id="exercise-name">
+          </div>
+        </div>
+
+        <div class="form__group form__group--inline">
+          <div class="form__group__label">
+            <label for="exercise-command">Polecenie</label>
+          </div>
+          <div class="form__group__control">
+            <input type="text" required name="exercise[command]" [(ngModel)]="exercise.command"
+                   class="input input--full" id="exercise-command">
+          </div>
+        </div>
+
+        <div class="form__group form__group--inline">
+          <div class="form__group__label">
+            <label for="exercise-code">Kod</label>
+          </div>
+          <div class="form__group__control">
+            <input type="text" required name="exercise[code]" [(ngModel)]="exercise.code"
+                   class="input input--full" id="exercise-code">
+          </div>
+        </div>
+
+        <div *ngFor="let sentence of keys(exercise.data); let i = index">
+          <div class="question-sentence">
+            <button style="margin-left: 5px; float: right" type="button" class="button button--danger" (click)="deleteSentence(sentence)">
+              <i class="fa fa-remove"></i>
+            </button>
+            <input type="text" required name="bracketsSentence-{{i}}" style="width: calc(100% - 4rem)"
+                   [(ngModel)]="exercise.data[sentence]" class="input input--full">
+
+            <div *ngFor="let word of countSentenceBrackets(exercise.data[sentence]); let j = index" style="display: inline">
+              <div class="question-sentence-word">
+                <div class="question-sentence-word__count">{{ j + 1}}.</div>
+                <input type="text" class="question-sentence-word__input input" required
+                       name="bracketsSentence-{{i}}-answer-{{j}}" [(ngModel)]="exercise.answers[sentence][j]">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form__buttons">
+          <button type="button" (click)="addSentence()" class="button button--success pull-right">
+            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Dodaj zdanie
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

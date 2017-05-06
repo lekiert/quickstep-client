@@ -1,0 +1,81 @@
+@import 'src/app/style';
+@import 'src/app/config';
+
+.exercises-table {
+
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+  transition: all 200ms;
+
+  th, td {
+    text-align: left;
+    padding: 10px 5px;
+  }
+
+  th {
+    &:first-child {
+      width: 10%;
+    }
+  }
+
+  td {
+    &:last-child {
+      width: 15%;
+      text-align: right;
+    }
+
+    @include gridle_state(xs) {
+      padding: 25px 15px;
+    }
+  }
+
+  thead {
+    border-bottom: 1px solid $color-gray;
+  }
+
+  tr {
+    transition: all 200ms;
+    border-bottom: 1px solid rgba(77, 127, 178, 0.1);
+    &:nth-child(even) {
+      background: rgba(77, 127, 178, 0.075);
+    }
+    &:hover {
+      cursor: pointer;
+      background: $color-blue-vlight;
+      color: #fff;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &.active {
+      .exercises-table__description {
+        max-height: auto;
+      }
+    }
+  }
+
+}
+
+.exercises-table__code {
+  display: inline-block;
+  padding: 5px 7px;
+  background: #ebebeb;
+  font-weight: 400;
+  color: $color-blue-light;
+  border-radius: 5px;
+}
+
+.exercises-table__name {
+  display: inline-block;
+  margin: 5px;
+}
+
+.exercises-table__description {
+  max-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 5px;
+  transition: all 200ms;
+}

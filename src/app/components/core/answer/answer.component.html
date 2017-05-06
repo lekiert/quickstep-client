@@ -11,29 +11,29 @@
     <div class="gr-12">
       <div class="test">
 
-        <div class="test__excercises" *ngIf="excercises">
+        <div class="test__exercises" *ngIf="exercises">
 
-          <div *ngFor="let excercise of excercises; let i = index" class="test__excercises__excercise">
-            <div class="test__excercises__excercise__name">
-              <h3 class="heading heading--primary">{{ excercise.name }}</h3>
+          <div *ngFor="let exercise of exercises; let i = index" class="test__exercises__exercise">
+            <div class="test__exercises__exercise__name">
+              <h3 class="heading heading--primary">{{ exercise.name }}</h3>
             </div>
 
-            <div class="test__excercises__excercise__command">
-              <p>{{ excercise.command }}</p>
+            <div class="test__exercises__exercise__command">
+              <p>{{ exercise.command }}</p>
             </div>
 
-            <div class="test__excercises__excercise__attachments">
-              <div *ngFor="let item of excercise.attachments" style="display: inline-block;vertical-align:middle; margin: 15px;">
-                <img *ngIf="item.type === 'image/png' || item.type === 'image/jpg' || item.type === 'image/jpeg'" class="test__excercises__excercise__attachments__item" src="{{ storageUrl }}{{ item.url }}">
+            <div class="test__exercises__exercise__attachments">
+              <div *ngFor="let item of exercise.attachments" style="display: inline-block;vertical-align:middle; margin: 15px;">
+                <img *ngIf="item.type === 'image/png' || item.type === 'image/jpg' || item.type === 'image/jpeg'" class="test__exercises__exercise__attachments__item" src="{{ storageUrl }}{{ item.url }}">
                 <audio controls *ngIf="item.type === 'audio/mpeg'">
-                  <source class="test__excercises__excercise__attachments__item" src="{{ storageUrl }}{{ item.url }}" type="{{ item.type }}">
+                  <source class="test__exercises__exercise__attachments__item" src="{{ storageUrl }}{{ item.url }}" type="{{ item.type }}">
                 </audio>
               </div>
             </div>
 
-            <div class="test__excercises__excercise__body">
-              <student-brackets [setDefaults]="false" [excercise]="excercise" [answers]="answers[excercise.id]" *ngIf="excercise.type === 'BRACKETS'"></student-brackets>
-              <student-choice [setDefaults]="false" [excercise]="excercise" [answers]="answers[excercise.id]" *ngIf="excercise.type === 'CHOICE'"></student-choice>
+            <div class="test__exercises__exercise__body">
+              <student-brackets [setDefaults]="false" [exercise]="exercise" [answers]="answers[exercise.id]" *ngIf="exercise.type === 'BRACKETS'"></student-brackets>
+              <student-choice [setDefaults]="false" [exercise]="exercise" [answers]="answers[exercise.id]" *ngIf="exercise.type === 'CHOICE'"></student-choice>
             </div>
           </div>
 

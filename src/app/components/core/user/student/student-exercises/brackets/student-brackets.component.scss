@@ -1,0 +1,22 @@
+@import 'src/app/style';
+@import 'src/app/config';
+
+.word {
+  border: 0;
+  width: 110px;
+  margin: 0 5px;
+  border-bottom: 2px solid $color-blue-vlight;
+  text-align: center;
+  font-weight: 400;
+  color: $color-blue-vlight;
+  outline: 0;
+
+  &.word--error {
+    border-bottom-color: $color-red;
+    color: $color-red;
+  }
+  &.word--correct {
+    border-bottom-color: $color-green-light;
+    color: $color-green-light;
+  }
+}

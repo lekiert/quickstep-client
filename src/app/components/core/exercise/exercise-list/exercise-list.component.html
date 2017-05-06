@@ -1,0 +1,39 @@
+<div class="">
+  <div class="row">
+    <div class="gr-12">
+      <h1 class="heading heading--border">Zadania</h1>
+    </div>
+    <div class="gr-12">
+      <table class="exercises-table">
+        <thead>
+          <th>Kod</th>
+          <th colspan="2">Nazwa ćwiczenia</th>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let exercise of exercises">
+            <td>
+              <span class="exercises-table__code">
+                {{ exercise.code }}
+              </span>
+            </td>
+            <td>
+              <span class="exercises-table__name">
+                {{ exercise.name }}
+              </span>
+              <p class="exercises-table__description">
+                {{ exercise.description }}
+              </p>
+
+            </td>
+            <td>
+              <button class="button button--primary">
+                <i class="fa fa-pencil"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+@import 'src/app/style';
+@import 'src/app/config';
+
+.pagination {
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+.pagination__page {
+  display: inline-block;
+  padding: 0.5rem;
+  background: #ededed;
+}

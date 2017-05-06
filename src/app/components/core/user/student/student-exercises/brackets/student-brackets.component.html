@@ -1,0 +1,16 @@
+<div class="" *ngIf="exercise && exercise.data">
+
+    <p *ngFor="let sentence of keys(exercise.data); let i = index">
+      <span *ngFor="let parsedSentence of splitSentence(exercise.data[sentence]); let j = index">
+        {{ parsedSentence }}
+        <span *ngIf="j < (splitSentence(exercise.data[sentence]).length - 1)">
+          <input type="text"
+                 [(ngModel)]="answers[sentence][j]"
+                 (ngModelChange)="updateExerciseAnswerValues()"
+                 [ngClass]="{'word': true, 'word--error' : hasError(sentence, j), 'word--correct' : hasWordResult(sentence, j) && !hasError(sentence, j) }"
+                 [disabled]="hasWordResult(sentence, j) || !setDefaults">
+        </span>
+      </span>
+    </p>
+
+</div>

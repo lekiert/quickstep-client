@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export abstract class BaseService {
@@ -8,7 +8,7 @@ export abstract class BaseService {
   protected usersUrl = environment.API_URL + 'users';
   protected teachersUrl = environment.API_URL + 'teachers';
   protected groupsUrl = environment.API_URL + 'groups';
-  protected excercisesUrl = environment.API_URL + 'excercises';
+  protected exercisesUrl = environment.API_URL + 'exercises';
   protected testsUrl = environment.API_URL + 'tests';
   protected userLogsUrl = environment.API_URL + 'user-logs';
   protected answersUrl = environment.API_URL + 'answers';

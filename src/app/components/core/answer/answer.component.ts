@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {TestService} from "app/services/test.service";
-import {Excercise} from "app/excercise";
+import {Exercise} from "app/exercise";
 import {Test} from "app/test";
 import {User} from "app/user";
 import {environment} from "../../../../environments/environment";
@@ -17,7 +17,7 @@ export class AnswerComponent implements OnInit {
   id: any;
   test: Test;
   user: User;
-  excercises: Excercise[];
+  exercises: Exercise[];
   answers: {};
   score: any;
   storageUrl = environment.API_URL;
@@ -39,9 +39,9 @@ export class AnswerComponent implements OnInit {
               if (res.type === 'tests') {
                 this.test = new Test(res.id, res.attributes);
 
-                this.service.getTestRelatedExcercises(res.id).then((excercises) => {
+                this.service.getTestRelatedExercises(res.id).then((exercises) => {
 
-                  this.excercises = excercises;
+                  this.exercises = exercises;
                 });
               }
               if (res.type === 'users') {

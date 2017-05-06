@@ -1,0 +1,51 @@
+@import 'src/app/style';
+@import 'src/app/config';
+
+.delete-group {
+  text-align: center;
+
+  @include clearfix;
+}
+
+.delete-group-button {
+  margin: 0 auto;
+}
+
+.delete-group-confirmation {
+  width: 100px;
+  padding: 8px;
+  font-size: 12pt;
+  text-align: center;
+}
+
+.users-table__edit {
+  min-width: 150px;
+}
+
+.add-teacher-to-group,
+.add-user-to-group {
+  width: 100%;
+
+  @include gridle_state(md) {
+    width: 50%;
+    float: right;
+  }
+
+  @include clearfix;
+}
+
+.add-teacher-to-group__input,
+.add-user-to-group__input {
+  width: calc(100% - 40px);
+  float: left;
+
+  input {
+    width: calc(100% - 20px);
+    height: 19px;
+  }
+}
+
+.add-teacher-to-group__button,
+.add-user-to-group__button {
+  float: right;
+}

@@ -1,0 +1,16 @@
+@import 'src/app/style';
+@import 'src/app/config';
+
+.generate-password-button {
+  width: 100%;
+  margin: 15px 10px 0 10px;
+
+  @include gridle_state(md) {
+    display: inline-block;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}

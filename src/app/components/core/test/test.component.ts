@@ -1,11 +1,11 @@
+import {environment} from "../../../../environments/environment";
 import {Component} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {TestService} from "../../../services/test.service";
-import {Excercise} from "../../../excercise";
-import {Test} from "../../../test";
-import {User} from "../../../user";
-import {environment} from "../../../../environments/environment";
+import {TestService} from "app/services/test.service";
 import {UserService} from "../../../services/user.service";
+import {Test} from "app/test";
+import {User} from "app/user";
+import {Exercise} from "app/exercise";
 
 const styles = require('./test.component.scss');
 const template = require('./test.component.html');
@@ -22,7 +22,7 @@ export class TestComponent {
   error: string = '';
   test: Test;
   user: User;
-  excercises: Excercise[];
+  exercises: Exercise[];
   results = [];
   answers = {};
 
@@ -47,16 +47,16 @@ export class TestComponent {
          this.test = test;
        });
 
-       this.service.getTestRelatedExcercises(this.id).then((excercises) => {
-         this.excercises = excercises;
-         for (let excercise of this.excercises) {
-           this.answers[excercise.id] = {};
+       this.service.getTestRelatedExercises(this.id).then((exercises) => {
+         this.exercises = exercises;
+         for (let exercise of this.exercises) {
+           this.answers[exercise.id] = {};
          }
        });
     });
   }
 
-  createExcercisesResults() {
+  createExercisesResults() {
 
   }
 
@@ -68,7 +68,7 @@ export class TestComponent {
     console.log(event);
   }
 
-  getExcercisesAnswers() {
+  getExercisesAnswers() {
     console.log(this.answers);
   }
 
@@ -77,19 +77,19 @@ export class TestComponent {
       let data = results.json().data.attributes;
       this.score = (+data.score.score / +data.score.max * 100).toFixed();
 
-      this.setExcerciseResults(data.results);
+      this.setExerciseResults(data.results);
     }).catch(error => {
       this.error = "Przekroczyłeś/aś limit 2 rozwiązań jednego testu.";
       console.log(error);
     });
   }
 
-  setExcerciseResults(results): void {
+  setExerciseResults(results): void {
     for (let i in results) {
-      for (let j in this.excercises) {
+      for (let j in this.exercises) {
 
-        if (+i === +this.excercises[j].id) {
-          this.excercises[j].checkResults = results[i];
+        if (+i === +this.exercises[j].id) {
+          this.exercises[j].checkResults = results[i];
         }
       }
     }
