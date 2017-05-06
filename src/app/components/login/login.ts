@@ -5,6 +5,7 @@ import {contentHeaders} from "../../common/headers";
 import {AuthGuard} from "../../common/auth.guard";
 import {UserService} from "../../services/user.service";
 import {environment} from "../../../environments/environment";
+import {getAuthenticatedUserId} from "../../common/helpers";
 
 const theme   = require('../../style.scss');
 const styles   = require('./login.scss');
@@ -38,8 +39,10 @@ export class Login {
       .subscribe(
         response => {
           localStorage.setItem('jwt', response.json().jwt);
-          this.service.fetchUserFromAPI();
-          this.router.navigate(['home']);
+          this.service.getUser(getAuthenticatedUserId()).then(user => {
+            this.service.setAuthenticatedUser(user);
+            this.router.navigate(['home']);
+          });
         },
         error => {
           this.error = true;

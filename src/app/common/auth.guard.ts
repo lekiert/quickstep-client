@@ -9,11 +9,7 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
   isUser() {
-    if (tokenNotExpired(environment.TOKEN_NAME)) {
-        return true;
-    }
-
-    return false;
+    return tokenNotExpired(environment.TOKEN_NAME);
   }
 
   isGuest() {

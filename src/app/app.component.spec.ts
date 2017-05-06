@@ -24,7 +24,7 @@ class UserServiceMock {
     return true;
   }
 
-  getAuthenticatedUser(): Observable<User> {
+  getUserObservable(): Observable<User> {
     let user = new User(1, {
         first_name: 'Jan',
         last_name: 'Kowalski',

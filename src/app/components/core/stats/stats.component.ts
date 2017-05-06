@@ -71,7 +71,7 @@ export class StatsComponent implements OnInit {
       let id = +params['id'];
       this.id = id;
       if (id) {
-        this.userService.getUserFromAPI(id, false).then(user => {
+        this.userService.getUser(id).then(user => {
           this.student = user
         })
       }

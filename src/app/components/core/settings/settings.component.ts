@@ -31,14 +31,7 @@ export class SettingsComponent {
       this.newPasswordRepeat = '';
       this.successMessage = '';
       this.service.fetchUserFromAPI();
-      this.service.getAuthenticatedUser().subscribe(
-          user => {
-              this.user = user
-          },
-          error => {
-              console.log(error)
-          }
-      )
+      this.service.getAuthenticatedUserObject().then(user => this.user = user)
   }
 
   changePassword() {

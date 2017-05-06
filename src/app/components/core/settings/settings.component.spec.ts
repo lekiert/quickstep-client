@@ -16,17 +16,17 @@ class UserServiceMock {
     return true;
   }
 
-  getAuthenticatedUser(): Observable<User> {
+  getAuthenticatedUserObject(): Promise<User> {
     let user = new User(1, {
       attributes: {
         first_name: 'Jan',
         last_name: 'Kowalski'
       }
     });
-    let sub = new Subject<User>();
-    sub.next(user);
+    // let sub = new Subject<User>();
+    // sub.next(user);
 
-    return sub.asObservable();
+    return new Promise(resolve => user);
   }
 }
 

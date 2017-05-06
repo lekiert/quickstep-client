@@ -7,35 +7,21 @@ import {User} from "../user";
 
 @Injectable()
 export class AuthAdminGuard implements CanActivate {
-    constructor(private userService: UserService) {}
+    constructor(private service: UserService) {}
 
     isUser() {
-        if (tokenNotExpired(environment.TOKEN_NAME)) {
-            return true;
-        }
-
-        return false;
+        return tokenNotExpired(environment.TOKEN_NAME);
     }
 
     isGuest() {
         return !this.isUser();
     }
 
-    canActivate(): Promise<boolean> {
+    canActivate(): boolean {
         if (this.isGuest()) {
-            return new Promise(resolve => resolve(false));
+            return false;
         }
 
-        let promise = new Promise((resolve, reject) => {
-            return this.userService.getAuthenticatedUserObject().then((user: User) => {
-                if (user.isAdmin()) {
-                    return resolve(true);
-                } else {
-                    return resolve(false);
-                }
-            });
-        });
-
-        return promise;
+        return this.service.isAuthenticatedAsAdmin();
     }
 }

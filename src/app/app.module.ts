@@ -44,7 +44,8 @@ import { AnswerListComponent } from './components/core/answer-list/answer-list.c
 import { authHttpServiceFactory } from './common/helpers'
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { StudentGroupsComponent } from './components/core/student/student-groups/student-groups.component';
-import {AuthAdminGuard} from "./common/auth-admin.guard";
+import { AuthAdminGuard } from "./common/auth-admin.guard";
+import { AuthSupervisorGuard } from "./common/auth-supervisor.guard";
 
 
 @NgModule({
@@ -89,6 +90,7 @@ import {AuthAdminGuard} from "./common/auth-admin.guard";
     providers   : [
         AuthGuard,
         AuthAdminGuard,
+        AuthSupervisorGuard,
         ExcerciseService,
         CourseService,
         UserService,

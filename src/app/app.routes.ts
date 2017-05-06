@@ -19,7 +19,7 @@ import { Login } from './components/login';
 import { AuthGuard } from './common/auth.guard';
 import { AuthAdminGuard } from './common/auth-admin.guard';
 import { AuthSupervisorGuard } from './common/auth-supervisor.guard';
-import {StudentGroupsComponent} from "./components/core/student/student-groups/student-groups.component";
+import { StudentGroupsComponent } from "./components/core/student/student-groups/student-groups.component";
 
 export const rootRouterConfig: Routes = [
   { path: 'summary',   component: StatsComponent, canActivate: [AuthGuard] },
@@ -27,14 +27,14 @@ export const rootRouterConfig: Routes = [
   { path: 'settings',   component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'groups',   component: StudentGroupsComponent, canActivate: [AuthGuard] },
   { path: 'groups/new',   component: AddGroupComponent, canActivate: [AuthGuard, AuthAdminGuard] },
-  { path: 'groups/:id/edit',   component: EditGroupComponent, canActivate: [AuthGuard] },
+  { path: 'groups/:id/edit',   component: EditGroupComponent, canActivate: [AuthGuard, AuthAdminGuard] },
   { path: 'users/new',   component: AddUserComponent, canActivate: [AuthGuard, AuthAdminGuard] },
-  { path: 'users/:id/edit',   component: EditUserComponent, canActivate: [AuthGuard, AuthSupervisorGuard] },
+  { path: 'users/:id/edit',   component: EditUserComponent, canActivate: [AuthGuard, AuthAdminGuard] },
   { path: 'users/:id/results',   component: AnswerListComponent, canActivate: [AuthGuard] },
   { path: 'users/:id/statistics',   component: StatsComponent, canActivate: [AuthGuard] },
-  { path: 'users/:id/groups',   component: StudentGroupsComponent, canActivate: [AuthGuard] },
-  { path: 'users/:type',   component: UserListComponent, canActivate: [AuthGuard] },
-  { path: 'courses/new',   component: AddCourseComponent, canActivate: [AuthGuard] },
+  { path: 'users/:id/groups',   component: StudentGroupsComponent, canActivate: [AuthGuard, AuthAdminGuard] },
+  { path: 'users/:type',   component: UserListComponent, canActivate: [AuthGuard, AuthAdminGuard] },
+  { path: 'courses/new',   component: AddCourseComponent, canActivate: [AuthGuard, AuthAdminGuard] },
   { path: 'courses',   component: CourseListComponent, canActivate: [AuthGuard] },
   { path: 'course/:id/tests/new',   component: AddTestComponent, canActivate: [AuthGuard, AuthAdminGuard] },
   { path: 'course/:id',   component: CourseComponent, canActivate: [AuthGuard] },

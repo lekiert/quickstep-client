@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { AuthHttp, JwtHelper } from 'angular2-jwt';
+import { URLSearchParams } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
 import { getAuthenticatedUserId } from '../common/helpers';
 import { User } from '../user';
 import { contentHeaders } from '../common/headers';
 import '../rxjs-operators';
 import { Subject }    from 'rxjs/Subject';
-import { environment } from '../../environments/environment';
 import { BaseService } from './base.service';
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class UserService extends BaseService {
 
   private subject = new Subject<User>();
 
-  private user: User;
+  private authenticatedUser: User;
 
   constructor (private authHttp: AuthHttp) {
     super()
@@ -25,61 +24,49 @@ export class UserService extends BaseService {
     return !!getAuthenticatedUserId();
   }
 
-  getAuthenticatedUser(): Observable<User> {
-    return this.subject.asObservable();
+  isAuthenticatedAsAdmin(): boolean {
+    if (this.authenticatedUser) {
+      return this.authenticatedUser.isAdmin();
+    }
+
+    return false
   }
 
-  getAuthenticatedUserObject(): Promise<User> {
-    return this.getUser(getAuthenticatedUserId());
+  isAuthenticatedAsSupervisor(): boolean {
+    if (this.authenticatedUser) {
+      return this.authenticatedUser.isAdmin() || this.authenticatedUser.isSupervisor();
+    }
+
+    return false
   }
 
-  isAuthenticatedAsAdmin(): Promise<boolean> {
-    return this.getAuthenticatedUserObject().then(user => {
-      return user.isAdmin();
+  public setAuthenticatedUser(user: User) {
+    this.authenticatedUser = user;
+    this.subject.next(user);
+  }
+
+  public getAuthenticatedUserObject(): Promise<User> {
+    if (this.authenticatedUser) {
+      return new Promise((resolve) => resolve(this.authenticatedUser));
+    }
+
+    return this.getUser(getAuthenticatedUserId()).then(user => {
+      this.setAuthenticatedUser(user);
+      return this.authenticatedUser;
     });
   }
 
-  private createUserFromResponse(response, cache: boolean = true): User {
-
-    let id = response.json().data.id;
-    let data = response.json().data.attributes;
-    let user = new User(id, data);
-
-    if (cache) {
-      // this.user = user;
-    }
-
-    return user;
+  getUser(userId: number): Promise<User> {
+    return this.getUserFromAPI(userId);
   }
 
-  getUser(userId: number, cache: boolean = true): Promise<User> {
-
-    let promise: Promise<User>;
-
-    if (this.user && cache) {
-      console.log(this.user);
-      promise = new Promise(resolve => resolve(this.user)).then(user => user);
-    } else {
-      promise = this.getUserFromAPI(userId, cache);
-    }
-
-    return promise;
-  }
-
-  getUserFromAPI(userId: number, cache: boolean = true): Promise<User> {
+  getUserFromAPI(userId: number): Promise<User> {
     return this.authHttp.get(this.usersUrl + '/' + userId + '/', { headers: contentHeaders })
-        .toPromise().then(user => user).then((response) => this.createUserFromResponse(response, cache));
+        .toPromise().then(user => user).then((response) => this.createUserFromResponse(response));
   }
 
-  getUserWithGroups(userId: number): Promise<User> {
-    return this.authHttp.get(this.usersUrl + '/' + userId + '/', { headers: contentHeaders })
-                        .toPromise()
-                        .then((response) => {
-                          let id = response.json().data.id;
-                          let data = response.json().data.attributes;
-                          let user = new User(id, data);
-                          return user;
-                        });
+  getUserObservable() {
+    return this.subject.asObservable();
   }
 
   fetchUserFromAPI(id?: number) {
@@ -97,14 +84,9 @@ export class UserService extends BaseService {
                         );
   }
 
-  deleteUser(id): Promise<boolean> {
-    return this.authHttp.delete(this.usersUrl + '/' + id, { headers: contentHeaders }).toPromise().then((response) => {
-      return true;
-    });
-  }
+
 
   getUsers(type?: string): Promise<User[]> {
-
     let filter = new URLSearchParams();
 
     if (type && type !== 'ALL') {
@@ -122,7 +104,7 @@ export class UserService extends BaseService {
                });
   }
 
-  getTeachers(filter: any): Promise<User[]> {
+  getTeachers(): Promise<User[]> {
     return this.getUsers('TEACHER');
   }
 
@@ -146,7 +128,7 @@ export class UserService extends BaseService {
                });
   }
 
-  changePassword(oldPassword: string, newPassword: string) {
+  public changePassword(oldPassword: string, newPassword: string) {
     let userId = getAuthenticatedUserId();
     return this.authHttp.post(this.usersUrl + '/' + userId + '/password-updates', {
       data: {
@@ -160,7 +142,7 @@ export class UserService extends BaseService {
     }, { headers: contentHeaders }).toPromise();
   }
 
-  changeUserPassword(userId, newPassword: string) {
+  public changeUserPassword(userId, newPassword: string) {
     return this.authHttp.post(this.usersUrl + '/' + userId + '/password-updates', {
       data: {
         type: "password-updates",
@@ -172,7 +154,13 @@ export class UserService extends BaseService {
     }, { headers: contentHeaders }).toPromise();
   }
 
-  createUser(user) {
+  public deleteUser(id): Promise<boolean> {
+    return this.authHttp.delete(this.usersUrl + '/' + id, { headers: contentHeaders }).toPromise().then((response) => {
+      return true;
+    });
+  }
+
+  public createUser(user) {
     let userId = getAuthenticatedUserId();
     return this.authHttp.post(this.usersUrl, {
       data: {
@@ -188,7 +176,7 @@ export class UserService extends BaseService {
     }, { headers: contentHeaders }).toPromise();
   }
 
-  updateUser(user) {
+  public updateUser(user) {
     return this.authHttp.patch(this.usersUrl + '/' + user.id, {
       data: {
         id: user.id,
@@ -201,5 +189,14 @@ export class UserService extends BaseService {
         }
       }
     }, { headers: contentHeaders }).toPromise();
+  }
+
+  private createUserFromResponse(response, cache: boolean = true): User {
+
+    let id = response.json().data.id;
+    let data = response.json().data.attributes;
+    let user = new User(id, data);
+
+    return user;
   }
 }

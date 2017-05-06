@@ -33,7 +33,7 @@ export class UserListComponent {
     getUsers(type?: string): void {
         this.users = [];
         if (type && type === 'TEACHER') {
-            this.service.getTeachers(this.filter)
+            this.service.getTeachers()
                 .then((users) => {
                     this.users = users;
                 });
