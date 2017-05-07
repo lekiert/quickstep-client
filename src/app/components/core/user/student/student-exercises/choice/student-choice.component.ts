@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { environment } from "environments/environment";
 import { BaseExerciseComponent } from "../base-exercise.component";
+import { PreparesOutputInterface } from "../prepares-output.interface";
 
 const styles = require('./student-choice.component.scss');
 const template = require('./student-choice.component.html');
@@ -10,7 +11,7 @@ const template = require('./student-choice.component.html');
   template: template,
   styles: [ styles ],
 })
-export class StudentChoiceComponent extends BaseExerciseComponent {
+export class StudentChoiceComponent extends BaseExerciseComponent implements PreparesOutputInterface {
 
   readonly storageUrl = environment.API_URL;
 

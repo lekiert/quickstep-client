@@ -11,17 +11,8 @@ import { BaseService } from './base.service';
 @Injectable()
 export class UserService extends BaseService {
 
-  private subject = new Subject<User>();
-
+  private user = new Subject<User>();
   private authenticatedUser: User;
-
-  constructor (private authHttp: AuthHttp) {
-    super()
-  }
-
-  public isAuthenticated(): boolean {
-    return !!getAuthenticatedUserId();
-  }
 
   public isAuthenticatedAsAdmin(): boolean {
     if (this.authenticatedUser) {
@@ -41,7 +32,7 @@ export class UserService extends BaseService {
 
   public setAuthenticatedUser(user: User) {
     this.authenticatedUser = user;
-    this.subject.next(user);
+    this.user.next(user);
   }
 
   public getAuthenticatedUserObject(): Promise<User> {
@@ -65,7 +56,7 @@ export class UserService extends BaseService {
   }
 
   public getUserObservable() {
-    return this.subject.asObservable();
+    return this.user.asObservable();
   }
 
   public fetchUserFromAPI(id?: number) {
@@ -76,7 +67,7 @@ export class UserService extends BaseService {
                             let id = response.json().data.id;
                             let data = response.json().data.attributes;
                             let user = new User(id, data);
-                            this.subject.next(user);
+                            this.user.next(user);
                             return user;
                           },
                           (error) => { console.log(error) }
@@ -101,8 +92,12 @@ export class UserService extends BaseService {
                });
   }
 
+  public getUsersOfType(type: string): Promise<User[]> {
+    return this.getUsers(type);
+  }
+
   public getTeachers(): Promise<User[]> {
-    return this.getUsers('TEACHER');
+    return this.getUsersOfType('TEACHER');
   }
 
   public getUsersByGroup(id: number): Promise<User[]> {
@@ -158,7 +153,6 @@ export class UserService extends BaseService {
   }
 
   public createUser(user) {
-    let userId = getAuthenticatedUserId();
     return this.authHttp.post(this.usersUrl, {
       data: {
         type: "users",

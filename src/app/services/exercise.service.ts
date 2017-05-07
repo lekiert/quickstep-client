@@ -9,10 +9,6 @@ import { BaseService } from './base.service';
 @Injectable()
 export class ExerciseService extends BaseService {
 
-  constructor (private authHttp: AuthHttp) {
-    super()
-  }
-
   getExercises(): Promise<Exercise[]> {
     return this.authHttp.get(this.exercisesUrl + '?sort=id', { headers: contentHeaders })
                .toPromise()

@@ -20,7 +20,6 @@ export class AnswerListComponent implements OnInit {
       private userService: UserService) {
         this.sub = this.route.params.subscribe(params => {
           let id = +params['id'];
-          console.log(id);
           this.userService.getUser(id).then((user) => {
             this.user = user;
           });

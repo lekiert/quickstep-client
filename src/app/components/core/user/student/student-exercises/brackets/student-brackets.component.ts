@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { BaseExerciseComponent } from "../base-exercise.component"
+import { PreparesOutputInterface } from "../prepares-output.interface";
 
 const styles = require('./student-brackets.component.scss');
 const template = require('./student-brackets.component.html');
@@ -9,9 +10,9 @@ const template = require('./student-brackets.component.html');
   template: template,
   styles: [ styles ],
 })
-export class StudentBracketsComponent extends BaseExerciseComponent {
+export class StudentBracketsComponent extends BaseExerciseComponent implements PreparesOutputInterface {
 
-  constructor(){
+  constructor() {
     super()
   }
 

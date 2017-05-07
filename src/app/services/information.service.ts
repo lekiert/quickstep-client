@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
-import { AuthHttp } from 'angular2-jwt';
 import { UserAction } from '../user-action';
 import { UserActionBatch } from '../user-action-batch';
 import { contentHeaders } from '../common/headers';
@@ -11,10 +10,6 @@ export class InformationService extends BaseService {
 
   private page = 1;
   private size = 15;
-
-  constructor (private authHttp: AuthHttp) {
-    super()
-  }
 
   getLatestUserActionLogs(id?: any, page?: number) {
     if (!id) {

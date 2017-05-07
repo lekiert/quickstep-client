@@ -56,22 +56,6 @@ export class TestComponent {
     });
   }
 
-  createExercisesResults() {
-
-  }
-
-  getTest() {
-
-  }
-
-  logResults(event) {
-    console.log(event);
-  }
-
-  getExercisesAnswers() {
-    console.log(this.answers);
-  }
-
   submitAnswers() {
     this.service.submitAnswers(this.id, this.user.id, this.answers).then(results => {
       let data = results.json().data.attributes;
@@ -80,7 +64,6 @@ export class TestComponent {
       this.setExerciseResults(data.results);
     }).catch(error => {
       this.error = "Przekroczyłeś/aś limit 2 rozwiązań jednego testu.";
-      console.log(error);
     });
   }
 

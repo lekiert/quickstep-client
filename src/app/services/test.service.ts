@@ -9,13 +9,6 @@ import { BaseService } from './base.service';
 @Injectable()
 export class TestService extends BaseService {
 
-  constructor (
-      private authHttp: AuthHttp,
-      private http: Http
-  ) {
-    super()
-  }
-
   public getTestsByCourse(id): Promise<Test[]> {
     return this.authHttp.get(this.coursesUrl + '/' + id + '/tests' + '?sort=id', { headers: contentHeaders })
                .toPromise()
@@ -27,18 +20,18 @@ export class TestService extends BaseService {
                  })
                });
   }
-
-  public getTestsByCourseWithAnswers(id): Promise<Test[]> {
-    return this.authHttp.get(this.coursesUrl + '/' + id + '/tests' + '?sort=id&include=answers', { headers: contentHeaders })
-               .toPromise()
-               .then((response) => {
-                 let data = response.json().data;
-
-                 return data.map((item) => {
-                   return new Test(item.id, item.attributes);
-                 })
-               });
-  }
+  //
+  // public getTestsByCourseWithAnswers(id): Promise<Test[]> {
+  //   return this.authHttp.get(this.coursesUrl + '/' + id + '/tests' + '?sort=id&include=answers', { headers: contentHeaders })
+  //              .toPromise()
+  //              .then((response) => {
+  //                let data = response.json().data;
+  //
+  //                return data.map((item) => {
+  //                  return new Test(item.id, item.attributes);
+  //                })
+  //              });
+  // }
 
   public getUserAnswers(userId): any {
     return this.authHttp.get(this.usersUrl + '/' + userId + '/answers' + '?sort=-id', { headers: contentHeaders })

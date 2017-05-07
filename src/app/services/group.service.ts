@@ -12,10 +12,6 @@ import { BaseService } from './base.service';
 @Injectable()
 export class GroupService extends BaseService {
 
-  constructor (private authHttp: AuthHttp) {
-    super()
-  }
-
   private mapGroupListFromResponse(response) {
       let data = response.json().data;
 

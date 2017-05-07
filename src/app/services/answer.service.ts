@@ -11,10 +11,6 @@ export class AnswerService extends BaseService {
   private page = 1;
   private size = 15;
 
-  constructor (private authHttp: AuthHttp) {
-    super()
-  }
-
   private getQueryParams(): URLSearchParams {
     let params: URLSearchParams = new URLSearchParams();
     params.set('sort', 'id');

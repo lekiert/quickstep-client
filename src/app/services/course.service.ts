@@ -9,10 +9,6 @@ import { BaseService } from './base.service';
 @Injectable()
 export class CourseService extends BaseService {
 
-  constructor (private authHttp: AuthHttp) {
-    super()
-  }
-
   getCourses(): Promise<Course[]> {
 
     return this.authHttp.get(this.coursesUrl, { headers: contentHeaders })

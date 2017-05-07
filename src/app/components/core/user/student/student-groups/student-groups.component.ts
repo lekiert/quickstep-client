@@ -48,10 +48,8 @@ export class StudentGroupsComponent implements OnInit {
   }
 
   ngOnInit() {
-      console.log('test');
       this.userService.getAuthenticatedUserObject().then(
           user => {
-              console.log(user);
               this.user = user;
               this.sub = this.route.params.subscribe(params => {
                   let id = +params['id'];
@@ -64,7 +62,6 @@ export class StudentGroupsComponent implements OnInit {
                   } else {
                       this.getUserGroups();
                   }
-
               });
       })
   }
