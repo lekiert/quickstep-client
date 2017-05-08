@@ -75,7 +75,7 @@ import { AuthSupervisorGuard } from "./common/auth-supervisor.guard";
         ChoiceFormComponent,
         AnswerComponent,
         AnswerListComponent,
-        StudentGroupsComponent
+        StudentGroupsComponent,
     ],
 
     imports     : [

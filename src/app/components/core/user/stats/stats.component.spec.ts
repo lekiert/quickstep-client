@@ -12,7 +12,7 @@ import { ChartsModule } from "ng2-charts";
 import {By} from "@angular/platform-browser";
 import {Answer} from "app/answer";
 import {UserAction} from "app/user-action";
-import {UserActionBatch} from "app/user-action-batch";
+import {UserActionCollection} from "app/user-action-collection";
 import {User} from "app/user";
 
 class InformationServiceMock {
@@ -78,13 +78,13 @@ class InformationServiceMock {
       return new UserAction(+answer.id, answer.attributes);
     })
 
-    let batch = new UserActionBatch;
+    let batch = new UserActionCollection;
     batch.actions = statsList;
     batch.meta = {
       links: {}
     }
 
-    return new Promise<UserActionBatch>((resolve, reject) => {
+    return new Promise<UserActionCollection>((resolve, reject) => {
       resolve(batch);
     });
   }

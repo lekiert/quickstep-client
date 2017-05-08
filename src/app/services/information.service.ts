@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { UserAction } from '../user-action';
-import { UserActionBatch } from '../user-action-batch';
+import { UserActionCollection } from '../user-action-collection';
 import { contentHeaders } from '../common/headers';
 import { BaseService } from './base.service';
 
@@ -28,8 +28,8 @@ export class InformationService extends BaseService {
     return params;
   }
 
-  private collectActions(logs: any): UserActionBatch {
-    let batch = new UserActionBatch;
+  private collectActions(logs: any): UserActionCollection {
+    let batch = new UserActionCollection;
 
     try {
       let source = logs.json();
@@ -52,7 +52,7 @@ export class InformationService extends BaseService {
     return batch;
   }
 
-  private getUserActionLogsForSpecificUser(id, page?: number): Promise<UserActionBatch> {
+  private getUserActionLogsForSpecificUser(id, page?: number): Promise<UserActionCollection> {
     let params = this.getQueryParams();
     if (page) {
       params.set('page[number]', ''+page);
@@ -65,7 +65,7 @@ export class InformationService extends BaseService {
     }).toPromise().then(this.collectActions)
   }
 
-  private getUserActionLogsForThisUser(page?: number): Promise<UserActionBatch> {
+  private getUserActionLogsForThisUser(page?: number): Promise<UserActionCollection> {
     let params = this.getQueryParams();
     if (page) {
       params.set('page[number]', ''+page);

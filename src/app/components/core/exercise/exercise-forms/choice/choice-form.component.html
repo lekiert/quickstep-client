@@ -57,7 +57,7 @@
                        name="bracketsSentence-{{i}}-answer-{{j}}"
                        [(ngModel)]="exercise.answers[sentence][answer].text"
                        [disabled]="exercise.answers[sentence][answer].mime && exercise.answers[sentence][answer].media">
-                       <file-upload [id]="file" (fileUploaded)="setAnswerAsMedia($event, sentence, answer)"></file-upload>
+                       <file-upload [id]="'file-' + i + '-' + j" (fileUploaded)="setAnswerAsMedia($event, sentence, answer)"></file-upload>
 
                        <div style="max-width: 300px; max-height: 300px" *ngIf="exercise.answers[sentence][answer].mime && exercise.answers[sentence][answer].media">
                          <div>
