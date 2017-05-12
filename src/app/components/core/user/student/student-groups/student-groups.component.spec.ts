@@ -12,7 +12,32 @@ import {Group} from "app/group";
 import {GroupListComponent} from "app/components/core/group/group-list/group-list.component";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
+import {AuthService} from "../../../../../services/auth.service";
 
+
+class AuthServiceMock {
+  fetchUserFromAPI() {
+    let user = new User(1, {
+      first_name: 'Jan',
+      last_name: 'Kowalski',
+      role: 'STUDENT'
+    });
+    let sub = new Subject<User>();
+    sub.next(user);
+
+    return sub.asObservable();
+  }
+
+  public getAuthenticatedUser(): Promise<User> {
+    let user = new User(1, {
+      first_name: 'Jan',
+      last_name: 'Kowalski',
+      role: 'STUDENT'
+    });
+
+    return new Promise(r => r(user))
+  }
+}
 
 class UserServiceMock {
   getAuthenticatedUserObject() {
@@ -59,6 +84,7 @@ describe('StudentGroupsComponent',  () => {
       declarations: [ StudentGroupsComponent, GroupListComponent ],
       providers: [
         {provide: GroupService, useClass: GroupServiceMock},
+        {provide: AuthService, useClass: AuthServiceMock},
         {provide: UserService, useClass: UserServiceMock},
         {
           provide: AuthHttp,

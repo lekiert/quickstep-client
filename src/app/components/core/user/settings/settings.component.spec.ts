@@ -7,6 +7,8 @@ import { FormsModule } from "@angular/forms";
 import {Http, HttpModule} from "@angular/http";
 import {AuthConfig, AuthHttp } from "angular2-jwt";
 import {User} from "app/user";
+import {AuthService} from "../../../../services/auth.service";
+import {Subject} from "rxjs/Subject";
 
 class UserServiceMock {
   fetchUserFromAPI() {
@@ -27,6 +29,31 @@ class UserServiceMock {
   }
 }
 
+class AuthServiceMock {
+  fetchUserFromAPI() {
+    let user = new User(1, {
+      first_name: 'Jan',
+      last_name: 'Kowalski',
+      role: 'STUDENT'
+    });
+    let sub = new Subject<User>();
+    sub.next(user);
+
+    return sub.asObservable();
+  }
+
+  public getAuthenticatedUser(): Promise<User> {
+    let user = new User(1, {
+      first_name: 'Jan',
+      last_name: 'Kowalski',
+      role: 'STUDENT'
+    });
+
+    return new Promise(r => r(user))
+  }
+}
+
+
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
   let fixture: ComponentFixture<SettingsComponent>;
@@ -36,6 +63,7 @@ describe('SettingsComponent', () => {
       imports: [ RouterTestingModule, FormsModule, HttpModule ],
       declarations: [ SettingsComponent ],
       providers: [
+        {provide: AuthService, useClass: AuthServiceMock},
         {provide: UserService, useClass: UserServiceMock},
         {
           provide: AuthHttp,

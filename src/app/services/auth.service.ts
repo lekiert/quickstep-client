@@ -10,7 +10,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class AuthService extends BaseService {
 
-  private user = new Subject<any>();
+  private user = new Subject<User>();
   private authenticatedUser: User;
 
   constructor(

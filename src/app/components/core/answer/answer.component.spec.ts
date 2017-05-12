@@ -12,6 +12,33 @@ import {Http, HttpModule} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {User} from "../../../user";
 import {Subject} from "rxjs/Subject";
+import {Answer} from "../../../answer";
+import {AnswerService} from "../../../services/answer.service";
+
+class AnswerServiceMock {
+  getUserAnswers() {
+    let answers = [
+      new Answer(1, {}),
+      new Answer(2, {}),
+    ];
+
+    return new Promise(r => r(answers));
+  }
+
+  getAnswer() {
+    let answer = new Answer(1, {
+      attributes: {
+        answers: {},
+        score: {
+          max: 1,
+          score: 1
+        }
+      }
+    });
+
+    return new Promise(r => r(answer));
+  }
+}
 
 class UserServiceMock {
   fetchUserFromAPI() {
@@ -57,6 +84,7 @@ describe('AnswerComponent', () => {
       providers: [
         {provide: UserService, useClass: UserServiceMock},
         {provide: TestService, useClass: TestServiceMock},
+        {provide: AnswerService, useClass: AnswerServiceMock},
         {
           provide: AuthHttp,
           useFactory: (http) => {

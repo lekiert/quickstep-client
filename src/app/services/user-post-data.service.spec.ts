@@ -15,14 +15,16 @@ describe('UserPostDataService', () => {
 
   it('should set old password in the object when provided',
     inject([UserPostDataService], (service: UserPostDataService) => {
-      let postData = this.service.getPasswordChangeData(1, 2, 3);
-      expect(postData.attributes["old-password"]).toBeTruthy();
+      let postData = service.getPasswordChangePostData(1, 2, 3);
+      console.log(postData);
+      expect(postData['data']).toBeTruthy();
+      expect(postData['data'].attributes["old-password"]).toBeTruthy();
     }
   ));
 
   it('should not set old password in the object when not provided',
     inject([UserPostDataService], (service: UserPostDataService) => {
-      let postData = this.service.getPasswordChangeData(1, 2, 3);
-      expect(postData.attributes["old-password"]).toBeFalsy();
+      let postData = service.getPasswordChangePostData(1, 2);
+      expect(postData['data'].attributes["old-password"]).toBeFalsy();
   }));
 });

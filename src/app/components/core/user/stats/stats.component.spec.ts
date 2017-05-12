@@ -14,6 +14,8 @@ import {Answer} from "app/answer";
 import {UserAction} from "app/user-action";
 import {UserActionCollection} from "app/user-action-collection";
 import {User} from "app/user";
+import {Subject} from "rxjs/Subject";
+import {AuthService} from "../../../../services/auth.service";
 
 class InformationServiceMock {
   getLatestUserActionLogs() {
@@ -184,6 +186,30 @@ class UserServiceMock {
   }
 }
 
+class AuthServiceMock {
+  fetchUserFromAPI() {
+    let user = new User(1, {
+      first_name: 'Jan',
+      last_name: 'Kowalski',
+      role: 'ADMIN'
+    });
+    let sub = new Subject<User>();
+    sub.next(user);
+
+    return sub.asObservable();
+  }
+
+  public getAuthenticatedUser(): Promise<User> {
+    let user = new User(1, {
+      first_name: 'Jan',
+      last_name: 'Kowalski',
+      role: 'ADMIN'
+    });
+
+    return new Promise(r => r(user))
+  }
+}
+
 describe('StatsComponent', () => {
   let component: StatsComponent;
   let fixture: ComponentFixture<StatsComponent>;
@@ -195,6 +221,7 @@ describe('StatsComponent', () => {
       providers: [
           {provide: InformationService, useClass: InformationServiceMock},
           {provide: AnswerService, useClass: AnswerServiceMock},
+          {provide: AuthService, useClass: AuthServiceMock},
           {provide: UserService, useClass: UserServiceMock},
           {
             provide: AuthHttp,

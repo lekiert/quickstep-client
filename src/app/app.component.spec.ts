@@ -12,11 +12,26 @@ import {Observable} from "rxjs/Observable";
 import {User} from "./user";
 import {Subject} from "rxjs/Subject";
 import {By} from "@angular/platform-browser";
+import {AuthService} from "./services/auth.service";
 
 class AuthGuardMock {
   isUser() {
     return true;
   }
+}
+
+class AuthServiceMock {
+    fetchUserFromAPI() {
+        let user = new User(1, {
+            first_name: 'Jan',
+            last_name: 'Kowalski',
+            role: 'STUDENT'
+        });
+        let sub = new Subject<User>();
+        sub.next(user);
+
+        return sub.asObservable();
+    }
 }
 
 class UserServiceMock {
@@ -60,6 +75,7 @@ describe('App: QuickstepClient', () => {
       ],
       providers: [
         {provide: UserService, useClass: UserServiceMock },
+        {provide: AuthService, useClass: AuthServiceMock},
         {provide: AuthGuard, useClass: AuthGuardMock },
         {
           provide: AuthHttp,

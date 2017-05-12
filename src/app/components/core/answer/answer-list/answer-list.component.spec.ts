@@ -9,11 +9,23 @@ import {Http, HttpModule} from "@angular/http";
 import {Subject} from "rxjs/Subject";
 import {User} from "app/user";
 import {Observable} from "rxjs/Observable";
+import {AnswerService} from "../../../../services/answer.service";
+import {Answer} from "../../../../answer";
 
 describe('AnswerListComponent', () => {
   let component: AnswerListComponent;
   let fixture: ComponentFixture<AnswerListComponent>;
 
+  class AnswerServiceMock {
+    getUserAnswers() {
+      let answers = [
+          new Answer(1, {}),
+          new Answer(2, {}),
+      ];
+
+      return new Promise(r => r(answers));
+    }
+  }
   class UserServiceMock {
     fetchUserFromAPI() {
       return true;
@@ -57,6 +69,7 @@ describe('AnswerListComponent', () => {
       imports: [ RouterTestingModule, HttpModule ],
       declarations: [ AnswerListComponent ],
       providers: [
+        {provide: AnswerService, useClass: AnswerServiceMock},
         {provide: UserService, useClass: UserServiceMock},
         {provide: TestService, useClass: TestServiceMock},
         {
