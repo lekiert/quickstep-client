@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {UserService} from "app/services/user.service";
 import {User} from "app/user";
+import {AuthService} from "../../../../services/auth.service";
 
 const styles = require('./settings.component.scss');
 const template = require('./settings.component.html');
@@ -13,6 +14,10 @@ const template = require('./settings.component.html');
 })
 export class SettingsComponent {
 
+  constructor(
+      private userService: UserService,
+      private authService: AuthService) {}
+
   changePasswordError: string;
   oldPassword: string;
   newPassword: string;
@@ -20,18 +25,14 @@ export class SettingsComponent {
   successMessage: string;
   user: User;
 
-  constructor(
-    private route: ActivatedRoute,
-    private service: UserService) {}
-
   ngOnInit() {
       this.changePasswordError = '';
       this.oldPassword = '';
       this.newPassword = '';
       this.newPasswordRepeat = '';
       this.successMessage = '';
-      this.service.fetchUserFromAPI();
-      this.service.getAuthenticatedUserObject().then(user => this.user = user)
+      // this.userService.fetchUserFromAPI();
+      this.authService.getAuthenticatedUser().then(user => this.user = user)
   }
 
   changePassword() {
@@ -59,27 +60,27 @@ export class SettingsComponent {
       return false;
     } finally {
       if (this.changePasswordError.length === 0) {
-        this.submitPasswordChange(this.oldPassword, this.newPassword);
+        this.submitPasswordChange();
       }
     }
 
   }
 
-  private submitPasswordChange(oldPassword, newPassword) {
-    this.service.changePassword(this.oldPassword, this.newPassword)
-                               .then((response) => {
-                                 this.successMessage = 'Hasło zostało zmienione.';
-                               })
-                               .catch((error) => {
-                                 switch (error.json().data.attributes.result) {
-                                   case 'WRONG_PASSWORD':
-                                    this.changePasswordError = 'Nieprawidłowe obecne hasło użytkownika.';
-                                   break;
-                                   case 'VALIDATION_FAILED':
-                                    this.changePasswordError = 'Nieprawidłowy format hasła. Hasło powinno mieć przynajmniej 6 znaków.';
-                                   break;
-                                 }
-                               });
+  private submitPasswordChange() {
+    this.userService.changePassword(this.oldPassword, this.newPassword)
+    .then((response) => {
+     this.successMessage = 'Hasło zostało zmienione.';
+    })
+    .catch((error) => {
+     switch (error.json().data.attributes.result) {
+       case 'WRONG_PASSWORD':
+        this.changePasswordError = 'Nieprawidłowe obecne hasło użytkownika.';
+       break;
+       case 'VALIDATION_FAILED':
+        this.changePasswordError = 'Nieprawidłowy format hasła. Hasło powinno mieć przynajmniej 6 znaków.';
+       break;
+     }
+    });
   }
 
 }

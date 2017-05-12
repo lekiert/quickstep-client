@@ -3,8 +3,8 @@ import {Group} from "app/group";
 import {User} from "app/user";
 import {GroupService} from "app/services/group.service";
 import {UserService} from "app/services/user.service";
-import {GroupListComponent} from "app/components/core/group/group-list/group-list.component";
 import {ActivatedRoute} from "@angular/router";
+import {AuthService} from "app/services/auth.service";
 
 @Component({
   selector: 'student-groups',
@@ -21,11 +21,12 @@ export class StudentGroupsComponent implements OnInit {
 
   constructor(
       private route: ActivatedRoute,
-      private service: GroupService,
-      private userService: UserService) {}
+      private groupService: GroupService,
+      private userService: UserService,
+      private authService: AuthService) {}
 
   getGroups(): void {
-    this.service.getGroups()
+    this.groupService.getGroups()
         .then((groups) => {
           this.groups = groups;
         });
@@ -34,21 +35,21 @@ export class StudentGroupsComponent implements OnInit {
   getUserGroups(): void {
     if (this.student) {
         if (this.student.isTeacher()) {
-            this.service.getTeacherGroups(this.student.id).then(groups =>  this.groups = groups)
+            this.groupService.getTeacherGroups(this.student.id).then(groups =>  this.groups = groups)
         } else {
-            this.service.getUserGroups(this.studentId).then(groups =>  this.groups = groups);
+            this.groupService.getUserGroups(this.studentId).then(groups =>  this.groups = groups);
         }
     } else {
       if (this.user.isTeacher()) {
-        this.service.getTeacherGroups(this.user.id).then(groups =>  this.groups = groups)
+        this.groupService.getTeacherGroups(this.user.id).then(groups =>  this.groups = groups)
       } else {
-        this.service.getGroups().then(groups => this.groups = groups)
+        this.groupService.getGroups().then(groups => this.groups = groups)
       }
     }
   }
 
   ngOnInit() {
-      this.userService.getAuthenticatedUserObject().then(
+      this.authService.getAuthenticatedUser().then(
           user => {
               this.user = user;
               this.sub = this.route.params.subscribe(params => {

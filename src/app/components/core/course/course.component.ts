@@ -6,6 +6,7 @@ import {UserService} from "app/services/user.service";
 import {Course} from "app/course";
 import {Test} from "app/test";
 import {User} from "app/user";
+import {AuthService} from "../../../services/auth.service";
 
 const styles = require('./course.component.scss');
 const template = require('./course.component.html');
@@ -18,8 +19,8 @@ const template = require('./course.component.html');
 export class CourseComponent {
   constructor(
     private route: ActivatedRoute,
-    private service: CourseService,
-    private userService: UserService,
+    private courseService: CourseService,
+    private authService: AuthService,
     private testService: TestService) {}
 
   user: User;
@@ -32,7 +33,7 @@ export class CourseComponent {
     this.sub = this.route.params.subscribe(params => {
        this.id = +params['id']; // (+) converts string 'id' to a number
 
-       this.service.getCourse(this.id).then((course) => {
+       this.courseService.getCourse(this.id).then((course) => {
          this.course = course;
        });
 
@@ -41,7 +42,7 @@ export class CourseComponent {
        });
     });
 
-    this.userService.getAuthenticatedUserObject().then(
+    this.authService.getAuthenticatedUser().then(
       user => {
         this.user = user
       }

@@ -1,9 +1,11 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {AuthHttp} from "angular2-jwt";
+import {Component, Input, Output, EventEmitter, ComponentFactoryResolver, ViewContainerRef} from "@angular/core";
 import {Exercise} from "app/exercise";
 import {contentHeaders} from "app/common/headers";
 import {environment} from "environments/environment";
 import {ExerciseService} from "app/services/exercise.service";
+import {ExerciseFormService} from "./exercise-form.service";
+import {BracketsFormComponent} from "./brackets/brackets-form.component";
+
 
 const styles = require('./exercise-form.component.scss');
 const template = require('./exercise-form.component.html');
@@ -27,68 +29,49 @@ export class ExerciseFormComponent {
 
   constructor(
     private service: ExerciseService,
-    private http: AuthHttp) {}
+    private componentService: ExerciseFormService,
+
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private viewContainerRef: ViewContainerRef) {}
 
   ngOnInit(): void {
     if (!this.exercise) {
-      this.exercise = new Exercise(null, {
-        // attributes: {
-        //   'exercise-type': this.exerciseType,
-        //   data: {},
-        //   answers: {},
-        //   attachments: []
-        // }
-      });
-      this.exercise.testId = this.testId;
-      this.exercise.name = '';
-      this.exercise.command = '';
-      this.exercise.code = '';
-      this.exercise.type = this.exerciseType;
-      this.exercise.data = {};
-      this.exercise.answers = {};
-      this.exercise.attachments = [];
-
+      this.exercise = this.componentService.makeBlankExercise(
+          this.exerciseType, this.testId
+      );
     } else {
       this.exerciseExists = true;
     }
+    console.log('test');
   }
 
   cancel(): void {
     this.cancelForm.emit(true);
   }
 
-  updateExerciseData(): void {
-    this.service.updateExercise(this.exercise).then((result) => {
-      let results = result.json();
-      this.exerciseUpdated.emit(true);
+  attachFileToExercise(file): void {
+    if (!this.exercise.id) return;
+
+    this.componentService.attachFile(file, this.exercise.id).then(() => {
+      this.updateExercise();
     });
   }
 
-  // TODO: move request to a service
-  attachFileToExercise(file) {
-    return this.http.post(environment.API_URL + 'exercises' + '/' + this.exercise.id + '/relationships/storage-files',
-      {
-        data: [
-          { type: "storage-files", id: file.id }
-        ]
-      }, { headers: contentHeaders }
-    ).toPromise().then((result) => {
-      this.updateExerciseData();
-    });
-  }
-
-  deleteAttachmentFromExercise(id) {
-    return this.http.delete(environment.API_URL + 'storage-files/' + id, { headers: contentHeaders }
-    ).toPromise().then((result) => {
-      this.updateExerciseData();
-    });
+  deleteAttachmentFromExercise(id): void {
+    this.componentService.deleteFile(+id).then(() => {
+      this.updateExercise();
+    });;
   }
 
   createExercise(): void {
-    this.service.createTestExercise(this.testId, this.exercise).then((result) => {
-      let results = result.json();
+    this.service.create(this.testId, this.exercise).then(() => {
       this.exerciseCreated.emit(true);
     });
   }
 
+  updateExercise(): void {
+    this.service.update(this.exercise).then(() => {
+      this.exerciseUpdated.emit(true);
+    });
+  }
 }

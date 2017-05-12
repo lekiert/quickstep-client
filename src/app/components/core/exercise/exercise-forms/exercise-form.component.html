@@ -15,8 +15,8 @@
 
   <div class="gr-12">
     <div [ngSwitch]="exercise.type">
-      <brackets-form *ngSwitchCase="'BRACKETS'" [exercise]="exercise" (updateExercise)="updateExerciseData()"></brackets-form>
-      <choice-form *ngSwitchCase="'CHOICE'" [exercise]="exercise" (updateExercise)="updateExerciseData()" (fileUploaded)="attachFileToExercise($event)"></choice-form>
+      <brackets-form *ngSwitchCase="'BRACKETS'" [exercise]="exercise"></brackets-form>
+      <choice-form *ngSwitchCase="'CHOICE'" [exercise]="exercise"></choice-form>
       <div *ngSwitchDefault></div>
     </div>
   </div>

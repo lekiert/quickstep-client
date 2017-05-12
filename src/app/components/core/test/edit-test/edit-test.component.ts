@@ -82,13 +82,13 @@ export class EditTestComponent {
 
   addExerciseToTest(exercise): void {
     this.selectedExercise = '';
-    this.exerciseService.createTestExercise(exercise.testId, exercise).then((result) => {
+    this.exerciseService.create(exercise.testId, exercise).then((result) => {
       let results = result.json();
     });
   }
 
   deleteExerciseFromTest(exerciseId): void {
-    this.exerciseService.deleteExercise(exerciseId).then((result) => {
+    this.exerciseService.delete(exerciseId).then((result) => {
       let results = result.json();
       this.getTest(this.test.id);
       this.getExercises(this.test.id);
@@ -96,7 +96,7 @@ export class EditTestComponent {
   }
 
   updateExercise(exercise): void {
-    this.exerciseService.updateExercise(exercise).then((result) => {
+    this.exerciseService.update(exercise).then((result) => {
       let results = result.json();
       this.getTest(this.test.id);
       this.getExercises(this.test.id);

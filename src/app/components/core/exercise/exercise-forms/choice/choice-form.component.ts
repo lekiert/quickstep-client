@@ -1,5 +1,6 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {environment} from "environments/environment";
+import {Component, Input} from "@angular/core";
+import {ExerciseFormInterface} from "../exercise-form.interface";
+import {Exercise} from "app/exercise";
 
 const styles = require('./choice-form.component.scss');
 const template = require('./choice-form.component.html');
@@ -9,12 +10,9 @@ const template = require('./choice-form.component.html');
   template: template,
   styles: [ styles ],
 })
-export class ChoiceFormComponent {
+export class ChoiceFormComponent implements ExerciseFormInterface {
 
-  storageUrl = environment.API_URL;
-  @Input() exercise;
-  @Output() updateExercise = new EventEmitter();
-  @Output() fileUploaded = new EventEmitter();
+  @Input() exercise: Exercise;
 
   keys(dict) : Array<string> {
     return Object.keys(dict);

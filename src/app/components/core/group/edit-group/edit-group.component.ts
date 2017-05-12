@@ -6,6 +6,7 @@ import {UserService} from "app/services/user.service";
 import {Group} from "app/group";
 import {User} from "app/user";
 import {Course} from "app/course";
+import {AuthService} from "../../../../services/auth.service";
 
 const styles = require('./edit-group.component.scss');
 const template = require('./edit-group.component.html');
@@ -38,8 +39,9 @@ export class EditGroupComponent {
     private router: Router,
     private service: GroupService,
     private courseService: CourseService,
-    private userService: UserService) {
-    this.userService.getAuthenticatedUserObject().then(
+    private userService: UserService,
+    private authService: AuthService) {
+    this.authService.getAuthenticatedUser().then(
       user => this.currentUser = user
     );
     this.sub = this.route.params.subscribe(params => {

@@ -7,6 +7,7 @@ import { UserAction } from "app/user-action";
 import { Answer } from "app/answer";
 import {UserService} from "app/services/user.service";
 import {User} from "app/user";
+import {AuthService} from "../../../../services/auth.service";
 
 
 @Component({
@@ -62,8 +63,9 @@ export class StatsComponent implements OnInit {
     private route: ActivatedRoute,
     private answerService: AnswerService,
     private userService: UserService,
+    private authService: AuthService,
     private service: InformationService) {
-    this.userService.getAuthenticatedUserObject().then((user) => this.user = user);
+    this.authService.getAuthenticatedUser().then((user) => this.user = user);
   }
 
   ngOnInit() {

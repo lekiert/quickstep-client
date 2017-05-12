@@ -1,37 +1,32 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {User} from "app/user";
-import {TestService} from "app/services/test.service";
 import {UserService} from "app/services/user.service";
-import {Router, ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
+import {AnswerService} from "app/services/answer.service";
 
 @Component({
   selector: 'answer-list',
   templateUrl: './answer-list.component.html',
   styleUrls: ['./answer-list.component.scss']
 })
-export class AnswerListComponent implements OnInit {
+export class AnswerListComponent {
   user: User;
   sub: any;
   answers: any;
 
-  constructor(private router: Router,
-      private route: ActivatedRoute,
-      private testService: TestService,
-      private userService: UserService) {
+  constructor(private route: ActivatedRoute,
+              private answerService: AnswerService,
+              private userService: UserService) {
         this.sub = this.route.params.subscribe(params => {
           let id = +params['id'];
           this.userService.getUser(id).then((user) => {
             this.user = user;
           });
-          this.testService.getUserAnswers(id).then((answers) => {
+          this.answerService.getUserAnswers(id).then((answers) => {
             this.answers = answers;
           });
         });
       }
-
-  ngOnInit() {
-
-  }
 
   getScore(max, score) {
     let result = (+score / +max * 100).toFixed().toString()

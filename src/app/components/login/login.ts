@@ -6,6 +6,7 @@ import {AuthGuard} from "../../common/auth.guard";
 import {UserService} from "../../services/user.service";
 import {environment} from "../../../environments/environment";
 import {getAuthenticatedUserId} from "../../common/helpers";
+import {AuthService} from "../../services/auth.service";
 
 const theme   = require('../../style.scss');
 const styles   = require('./login.scss');
@@ -20,7 +21,8 @@ export class Login {
   constructor(public router: Router,
               public http: Http,
               private guard: AuthGuard,
-              private service: UserService) {
+              private authService: AuthService,
+              private userService: UserService) {
   }
 
   error = false;
@@ -39,8 +41,8 @@ export class Login {
       .subscribe(
         response => {
           localStorage.setItem('jwt', response.json().jwt);
-          this.service.getUser(getAuthenticatedUserId()).then(user => {
-            this.service.setAuthenticatedUser(user);
+          this.userService.getUser(getAuthenticatedUserId()).then(user => {
+            this.authService.setAuthenticatedUser(user);
             this.router.navigate(['home']);
           });
         },

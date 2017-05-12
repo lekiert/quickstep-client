@@ -5,6 +5,7 @@ import {Exercise} from "app/exercise";
 import {Test} from "app/test";
 import {User} from "app/user";
 import {environment} from "../../../../environments/environment";
+import {AnswerService} from "../../../services/answer.service";
 
 @Component({
   selector: 'app-answer',
@@ -24,13 +25,14 @@ export class AnswerComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private service: TestService) {}
+    private answerService: AnswerService,
+    private testService: TestService) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
        this.id = +params['id'];
 
-       this.service.getAnswer(this.id).then((answer) => {
+       this.answerService.getAnswer(this.id).then((answer) => {
          this.answers = answer.data.attributes.answers;
          this.score = (answer.data.attributes.score.score / answer.data.attributes.score.max * 100).toFixed()
 
@@ -39,7 +41,7 @@ export class AnswerComponent implements OnInit {
               if (res.type === 'tests') {
                 this.test = new Test(res.id, res.attributes);
 
-                this.service.getTestRelatedExercises(res.id).then((exercises) => {
+                this.testService.getTestRelatedExercises(res.id).then((exercises) => {
 
                   this.exercises = exercises;
                 });

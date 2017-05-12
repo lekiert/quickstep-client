@@ -3,6 +3,7 @@ import {CourseService} from "app/services/course.service";
 import {UserService} from "app/services/user.service";
 import {Course} from "app/course";
 import {User} from "app/user";
+import {AuthService} from "../../../../services/auth.service";
 
 const styles = require('./course-list.component.scss');
 const template = require('./course-list.component.html');
@@ -13,32 +14,25 @@ const template = require('./course-list.component.html');
   styles: [ styles ],
 })
 export class CourseListComponent {
-  constructor(private service: CourseService,
-              private userService: UserService) {}
 
   user: User;
   courses: Course[];
 
+  constructor(private service: CourseService,
+              private authService: AuthService) {}
+
+
   // todo: fix callback hell
   getCourses(): void {
-    this.userService.getAuthenticatedUserObject().then(
+    this.authService.getAuthenticatedUser().then(
       user => {
         this.user = user;
         if (this.user.isAdmin()) {
-          this.service.getCourses()
-                      .then((courses) => {
-                        this.courses = courses;
-                      });
+          this.service.getCourses().then(courses => this.courses = courses);
         } else if (this.user.isTeacher()) {
-          this.service.getTeacherCourses(this.user.id)
-                      .then((courses) => {
-                        this.courses = courses;
-                      });
+          this.service.getTeacherCourses(this.user.id).then(courses => this.courses = courses);
         } else {
-          this.service.getUserCourses(this.user.id)
-                      .then((courses) => {
-                        this.courses = courses;
-                      });
+          this.service.getUserCourses(this.user.id).then(courses => this.courses = courses);
         }
       }
     );

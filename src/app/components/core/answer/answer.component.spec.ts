@@ -2,8 +2,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from "@angular/forms";
 import { AnswerComponent } from './answer.component';
-import { StudentBracketsComponent } from '../user/student/student-exercises/brackets/student-brackets.component';
-import { StudentChoiceComponent } from '../user/student/student-exercises/choice/student-choice.component';
+import { StudentBracketsComponent } from '../exercise/student-exercises/brackets/student-brackets.component';
+import { StudentChoiceComponent } from '../exercise/student-exercises/choice/student-choice.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from 'app/services/user.service';
 import { TestService } from 'app/services/test.service';

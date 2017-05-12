@@ -39,18 +39,38 @@ export class AnswerService extends BaseService {
   getAnswerStats(userId?: any, page?: number): Promise<any> {
     let url = this.answersUrl;
     let params = this.getQueryParams();
+    params.set('sort', '-id');
     if (userId) {
-      url = this.usersUrl + '/' + userId + '/answers/';
+      url = `${this.usersUrl}/${userId}/answers/`;
     }
 
     if (page) {
       params.set('page[number]', ''+page);
     }
-
+    console.log(params);
     return this.authHttp.get(url, {
-      search: this.getQueryParams(),
+      search: params,
       headers: contentHeaders
     }).toPromise().then(this.collectAnswers);
   }
 
+  public getUserAnswers(userId): any {
+    return this.authHttp.get(this.usersUrl + '/' + userId + '/answers' + '?sort=-id', { headers: contentHeaders })
+        .toPromise()
+        .then((response) => {
+          let data = response.json().data;
+
+          return data;
+        });
+  }
+
+  public getAnswer(answersId): any {
+    return this.authHttp.get(this.answersUrl + '/' + answersId + '?include=test,user', { headers: contentHeaders })
+        .toPromise()
+        .then((response) => {
+          let data = response.json();
+
+          return data;
+        });
+  }
 }

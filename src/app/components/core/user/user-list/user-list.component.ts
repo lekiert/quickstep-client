@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {UserService} from "app/services/user.service";
 import {User} from "app/user";
 import {ActivatedRoute} from "@angular/router";
+import {AuthService} from "../../../../services/auth.service";
 
 const styles = require('./user-list.component.scss');
 const template = require('./user-list.component.html');
@@ -27,28 +28,23 @@ export class UserListComponent {
     private routeFilter: any;
 
     constructor(private route: ActivatedRoute,
-                private service: UserService) {
+                private service: UserService,
+                private authService: AuthService) {
     }
 
     getUsers(type?: string): void {
-        this.users = [];
+        // this.users = [];
         if (type && type === 'TEACHER') {
-            this.service.getTeachers()
-                .then((users) => {
-                    this.users = users;
-                });
+            this.service.getTeachers().then(users => this.users = users);
+        } else {
+            this.service.getUsers(this.filter).then(users => this.users = users);
         }
-
-        this.service.getUsers(this.filter)
-            .then((users) => {
-                this.users = users;
-            });
     }
 
     ngOnInit(): void {
         this.sub = this.route.params.subscribe(params => {
             this.routeFilter = params['type'];
-            this.service.getAuthenticatedUserObject().then(
+            this.authService.getAuthenticatedUser().then(
                 user => {
                     this.user = user
                     if (user.isSupervisor()) {

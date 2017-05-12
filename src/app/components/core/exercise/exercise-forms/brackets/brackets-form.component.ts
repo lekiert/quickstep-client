@@ -1,4 +1,6 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, Input} from "@angular/core";
+import {ExerciseFormInterface} from "../exercise-form.interface";
+import {Exercise} from "app/exercise";
 
 const styles = require('./brackets-form.component.scss');
 const template = require('./brackets-form.component.html');
@@ -8,12 +10,9 @@ const template = require('./brackets-form.component.html');
   template: template,
   styles: [ styles ],
 })
-export class BracketsFormComponent {
+export class BracketsFormComponent implements ExerciseFormInterface  {
 
-  @Input() exercise;
-  @Output() updateExercise = new EventEmitter();
-
-  constructor() {}
+  @Input() exercise: Exercise;
 
   keys(dict) : Array<string> {
     return Object.keys(dict);

@@ -20,38 +20,6 @@ export class TestService extends BaseService {
                  })
                });
   }
-  //
-  // public getTestsByCourseWithAnswers(id): Promise<Test[]> {
-  //   return this.authHttp.get(this.coursesUrl + '/' + id + '/tests' + '?sort=id&include=answers', { headers: contentHeaders })
-  //              .toPromise()
-  //              .then((response) => {
-  //                let data = response.json().data;
-  //
-  //                return data.map((item) => {
-  //                  return new Test(item.id, item.attributes);
-  //                })
-  //              });
-  // }
-
-  public getUserAnswers(userId): any {
-    return this.authHttp.get(this.usersUrl + '/' + userId + '/answers' + '?sort=-id', { headers: contentHeaders })
-               .toPromise()
-               .then((response) => {
-                 let data = response.json().data;
-
-                 return data;
-               });
-  }
-
-  public getAnswer(answersId): any {
-    return this.authHttp.get(this.answersUrl + '/' + answersId + '?include=test,user', { headers: contentHeaders })
-               .toPromise()
-               .then((response) => {
-                 let data = response.json();
-
-                 return data;
-               });
-  }
 
   public getTest(id): Promise<Test> {
     return this.authHttp.get(this.testsUrl + '/' + id, { headers: contentHeaders })
@@ -101,7 +69,6 @@ export class TestService extends BaseService {
         }
       }
     }, { headers: contentHeaders }).toPromise().then((test) => {
-      console.log(test.json());
       let result = test.json();
       return this.authHttp.post(this.coursesUrl + '/' + courseId + '/relationships/tests', {
         data: [

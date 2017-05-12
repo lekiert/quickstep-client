@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {ExerciseService} from "app/services/exercise.service";
 import {Exercise} from "app/exercise";
 
@@ -10,21 +10,12 @@ const template = require('./exercise-list.component.html');
   template: template,
   styles: [ styles ],
 })
-export class ExerciseListComponent {
-  constructor(private service: ExerciseService) {
-
-  }
+export class ExerciseListComponent implements OnInit {
+  constructor(private service: ExerciseService) {}
 
   exercises: Exercise[];
 
-  getExercises(): void {
-    this.service.getExercises()
-                .then((exercises) => {
-                  this.exercises = exercises;
-                });
-  }
-
   ngOnInit(): void {
-    this.getExercises();
+    this.service.getExercises().then(exercises => this.exercises = exercises);
   }
 }

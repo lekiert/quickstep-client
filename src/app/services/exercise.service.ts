@@ -1,83 +1,47 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Exercise } from '../exercise';
-import { Observable } from 'rxjs/Observable';
-import { AuthHttp } from 'angular2-jwt';
 import { contentHeaders } from '../common/headers';
 import { BaseService } from './base.service';
+import { ExercisePostDataService } from "./exercise-post-data.service";
+import { AuthHttp } from "angular2-jwt";
 
 @Injectable()
 export class ExerciseService extends BaseService {
 
+  constructor(protected authHttp: AuthHttp,
+              private postData: ExercisePostDataService) {
+    super(authHttp);
+  }
+
   getExercises(): Promise<Exercise[]> {
-    return this.authHttp.get(this.exercisesUrl + '?sort=id', { headers: contentHeaders })
-               .toPromise()
-               .then((response) => {
-                 let data = response.json().data;
-
-                 return data.map((item) => {
-                   return new Exercise(item.id, item.attributes);
-                 })
-               })
-               .catch(this.handleError);
+    let url = `${this.exercisesUrl}?sort=id`;
+    return this.get(url).then(this.createExerciseFromResponse);
   }
 
-  createTestExercise(testId, exercise) {
-    return this.authHttp.post(this.testsUrl + '/' + testId + '/exercises', {
-      data: {
-        type: "exercises",
-        attributes: {
-          "name": exercise.name,
-          "code": exercise.code,
-          "command": exercise.command,
-          "exercise-type": exercise.type,
-          "data": exercise.data,
-          "answers": exercise.answers,
-          "status": 1,
-          "test-id": testId,
-        }
-      }
-    }, { headers: contentHeaders }).toPromise();
+  create(testId, exercise) {
+    let url = `${this.testsUrl}/${testId}`;
+    let data = this.postData.getCreateExercisePostData(exercise, testId);
+    return this.post(url, data);
   }
 
-  updateExercise(exercise) {
-    return this.authHttp.patch(this.exercisesUrl + '/' + exercise.id, {
-      data: {
-        id: exercise.id,
-        type: "exercises",
-        attributes: {
-          "name": exercise.name,
-          "code": exercise.code,
-          "command": exercise.command,
-          "exercise-type": exercise.type,
-          "data": exercise.data,
-          "answers": exercise.answers,
-          "status": 1,
-          "test-id": exercise.testId
-        }
-      }
-    }, { headers: contentHeaders }).toPromise();
+  update(exercise: Exercise) {
+    let url = `${this.exercisesUrl}/${exercise.id}`;
+    let data = this.postData.getUpdateExercisePostData(exercise);
+    return this.patch(url, data);
   }
 
-  deleteExercise(exerciseId) {
-    return this.authHttp.delete(this.exercisesUrl + '/' + exerciseId).toPromise();
+  delete(exerciseId) {
+    return this.delete(this.exercisesUrl + '/' + exerciseId).toPromise();
   }
 
-  private extractData(res: Response) {
-    let body = res.json();
-    return body.data || { };
-  }
-
-  private handleError (error: Response | any) {
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
+  private createExerciseFromResponse(response: Response) {
+    try {
+      return response.json().data.map((item) => {
+        return new Exercise(item.id, item.attributes);
+      });
+    } catch(e) {
+      return null;
     }
-
-    return Observable.throw(errMsg);
   }
 }

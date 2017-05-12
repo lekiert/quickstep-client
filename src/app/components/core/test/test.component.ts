@@ -6,6 +6,7 @@ import {UserService} from "../../../services/user.service";
 import {Test} from "app/test";
 import {User} from "app/user";
 import {Exercise} from "app/exercise";
+import {AuthService} from "../../../services/auth.service";
 
 const styles = require('./test.component.scss');
 const template = require('./test.component.html');
@@ -32,11 +33,9 @@ export class TestComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService,
+    private authService: AuthService,
     private service: TestService) {
-      this.userService.getAuthenticatedUserObject().then(
-        user => { this.user = user; }
-      );
+      this.authService.getAuthenticatedUser().then(user => this.user = user);
     }
 
   ngOnInit(): void {

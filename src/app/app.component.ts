@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthGuard } from './common/auth.guard';
 import { UserService } from './services/user.service';
 import { User } from './user';
+import {AuthService} from "./services/auth.service";
 
 const grid   = require('./grid.scss');
 const style   = require('./style.scss');
@@ -16,16 +17,15 @@ const style   = require('./style.scss');
 
 export class AppComponent {
 
-  user: User;
+  user: any;
 
   constructor(public router: Router,
               public guard: AuthGuard,
-              private service: UserService) {
-                  this.service.getUserObservable().subscribe(
-                      user => this.user = user,
-                      error => console.log(error)
-                  )
-              }
+              private service: AuthService) {}
+
+  ngOnInit() {
+    this.service.fetchUserFromAPI().subscribe(user => this.user = user);
+  }
 
   isUser(): boolean {
     return this.guard.isUser();
