@@ -1,12 +1,12 @@
 import {Component} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
-import {GroupService} from "app/services/group.service";
-import {CourseService} from "app/services/course.service";
-import {UserService} from "app/services/user.service";
+import {GroupService} from "app/services/group/group.service";
+import {CourseService} from "app/services/course/course.service";
+import {UserService} from "app/services/user/user.service";
 import {Group} from "app/group";
 import {User} from "app/user";
 import {Course} from "app/course";
-import {AuthService} from "../../../../services/auth.service";
+import {AuthService} from "../../../../services/auth/auth.service";
 
 const styles = require('./edit-group.component.scss');
 const template = require('./edit-group.component.html');

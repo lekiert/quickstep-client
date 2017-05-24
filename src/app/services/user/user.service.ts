@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
-import { getAuthenticatedUserId } from '../common/helpers';
-import { User } from '../user';
-import { contentHeaders } from '../common/headers';
-import '../rxjs-operators';
+import { getAuthenticatedUserId } from '../../common/helpers';
+import { User } from '../../user';
+import '../../rxjs-operators';
 import { Subject }    from 'rxjs/Subject';
-import { BaseService } from './base.service';
+import { BaseService } from '../base.service';
 import {UserPostDataService} from "./user-post-data.service";
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Observable";
@@ -15,7 +14,6 @@ import 'rxjs/add/observable/of';
 export class UserService extends BaseService {
 
   private user = new Subject<User>();
-  private authenticatedUser: User;
 
   constructor(
       protected authHttp: AuthHttp,
@@ -29,15 +27,11 @@ export class UserService extends BaseService {
    * @returns {Promise<User>}
    */
   public getUser(userId: number): Promise<User> {
-    return this.getUserFromAPI(userId);
-  }
-
-  public getUserFromAPI(userId: number): Promise<User> {
     let url = `${this.usersUrl}/${userId}/`;
     return this.get(url).then(user => user).then(this.createUserFromResponse);
   }
 
-  public fetchUserFromAPI(id?: number) {
+  public getUserAsObservable(id?: number): Observable<User> {
     let userId = id || getAuthenticatedUserId();
     let url = `${this.usersUrl}/${userId}/`;
     return this.getObs(url).flatMap(
@@ -79,14 +73,27 @@ export class UserService extends BaseService {
     return this.get(url).then(this.createUserListFromResponse);
   }
 
-  public changePassword(oldPassword: string, newPassword: string) {
+  /**
+   * Changing password of currently authenticated user. Usable by all account types.
+   * @param oldPassword
+   * @param newPassword
+   * @returns {Promise<any>}
+   */
+  public changePassword(oldPassword: string, newPassword: string): Promise<any> {
     let userId = getAuthenticatedUserId();
     let url = `${this.usersUrl}/${userId}/password-updates`
     let data = this.postData.getPasswordChangePostData(userId, newPassword, oldPassword);
     return this.post(url, data);
   }
 
-  public changeUserPassword(userId, newPassword: string) {
+  /**
+   * Changing specific user's password. Usable by Administrator, other accounts
+   * have no such privileges.
+   * @param userId
+   * @param newPassword
+   * @returns {Promise<any>}
+   */
+  public changeUserPassword(userId, newPassword: string): Promise<any> {
     let url = `${this.usersUrl}/${userId}/password-updates`;
     let data = this.postData.getPasswordChangePostData(userId, newPassword);
     return this.post(url, data);
@@ -97,12 +104,12 @@ export class UserService extends BaseService {
     return this.delete(url).then(() => true).catch(() => false);
   }
 
-  public createUser(user) {
+  public createUser(user): Promise<any> {
     let data = this.postData.getCreateUserPostData(user);
     return this.post(this.usersUrl, data);
   }
 
-  public updateUser(user: User) {
+  public updateUser(user: User): Promise<any> {
     let url = `${this.usersUrl}/${user.id}`;
     let data = this.postData.getUpdateUserPostData(user);
     return this.patch(url, data);
@@ -112,7 +119,7 @@ export class UserService extends BaseService {
     try {
       let id = response.json().data.id;
       let data = response.json().data.attributes;
-      let user = new User(id, data);
+      let user = new User(+id, data);
 
       return user;
     } catch(e) {
@@ -126,7 +133,7 @@ export class UserService extends BaseService {
       let data = response.json().data;
 
       return data.map((item) => {
-        return new User(item.id, item.attributes);
+        return new User(+item.id, item.attributes);
       })
     } catch(e) {
       console.log(e);

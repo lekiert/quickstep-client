@@ -27,13 +27,13 @@
     </button>
   </div>
 
-  <div class="form__buttons" *ngIf="!exerciseExists">
+  <div class="form__buttons" *ngIf="exercise.id && exercise.id > 0">
     <button type="button" (click)="createExercise()" class="button button--primary pull-right">
       <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Dodaj ćwiczenie
     </button>
   </div>
 
-  <div class="form__buttons" *ngIf="exerciseExists || exercise.id > 0">
+  <div class="form__buttons" *ngIf="exercise.id && exercise.id > 0">
     <button type="button" (click)="cancel()" class="button button--default pull-right">
       <i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;&nbsp;Powrót
     </button>

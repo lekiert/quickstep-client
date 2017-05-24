@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Exercise} from "../exercise";
+import {Exercise} from "../../exercise";
 
 @Injectable()
 export class ExercisePostDataService {

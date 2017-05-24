@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {TestService} from "app/services/test.service";
+import {TestService} from "app/services/test/test.service";
 
 const styles = require('./add-test.component.scss');
 const template = require('./add-test.component.html');

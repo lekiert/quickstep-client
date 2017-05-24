@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditUserComponent} from './edit-user.component';
 import { FormsModule } from "@angular/forms";
 import { RouterTestingModule } from "@angular/router/testing";
-import { UserService } from "app/services/user.service";
+import { UserService } from "app/services/user/user.service";
 import { AuthHttp, AuthConfig} from "angular2-jwt";
 import { Http, HttpModule} from "@angular/http";
 import { User } from "app/user";
@@ -17,7 +17,7 @@ describe('EditUserComponent', () => {
     let fixture: ComponentFixture<EditUserComponent>;
 
     class UserServiceMock {
-        fetchUserFromAPI() {
+        getUserAsObservable() {
             return true;
         }
 

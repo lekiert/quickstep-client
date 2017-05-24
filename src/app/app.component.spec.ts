@@ -7,12 +7,12 @@ import {Http, HttpModule} from "@angular/http";
 import {AuthConfig, AuthHttp, provideAuth} from 'angular2-jwt';
 import { environment } from '../environments/environment';
 import { AuthGuard } from './common/auth.guard';
-import { UserService } from './services/user.service';
+import { UserService } from './services/user/user.service';
 import {Observable} from "rxjs/Observable";
 import {User} from "./user";
 import {Subject} from "rxjs/Subject";
 import {By} from "@angular/platform-browser";
-import {AuthService} from "./services/auth.service";
+import {AuthService} from "./services/auth/auth.service";
 
 class AuthGuardMock {
   isUser() {
@@ -21,7 +21,7 @@ class AuthGuardMock {
 }
 
 class AuthServiceMock {
-    fetchUserFromAPI() {
+    getUserAsObservable() {
         let user = new User(1, {
             first_name: 'Jan',
             last_name: 'Kowalski',
@@ -35,7 +35,7 @@ class AuthServiceMock {
 }
 
 class UserServiceMock {
-  fetchUserFromAPI() {
+    getUserAsObservableU() {
     return true;
   }
 
@@ -112,7 +112,7 @@ describe('App: QuickstepClient', () => {
       expect(nav).toBeTruthy();
   }));
 
-  it('should display the supervisor navigation if user is a supervisor', async(() => {
+  it('should display the supervisor navigation if the user is a supervisor', async(() => {
       component.user = new User(1, {
         first_name: 'Jan',
         last_name: 'Kowalski',
@@ -127,5 +127,52 @@ describe('App: QuickstepClient', () => {
       expect(nav[2].nativeNode.innerHTML).toContain('Uczniowie');
       expect(nav[3].nativeNode.innerHTML).toContain('Grupy');
       expect(nav[4].nativeNode.innerHTML).toContain('Dane konta');
+  }));
+
+  it('should display the student navigation if the user is a student', async(() => {
+      component.user = new User(1, {
+        first_name: 'Jan',
+        last_name: 'Kowalski',
+        role: 'STUDENT'
+      })
+      fixture.detectChanges();
+
+      let nav = fixture.debugElement.queryAll(By.css('.sidebar nav .nav__menu-item__link'));
+
+      expect(nav[0].nativeNode.innerHTML).toContain('Podsumowanie');
+      expect(nav[1].nativeNode.innerHTML).toContain('Kursy');
+      expect(nav[2].nativeNode.innerHTML).toContain('Dane konta');
+  }));
+
+  it('should display the teacher navigation if the user is a teacher', async(() => {
+      component.user = new User(1, {
+        first_name: 'Jan',
+        last_name: 'Kowalski',
+        role: 'TEACHER'
+      })
+      fixture.detectChanges();
+
+      let nav = fixture.debugElement.queryAll(By.css('.sidebar nav .nav__menu-item__link'));
+
+      expect(nav[0].nativeNode.innerHTML).toContain('Najnowsze wyniki');
+      expect(nav[1].nativeNode.innerHTML).toContain('Kursy');
+      expect(nav[2].nativeNode.innerHTML).toContain('Grupy');
+      expect(nav[3].nativeNode.innerHTML).toContain('Dane konta');
+  }));
+
+  it('should display the admin navigation if the user is an admin', async(() => {
+      component.user = new User(1, {
+        first_name: 'Jan',
+        last_name: 'Kowalski',
+        role: 'TEACHER'
+      })
+      fixture.detectChanges();
+
+      let nav = fixture.debugElement.queryAll(By.css('.sidebar nav .nav__menu-item__link'));
+
+      expect(nav[0].nativeNode.innerHTML).toContain('Najnowsze wyniki');
+      expect(nav[1].nativeNode.innerHTML).toContain('Kursy');
+      expect(nav[2].nativeNode.innerHTML).toContain('Grupy');
+      expect(nav[3].nativeNode.innerHTML).toContain('Dane konta');
   }));
 });

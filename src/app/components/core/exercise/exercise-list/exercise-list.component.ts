@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {ExerciseService} from "app/services/exercise.service";
+import {ExerciseService} from "app/services/exercise/exercise.service";
 import {Exercise} from "app/exercise";
 
 const styles = require('./exercise-list.component.scss');

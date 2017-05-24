@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ExerciseService} from "app/services/exercise.service";
+import {ExerciseService} from "app/services/exercise/exercise.service";
 import {AuthHttp} from "angular2-jwt";
 import {environment} from "environments/environment";
 import {contentHeaders} from "app/common/headers";

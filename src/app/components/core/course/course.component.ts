@@ -1,12 +1,12 @@
 import {Component} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {CourseService} from "app/services/course.service";
-import {TestService} from "app/services/test.service";
-import {UserService} from "app/services/user.service";
+import {CourseService} from "app/services/course/course.service";
+import {TestService} from "app/services/test/test.service";
+import {UserService} from "app/services/user/user.service";
 import {Course} from "app/course";
 import {Test} from "app/test";
 import {User} from "app/user";
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 const styles = require('./course.component.scss');
 const template = require('./course.component.html');

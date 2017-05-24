@@ -17,15 +17,9 @@ export class HomeComponent {
   jwt: string;
   decodedJwt: string;
   response: string;
-  api: string;
 
   constructor(public router: Router, public http: Http, public authHttp: AuthHttp) {
     this.jwt = localStorage.getItem('jwt');
     this.decodedJwt = this.jwt && jwt_decode(this.jwt);
-  }
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
   }
 }

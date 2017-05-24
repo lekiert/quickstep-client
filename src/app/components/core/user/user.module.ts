@@ -11,12 +11,13 @@ import {SettingsService} from "./settings/settings.service";
 import {RouterModule} from "@angular/router";
 import {ChartsModule} from "ng2-charts";
 import {GroupModule} from "../group/group.module";
+import { UserActionListComponent } from './stats/user-action-list/user-action-list.component';
 
 
 @NgModule({
     imports: [ CommonModule, FormsModule, RouterModule, ChartsModule, GroupModule ],
     declarations: [ AddUserComponent, EditUserComponent, SettingsComponent, StatsComponent, UserListComponent,
-        StudentGroupsComponent ],
+        StudentGroupsComponent, UserActionListComponent ],
     exports: [ AddUserComponent, EditUserComponent, SettingsComponent, StatsComponent, UserListComponent,
         StudentGroupsComponent ],
     providers: [ SettingsService ]

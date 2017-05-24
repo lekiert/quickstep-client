@@ -1,12 +1,14 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { InformationService } from './information.service';
-import {AuthConfig, AuthHttp, provideAuth} from 'angular2-jwt';
-import { environment } from '../../environments/environment';
+import {AuthConfig, AuthHttp} from 'angular2-jwt';
 import {Http, HttpModule} from "@angular/http";
 
 describe('InformationService', () => {
+
+  let service: InformationService;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -23,9 +25,11 @@ describe('InformationService', () => {
         }
       ]
     });
+
+    service = TestBed.get(InformationService);
   });
 
-  it('should create', inject([InformationService], (service: InformationService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should create an instance', () => {
+    expect(service).toBeDefined();
+  });
 });

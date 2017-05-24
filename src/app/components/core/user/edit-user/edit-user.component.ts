@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
-import {UserService} from "app/services/user.service";
+import {UserService} from "app/services/user/user.service";
 import {User} from "app/user";
 
 var MD5 = require("crypto-js/md5");

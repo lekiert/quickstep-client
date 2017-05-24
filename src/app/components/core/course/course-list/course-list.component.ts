@@ -1,9 +1,9 @@
 import {Component} from "@angular/core";
-import {CourseService} from "app/services/course.service";
-import {UserService} from "app/services/user.service";
+import {CourseService} from "app/services/course/course.service";
+import {UserService} from "app/services/user/user.service";
 import {Course} from "app/course";
 import {User} from "app/user";
-import {AuthService} from "../../../../services/auth.service";
+import {AuthService} from "../../../../services/auth/auth.service";
 
 const styles = require('./course-list.component.scss');
 const template = require('./course-list.component.html');

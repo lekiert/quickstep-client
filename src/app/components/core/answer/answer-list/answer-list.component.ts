@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
 import {User} from "app/user";
-import {UserService} from "app/services/user.service";
+import {UserService} from "app/services/user/user.service";
 import {ActivatedRoute} from "@angular/router";
-import {AnswerService} from "app/services/answer.service";
+import {AnswerService} from "app/services/answer/answer.service";
 
 @Component({
   selector: 'answer-list',

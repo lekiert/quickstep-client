@@ -1,4 +1,7 @@
+import {Exercise} from "./exercise";
 export class Test {
+
+  exercises: Exercise[];
 
   constructor(public id: number, private attributes) {}
 

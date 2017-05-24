@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {UserService} from "app/services/user.service";
+import {UserService} from "app/services/user/user.service";
 import {User} from "app/user";
-import {AuthService} from "../../../../services/auth.service";
+import {AuthService} from "../../../../services/auth/auth.service";
 
 const styles = require('./settings.component.scss');
 const template = require('./settings.component.html');
@@ -31,7 +31,6 @@ export class SettingsComponent {
       this.newPassword = '';
       this.newPasswordRepeat = '';
       this.successMessage = '';
-      // this.userService.fetchUserFromAPI();
       this.authService.getAuthenticatedUser().then(user => this.user = user)
   }
 
@@ -68,9 +67,7 @@ export class SettingsComponent {
 
   private submitPasswordChange() {
     this.userService.changePassword(this.oldPassword, this.newPassword)
-    .then((response) => {
-     this.successMessage = 'Hasło zostało zmienione.';
-    })
+    .then(() => this.successMessage = 'Hasło zostało zmienione.')
     .catch((error) => {
      switch (error.json().data.attributes.result) {
        case 'WRONG_PASSWORD':

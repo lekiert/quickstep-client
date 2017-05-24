@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {UserService} from "app/services/user.service";
+import {UserService} from "app/services/user/user.service";
 
 var MD5 = require("crypto-js/md5");
 const styles = require('./add-user.component.scss');

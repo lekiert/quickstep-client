@@ -1,10 +1,7 @@
-import {Component, Input, Output, EventEmitter, ComponentFactoryResolver, ViewContainerRef} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {Exercise} from "app/exercise";
-import {contentHeaders} from "app/common/headers";
-import {environment} from "environments/environment";
-import {ExerciseService} from "app/services/exercise.service";
+import {ExerciseService} from "app/services/exercise/exercise.service";
 import {ExerciseFormService} from "./exercise-form.service";
-import {BracketsFormComponent} from "./brackets/brackets-form.component";
 
 
 const styles = require('./exercise-form.component.scss');
@@ -24,25 +21,16 @@ export class ExerciseFormComponent {
   @Output() exerciseCreated = new EventEmitter();
   @Output() cancelForm = new EventEmitter();
 
-  exerciseExists:boolean = false;
-  storageUrl = environment.API_URL;
-
   constructor(
     private service: ExerciseService,
-    private componentService: ExerciseFormService,
-
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private viewContainerRef: ViewContainerRef) {}
+    private componentService: ExerciseFormService) {}
 
   ngOnInit(): void {
     if (!this.exercise) {
       this.exercise = this.componentService.makeBlankExercise(
           this.exerciseType, this.testId
       );
-    } else {
-      this.exerciseExists = true;
     }
-    console.log('test');
   }
 
   cancel(): void {

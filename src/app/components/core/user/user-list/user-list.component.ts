@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
-import {UserService} from "app/services/user.service";
+import {UserService} from "app/services/user/user.service";
 import {User} from "app/user";
 import {ActivatedRoute} from "@angular/router";
-import {AuthService} from "../../../../services/auth.service";
+import {AuthService} from "../../../../services/auth/auth.service";
 
 const styles = require('./user-list.component.scss');
 const template = require('./user-list.component.html');

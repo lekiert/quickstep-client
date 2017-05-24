@@ -30,15 +30,18 @@ import { UserModule } from "./components/core/user/user.module";
     ],
 
     imports     : [
-        AnswerModule,
+        // vendor and framework modules
         BrowserModule,
         ChartsModule,
+        RouterModule.forRoot(rootRouterConfig),
+        FormsModule,
+        HttpModule,
+
+        // app specific modules
+        AnswerModule,
         CourseModule,
         ExerciseModule,
-        FormsModule,
         GroupModule,
-        HttpModule,
-        RouterModule.forRoot(rootRouterConfig),
         SharedServicesModule,
         TestModule,
         UserModule,

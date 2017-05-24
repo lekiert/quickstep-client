@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { InformationService } from "app/services/information.service";
+import { InformationService } from "app/services/information/information.service";
 import { ActivatedRoute } from "@angular/router";
-import { AnswerService } from "app/services/answer.service";
+import { AnswerService } from "app/services/answer/answer.service";
 import { UserAction } from "app/user-action";
 import { Answer } from "app/answer";
-import {UserService} from "app/services/user.service";
+import {UserService} from "app/services/user/user.service";
 import {User} from "app/user";
-import {AuthService} from "../../../../services/auth.service";
+import {AuthService} from "../../../../services/auth/auth.service";
 
 
 @Component({

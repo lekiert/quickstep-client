@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
-import {TestService} from "app/services/test.service";
-import {UserService} from "app/services/user.service";
-import {ExerciseService} from "app/services/exercise.service";
+import {TestService} from "app/services/test/test.service";
+import {UserService} from "app/services/user/user.service";
+import {ExerciseService} from "app/services/exercise/exercise.service";
 import {Test} from "app/test";
 import {User} from "app/user";
 import {Exercise} from "app/exercise";

@@ -3,10 +3,10 @@ import { TestBed, inject } from '@angular/core/testing';
 import { SettingsService } from './settings.service';
 import {Subject} from "rxjs/Subject";
 import {User} from "../../../../user";
-import {AuthService} from "../../../../services/auth.service";
+import {AuthService} from "../../../../services/auth/auth.service";
 
 class AuthServiceMock {
-  fetchUserFromAPI() {
+  getUserAsObservable() {
     let user = new User(1, {
       first_name: 'Jan',
       last_name: 'Kowalski',

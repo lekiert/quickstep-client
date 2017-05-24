@@ -3,11 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { StatsComponent } from './stats.component';
 import { RouterTestingModule } from "@angular/router/testing";
 import { FormsModule } from "@angular/forms";
-import { InformationService } from "app/services/information.service";
-import { AnswerService } from "app/services/answer.service";
+import { InformationService } from "app/services/information/information.service";
+import { AnswerService } from "app/services/answer/answer.service";
 import {AuthConfig, AuthHttp } from "angular2-jwt";
 import {Http, HttpModule} from "@angular/http";
-import { UserService } from "app/services/user.service";
+import { UserService } from "app/services/user/user.service";
 import { ChartsModule } from "ng2-charts";
 import {By} from "@angular/platform-browser";
 import {Answer} from "app/answer";
@@ -15,7 +15,8 @@ import {UserAction} from "app/user-action";
 import {UserActionCollection} from "app/user-action-collection";
 import {User} from "app/user";
 import {Subject} from "rxjs/Subject";
-import {AuthService} from "../../../../services/auth.service";
+import {AuthService} from "../../../../services/auth/auth.service";
+import {UserActionListComponent} from "./user-action-list/user-action-list.component";
 
 class InformationServiceMock {
   getLatestUserActionLogs() {
@@ -187,7 +188,7 @@ class UserServiceMock {
 }
 
 class AuthServiceMock {
-  fetchUserFromAPI() {
+  getUserAsObservable() {
     let user = new User(1, {
       first_name: 'Jan',
       last_name: 'Kowalski',
@@ -217,7 +218,7 @@ describe('StatsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule, FormsModule, HttpModule, ChartsModule ],
-      declarations: [ StatsComponent ],
+      declarations: [ StatsComponent, UserActionListComponent ],
       providers: [
           {provide: InformationService, useClass: InformationServiceMock},
           {provide: AnswerService, useClass: AnswerServiceMock},
@@ -231,14 +232,6 @@ describe('StatsComponent', () => {
             deps: [Http]
           }
       ]
-    })
-    .overrideComponent(StatsComponent, {
-      set: {
-        providers: [
-          ,
-
-        ]
-      }
     })
     .compileComponents();
 

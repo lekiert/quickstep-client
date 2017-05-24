@@ -3,11 +3,11 @@ import { TestBed, inject } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import {AuthConfig, AuthHttp} from "angular2-jwt";
 import {Http, HttpModule} from "@angular/http";
-import {UserService} from "./user.service";
-import {User} from "../user";
+import {UserService} from "../user/user.service";
+import {User} from "../../user";
 
 class UserServiceMock {
-  fetchUserFromAPI() {
+  getUserAsObservable() {
     return true;
   }
 
@@ -43,7 +43,7 @@ describe('AuthService', () => {
     });
   });
 
-  it('should ...', inject([AuthService], (service: AuthService) => {
+  it('should create an instance', inject([AuthService], (service: AuthService) => {
     expect(service).toBeTruthy();
   }));
 });

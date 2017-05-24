@@ -10,10 +10,8 @@
 
     <div class="gr-12">
       <div class="test">
-
-        <div class="test__exercises" *ngIf="exercises">
-
-          <div *ngFor="let exercise of exercises; let i = index" class="test__exercises__exercise">
+        <div class="test__exercises" *ngIf="test.exercises">
+          <div *ngFor="let exercise of test.exercises; let i = index" class="test__exercises__exercise">
             <div class="test__exercises__exercise__name">
               <h3 class="heading heading--primary">{{ exercise.name }}</h3>
             </div>
@@ -36,11 +34,7 @@
               <student-choice [setDefaults]="false" [exercise]="exercise" [answers]="answers[exercise.id]" *ngIf="exercise.type === 'CHOICE'"></student-choice>
             </div>
           </div>
-
         </div>
-
-
-
       </div>
 
       <hr class="line">

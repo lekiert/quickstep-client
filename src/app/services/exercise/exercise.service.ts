@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { Exercise } from '../exercise';
-import { contentHeaders } from '../common/headers';
-import { BaseService } from './base.service';
+import { Exercise } from '../../exercise';
+import { BaseService } from '../base.service';
 import { ExercisePostDataService } from "./exercise-post-data.service";
 import { AuthHttp } from "angular2-jwt";
 

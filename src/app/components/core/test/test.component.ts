@@ -1,12 +1,12 @@
 import {environment} from "../../../../environments/environment";
 import {Component} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {TestService} from "app/services/test.service";
-import {UserService} from "../../../services/user.service";
+import {TestService} from "app/services/test/test.service";
+import {UserService} from "../../../services/user/user.service";
 import {Test} from "app/test";
 import {User} from "app/user";
 import {Exercise} from "app/exercise";
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 const styles = require('./test.component.scss');
 const template = require('./test.component.html');

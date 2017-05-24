@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {TestService} from "app/services/test.service";
+import {CourseService} from "../../../../services/course/course.service";
 
 const styles = require('./add-course.component.scss');
 const template = require('./add-course.component.html');
@@ -20,7 +20,7 @@ export class AddCourseComponent {
   result = null;
 
   constructor(
-    private service: TestService) {}
+    private service: CourseService) {}
 
   ngOnInit(): void {
     this.course = this.createStub();

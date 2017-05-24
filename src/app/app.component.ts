@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import './rxjs-operators';
 import { Router } from '@angular/router';
 import { AuthGuard } from './common/auth.guard';
-import { UserService } from './services/user.service';
+import { UserService } from './services/user/user.service';
 import { User } from './user';
-import {AuthService} from "./services/auth.service";
+import {AuthService} from "./services/auth/auth.service";
 
 const grid   = require('./grid.scss');
 const style   = require('./style.scss');
@@ -17,14 +17,14 @@ const style   = require('./style.scss');
 
 export class AppComponent {
 
-  user: any;
+  user: User;
 
   constructor(public router: Router,
               public guard: AuthGuard,
               private service: AuthService) {}
 
   ngOnInit() {
-    this.service.fetchUserFromAPI().subscribe(user => this.user = user);
+    this.service.getUserAsObservable().subscribe(user => this.user = user);
   }
 
   isUser(): boolean {
@@ -33,7 +33,7 @@ export class AppComponent {
 
   logout(): void {
     delete this.user;
-    localStorage.removeItem('jwt');
+    this.service.logout();
     this.router.navigate(['login']);
   }
 }

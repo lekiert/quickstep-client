@@ -1,17 +1,17 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SettingsComponent } from './settings.component';
-import { UserService } from 'app/services/user.service';
+import { UserService } from 'app/services/user/user.service';
 import { RouterTestingModule } from "@angular/router/testing";
 import { FormsModule } from "@angular/forms";
 import {Http, HttpModule} from "@angular/http";
 import {AuthConfig, AuthHttp } from "angular2-jwt";
 import {User} from "app/user";
-import {AuthService} from "../../../../services/auth.service";
+import {AuthService} from "../../../../services/auth/auth.service";
 import {Subject} from "rxjs/Subject";
 
 class UserServiceMock {
-  fetchUserFromAPI() {
+  getUserAsObservable() {
     return true;
   }
 
@@ -30,7 +30,7 @@ class UserServiceMock {
 }
 
 class AuthServiceMock {
-  fetchUserFromAPI() {
+  getUserAsObservable() {
     let user = new User(1, {
       first_name: 'Jan',
       last_name: 'Kowalski',

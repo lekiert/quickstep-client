@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Group} from "app/group";
 import {User} from "app/user";
-import {GroupService} from "app/services/group.service";
-import {UserService} from "app/services/user.service";
+import {GroupService} from "app/services/group/group.service";
+import {UserService} from "app/services/user/user.service";
 import {ActivatedRoute} from "@angular/router";
-import {AuthService} from "app/services/auth.service";
+import {AuthService} from "app/services/auth/auth.service";
 
 @Component({
   selector: 'student-groups',

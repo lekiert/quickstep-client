@@ -1,14 +1,26 @@
+import {User} from "./user";
+import {Test} from "./test";
 export class Answer {
 
-    constructor(public id: number, private attributes) {}
+    public test: Test;
+    public user: User;
+
+    constructor(
+        public id: number,
+        private attributes
+    ) {}
 
     get score(): number {
-        let score = this.attributes['score'];
-        if (this.isValid) {
-            return (+score.score / +score.max);
-        }
+        try {
+            let score = this.attributes['score'];
+            if (this.isValid) {
+                return (+score.score / +score.max);
+            }
 
-        return 0;
+            return 0;
+        } catch (e) {
+            return 0;
+        }
     }
 
     get isValid(): boolean {

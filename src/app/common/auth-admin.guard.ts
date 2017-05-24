@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
-import {AuthService} from "app/services/auth.service";
+import {AuthService} from "app/services/auth/auth.service";
 
 @Injectable()
 export class AuthAdminGuard implements CanActivate {

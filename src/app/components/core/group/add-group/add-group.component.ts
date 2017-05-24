@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {GroupService} from "app/services/group.service";
+import {GroupService} from "app/services/group/group.service";
 
 const styles = require('./add-group.component.scss');
 const template = require('./add-group.component.html');

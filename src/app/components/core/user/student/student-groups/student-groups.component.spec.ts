@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StudentGroupsComponent } from './student-groups.component';
-import {GroupService} from "app/services/group.service";
-import {UserService} from "app/services/user.service";
+import {GroupService} from "app/services/group/group.service";
+import {UserService} from "app/services/user/user.service";
 import {RouterTestingModule} from "@angular/router/testing";
 import {FormsModule} from "@angular/forms";
 import {Http, HttpModule} from "@angular/http";
@@ -12,11 +12,11 @@ import {Group} from "app/group";
 import {GroupListComponent} from "app/components/core/group/group-list/group-list.component";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
-import {AuthService} from "../../../../../services/auth.service";
+import {AuthService} from "../../../../../services/auth/auth.service";
 
 
 class AuthServiceMock {
-  fetchUserFromAPI() {
+  getUserAsObservable() {
     let user = new User(1, {
       first_name: 'Jan',
       last_name: 'Kowalski',

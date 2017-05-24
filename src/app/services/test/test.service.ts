@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Test } from '../test';
-import { Exercise } from '../exercise';
-import { AuthHttp } from 'angular2-jwt';
-import { contentHeaders } from '../common/headers';
-import { BaseService } from './base.service';
+import { Test } from '../../test';
+import { Exercise } from '../../exercise';
+import { contentHeaders } from '../../common/headers';
+import { BaseService } from '../base.service';
 
 @Injectable()
 export class TestService extends BaseService {
@@ -94,35 +92,10 @@ export class TestService extends BaseService {
     }, { headers: contentHeaders }).toPromise();
   }
 
-  public createCourse(course) {
-    return this.authHttp.post(this.coursesUrl, {
-      data: {
-        type: "courses",
-        attributes: {
-          "name": course.name,
-          "description": course.description
-        }
-      }
-    }, { headers: contentHeaders }).toPromise();
-  }
-
   public deleteTest(id): Promise<boolean> {
     return this.authHttp.delete(this.testsUrl + '/' + id).toPromise().then((response) => {
       return true;
     });
-  }
-
-  public updateCourse(course) {
-    return this.authHttp.patch(this.coursesUrl + '/' + course.id, {
-      data: {
-        id: course.id,
-        type: "courses",
-        attributes: {
-          "name": course.name,
-          "description": course.description
-        }
-      }
-    }, { headers: contentHeaders }).toPromise();
   }
 
   public submitAnswers(testId, userId, answers) {
