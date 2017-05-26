@@ -1,4 +1,4 @@
 <div class="file-upload">
   <input type="file" class="input file-upload__input" [id]="id" (change)="uploadFile($event)">
-  <label for="{{ id }}" class="input file-upload__file">Choose a file</label>
+  <label [for]="id" class="input file-upload__file file-upload__file--block"><i class="fa fa-upload"></i> wybierz plik</label>
 </div>

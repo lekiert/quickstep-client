@@ -1,11 +1,8 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 import {Http} from "@angular/http";
-import {contentHeaders} from "../../common/headers";
 import {AuthGuard} from "../../common/auth.guard";
 import {UserService} from "../../services/user/user.service";
-import {environment} from "../../../environments/environment";
-import {getAuthenticatedUserId} from "../../common/helpers";
 import {AuthService} from "../../services/auth/auth.service";
 
 const theme   = require('../../style.scss');

@@ -47,7 +47,7 @@ export class UserListComponent {
             this.authService.getAuthenticatedUser().then(
                 user => {
                     this.user = user
-                    if (user.isSupervisor()) {
+                    if (user.isSupervisor() || user.isAdmin()) {
                         switch (this.routeFilter) {
                             case 'students':
                                 this.filter = 'STUDENT';

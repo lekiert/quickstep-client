@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {UserAction} from "../../../../../user-action";
 
 @Component({
   selector: 'user-action-list',
@@ -6,5 +7,5 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./user-action-list.component.scss']
 })
 export class UserActionListComponent {
-  @Input() actions;
+  @Input() actions: UserAction[];
 }

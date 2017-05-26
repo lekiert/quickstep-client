@@ -1,4 +1,5 @@
 import {Component, Input} from "@angular/core";
+import { environment } from "environments/environment";
 import {ExerciseFormInterface} from "../exercise-form.interface";
 import {Exercise} from "app/exercise";
 
@@ -11,6 +12,8 @@ const template = require('./choice-form.component.html');
   styles: [ styles ],
 })
 export class ChoiceFormComponent implements ExerciseFormInterface {
+
+  readonly storageUrl = environment.API_URL;
 
   @Input() exercise: Exercise;
 
@@ -42,6 +45,23 @@ export class ChoiceFormComponent implements ExerciseFormInterface {
     this.exercise.answers[sentence][answer].text = evt.id;
     this.exercise.answers[sentence][answer].media = evt.attributes.item;
     this.exercise.answers[sentence][answer].mime = evt.attributes.mime;
+  }
+
+  toggleAttachment(eId, sId, aId) {
+    let id = `attachment-e${eId}-s${sId}-a${aId}`;
+    let element = document.getElementById(id);
+    console.log(element.style.display);
+    if (element.style.display === 'block') {
+      element.style.display = 'none';
+    } else {
+      element.style.display = 'block';
+    }
+  }
+
+  removeAttachmentFromAnswer(sId, aId) {
+    console.log(this.exercise.answers[sId][aId]);
+    delete this.exercise.answers[sId][aId].media;
+    delete this.exercise.answers[sId][aId].mime;
   }
 
 }

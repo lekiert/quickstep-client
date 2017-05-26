@@ -1,2 +1,16 @@
 @import 'src/app/style';
 @import 'src/app/config';
+
+.table td {
+  height: 60px;
+}
+
+a {
+  color: $color-blue;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -15,6 +15,7 @@ describe('ExercisePostDataService', () => {
     answers: {},
     status: 1,
     testId: 1,
+    pointFactor: 1,
   }
 
   let testExercise: Exercise = new Exercise(1, {

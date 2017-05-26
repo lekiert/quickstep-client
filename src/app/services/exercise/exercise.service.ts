@@ -19,7 +19,7 @@ export class ExerciseService extends BaseService {
   }
 
   create(testId, exercise) {
-    let url = `${this.testsUrl}/${testId}`;
+    let url = `${this.exercisesUrl}`;
     let data = this.postData.getCreateExercisePostData(exercise, testId);
     return this.post(url, data);
   }

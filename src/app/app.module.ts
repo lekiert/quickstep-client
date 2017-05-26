@@ -21,12 +21,13 @@ import { ExerciseModule } from "./components/core/exercise/exercise.module";
 import { GroupModule } from "./components/core/group/group.module";
 import { TestModule } from "./components/core/test/test.module";
 import { UserModule } from "./components/core/user/user.module";
+import { QScoreDirective } from './util/qscore.directive';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        Login,
+        Login
     ],
 
     imports     : [

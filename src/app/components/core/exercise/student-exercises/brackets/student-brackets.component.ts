@@ -29,7 +29,9 @@ export class StudentBracketsComponent extends BaseExerciseComponent implements P
   }
 
   hasWordResult(sentence, word): boolean {
-    return (this.exercise.checkResults && this.exercise.checkResults[sentence] && typeof this.exercise.checkResults[sentence][word] !== 'undefined');
+    return (this.exercise.checkResults
+         && this.exercise.checkResults[sentence]
+         && typeof this.exercise.checkResults[sentence][word] !== 'undefined');
   }
 
   splitSentence(sentence) {

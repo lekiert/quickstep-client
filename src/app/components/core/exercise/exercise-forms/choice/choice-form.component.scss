@@ -10,15 +10,40 @@
     width: calc(100% - 8rem);
   }
 
-  .button {
+  .question-operation {
     float: right;
   }
 }
 
+.question-correct {
+  display: block;
+  padding: 5px;
+  text-align: center;
+  color: white;
+  input {
+    display: none;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.question-correct--correct {
+  background: $color-green;
+}
+
+.question-correct--incorrect {
+  background: $color-red;
+}
+
 .question-sentence-word {
   display: inline-block;
+  vertical-align: top;
+  margin: 7px;
   width: calc(23% - 26px);
   padding: 15px 13px;
+  background: #efefef;
+  border: 1px solid #ccc;
 }
 
 .question-sentence-word__count {
@@ -38,4 +63,16 @@
   border-bottom-left-radius: 0;
   float: right;
   width: calc(90% - 1.25rem - 2px);
+}
+
+.question-attachment {
+  text-align: center;
+  .show-attachment {
+    width: 100%;
+    margin: 7px 0;
+  }
+}
+
+.question-attachment__attachment {
+  display: none;
 }

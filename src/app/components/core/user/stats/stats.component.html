@@ -1,3 +1,7 @@
+<div class="error" *ngIf="error.length > 0">
+  {{ error }}
+</div>
+
 <div class="dashboard">
   <div class="row">
     <div class="gr-12">
@@ -12,6 +16,16 @@
       </h1>
     </div>
 
+    <div class="overall-score" *ngIf="statsUser">
+      <span class="overall-score__label">Średni wynik:</span>
+      <div class="overall-score__score">
+        <score-circle *ngIf="statsUser" [score]="statsUser.overallScore" [dark]="true"></score-circle>
+      </div>
+    </div>
+
+    <div class="overall-score-mobile" *ngIf="student">
+      Średni wynik: <strong>{{ student.overallScore }}%</strong>
+    </div>
 
     <div class="dashboard__chart">
       <canvas *ngIf="this.finished" baseChart height="80"
@@ -27,22 +41,44 @@
 
     <div style="clear: both"></div>
 
-    <user-action-list [actions]="stats" *ngIf="stats"></user-action-list>
+    <div class="gr-12 last-actions">
+      <h3 class="heading heading--border">
+        Ostatnie akcje użytkownika
+      </h3>
 
-    <div class="pagination">
-      Strona: <strong>{{ currentPage }}</strong><br><br>
-      <button type="button" class="button button--primary" [disabled]="!pagination.first" (click)="getUserActionLogs(pagination.first)">
-        <i class="fa fa-angle-double-left"></i>
-      </button>
-      <button type="button" class="button button--primary" [disabled]="!pagination.prev" (click)="getUserActionLogs(pagination.prev)">
-        <i class="fa fa-angle-left"></i>
-      </button>
-      <button type="button" class="button button--primary" [disabled]="!pagination.next" (click)="getUserActionLogs(pagination.next)">
-        <i class="fa fa-angle-right"></i>
-      </button>
-      <button type="button" class="button button--primary" [disabled]="!pagination.last" (click)="getUserActionLogs(pagination.last)">
-        <i class="fa fa-angle-double-right"></i>
-      </button>
+      <div class="pagination" *ngIf="pagination.first !== pagination.last"> 
+        Strona: <strong>{{ currentPage }}</strong><br><br>
+        <button type="button" class="button button--primary" [disabled]="!pagination.first" (click)="getUserActionLogs(pagination.first)">
+          <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button type="button" class="button button--primary" [disabled]="!pagination.prev" (click)="getUserActionLogs(pagination.prev)">
+          <i class="fa fa-angle-left"></i>
+        </button>
+        <button type="button" class="button button--primary" [disabled]="!pagination.next" (click)="getUserActionLogs(pagination.next)">
+          <i class="fa fa-angle-right"></i>
+        </button>
+        <button type="button" class="button button--primary" [disabled]="!pagination.last" (click)="getUserActionLogs(pagination.last)">
+          <i class="fa fa-angle-double-right"></i>
+        </button>
+      </div>
+
+      <user-action-list [actions]="stats" *ngIf="stats"></user-action-list>
+
+      <div class="pagination" *ngIf="pagination.first !== pagination.last">
+        Strona: <strong>{{ currentPage }}</strong><br><br>
+        <button type="button" class="button button--primary" [disabled]="!pagination.first" (click)="getUserActionLogs(pagination.first)">
+          <i class="fa fa-angle-double-left"></i>
+        </button>
+        <button type="button" class="button button--primary" [disabled]="!pagination.prev" (click)="getUserActionLogs(pagination.prev)">
+          <i class="fa fa-angle-left"></i>
+        </button>
+        <button type="button" class="button button--primary" [disabled]="!pagination.next" (click)="getUserActionLogs(pagination.next)">
+          <i class="fa fa-angle-right"></i>
+        </button>
+        <button type="button" class="button button--primary" [disabled]="!pagination.last" (click)="getUserActionLogs(pagination.last)">
+          <i class="fa fa-angle-double-right"></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>

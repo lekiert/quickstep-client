@@ -11,7 +11,9 @@
     <tr *ngFor="let log of actions">
       <td>{{ log.id }}</td>
       <td>{{ log.when }}</td>
-      <td>{{ log.userName }}</td>
+      <td>
+        <a href="javascript;" [routerLink]="['/users', log.userId, 'statistics']">{{ log.userName }}</a>
+      </td>
       <td>
         {{ log.description }}&nbsp;&nbsp;&nbsp;
         <button *ngIf="log.code === 'USER_HAS_SUBMITTED_ANSWER'" class="button button--primary" [routerLink]="['/answer', log.answerId]">
@@ -20,4 +22,11 @@
       </td>
     </tr>
   </tbody>
+  <tfoot *ngIf="actions.length == 0">
+    <tr>
+      <td colspan="4" style="text-align:center">
+        Użytkownik nie wykonał jeszcze żadnych akcji.
+      </td>
+    </tr>
+  </tfoot>
 </table>

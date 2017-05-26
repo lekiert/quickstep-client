@@ -1,4 +1,4 @@
-<div class="" *ngIf="user">
+<div class="" *ngIf="user || student">
   <div class="row">
     <div class="gr-12">
       <h1 class="heading heading--border">Użytkownicy</h1>
@@ -33,7 +33,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let element of users" [routerLink]="['/user', element.id]">
+          <tr *ngFor="let element of users" [routerLink]="['/users', element.id, 'statistics']">
             <td>
               <span class="users-table__first-name">
                 {{ element.first_name }}

@@ -1,3 +1,5 @@
+@import '../../../config';
+
 .file-upload input  {
   width: 0.1px;
   height: 0.1px;
@@ -8,15 +10,23 @@
 }
 
 .file-upload input  + label {
-  font-size: 1.25em;
-  font-weight: 700;
+  font-size: 16px;
   color: white;
-  background-color: black;
+  background-color: $color-blue-vlight;
+  border-radius: 7px;
   display: inline-block;
-  cursor: pointer; /* "hand" cursor */
+  cursor: pointer;
+  padding: 7px 15px;
+  margin: 7px 0;
 }
 
 .file-upload input:focus + label,
 .file-upload input  + label:hover {
-  background-color: red;
+  background-color: $color-blue;
+}
+
+.file-upload__file--block {
+  width: calc(100% - 30px);
+  display: block;
+  text-align: center;
 }

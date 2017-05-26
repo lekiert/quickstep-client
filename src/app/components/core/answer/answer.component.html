@@ -5,10 +5,17 @@
     </div>
 
     <div class="test__score">
-      Wynik: {{ score }}%
+      <span class="test__score__label">Wynik testu:</span>
+      <div class="test__score__score">
+        <score-circle [score]="score" [dark]="true"></score-circle>
+      </div>
     </div>
 
-    <div class="gr-12">
+    <div class="test__score-mobile">
+      Wynik testu: <strong>{{ score }}%</strong>
+    </div>
+
+    <div class="gr-12" style="margin-top: 30px">
       <div class="test">
         <div class="test__exercises" *ngIf="test.exercises">
           <div *ngFor="let exercise of test.exercises; let i = index" class="test__exercises__exercise">

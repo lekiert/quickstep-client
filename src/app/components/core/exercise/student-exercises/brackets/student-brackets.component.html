@@ -7,7 +7,10 @@
           <input type="text"
                  [(ngModel)]="answers[sentence][j]"
                  (ngModelChange)="updateExerciseAnswerValues()"
-                 [ngClass]="{'word': true, 'word--error' : hasError(sentence, j), 'word--correct' : hasWordResult(sentence, j) && !hasError(sentence, j) }"
+                 [ngClass]="{
+                     'word': true,
+                     'word--error' : hasError(sentence, j),
+                     'word--correct' : hasWordResult(sentence, j) && !hasError(sentence, j) }"
                  [disabled]="hasWordResult(sentence, j) || !setDefaults">
         </span>
       </span>

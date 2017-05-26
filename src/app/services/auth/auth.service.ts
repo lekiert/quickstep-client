@@ -9,6 +9,7 @@ import {Observable} from "rxjs/Observable";
 import { environment } from 'environments/environment';
 import {Http} from "@angular/http";
 import {contentHeaders} from "../../common/headers";
+import {Router} from "@angular/router";
 
 
 @Injectable()
@@ -18,6 +19,7 @@ export class AuthService extends BaseService {
   private authenticatedUser: User;
 
   constructor(
+      public router: Router,
       protected authHttp: AuthHttp,
       protected http: Http,
       protected userService: UserService) {
@@ -49,10 +51,12 @@ export class AuthService extends BaseService {
     if (this.authenticatedUser) {
       return new Promise((resolve) => resolve(this.authenticatedUser));
     }
-
     return this.userService.getUser(getAuthenticatedUserId()).then(user => {
       this.setAuthenticatedUser(user);
       return this.authenticatedUser;
+    }).catch(() => {
+      this.logout();
+      this.router.navigate(['/login']);
     });
   }
 

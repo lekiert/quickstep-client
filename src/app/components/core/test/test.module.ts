@@ -5,10 +5,12 @@ import {TestComponent} from "./test.component";
 import {AddTestComponent} from "./add-test/add-test.component";
 import {EditTestComponent} from "./edit-test/edit-test.component";
 import {ExerciseModule} from "../exercise/exercise.module";
+import {UtilModule} from "../../util/util.module";
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
-    imports: [ CommonModule, FormsModule, ExerciseModule ],
+    imports: [ CommonModule, FormsModule, ExerciseModule, UtilModule, RouterModule ],
     declarations: [ TestComponent, AddTestComponent, EditTestComponent ],
     exports: [ TestComponent, AddTestComponent, EditTestComponent ]
 })

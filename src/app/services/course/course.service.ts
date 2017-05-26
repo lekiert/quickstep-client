@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 import {Course} from '../../course';
-import {contentHeaders} from '../../common/headers';
 import {BaseService} from '../base.service';
 import {AuthHttp} from "angular2-jwt";
 import {CoursePostDataService} from "./course-post-data.service";
@@ -17,15 +16,17 @@ export class CourseService extends BaseService {
 
     getCourses(): Promise<Course[]> {
         return this.get(this.coursesUrl)
-            .then(this.createCourseListFromResponse)
-            .catch(this.handleError);
+            .then((response) => {
+                return this.createCourseListFromResponse(response)
+            }).catch(this.handleError);
     }
 
     getCoursesByUser(id): Promise<Course[]> {
         let url = `${this.usersUrl}/${id}/courses`;
         return this.get(url)
-            .then(this.createCourseListFromResponse)
-            .catch(this.handleError);
+            .then((response) => {
+                return this.createCourseListFromResponse(response)
+            }).catch(this.handleError);
     }
 
     getUserCourses(id): Promise<Course[]> {
@@ -45,8 +46,7 @@ export class CourseService extends BaseService {
     getCourse(id: number): Promise<Course> {
         let url = `${this.coursesUrl}/${id}`;
         return this.get(url)
-            .then(this.createCourseFromResponse)
-            .catch(this.handleError);
+            .then((response) => { return this.createCourseFromResponse(response) });
     }
 
     public createCourse(course) {

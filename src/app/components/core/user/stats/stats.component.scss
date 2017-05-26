@@ -1,6 +1,12 @@
 @import 'src/app/style';
 @import 'src/app/config';
 
+.error {
+  text-align: center;
+  font-size: 18px;
+  color: $color-red;
+}
+
 .pagination {
   padding: 0.5rem 0;
   text-align: center;
@@ -10,4 +16,68 @@
   display: inline-block;
   padding: 0.5rem;
   background: #ededed;
+}
+
+.dashboard__chart {
+  clear: both;
+  margin-top: 30px;
+}
+
+.view-user-groups {
+  @include gridle_state(mobile) {
+    display: block;
+    margin: 15px auto;
+    float: none;
+    width: 100%;
+  }
+}
+
+$scoreHeight: 165px;
+
+.overall-score {
+  background: #3B648E;
+  color: #fff;
+  clear: both;
+  text-align: center;
+  height: $scoreHeight;
+
+  @include gridle_state(mobile, xs) {
+    display: none;
+  }
+}
+
+.overall-score__label {
+  vertical-align:top;
+  height: $scoreHeight;
+  line-height: $scoreHeight;
+  display: inline-block;
+  font-size: 2em;
+}
+
+.overall-score__score {
+  vertical-align:top;
+  display: inline-block;
+  height: $scoreHeight;
+  width: $scoreHeight;
+}
+
+
+.overall-score-mobile {
+  margin-bottom: 20px;
+  color: #929292;
+  text-align: center;
+  font-size: 24px;
+  display: none;
+  @include gridle_state(mobile, xs) {
+    display: block;
+  }
+}
+
+.last-actions {
+  margin-top: 25px;
+}
+.dashboard__chart {
+  @include gridle_state(mobile) {
+    display: none;
+  }
 }

@@ -1,5 +1,40 @@
 @import 'src/app/style';
 @import 'src/app/config';
+//
+//.test__exercises__exercise {
+//  margin: 25px 0;
+//}
+//
+//.test__exercises__exercise {
+//  margin-top: 50px;
+//
+//  &:first-child {
+//    margin-top: 0;
+//  }
+//}
+//
+//.test__check {
+//  display: block;
+//  margin: 25px auto;
+//}
+//
+//.test__exercises__exercise__attachments__item {
+//  max-width: 250px;
+//  max-height: 250px;
+//  width: auto;
+//  height: auto;
+//  display: inline-block;
+//  padding: 15px;
+//  border: 1px solid $color-gray;
+//  background: #fdfdfd;
+//  vertical-align: middle;
+//}
+//
+//.test__score {
+//  padding: 1.5em;
+//  text-align: center;
+//  font-size: 24pt;
+//}
 
 .test__exercises__exercise {
   margin: 25px 0;
@@ -7,10 +42,29 @@
 
 .test__exercises__exercise {
   margin-top: 50px;
+  padding: 25px;
+  border-bottom: 1px solid $color-blue-vlight;
+  border-top: 3px solid #e0e0e0;
 
   &:first-child {
     margin-top: 0;
   }
+
+  background: #efefef;
+}
+
+.test__exercises__exercise__name {
+  text-align: center;
+  font-size: 120%;
+  p {
+    font-weight: bold;
+  }
+}
+
+.test__exercises__exercise__command {
+  text-align: center;
+  font-size: 120%;
+  color: $color-blue-vlight;
 }
 
 .test__check {
@@ -34,4 +88,62 @@
   padding: 1.5em;
   text-align: center;
   font-size: 24pt;
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  background: rgba(77,127,178,0.8);
+  background: #fff;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  transition: all 600ms;
+}
+
+$scoreHeight: 165px;
+
+.test__score {
+  background: #3B648E;
+  color: #fff;
+  clear: both;
+  text-align: center;
+  height: $scoreHeight;
+
+  @include gridle_state(mobile, xs) {
+    display: none;
+  }
+}
+
+.test__score__label {
+  vertical-align:top;
+  height: $scoreHeight;
+  line-height: $scoreHeight;
+  display: inline-block;
+  font-size: 28px;
+}
+
+.test__score__score {
+  vertical-align:top;
+  display: inline-block;
+  height: $scoreHeight;
+  width: $scoreHeight;
+}
+
+
+.test__score-mobile {
+  margin-bottom: 20px;
+  color: #929292;
+  text-align: center;
+  font-size: 24px;
+  display: none;
+  @include gridle_state(mobile, xs) {
+    display: block;
+  }
 }

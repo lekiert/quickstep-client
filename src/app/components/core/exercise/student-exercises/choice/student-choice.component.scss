@@ -1,20 +1,32 @@
 @import '../../../../../style';
 @import '../../../../../config';
 
+.sentence {
+  margin-top: 50px;
+  clear: both;
+}
+
+.command {
+  font-size: 18px;
+  color: $color-blue-vlight;
+  font-weight: bold;
+}
+
 .choice-options {
   @include clearfix();
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
 }
 
 .choice-options__option {
   display: block;
-  width: 150px;
-  height: 150px;
   max-width: 150px;
   max-height: 150px;
   float: left;
-  margin: 10px;
-  padding: 10px 10px 25px 10px;
-  border: 2px solid #eee;
+  margin: 0 15px;
+  font-size: 24px;
+  padding: 10px 10px 10px 10px;
+  border: 2px solid transparent;
 
   img {
     max-width: 100%;
@@ -28,20 +40,47 @@
 
   &.choice-options__option--error {
     border-color: $color-red;
+    background: $color-red;
+    color: #fff;
   }
   &.choice-options__option--correct {
     border-color: $color-green-light;
+    background: $color-green-light;
+    color: #fff;
   }
 }
 
 .choice-options__option--selected {
   border-color: $color-blue-light;
+  background: $color-blue-light;
+  color: #fff;
 }
 
 .choice-options__option__input {
-  display: block;
-  margin: 0 auto;
-  position: absolute;
-  bottom: 5px;
-  left: calc(50% - 5px);
+  display: none;
+}
+
+label {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.audio-check {
+  margin-top: 25px;
+  text-align: center;
+  border: 1px solid $color-blue-light;
+  padding-bottom: 10px;
+  span {
+    text-align: center;
+
+    font-size: 12px;
+    padding: 7px 15px;
+  }
+
+  &:hover {
+    font-weight: bold;
+    color: #fff;
+    background: $color-blue-light;
+  }
 }

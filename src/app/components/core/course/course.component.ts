@@ -28,26 +28,26 @@ export class CourseComponent {
   tests: Test[];
   private sub: any;
   id: number;
+  error:string = '';
 
-  ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-       this.id = +params['id']; // (+) converts string 'id' to a number
-
-       this.courseService.getCourse(this.id).then((course) => {
-         this.course = course;
-       });
-
-       this.testService.getTestsByCourse(this.id).then((tests) => {
-         this.tests = tests;
-       });
-    });
-
-    this.authService.getAuthenticatedUser().then(
-      user => {
-        this.user = user
-      }
-    )
-  }
+    ngOnInit() {
+        this.authService.getAuthenticatedUser().then(user => this.user = user)
+        this.sub = this.route.params.subscribe(params => {
+            this.id = +params['id']; // (+) converts string 'id' to a number
+            if (this.id) {
+                this.courseService.getCourse(this.id)
+                    .then((course) => this.course = course)
+                    .catch((error) => {
+                        if (error.status === 404) {
+                            this.error = "Nie odnaleziono żądanego kursu";
+                        }
+                    });
+            }
+            this.testService.getTestsByCourse(this.id).then((tests) => {
+              this.tests = tests;
+            });
+        });
+    }
 
   ngOnDestroy() {
     this.sub.unsubscribe();

@@ -17,6 +17,7 @@ export class ExercisePostDataService {
           "answers": exercise.answers,
           "status": 1,
           "test-id": testId,
+          "point-factor": exercise.pointFactor,
         }
       }
     }
@@ -35,7 +36,8 @@ export class ExercisePostDataService {
           "data": exercise.data,
           "answers": exercise.answers,
           "status": 1,
-          "test-id": exercise.testId
+          "test-id": exercise.testId,
+          "point-factor": exercise.pointFactor,
         }
       }
     }

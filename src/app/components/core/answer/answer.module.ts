@@ -5,10 +5,11 @@ import {AnswerComponent} from "./answer.component";
 import {AnswerListComponent} from "./answer-list/answer-list.component";
 import {ExerciseModule} from "../exercise/exercise.module";
 import {RouterModule} from "@angular/router";
+import {UtilModule} from "../../util/util.module";
 
 
 @NgModule({
-    imports: [ CommonModule, FormsModule, ExerciseModule, RouterModule ],
+    imports: [ CommonModule, FormsModule, ExerciseModule, RouterModule, UtilModule ],
     declarations: [ AnswerComponent, AnswerListComponent ],
     exports: [ AnswerComponent, AnswerListComponent ]
 })

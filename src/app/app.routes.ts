@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { CourseListComponent } from './components/core/course/course-list/course-list.component';
 import { UserListComponent } from './components/core/user/user-list/user-list.component';
-import { GroupListComponent } from './components/core/group/group-list/group-list.component';
 import { CourseComponent } from './components/core/course/course.component';
 import { SettingsComponent } from './components/core/user/settings/settings.component';
 import { AddUserComponent } from './components/core/user/add-user/add-user.component';

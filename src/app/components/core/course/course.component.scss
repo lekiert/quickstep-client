@@ -1,6 +1,12 @@
 @import 'src/app/style';
 @import 'src/app/config';
 
+.error {
+  text-align: center;
+  font-size: 18px;
+  color: $color-red;
+}
+
 .tests-table {
 
   width: 100%;

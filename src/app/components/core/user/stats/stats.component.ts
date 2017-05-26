@@ -17,6 +17,7 @@ import {AuthService} from "../../../../services/auth/auth.service";
 })
 export class StatsComponent implements OnInit {
 
+  public error:string = '';
   public stats: Array<UserAction>;
   public answers: Array<Answer>;
   public finished: boolean = false;
@@ -40,7 +41,10 @@ export class StatsComponent implements OnInit {
     {
       backgroundColor: 'rgba(148,159,177,0.2)',
       borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointRadius: 10,
+      pointHoverRadius: 10,
+      pointLabelFontSize: 20,
+      pointBackgroundColor: '#3B648E',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
@@ -55,8 +59,8 @@ export class StatsComponent implements OnInit {
     prev: null,
     next: null
   }
-  public user: User;
-  public student: User;
+  public user: User; // authenticated user
+  public student: User; // student results authenticated user is viewing
 
   constructor(
     public router: Router,
@@ -73,15 +77,29 @@ export class StatsComponent implements OnInit {
       let id = +params['id'];
       this.id = id;
       if (id) {
-        this.userService.getUser(id).then(user => {
-          this.student = user
-        })
+        this.userService.getUser(id)
+            .then((user) => {
+              this.student = user;
+
+            })
+            .catch((error) => {
+              console.log(error);
+              if (error.status === 404) {
+                this.error = "Nie odnaleziono wskazanego użytkownika."
+              }
+            });
       }
       this.getUserActionLogs(this.currentPage);
       this.answerService.getAnswerStats(this.id).then((answers) => {
         this.setAnswerChartData(answers);
+      }).catch((error) => {
+        console.log(error);
       });
     });
+  }
+
+  get statsUser() {
+    return this.student || this.user;
   }
 
   public getUserActionLogs(page?: number) {
@@ -129,12 +147,16 @@ export class StatsComponent implements OnInit {
   }
 
   public chartClicked(e:any) {
-    let i = e.active[0]._index
-    this.router.navigate(['/answer', this.answers[i].id]);
+    try {
+      let i = e.active[0]._index
+      this.router.navigate(['/answer', this.answers[i].id]);
+    } catch (e) {
+      // NOOP
+    }
   }
 
   public chartHovered(e:any):void {
-
+    console.log(e);
   }
 
 }

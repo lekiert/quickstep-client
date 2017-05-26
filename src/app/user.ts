@@ -59,6 +59,10 @@ export class User {
     return this.attributes['created-at'];
   }
 
+  get overallScore(): string {
+    return this.attributes['overall-score'] || '0';
+  }
+
   isStudent(): boolean {
     return this.attributes['role'] === 'STUDENT';
   }

@@ -1,0 +1,14 @@
+<div class="score-pie">
+  <div class="p{{score}}" [ngClass]="{
+        'c100': true,
+        'center': true,
+        'score-pie__chart--dark': dark
+      }">
+    <span>{{ score }}%</span>
+    <div class="slice">
+      <div class="bar"
+           [style.border-color]="color"></div>
+      <div class="fill" [style.border-color]="color"></div>
+    </div>
+  </div>
+</div>

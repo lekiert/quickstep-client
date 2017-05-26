@@ -1,30 +1,42 @@
 <div *ngIf="exercise.data">
 
-    <div *ngFor="let sentence of keys(exercise.data); let i = index">
-      <p>{{ exercise.data[sentence] }}</p>
+  <div *ngFor="let sentence of keys(exercise.data); let i = index" class="sentence">
+      <p class="command">{{ i+1 }}. {{ exercise.data[sentence] }}</p>
       <div class="choice-options">
-        <div *ngFor="let choice of exercise.answers[sentence]; let j = index"
-             [ngClass]="{
+        <label style="padding: 15px" *ngFor="let choice of exercise.answers[sentence]; let j = index" for="input-{{exercise.id}}-{{i}}-{{j}}"
+               [ngClass]="{
                'choice-options__option' : true,
                'choice-options__option--selected' : isSelected(sentence, choice.text),
-               'choice-options__option--error' : hasError(sentence, choice.text),
-               'choice-options__option--correct' : hasChoiceResult(sentence, choice.text) && !hasError(sentence, choice.text)
+               'choice-options__option--error' : hasError(sentence, choice.text) && isSelected(sentence, choice.text),
+               'choice-options__option--correct' : hasChoiceResult(sentence, choice.text) && !hasError(sentence, choice.text) && isSelected(sentence, choice.text)
              }">
-
           <div *ngIf="!choice.mime || !choice.media">
-             {{ choice.text }}
+            {{ choice.text }}
           </div>
 
           <div *ngIf="choice.mime && choice.media">
             <img *ngIf="choice.mime.indexOf('image') === 0" src="{{ storageUrl }}{{ choice.media }}">
-            <audio controls *ngIf="choice.mime.indexOf('audio') === 0">
-              <source src="{{ storageUrl }}{{ choice.media }}" type="{{ choice.mime }}">
-            </audio>
+            <div *ngIf="choice.mime.indexOf('audio') === 0" style="width: 130px">
+              <qAudio *ngIf="choice.mime.indexOf('audio') === 0"
+                      [id]="'e'+exercise.id+'s'+sentence+'a'+j"
+                      [audio]="choice"
+                      style="margin: 0 auto"
+              ></qAudio>
+              <div class="audio-check">
+                <span *ngIf="!isSelected(sentence, choice.text)">ZAZNACZ</span>
+                <span *ngIf="isSelected(sentence, choice.text)" style="color: #fff"><i class="fa fa-check"></i> ZAZNACZONE</span>
+              </div>
+            </div>
+
           </div>
-
-          <input *ngIf="setDefaults" [disabled]="hasChoiceResult(sentence, choice.text)" type="checkbox" (click)="toggleChoice(sentence, choice.text)" [checked]="hasChoiceResult(sentence, choice.text)" class="choice-options__option__input">
-        </div>
-      </div>
+          <input *ngIf="setDefaults"
+                 id="input-{{exercise.id}}-{{i}}-{{j}}"
+                 [disabled]="hasChoiceResult(sentence, choice.text)"
+                 (click)="toggleChoice(sentence, choice.text)"
+                 type="checkbox"
+                 [checked]="hasChoiceResult(sentence, choice.text)"
+                 class="choice-options__option__input">
+      </label>
     </div>
-
+  </div>
 </div>

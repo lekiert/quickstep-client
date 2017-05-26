@@ -21,14 +21,10 @@ export class UserService extends BaseService {
     super(authHttp);
   }
 
-  /**
-   * Alias for getUserFromAPI
-   * @param userId
-   * @returns {Promise<User>}
-   */
   public getUser(userId: number): Promise<User> {
     let url = `${this.usersUrl}/${userId}/`;
-    return this.get(url).then(user => user).then(this.createUserFromResponse);
+    return this.get(url)
+        .then((user) => { return this.createUserFromResponse(user) });
   }
 
   public getUserAsObservable(id?: number): Observable<User> {
@@ -49,7 +45,7 @@ export class UserService extends BaseService {
       filter.set('filter[role]', type);
     }
 
-    return this.get(this.usersUrl).then(this.createUserListFromResponse);
+    return this.get(this.usersUrl, {}, filter).then(this.createUserListFromResponse);
   }
 
   public getUsersOfType(type: string): Promise<User[]> {

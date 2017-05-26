@@ -29,6 +29,16 @@
 
         <div class="form__group form__group--inline">
           <div class="form__group__label">
+            <label for="exercise-command">Mnożnik punktów</label>
+          </div>
+          <div class="form__group__control">
+            <input type="text" required name="exercise[point-factor]" [(ngModel)]="exercise.pointFactor"
+                   class="input input--full" id="exercise-point-factor">
+          </div>
+        </div>
+
+        <div class="form__group form__group--inline">
+          <div class="form__group__label">
             <label for="exercise-code">Kod</label>
           </div>
           <div class="form__group__control">
@@ -41,38 +51,58 @@
           <div class="question-sentence">
             <input type="text" required name="bracketsSentence-{{i}}"
                    [(ngModel)]="exercise.data[sentence]" class="input input--full choice-sentence">
-            <button style="margin-left: 5px" type="button" class="button button--danger" (click)="deleteSentence(sentence)">
+            <button style="margin-left: 5px" type="button" class="button button--danger question-operation" (click)="deleteSentence(sentence)">
               <i class="fa fa-remove"></i>
             </button>
-            <button type="button" class="button button--primary" (click)="addOption(sentence)">
+            <button type="button" class="button button--primary question-operation" (click)="addOption(sentence)">
               <i class="fa fa-plus"></i>
             </button>
 
             <div *ngFor="let answer of keys(exercise.answers[sentence]); let j = index" style="display: inline">
               <div class="question-sentence-word">
-                <div class="question-sentence-word__count">
-                  <input type="checkbox" name="bracketsSentence-{{i}}-answer-correct-{{j}}" [(ngModel)]="exercise.answers[sentence][answer].correct">
-                </div>
-                <input type="text" class="question-sentence-word__input input" required
-                       name="bracketsSentence-{{i}}-answer-{{j}}"
-                       [(ngModel)]="exercise.answers[sentence][answer].text"
-                       [disabled]="exercise.answers[sentence][answer].mime && exercise.answers[sentence][answer].media">
-                       <file-upload [id]="'file-' + i + '-' + j" (fileUploaded)="setAnswerAsMedia($event, sentence, answer)"></file-upload>
+                <label for="bracketsSentence-{{i}}-answer-correct-{{j}}"
+                       class="question-correct"
+                       [class.question-correct--correct]="exercise.answers[sentence][answer].correct"
+                       [class.question-correct--incorrect]="!exercise.answers[sentence][answer].correct"
+                >
+                  <small *ngIf="exercise.answers[sentence][answer].correct">POPRAWNA</small>
+                  <small *ngIf="!exercise.answers[sentence][answer].correct">NIEPOPRAWNA</small>
+                  <input type="checkbox" id="bracketsSentence-{{i}}-answer-correct-{{j}}" name="bracketsSentence-{{i}}-answer-correct-{{j}}" [(ngModel)]="exercise.answers[sentence][answer].correct">
+                </label>
 
-                       <div style="max-width: 300px; max-height: 300px" *ngIf="exercise.answers[sentence][answer].mime && exercise.answers[sentence][answer].media">
-                         <div>
-                           <img *ngIf="exercise.answers[sentence][answer].mime.indexOf('image') === 0" src="{{ storageUrl }}{{ exercise.answers[sentence][answer].media }}">
-                           <audio controls *ngIf="exercise.answers[sentence][answer].mime.indexOf('audio') === 0">
-                             <source src="{{ storageUrl }}{{ exercise.answers[sentence][answer].media }}" type="{{ exercise.answers[sentence][answer].mime }}">
-                           </audio>
-                         </div>
-                       </div>
+                <input *ngIf="!(exercise.answers[sentence][answer].mime || exercise.answers[sentence][answer].media)"
+                       type="text" class="question-sentence-word__input input" required
+                       name="bracketsSentence-{{i}}-answer-{{j}}"
+                       [(ngModel)]="exercise.answers[sentence][answer].text">
+
+                <span *ngIf="exercise.answers[sentence][answer].mime && exercise.answers[sentence][answer].media">
+                  <small style="text-align: center">Odpowiedź zawiera załącznik.</small>
+                </span>
+
+                <div style="max-width: 300px; max-height: 300px" *ngIf="exercise.answers[sentence][answer].mime && exercise.answers[sentence][answer].media" class="question-attachment">
+                  <div>
+                    <button type="button" class="button button--small show-attachment" (click)="toggleAttachment(exercise.id, i, j)"><i class="fa fa-eye"></i> pokaż / ukryj</button>
+
+                    <div class="question-attachment__attachment" id="attachment-e{{ exercise.id }}-s{{ i }}-a{{ j }}">
+                     <img *ngIf="exercise.answers[sentence][answer].mime.indexOf('image') === 0" src="{{ storageUrl }}{{ exercise.answers[sentence][answer].media }}">
+                     <qAudio *ngIf="exercise.answers[sentence][answer].mime.indexOf('audio') === 0"
+                             [id]="'audio' + exercise.id + 's' + sentence + 'a' + answer"
+                             [audio]="exercise.answers[sentence][answer]"></qAudio>
+                     <br>
+                     <button type="button" class="button button--small button--danger show-attachment" (click)="removeAttachmentFromAnswer(sentence, answer)">
+                       <i class="fa fa-trash"></i> usuń załącznik
+                     </button>
+                    </div>
+                  </div>
+                </div>
+
+                <file-upload [id]="'file-' + i + '-' + j" (fileUploaded)="setAnswerAsMedia($event, sentence, answer)"></file-upload>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="form__buttons">
+        <div class="form__buttons" style="clear: both">
           <button type="button" (click)="addSentence()" class="button button--success pull-right">
             <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Dodaj zdanie
           </button>

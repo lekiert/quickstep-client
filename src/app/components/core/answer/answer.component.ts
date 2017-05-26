@@ -8,47 +8,68 @@ import {environment} from "../../../../environments/environment";
 import {AnswerService} from "../../../services/answer/answer.service";
 
 @Component({
-  selector: 'app-answer',
-  templateUrl: './answer.component.html',
-  styleUrls: ['./answer.component.scss']
+    selector: 'app-answer',
+    templateUrl: './answer.component.html',
+    styleUrls: ['./answer.component.scss']
 })
 export class AnswerComponent implements OnInit {
 
-  sub: any;
-  id: any;
-  test: Test;
-  user: User;
-  exercises: Exercise[];
-  answers: {};
-  score: any;
-  storageUrl = environment.API_URL;
+    sub: any;
+    id: any;
+    test: Test;
+    user: User;
+    exercises: Exercise[];
+    answers: {};
+    score: any;
+    storageUrl = environment.API_URL;
 
-  constructor(
-    private route: ActivatedRoute,
-    private answerService: AnswerService,
-    private testService: TestService) {}
+    constructor(private route: ActivatedRoute,
+                private answerService: AnswerService,
+                private testService: TestService) {
+    }
 
-  ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-       this.id = +params['id'];
+    ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            this.id = +params['id'];
 
-       this.answerService.getAnswer(this.id).then((answer) => {
-         this.answers = answer.data.attributes.answers;
-         this.score = (answer.score * 100).toFixed();
+            this.answerService.getAnswer(this.id).then((answer) => {
+                try {
+                    this.answers = answer.data.answers;
+                    this.score = (answer.score * 100).toFixed();
 
-         if (answer.test) {
-             this.test = answer.test;
-             this.testService.getTestRelatedExercises(this.test.id).then((exercises) => {
-                 this.exercises = exercises;
-                 this.test.exercises = exercises;
-             });
-         }
+                    if (answer.test) {
+                        this.test = answer.test;
+                        this.testService.getTestRelatedExercises(this.test.id).then((exercises) => {
+                            this.exercises = exercises;
+                            this.test.exercises = exercises;
+                            this.setExerciseResults(answer.data.results);
+                        });
+                    }
 
-         if (answer.user) {
-             this.user = answer.user;
-         }
-       });
-    });
-  }
+                    if (answer.user) {
+                        this.user = answer.user;
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+            });
+        });
+    }
+
+
+    setExerciseResults(results): void {
+        for (let i in results) {
+            for (let j in this.exercises) {
+                if (+i === +this.exercises[j].id) {
+                    let _results = {}
+                    Object.keys(results[i]).forEach((r) => {
+                        _results[r] = results[i][r].results
+                    });
+                    console.log(_results);
+                    this.exercises[j].checkResults = _results;
+                }
+            }
+        }
+    }
 
 }

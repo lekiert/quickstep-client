@@ -6,6 +6,19 @@
     <div class="gr-12">
       <div class="alert alert--danger" *ngIf="error.length > 0" (click)="error = ''">{{ error }}</div>
     </div>
+
+    <div class="test__score" *ngIf="hasResults">
+      <span class="test__score__label">Wynik testu:</span>
+      <div class="test__score__score">
+        <score-circle [score]="score" [dark]="true"></score-circle>
+      </div>
+    </div>
+
+
+    <div class="test__score-mobile" *ngIf="hasResults">
+      Wynik testu: <strong>{{ score }}%</strong>
+    </div>
+
     <div class="gr-12">
       <div class="test">
 
@@ -13,7 +26,7 @@
 
           <div *ngFor="let exercise of exercises; let i = index" class="test__exercises__exercise">
             <div class="test__exercises__exercise__name">
-              <h3 class="heading heading--primary">{{ exercise.name }}</h3>
+              <h3 class="heading heading--primary">{{ exercise.name }} <small><em>( x {{ exercise.pointFactor }} p.)</em></small></h3>
             </div>
 
             <div class="test__exercises__exercise__command">
@@ -37,19 +50,23 @@
 
         </div>
 
-
-
       </div>
-
-      <hr class="line">
 
       <button type="button" *ngIf="!hasResults" class="button button--primary test__check" (click)="submitAnswers()">Sprawdź wyniki</button>
       <!-- <button type="button" class="button button--primary test__check" (click)="submitAnswers()">Sprawdź wyniki</button> -->
-
-      <div class="test__score" *ngIf="hasResults">
-        Wynik: {{ score }}%
-      </div>
-
     </div>
+  </div>
+</div>
+
+<div class="modal" id="result-modal" *ngIf="hasResults">
+  <div class="modal__result-wrapper">
+    <h2>Twój wynik</h2>
+    <score-circle [score]="score" [dark]="false"></score-circle>
+    <button type="button" class="button button--primary" [routerLink]="['/summary']">
+      <i class="fa fa-sign-out"></i> Wróć do podsumowania
+    </button>
+    <button type="button" class="button" (click)="closeModal()">
+      <i class="fa fa-eye"></i> Zobacz wyniki
+    </button>
   </div>
 </div>

@@ -22,12 +22,12 @@
   </div>
 
   <div class="form__buttons" *ngIf="exercise.id > 0">
-    <button type="button" (click)="updateExerciseData()" class="button button--primary pull-right">
+    <button type="button" (click)="updateExercise()" class="button button--primary pull-right">
       <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Zaktualizuj ćwiczenie
     </button>
   </div>
 
-  <div class="form__buttons" *ngIf="exercise.id && exercise.id > 0">
+  <div class="form__buttons" *ngIf="!exercise.id">
     <button type="button" (click)="createExercise()" class="button button--primary pull-right">
       <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Dodaj ćwiczenie
     </button>

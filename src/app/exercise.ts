@@ -40,6 +40,14 @@ export class Exercise {
     this.attributes['test-id'] = id;
   }
 
+  set pointFactor(f) {
+    this.attributes['point-factor'] = f;
+  }
+
+  get pointFactor() {
+    return this.attributes['point-factor'] | 1;
+  }
+
   set name(name) {
     this.attributes['name'] = name;
   }

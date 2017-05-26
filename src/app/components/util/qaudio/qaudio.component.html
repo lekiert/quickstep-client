@@ -1,0 +1,15 @@
+<div style="text-align: center">
+  <audio [id]="id" style="display: none">
+    <source src="{{ storageUrl }}{{ audio.media }}" type="{{ audio.mime }}">
+  </audio>
+
+  <button type="button"
+          class="play"
+          (click)="play($event)"
+          [class.playing]="isPlaying"
+          [class.stopped]="!isPlaying"
+  >
+    <i class="fa fa-play" *ngIf="!isPlaying"></i>
+    <i class="fa fa-music" *ngIf="isPlaying"></i>
+  </button>
+</div>

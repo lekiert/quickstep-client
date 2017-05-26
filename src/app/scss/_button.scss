@@ -23,6 +23,11 @@
   }
 }
 
+.button--small {
+  padding: 0.2rem 0.3rem;
+  font-size: 9pt;
+}
+
 .button--primary {
   color: $color-white;
   background: $color-blue-light;

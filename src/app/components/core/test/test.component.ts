@@ -1,6 +1,6 @@
 import {environment} from "../../../../environments/environment";
-import {Component} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {animate, Component, state, style, transition, trigger} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TestService} from "app/services/test/test.service";
 import {UserService} from "../../../services/user/user.service";
 import {Test} from "app/test";
@@ -14,7 +14,7 @@ const template = require('./test.component.html');
 @Component({
   selector: 'test',
   template: template,
-  styles: [ styles ],
+  styles: [ styles ]
 })
 export class TestComponent {
 
@@ -69,9 +69,12 @@ export class TestComponent {
   setExerciseResults(results): void {
     for (let i in results) {
       for (let j in this.exercises) {
-
         if (+i === +this.exercises[j].id) {
-          this.exercises[j].checkResults = results[i];
+          let _results = {}
+          Object.keys(results[i]).forEach((r) => {
+            _results[r] = results[i][r].results
+          });
+          this.exercises[j].checkResults = _results;
         }
       }
     }
@@ -79,4 +82,12 @@ export class TestComponent {
     this.hasResults = true;
   }
 
+  closeModal(): void {
+    let modal = document.getElementById('result-modal');
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    modal.style.opacity = '0';
+    setTimeout(() => {
+      modal.style.display = 'none';
+    }, 600)
+  }
 }
