@@ -30,10 +30,14 @@ export class Test {
   }
 
   get score() {
-    let max = this.attributes['last-score'].max;
-    let score = this.attributes['last-score'].score;
-    if (max && score) {
-      return (+score / +max * 100).toFixed().toString();
+    try {
+      let max = this.attributes['last-score'].max;
+      let score = this.attributes['last-score'].score;
+      if (max && score) {
+        return (+score / +max * 100).toFixed().toString();
+      }
+    } catch (e) {
+      return '';
     }
 
     return '';

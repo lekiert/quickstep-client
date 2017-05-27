@@ -46,7 +46,7 @@
         Ostatnie akcje użytkownika
       </h3>
 
-      <div class="pagination" *ngIf="pagination.first !== pagination.last"> 
+      <div class="pagination" *ngIf="pagination.first !== pagination.last">
         Strona: <strong>{{ currentPage }}</strong><br><br>
         <button type="button" class="button button--primary" [disabled]="!pagination.first" (click)="getUserActionLogs(pagination.first)">
           <i class="fa fa-angle-double-left"></i>
