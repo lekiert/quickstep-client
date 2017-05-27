@@ -1,6 +1,6 @@
 <div class="search-field">
   <input type="text" class="input" [(ngModel)]="query" (ngModelChange)="querySearch()">
-  <div class="search-field__results">
+  <div class="search-field__results" [class.search-field__results--bottom]="dropDown">
     <ul>
       <li *ngFor="let user of users" [class]="user.role.toLowerCase()" (click)="selectUser(user)">
         <i class="fa fa-user"></i>

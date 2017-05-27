@@ -23,4 +23,11 @@
       </td>
     </tr>
   </tbody>
+  <tfoot *ngIf="groups.length === 0">
+  <tr>
+    <td colspan="3">
+      <loading></loading>
+    </td>
+  </tr>
+  </tfoot>
 </table>

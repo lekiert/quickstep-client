@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {UserService} from "app/services/user/user.service";
 import {User} from "app/user";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../../services/auth/auth.service";
 
 const styles = require('./user-list.component.scss');
@@ -15,7 +15,8 @@ const template = require('./user-list.component.html');
 export class UserListComponent {
 
     user: User;
-    users: User[];
+    selectedUser: User;
+    users: User[] = [];
     filters = [
         {name: 'Wszyscy', value: 'ALL'},
         {name: 'Uczeń', value: 'STUDENT'},
@@ -27,9 +28,15 @@ export class UserListComponent {
     private sub: any;
     private routeFilter: any;
 
-    constructor(private route: ActivatedRoute,
+    constructor(private router: Router,
+                private route: ActivatedRoute,
                 private service: UserService,
                 private authService: AuthService) {
+    }
+
+    viewUser(user) {
+        this.router.navigate(['/users', user.id, 'statistics']);
+        return false;
     }
 
     getUsers(type?: string): void {

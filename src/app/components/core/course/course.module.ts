@@ -5,10 +5,11 @@ import {CourseComponent} from "./course.component";
 import {CourseListComponent} from "./course-list/course-list.component";
 import {AddCourseComponent} from "./add-course/add-course.component";
 import {RouterModule} from "@angular/router";
+import {UtilModule} from "../../util/util.module";
 
 
 @NgModule({
-  imports: [ CommonModule, FormsModule, RouterModule ],
+  imports: [ CommonModule, FormsModule, RouterModule, UtilModule ],
   declarations: [ CourseComponent, CourseListComponent, AddCourseComponent ],
   exports: [ CourseComponent, CourseListComponent, AddCourseComponent ]
 })

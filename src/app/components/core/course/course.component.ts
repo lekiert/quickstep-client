@@ -25,7 +25,7 @@ export class CourseComponent {
 
   user: User;
   course: Course;
-  tests: Test[];
+  tests: Test[] = []; 
   private sub: any;
   id: number;
   error:string = '';

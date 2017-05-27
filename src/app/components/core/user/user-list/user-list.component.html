@@ -5,7 +5,7 @@
     </div>
     <div class="gr-12" *ngIf="user.isAdmin()">
       <div class="form-filters">
-        <div class="form-filters__filter gr-12 gr-4@md">
+        <div class="form-filters__filter gr-12 gr-5@md">
           <div class="form-filters__filter__label">
             <label for="user-role-filter">Typ użytkownika</label>
           </div>
@@ -13,6 +13,19 @@
             <select [(ngModel)]="filter" (ngModelChange)="getUsers()" class="select">
                 <option *ngFor="let type of filters" [value]="type.value">{{ type.name }}</option>
             </select>
+          </div>
+        </div>
+
+        <div class="form-filters__filter gr-12 gr-7@md">
+          <div class="form-filters__filter__label">
+            <label for="user-role-filter">Szukaj użytkownika</label>
+          </div>
+          <div class="form-filters__filter__control">
+            <div class="row">
+              <div class="gr-12">
+                <search-field (userSelection)="viewUser($event)" entity="user" [dropDown]="true"></search-field>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -68,6 +81,13 @@
             </td>
           </tr>
         </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="5">
+            <loading></loading>
+          </td>
+        </tr>
+        </tfoot>
       </table>
     </div>
     <div class="gr-12">

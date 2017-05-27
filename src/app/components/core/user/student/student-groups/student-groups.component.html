@@ -2,19 +2,20 @@
   <div class="row">
     <div class="gr-12">
       <h1 class="heading heading--border">Lista grup <strong *ngIf="student"><br>{{ student.first_name }} {{ student.last_name }}</strong></h1>
+
+      <a class="button button--primary add-group pull-right" [routerLink]="['/groups/new']" *ngIf="user && user.isAdmin()">
+        <i class="fa fa-plus"></i> <i class="fa fa-group"></i>
+      </a>
     </div>
 
     <div class="gr-12" *ngIf="groups">
       <group-list [groups]="groups"></group-list>
     </div>
 
-    <div class="gr-12" *ngIf="user">
-      <a class="button button--primary add-group pull-right" [routerLink]="['/groups/new']" *ngIf="user.isAdmin()">
+    <div class="gr-12" *ngIf="user && user.isAdmin()">
+      <a class="button button--primary add-group pull-right" [routerLink]="['/groups/new']">
         <i class="fa fa-plus"></i> <i class="fa fa-group"></i>
       </a>
-      <!-- <a class="button button--primary add-user pull-right" [routerLink]="['/users/new']">
-        <i class="fa fa-plus"></i> <i class="fa fa-user"></i>
-      </a> -->
     </div>
 
   </div>

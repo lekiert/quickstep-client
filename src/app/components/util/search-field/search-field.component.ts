@@ -17,6 +17,7 @@ export class SearchFieldComponent {
   constructor(private http: AuthHttp) {}
 
   @Input() entity: string;
+  @Input() dropDown: boolean = false;
   users = [];
   query:string = '';
   @Output() userSelection = new EventEmitter();

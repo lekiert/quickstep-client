@@ -14,6 +14,7 @@ import {AnswerService} from "../../../services/answer/answer.service";
 })
 export class AnswerComponent implements OnInit {
 
+    error: string = '';
     sub: any;
     id: any;
     test: Test;
@@ -52,6 +53,8 @@ export class AnswerComponent implements OnInit {
                 } catch (e) {
                     console.log(e);
                 }
+            }).catch((e)  => {
+                this.error = 'Nie odnaleziono odpowiedzi lub nie posiadasz odpowiednich uprawnień.'
             });
         });
     }

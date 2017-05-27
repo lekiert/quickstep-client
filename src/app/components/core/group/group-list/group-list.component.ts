@@ -10,5 +10,5 @@ const template = require('./group-list.component.html');
   styles: [ styles ],
 })
 export class GroupListComponent {
-  @Input() groups: Group[];
+  @Input() groups: Group[] = [];
 }
