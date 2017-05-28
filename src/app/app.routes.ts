@@ -26,7 +26,7 @@ export const rootRouterConfig: Routes = [
   { path: 'settings',   component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'groups',   component: StudentGroupsComponent, canActivate: [AuthGuard] },
   { path: 'groups/new',   component: AddGroupComponent, canActivate: [AuthGuard, AuthAdminGuard] },
-  { path: 'groups/:id/edit',   component: EditGroupComponent, canActivate: [AuthGuard, AuthSupervisorGuard] },
+  { path: 'groups/:id/edit',   component: EditGroupComponent, canActivate: [AuthGuard] },
   { path: 'users/new',   component: AddUserComponent, canActivate: [AuthGuard, AuthAdminGuard] },
   { path: 'users/:id/edit',   component: EditUserComponent, canActivate: [AuthGuard, AuthAdminGuard] },
   { path: 'users/:id/results',   component: AnswerListComponent, canActivate: [AuthGuard] },
