@@ -35,8 +35,9 @@ export class UserListComponent {
     }
 
     viewUser(user) {
-        this.router.navigate(['/users', user.id, 'statistics']);
-        return false;
+        if (user) {
+            this.router.navigate(['/users', user.id, 'statistics']);
+        }
     }
 
     getUsers(type?: string): void {
