@@ -17,6 +17,7 @@ import {User} from "app/user";
 import {Subject} from "rxjs/Subject";
 import {AuthService} from "../../../../services/auth/auth.service";
 import {UserActionListComponent} from "./user-action-list/user-action-list.component";
+import {UtilModule} from "../../../util/util.module";
 
 class InformationServiceMock {
   getLatestUserActionLogs() {
@@ -164,8 +165,8 @@ class AnswerServiceMock {
       ],
       "links": {
         "first": "http:\/\/localhost:3000\/answers?page%5Bnumber%5D=1&page%5Bsize%5D=15&sort=id",
-        "next": "http:\/\/localhost:3000\/answers?page%5Bnumber%5D=2&page%5Bsize%5D=15&sort=id",
-        "last": "http:\/\/localhost:3000\/answers?page%5Bnumber%5D=121&page%5Bsize%5D=15&sort=id"
+        "next": "http:\/\/localhost:3000\/answers?page%5Bnumber%5D=1&page%5Bsize%5D=15&sort=id",
+        "last": "http:\/\/localhost:3000\/answers?page%5Bnumber%5D=2&page%5Bsize%5D=15&sort=id"
       }
     };
     let answerList = testAnswers.data.map((answer) => {
@@ -217,7 +218,7 @@ describe('StatsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule, FormsModule, HttpModule, ChartsModule ],
+      imports: [ RouterTestingModule, FormsModule, HttpModule, ChartsModule, UtilModule ],
       declarations: [ StatsComponent, UserActionListComponent ],
       providers: [
           {provide: InformationService, useClass: InformationServiceMock},
@@ -245,6 +246,13 @@ describe('StatsComponent', () => {
   });
 
   it('should display a pagination', () => {
+    component.pagination = {
+      first: 1,
+      last: 2,
+      prev: null,
+      next: null
+    }
+    fixture.detectChanges();
     let pagination = fixture.debugElement.query(By.css('.dashboard .pagination'));
     expect(pagination).toBeTruthy();
   })
@@ -255,6 +263,7 @@ describe('StatsComponent', () => {
   })
 
   it('should display user groups button for supervisors and admins (async)', async(() => {
+    component.student = new User(1, {});
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       let button = fixture.debugElement.query(By.css('.dashboard .view-user-groups'));

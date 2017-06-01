@@ -13,6 +13,7 @@ import {AnswerService} from "../../../services/answer/answer.service";
 import {UserServiceMock} from "../../../services/testing/user.service.mock";
 import {AnswerServiceMock} from "../../../services/testing/answer.service.mock";
 import {TestServiceMock} from "../../../services/testing/test.service.mock";
+import {UtilModule} from "../../util/util.module";
 
 describe('AnswerComponent', () => {
   let component: AnswerComponent;
@@ -20,7 +21,7 @@ describe('AnswerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, RouterTestingModule, HttpModule ],
+      imports: [ FormsModule, RouterTestingModule, HttpModule, UtilModule ],
       declarations: [ AnswerComponent, StudentBracketsComponent, StudentChoiceComponent ],
       providers: [
         {provide: UserService, useClass: UserServiceMock},

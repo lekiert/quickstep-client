@@ -5,6 +5,7 @@ import {AuthConfig, AuthHttp} from "angular2-jwt";
 import {Http, HttpModule} from "@angular/http";
 import {UserService} from "../user/user.service";
 import {User} from "../../user";
+import {RouterTestingModule} from "@angular/router/testing";
 
 class UserServiceMock {
   getUserAsObservable() {
@@ -28,7 +29,7 @@ class UserServiceMock {
 describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpModule ],
+      imports: [ HttpModule, RouterTestingModule ],
       providers: [
           {provide: UserService, useClass: UserServiceMock},
           AuthService,

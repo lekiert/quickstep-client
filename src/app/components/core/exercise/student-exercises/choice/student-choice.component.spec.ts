@@ -6,6 +6,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {HttpModule} from "@angular/http";
 import {Exercise} from "app/exercise";
 import {By} from "@angular/platform-browser";
+import {UtilModule} from "../../../../util/util.module";
 
 describe('StudentChoiceComponent', () => {
     let component: StudentChoiceComponent;
@@ -13,7 +14,7 @@ describe('StudentChoiceComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ FormsModule, RouterTestingModule, HttpModule ],
+            imports: [ FormsModule, RouterTestingModule, HttpModule, UtilModule ],
             declarations: [ StudentChoiceComponent ],
         })
             .compileComponents();

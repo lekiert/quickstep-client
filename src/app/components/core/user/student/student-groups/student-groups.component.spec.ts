@@ -13,6 +13,7 @@ import {GroupListComponent} from "app/components/core/group/group-list/group-lis
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
 import {AuthService} from "../../../../../services/auth/auth.service";
+import {UtilModule} from "../../../../util/util.module";
 
 
 class AuthServiceMock {
@@ -80,7 +81,7 @@ describe('StudentGroupsComponent',  () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule, FormsModule, HttpModule ],
+      imports: [ RouterTestingModule, FormsModule, HttpModule, UtilModule ],
       declarations: [ StudentGroupsComponent, GroupListComponent ],
       providers: [
         {provide: GroupService, useClass: GroupServiceMock},

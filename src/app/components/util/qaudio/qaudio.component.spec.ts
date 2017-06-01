@@ -16,6 +16,10 @@ describe('QAudioComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(QAudioComponent);
     component = fixture.componentInstance;
+    component.audio = {
+      media: '',
+      mime: ''
+    }
     fixture.detectChanges();
   });
 
