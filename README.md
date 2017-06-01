@@ -8,9 +8,9 @@ Be aware that this project is still under development and certain parts of it wi
 
 ## Demo
 
-URL: http://vps389827.ovh.net/
-Admin account: admin@quickstep.dev (password: secret)
-Test user: test@test.dev (password: secret)
+* URL: http://vps389827.ovh.net/
+* Admin account: admin@quickstep.dev (password: secret)
+* Test user: test@test.dev (password: secret)
 
 The data inside comes from a real production snapshot, however I had to obfuscate the names and e-mails. So far I do not reset the data periodically, but I will set up a daily reset in cron in the near future.
 
