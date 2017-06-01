@@ -41,9 +41,3 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng github-pages:deploy` to deploy to Github Pages.
 
-## TODOs so far (list will extend)
-* more test coverage
-* table pagination
-* pages
-* student scoring 
-
