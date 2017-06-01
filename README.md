@@ -6,6 +6,14 @@ This is a client application that consumes the [Quickstep Api](https://github.co
 
 Be aware that this project is still under development and certain parts of it will be rewritten. Also bear in mind that the UI language is Polish, however I intend to translate it later to English.
 
+## Demo
+
+URL: http://vps389827.ovh.net/
+Admin account: admin@quickstep.dev (password: secret)
+Test user: test@test.dev (password: secret)
+
+The data inside comes from a real production snapshot, however I had to obfuscate the names and e-mails. So far I do not reset the data periodically, but I will set up a daily reset in cron in the near future.
+
 ## Requirements
 * node >= 6
 * @angular/cli@1.0.0-rc.4 (`npm install -g @angular/cli@1.0.0-rc.4`)
