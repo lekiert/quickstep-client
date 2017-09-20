@@ -67,7 +67,7 @@ export class AnswerService extends BaseService {
             let data = logs.json().data;
 
             if (data) {
-                return data.map((log) => {
+                return data.reverse().map((log) => {
                     return new Answer(log.id, log.attributes);
                 });
             }
